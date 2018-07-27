@@ -1,8 +1,8 @@
-// import { ErrorComponent } from './error/error.component';
 import { LayoutComponent } from './share/components/layout/layout.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-
+import { ErrorComponent } from './share/components/error/error.component';
+import { HomeComponent } from './home/home.component';
 
 
 const appRoutes: Routes = [
@@ -12,46 +12,19 @@ const appRoutes: Routes = [
     children: [
       {
         path: '',
-        // component: HomeComponent
+        component: HomeComponent
       },
-      {
-        path: 'core',
-        loadChildren: './module-core/core.module#CoreModule'
-      },
-      {
-        path: 'base',
-        loadChildren: './module-base/base.module#BaseModule'
-      },
-      {
-        path: 'warehouse',
-        loadChildren: './module-warehouse/warehouse.module#WarehouseModule'
-      },
-      {
-        path: 'purchase',
-        loadChildren: './module-purchase/purchase.module#PurchaseModule'
-      },
-      {
-        path: 'sales',
-        loadChildren: './module-sales/sales.module#SalesModule'
-      },
-      {
-        path: 'finance',
-        loadChildren: './module-finance/finance.module#FinanceModule'
-      },
-      {
-        path: 'plan',
-        loadChildren: './module-plan/plan.module#PlanModule'
-      }
+
     ]
   },
   {
-    path: 'error', // 用来展示404等错误页面
-    // component: ErrorComponent
+    path: 'error',
+    component: ErrorComponent
   },
   {
     path: '**',
     pathMatch: 'full',
-    // component: ErrorComponent
+    component: ErrorComponent
   }
 ];
 
