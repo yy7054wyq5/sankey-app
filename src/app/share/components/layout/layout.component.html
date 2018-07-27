@@ -1,13 +1,16 @@
 <nz-layout class="layout">
-  <nz-header>
-    <div class="logo"></div>
-    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
-      <li nz-menu-item>nav 1</li>
-      <li nz-menu-item>nav 2</li>
-      <li nz-menu-item>nav 3</li>
-    </ul>
+  <nz-header class="header">
+    <div nz-row>
+      <div nz-col nzSpan="18" class="logo">LOGO</div>
+      <ul class="menu" nz-col nzSpan="6">
+        <li [routerLink]="''">首页</li>
+        <li>助理</li>
+        <li>核心能力</li>
+        <li>登陆/注册</li>
+      </ul>
+    </div>
   </nz-header>
-  <nz-layout>
+  <nz-layout class="content">
     <nz-content>
       <router-outlet></router-outlet>
     </nz-content>
