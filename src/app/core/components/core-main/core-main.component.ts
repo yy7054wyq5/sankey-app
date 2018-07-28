@@ -30,7 +30,7 @@ export class CoreMainComponent implements OnInit {
   }
 
   fullScreen() {
-    this.chartParent = this.chartParent ? '' : 'core-main';
+    this.chartParent = this.chartParent ? '' : '.core-main';
   }
 
 }

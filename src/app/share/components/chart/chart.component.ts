@@ -11,14 +11,15 @@ import { ChartService } from './chart.service';
 })
 export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
 
+  @Input() ehasFullBtn = true;
   @Input() ewidth: string;
   @Input() eheight: string;
   @Input() eloading: boolean;
-  @Input() eparent: string;
+  @Input() efullParentClassName: string;
   @Input() eoption: any; // http://echarts.baidu.com/option.html
 
   detail: any;
-  index: number;
+  hadFull = false;
   chartDom: HTMLElement;
   chartInstance: any;
   unlistenDomParentResize: any;
@@ -36,18 +37,10 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       if (changes.eoption && !changes.eoption.isFirstChange()) {
         this._initChart();
       }
-      if (changes.eparent && !changes.eparent.isFirstChange()) {
-        if (this.eparent) {
-
-        }
-        this._initChart();
-      }
     }
-
   }
 
   ngOnInit() {
-    this.index = this._chart.index;
     this.chartDom = this._element.nativeElement.querySelector('.chart');
   }
 
@@ -60,6 +53,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       this._bindEvent();
     }, 1);
 
+    // 监听窗口变化
     this.unlistenDomParentResize = this._renderer.listen('window', 'resize', () => {
       this._initChart();
     });
@@ -67,19 +61,36 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   }
 
   ngOnDestroy() {
-    this.chartInstance = null;
+    this._destroyChart();
     this.eoption = null;
     this.unlistenDomParentResize();
   }
 
   /////////////////////////////////////////////////
 
-  private _wraper(): HTMLElement {
-    if (!this.eparent) {
-      this.eparent = 'chart-parent-' + this.index;
+  public toFull() {
+    if (this.hadFull) {
+      this._wraper = () => {
+        return this.chartDom.parentElement;
+      };
+    } else {
+      this._wraper = () => {
+        return document.querySelector('.' + this.efullParentClassName);
+      };
     }
-    console.log(this.eparent);
-    return document.querySelector('.' + this.eparent);
+    this.hadFull = !this.hadFull;
+    this._initChart();
+  }
+
+  private _wraper = (): HTMLElement => {
+    return this.chartDom.parentElement;
+  }
+
+  private _destroyChart() {
+    if (this.chartInstance) {
+      this.chartInstance.dispose();
+      this._setChartWH(this.chartDom, '0px', '0px');
+    }
   }
 
   /**
@@ -92,12 +103,10 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     if (!this.chartDom && !this.eoption) {
       return;
     }
+    this._destroyChart();
     const _chartDom = this._setChartWH(this.chartDom, this.ewidth, this.eheight);
-    // 将echart的初始化脱离NgZone的监控，以免造成大量的cpu占用
-    // https://github.com/apache/incubator-echarts/issues/7047
-    // http://www.ngfans.net/topic/24/post/2
     this._zone.runOutsideAngular(() => {
-      this.chartInstance = this.chartInstance || echarts.init(_chartDom, 'sn');
+      this.chartInstance = echarts.init(_chartDom, 'sn');
       this.chartInstance.setOption(this.eoption);
       this.eloading = false;
     });
@@ -133,9 +142,8 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    */
   private _setChartWH(chartDom: HTMLElement, width: string, height: string): HTMLElement {
     const wraper = this._wraper();
-    console.log(wraper);
-    width = width || chartDom.parentElement.clientWidth.toString() + 'px';
-    height = height || chartDom.parentElement.clientHeight.toString() + 'px';
+    width = width || wraper.clientWidth.toString() + 'px';
+    height = height || wraper.clientHeight.toString() + 'px';
     this._renderer.setStyle(chartDom, 'width', width);
     this._renderer.setStyle(chartDom, 'height', height);
     return chartDom;
