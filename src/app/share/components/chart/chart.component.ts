@@ -82,6 +82,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     // 监听窗口变化
     this.unlistenDomParentResize = this._renderer.listen('window', 'resize', () => {
+      this._exchangeContainerStyle();
       this._initChart();
     });
 
@@ -95,6 +96,15 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
   /////////////////////////////////////////////////
 
+  private _setStyle(dom: HTMLElement, params: { [styleKey: string]: string | number }) {
+    for (const styleKey in params) {
+      if (params.hasOwnProperty(styleKey)) {
+        let styleValue = params[styleKey];
+        styleValue = typeof styleValue === 'number' ? styleValue.toString() + 'px' : styleValue;
+        this._renderer.setStyle(dom, styleKey, styleValue);
+      }
+    }
+  }
 
   /**
    * 全屏切换
@@ -114,7 +124,29 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         return document.querySelector('.' + this.efullParentClassName);
       };
     }
+    this._exchangeContainerStyle();
     this._initChart();
+  }
+
+
+  /**
+   * 改变全屏样式
+   *
+   * @private
+   * @memberof ChartComponent
+   */
+  private _exchangeContainerStyle() {
+    const chartContainer = this._element.nativeElement;
+    if (this.hadFull === 'yes') {
+      const wraper = this._wraper();
+      const left = wraper.offsetLeft;
+      const top = wraper.offsetTop;
+      const width = wraper.clientWidth;
+      const height = wraper.clientHeight;
+      this._setStyle(chartContainer, { position: 'fixed', left, top, width, height });
+    } else {
+      this._setStyle(chartContainer, { position: 'relative', left: 0, top: 0, width: '100%', height: '100%' });
+    }
   }
 
 
@@ -154,12 +186,16 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     }
     this._destroyChart();
     const _chartDom = this._setChartWH(this.chartDom, this.ewidth, this.eheight);
-    this._zone.runOutsideAngular(() => {
-      this.chartInstance = echarts.init(_chartDom, 'sn');
-      this.chartInstance.setOption(this.eoption);
-      this.eloading = false;
-    });
-    this._bindEvent();
+    try {
+      this._zone.runOutsideAngular(() => {
+        this.chartInstance = echarts.init(_chartDom, 'sn');
+        this.chartInstance.setOption(this.eoption);
+        this.eloading = false;
+        this._bindEvent();
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 
@@ -196,8 +232,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     const wraper = this._wraper();
     width = width || wraper.clientWidth.toString() + 'px';
     height = height || wraper.clientHeight.toString() + 'px';
-    this._renderer.setStyle(chartDom, 'width', width);
-    this._renderer.setStyle(chartDom, 'height', height);
+    this._setStyle(chartDom, { width, height });
     return chartDom;
   }
 
