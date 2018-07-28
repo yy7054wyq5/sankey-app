@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { ErrorComponent } from './components/error/error.component';
 import { RouterModule } from '@angular/router';
+import { ChartComponent } from './components/chart/chart.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     NgZorroAntdModule
   ],
-  declarations: [LayoutComponent, ErrorComponent]
+  declarations: [LayoutComponent, ErrorComponent, ChartComponent],
+  exports: [ChartComponent]
 })
 export class ShareModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { siderMenus, SideMenuItem } from '../../config';
 
 @Component({
   selector: 'app-core-main',
@@ -9,6 +10,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 export class CoreMainComponent implements OnInit {
 
   constructor() { }
+
+  siderMenus: SideMenuItem[] = siderMenus;
 
   ngOnInit() {
   }

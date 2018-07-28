@@ -1,16 +1,51 @@
 app-core-main {
   display: flex;
   width: 100%;
-  .core-main {
+  .core-main.ant-layout.ant-layout-has-sider {
     display: flex;
     flex: 1;
-    section {
+    flex-direction: column;
+    .core-body {
+      display: flex;
       flex: 1;
-    }
-    nz-sider {
-      background: transparent;
-      .ant-menu-vertical {
-        border: 0;
+      flex-direction: row;
+      section {
+        flex: 1;
+      }
+      nz-sider {
+        background: transparent;
+        .ant-menu-vertical {
+          border: 0;
+          >li {
+            // 图标显隐
+            &.ant-menu-item-selected {
+              .anticon-down {
+                display: block;
+              }
+              .anticon-right {
+                display: none;
+              }
+            }
+            .anticon-down {
+              display: none;
+              float: right;
+            }
+            .anticon-right {
+              float: right;
+            }
+            span {
+              &::after {
+                clear: both;
+              }
+              >* {
+                float: left;
+              }
+              i {
+                line-height: 40px;
+              }
+            }
+          }
+        }
       }
     }
   }
