@@ -14,20 +14,23 @@ export class CoreMainComponent implements OnInit {
     private _http: HttpClient
   ) { }
 
-  siderMenus: SideMenuItem[] = siderMenus;
   option = chartConfig;
+  siderMenus: SideMenuItem[] = siderMenus;
+  chartParent: string;
 
   ngOnInit() {
   }
 
   search() {
-    console.log(1);
     this._http.get('assets/mock/search-result.json').subscribe(data => {
       this.option.series[0].data = data[0].nodes;
       this.option.series[0].links = data[0].links;
       this.option = Object.assign({}, this.option);
     });
+  }
 
+  fullScreen() {
+    this.chartParent = this.chartParent ? '' : 'core-main';
   }
 
 }

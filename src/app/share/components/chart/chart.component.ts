@@ -15,7 +15,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   @Input() eheight: string;
   @Input() eloading: boolean;
   @Input() eparent: string;
-  @Input() ewraperClassName = 'chart-parent';
   @Input() eoption: any; // http://echarts.baidu.com/option.html
 
   detail: any;
@@ -38,6 +37,9 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         this._initChart();
       }
       if (changes.eparent && !changes.eparent.isFirstChange()) {
+        if (this.eparent) {
+
+        }
         this._initChart();
       }
     }
@@ -74,8 +76,9 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
   private _wraper(): HTMLElement {
     if (!this.eparent) {
-      this.eparent = this.ewraperClassName + '-' + this._chart.index;
+      this.eparent = 'chart-parent-' + this.index;
     }
+    console.log(this.eparent);
     return document.querySelector('.' + this.eparent);
   }
 
@@ -89,7 +92,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     if (!this.chartDom && !this.eoption) {
       return;
     }
-    const _chartDom = this._setStyle(this.chartDom, this.ewidth, this.eheight);
+    const _chartDom = this._setChartWH(this.chartDom, this.ewidth, this.eheight);
     // 将echart的初始化脱离NgZone的监控，以免造成大量的cpu占用
     // https://github.com/apache/incubator-echarts/issues/7047
     // http://www.ngfans.net/topic/24/post/2
@@ -128,10 +131,11 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @returns {HTMLElement}
    * @memberof ChartComponent
    */
-  private _setStyle(chartDom: HTMLElement, width: string, height: string): HTMLElement {
+  private _setChartWH(chartDom: HTMLElement, width: string, height: string): HTMLElement {
     const wraper = this._wraper();
-    width = width || wraper.clientWidth.toString() + 'px';
-    height = height || wraper.clientHeight.toString() + 'px';
+    console.log(wraper);
+    width = width || chartDom.parentElement.clientWidth.toString() + 'px';
+    height = height || chartDom.parentElement.clientHeight.toString() + 'px';
     this._renderer.setStyle(chartDom, 'width', width);
     this._renderer.setStyle(chartDom, 'height', height);
     return chartDom;
