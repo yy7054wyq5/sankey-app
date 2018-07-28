@@ -1,6 +1,17 @@
-.core-main {
+app-core-main {
   display: flex;
-  section {
+  width: 100%;
+  .core-main {
+    display: flex;
     flex: 1;
+    section {
+      flex: 1;
+    }
+    nz-sider {
+      background: transparent;
+      .ant-menu-vertical {
+        border: 0;
+      }
+    }
   }
 }
