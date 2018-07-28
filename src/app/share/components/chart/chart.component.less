@@ -3,8 +3,13 @@ app-chart {
   height: 100%;
   overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
   background: #fff;
-  .full-screen-btn{
+  .chart {
+    flex: 1;
+  }
+  .full-screen-btn {
     font-size: 18px;
     position: absolute;
     top: 0;
@@ -15,5 +20,14 @@ app-chart {
     position: absolute;
     top: 0;
     right: 0;
+  }
+  .color-bar {
+    background: #fff;
+    margin-top: 5px;
+    width: 200px;
+    display: flex;
+    li {
+      flex: 1;
+    }
   }
 }

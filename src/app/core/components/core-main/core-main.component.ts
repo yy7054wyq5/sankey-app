@@ -14,7 +14,7 @@ export class CoreMainComponent implements OnInit {
     private _http: HttpClient
   ) { }
 
-  option = chartConfig;
+  option: any;
   siderMenus: SideMenuItem[] = siderMenus;
 
   ngOnInit() {
@@ -24,9 +24,10 @@ export class CoreMainComponent implements OnInit {
 
   search() {
     this._http.get('assets/mock/search-result.json').subscribe(data => {
-      this.option.series[0].data = data[0].nodes;
-      this.option.series[0].links = data[0].links;
-      this.option = Object.assign({}, this.option);
+      const _chartConfig = chartConfig;
+      _chartConfig.series[0].data = data[0].nodes;
+      _chartConfig.series[0].links = data[0].links;
+      this.option = _chartConfig;
     });
   }
 

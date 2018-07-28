@@ -29,6 +29,11 @@ export interface ChartEventCbParams {
   color: string;
 }
 
+enum FullStatus {
+  yes = 'yes',
+  no = 'no'
+}
+
 
 @Component({
   selector: 'app-chart',
@@ -48,10 +53,14 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   @Output() eclick = new EventEmitter<any>();
 
   detail: any;
-  hadFull = 'no';
+  fullStatus = FullStatus.no; // yes为全屏，no为
   chartDom: HTMLElement;
   chartInstance: any;
+  bindedEvent: boolean;
   unlistenDomParentResize: any;
+  get chartActived() {
+    return this.chartInstance ? true : false;
+  }
 
   constructor(
     private _chart: ChartService,
@@ -82,8 +91,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     // 监听窗口变化
     this.unlistenDomParentResize = this._renderer.listen('window', 'resize', () => {
-      this._exchangeContainerStyle();
-      this._initChart();
+      this._resizeChart();
     });
 
   }
@@ -96,6 +104,14 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
   /////////////////////////////////////////////////
 
+  /**
+   * 设置样式
+   *
+   * @private
+   * @param {HTMLElement} dom
+   * @param {({ [styleKey: string]: string | number })} params
+   * @memberof ChartComponent
+   */
   private _setStyle(dom: HTMLElement, params: { [styleKey: string]: string | number }) {
     for (const styleKey in params) {
       if (params.hasOwnProperty(styleKey)) {
@@ -113,7 +129,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @memberof ChartComponent
    */
   public toFull(tag: string) {
-    this.hadFull = tag;
+    this.fullStatus = FullStatus[tag];
     // 重写寻找父级的方法
     if (tag === 'no') {
       this._wraper = () => {
@@ -124,8 +140,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         return document.querySelector('.' + this.efullParentClassName);
       };
     }
-    this._exchangeContainerStyle();
-    this._initChart();
+    this._resizeChart();
   }
 
 
@@ -136,8 +151,8 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @memberof ChartComponent
    */
   private _exchangeContainerStyle() {
-    const chartContainer = this._element.nativeElement;
-    if (this.hadFull === 'yes') {
+    const chartContainer = this._element.nativeElement; // app-chart
+    if (this.fullStatus === 'yes') {
       const wraper = this._wraper();
       const left = wraper.offsetLeft;
       const top = wraper.offsetTop;
@@ -162,6 +177,26 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
 
   /**
+   * 重绘
+   *
+   * @private
+   * @returns
+   * @memberof ChartComponent
+   */
+  private _resizeChart() {
+    if (this.ewidth || this.eheight) {
+      return;
+    }
+    this._exchangeContainerStyle();
+    this._zone.runOutsideAngular(() => {
+      if (this.chartInstance) {
+        this.chartInstance.resize();
+      }
+    });
+  }
+
+
+  /**
    * 销毁图表
    *
    * @private
@@ -181,20 +216,18 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @memberof ChartComponent
    */
   private _initChart() {
-    if (!this.chartDom && !this.eoption) {
+    if (!this.chartDom || !this.eoption) {
       return;
     }
-    this._destroyChart();
     const _chartDom = this._setChartWH(this.chartDom, this.ewidth, this.eheight);
-    try {
-      this._zone.runOutsideAngular(() => {
-        this.chartInstance = echarts.init(_chartDom, 'sn');
-        this.chartInstance.setOption(this.eoption);
-        this.eloading = false;
-        this._bindEvent();
-      });
-    } catch (error) {
-      console.log(error);
+    this._zone.runOutsideAngular(() => {
+      this.chartInstance = echarts.init(_chartDom, 'sn');
+      this.chartInstance.setOption(this.eoption);
+      this.eloading = false;
+    });
+    if (!this.bindedEvent) {
+      this._bindEvent();
+      this.bindedEvent = true;
     }
   }
 
@@ -206,15 +239,12 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @memberof ChartComponent
    */
   private _bindEvent() {
-    if (this.chartInstance) {
-      this.chartInstance.on('click', (params: ChartEventCbParams) => {
-        this.eclick.emit(params);
-      });
-
-      this.chartInstance.on('mouseover', (params: ChartEventCbParams) => {
-        this.emouseover.emit(params);
-      });
-    }
+    this.chartInstance.on('click', (params: ChartEventCbParams) => {
+      this.eclick.emit(params);
+    });
+    this.chartInstance.on('mouseover', (params: ChartEventCbParams) => {
+      this.emouseover.emit(params);
+    });
   }
 
 
@@ -229,10 +259,9 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @memberof ChartComponent
    */
   private _setChartWH(chartDom: HTMLElement, width: string, height: string): HTMLElement {
-    const wraper = this._wraper();
-    width = width || wraper.clientWidth.toString() + 'px';
-    height = height || wraper.clientHeight.toString() + 'px';
-    this._setStyle(chartDom, { width, height });
+    if (width && height) {
+      this._setStyle(chartDom, { width, height });
+    }
     return chartDom;
   }
 

@@ -1,8 +1,17 @@
 <div class="chart"></div>
-<ng-container *ngIf="ehasFullBtn">
-  <i *ngIf="hadFull==='no'" class="anticon anticon-plus full-screen-btn" (click)="toFull('yes')"></i>
-  <i *ngIf="hadFull==='yes'" class="anticon anticon-minus full-screen-btn" (click)="toFull('no')"></i>
+<ng-container *ngIf="chartActived">
+  <ng-container *ngIf="ehasFullBtn">
+    <i *ngIf="fullStatus==='no'" class="anticon anticon-plus full-screen-btn" (click)="toFull('yes')"></i>
+    <i *ngIf="fullStatus==='yes'" class="anticon anticon-minus full-screen-btn" (click)="toFull('no')"></i>
+  </ng-container>
+  <nz-dropdown-button class="drop">
+    DropDown
+  </nz-dropdown-button>
+  <div class="hack" style="height: 5px;"></div>
+  <ul class="color-bar">
+    <li>1</li>
+    <li>3</li>
+    <li>2</li>
+    <li>5</li>
+  </ul>
 </ng-container>
-<nz-dropdown-button class="drop">
-  DropDown
-</nz-dropdown-button>
