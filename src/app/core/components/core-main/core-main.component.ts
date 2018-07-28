@@ -16,7 +16,6 @@ export class CoreMainComponent implements OnInit {
 
   option = chartConfig;
   siderMenus: SideMenuItem[] = siderMenus;
-  chartParent: string;
 
   ngOnInit() {
   }
@@ -27,10 +26,6 @@ export class CoreMainComponent implements OnInit {
       this.option.series[0].links = data[0].links;
       this.option = Object.assign({}, this.option);
     });
-  }
-
-  fullScreen() {
-    this.chartParent = this.chartParent ? '' : '.core-main';
   }
 
 }

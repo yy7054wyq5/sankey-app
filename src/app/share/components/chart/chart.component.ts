@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, AfterViewInit, NgZone, Renderer2, ViewEncapsulation, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, AfterViewInit, NgZone, Renderer2, ViewEncapsulation, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import * as echarts from 'echarts';
 import theme from './theme';
 import { ChartService } from './chart.service';
@@ -17,9 +17,11 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   @Input() eloading: boolean;
   @Input() efullParentClassName: string;
   @Input() eoption: any; // http://echarts.baidu.com/option.html
+  @Output() emouseenter = new EventEmitter<any>();
+  @Output() eclick = new EventEmitter<any>();
 
   detail: any;
-  hadFull = false;
+  hadFull = 'no';
   chartDom: HTMLElement;
   chartInstance: any;
   unlistenDomParentResize: any;
@@ -68,8 +70,17 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
   /////////////////////////////////////////////////
 
-  public toFull() {
-    if (this.hadFull) {
+
+  /**
+   * 全屏切换
+   *
+   * @param {string} tag
+   * @memberof ChartComponent
+   */
+  public toFull(tag: string) {
+    this.hadFull = tag;
+    // 重写寻找父级的方法
+    if (tag === 'no') {
       this._wraper = () => {
         return this.chartDom.parentElement;
       };
@@ -78,14 +89,27 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         return document.querySelector('.' + this.efullParentClassName);
       };
     }
-    this.hadFull = !this.hadFull;
     this._initChart();
   }
 
+
+  /**
+   * 返回图表父级
+   *
+   * @private
+   * @memberof ChartComponent
+   */
   private _wraper = (): HTMLElement => {
     return this.chartDom.parentElement;
   }
 
+
+  /**
+   * 销毁图表
+   *
+   * @private
+   * @memberof ChartComponent
+   */
   private _destroyChart() {
     if (this.chartInstance) {
       this.chartInstance.dispose();
@@ -121,9 +145,15 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    */
   private _bindEvent() {
     if (this.chartInstance) {
-      this.chartInstance.on('click', (param) => {
+      this.chartInstance.on('click', (params) => {
         this._zone.run(() => {
-          this.detail = param.name;
+          this.eclick.emit(params);
+        });
+      });
+
+      this.chartInstance.on('mouseenter', (params) => {
+        this._zone.run(() => {
+          this.eclick.emit(params);
         });
       });
     }

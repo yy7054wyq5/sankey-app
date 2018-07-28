@@ -1,5 +1,8 @@
 <div class="chart"></div>
-<i *ngIf="ehasFullBtn" class="anticon anticon-plus-square-o full-screen-btn" (click)="toFull()"></i>
+<ng-container *ngIf="ehasFullBtn">
+  <i *ngIf="hadFull==='no'" class="anticon anticon-plus full-screen-btn" (click)="toFull('yes')"></i>
+  <i *ngIf="hadFull==='yes'" class="anticon anticon-minus full-screen-btn" (click)="toFull('no')"></i>
+</ng-container>
 <nz-dropdown-button class="drop">
   DropDown
 </nz-dropdown-button>
