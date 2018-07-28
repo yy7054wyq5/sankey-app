@@ -19,6 +19,6 @@
         </li>
       </ul>
     </nz-sider>
-    <app-chart [eoption]="option" [efullParentClassName]="'core-main'"></app-chart>
+    <app-chart [eoption]="option" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)"></app-chart>
   </section>
 </nz-layout>

@@ -20,12 +20,21 @@ export class CoreMainComponent implements OnInit {
   ngOnInit() {
   }
 
+  /////////////////////////
+
   search() {
     this._http.get('assets/mock/search-result.json').subscribe(data => {
       this.option.series[0].data = data[0].nodes;
       this.option.series[0].links = data[0].links;
       this.option = Object.assign({}, this.option);
     });
+  }
+
+  mouseoverChartEvent(data) {
+    console.log('over', data);
+  }
+  clickChartEvent(data) {
+    console.log('click', data);
   }
 
 }
