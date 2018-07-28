@@ -14,5 +14,33 @@ const siderMenus: SideMenuItem[] = [{
   icon: 'anticon-clock-circle-o',
 }];
 
+const chartConfig = {
+  title: {
+    text: 'Sankey Diagram'
+  },
+  tooltip: {
+    trigger: 'item',
+    triggerOn: 'mousemove'
+  },
+  series: [
+    {
+      type: 'sankey',
+      layout: 'none',
+      data: [],
+      links: [],
+      itemStyle: {
+        normal: {
+          borderWidth: 1,
+          borderColor: '#aaa'
+        }
+      },
+      lineStyle: {
+        normal: {
+          curveness: 0.5
+        }
+      }
+    }
+  ]
+};
 
-export { siderMenus };
+export { siderMenus, chartConfig };

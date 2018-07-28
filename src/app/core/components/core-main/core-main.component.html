@@ -1,5 +1,7 @@
 <nz-layout class="core-main">
-  <section class="core-search-bar">dajdajjdaj</section>
+  <section class="core-search-bar">
+    <button nz-button (click)="search()">匹配</button>
+  </section>
   <section class="core-body">
     <nz-sider>
       <ul nz-menu [nzSelectable]="false">
@@ -17,6 +19,8 @@
         </li>
       </ul>
     </nz-sider>
-    <section (click)="siderMenus[0].actived=!siderMenus[0].actived"></section>
+    <section>
+      <app-chart [eoption]="option"></app-chart>
+    </section>
   </section>
 </nz-layout>
