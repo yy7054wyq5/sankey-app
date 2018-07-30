@@ -9,8 +9,7 @@ app-core-main {
     section.core-body {
       display: flex;
       flex: 1;
-      flex-direction: row;
-      //
+      flex-direction: row; //
       // 侧栏
       //
       aside {
@@ -88,6 +87,31 @@ app-core-main {
         flex: 1;
         display: flex;
         flex-direction: column;
+        border-radius: 6px;
+        >div.chart-tips {
+          width: 32.525253rem;
+          height: 3.131313rem;
+          background: #fff;
+          margin-top: 0.5rem;
+        }
+        >div.status {
+          flex: 1;
+          display: flex;
+          background-color: #fff;
+          flex-direction: column;
+          align-items: center;
+          img {
+            width: 30.30303rem;
+            height: 20.20202rem;
+            margin-top: 3rem;
+          }
+          p {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #343348;
+            font-size: 1.111111rem;
+          }
+        }
       }
     }
   }

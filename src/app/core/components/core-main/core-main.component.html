@@ -18,7 +18,18 @@
       </ul>
     </aside>
     <section class="core-content">
-      <app-chart [eoption]="option" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)"></app-chart>
+      <div *ngIf="initCore" class="status init-status">
+        <img src="/assets/images/init-status.png" alt="">
+        <p>告诉我您是谁？你想找谁？</p>
+        <p>我会帮您找到他哦</p>
+      </div>
+      <ng-container *ngIf="!initCore">
+        <!-- <div class="status not-found">
+        <p>未找到合适信息哦</p>
+      </div> -->
+        <app-chart *ngIf="option" [eoption]="option" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)"></app-chart>
+      </ng-container>
+      <div class="chart-tips"></div>
     </section>
   </section>
 </nz-layout>

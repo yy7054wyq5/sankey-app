@@ -15,6 +15,7 @@ export class CoreMainComponent implements OnInit {
   ) { }
 
   option: any;
+  initCore = true;
   siderMenus: SideMenuItem[] = siderMenus;
 
   ngOnInit() {
@@ -24,6 +25,7 @@ export class CoreMainComponent implements OnInit {
 
   search() {
     this._http.get('assets/mock/search-result.json').subscribe(data => {
+      this.initCore = false;
       const _chartConfig = chartConfig;
       _chartConfig.series[0].data = data[0].nodes;
       _chartConfig.series[0].links = data[0].links;
