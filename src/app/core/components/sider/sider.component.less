@@ -1,73 +1,134 @@
 @import '../../../../less/variable.less';
+@import '../../../../less/mixin.less';
 aside {
   width: 14.646465rem;
   padding-right: 1rem;
   background: transparent;
-  .ant-menu {
-    border: 0;
-    >li {
-      padding: 0;
+}
+
+i.icon {
+  display: block;
+  width: 2.020202rem;
+  height: 2.020202rem;
+  background-size: 3.030303rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  &.arrow {
+    &.icon-down {
+      display: none;
+      background-image: url('/assets/images/arrow-down.png');
+    }
+    &.icon-right {
+      display: block;
+      background-image: url('/assets/images/arrow-right.png');
+    }
+  }
+}
+
+.ant-menu {
+  border: 0;
+  >li {
+    padding: 0;
+    margin-top: 0;
+    overflow: hidden;
+    height: 2.020202rem;
+    line-height: 2.020202rem;
+    margin-bottom: 0;
+    .menu-info {
+      height: 2.020202rem; // padding-top: 0.45rem;
+      display: block;
       padding-left: 1.010101rem;
-      margin-top: 0;
-      padding-top: .252525rem;
-      >span {
-        &::after {
-          clear: both;
+      >* {
+        float: left;
+        &.arrow {
+          float: right;
         }
-        >* {
-          float: left;
-        }
-        span.nav-text {
-          font-size: 1.111111rem;
-          line-height: 2.020202rem;
-          color: @fontColor;
+      }
+      span.nav-text {
+        font-size: 1.111111rem;
+        line-height: 2.020202rem;
+        color: @fontColor;
+        display: block;
+        height: 2.020202rem;
+      }
+    }
+  } //
+  // 1级图标显隐
+  //
+  >li.ant-menu-item-selected {
+    height: auto;
+    background: transparent;
+    color: @fontColor;
+    padding: 0;
+    .menu-info {
+      background: #fff;
+      i.icon.arrow {
+        &.icon-down {
           display: block;
-          height: 2.020202rem;
         }
-        i.icon {
-          display: block;
-          width: 2.020202rem;
-          height: 2.020202rem;
-          background-size: 3.030303rem;
-          background-position: center;
-          background-repeat: no-repeat;
-          &.arrow {
-            float: right;
-            &.icon-down {
-              display: none;
-              background-image: url('/assets/images/arrow-down.png');
-            }
-            &.icon-right {
-              display: block;
-              background-image: url('/assets/images/arrow-right.png');
-            }
-          }
-        }
-      }
-    } //
-    // 图标显隐
-    //
-    >li.ant-menu-item-selected {
-      >span {
-        i.icon.arrow {
-          &.icon-down {
-            display: block;
-          }
-          &.icon-right {
-            display: none;
-          }
+        &.icon-right {
+          display: none;
         }
       }
     }
-    >li.user-info {
-      i.icon.user {
-        background-image: url('/assets/images/user.png');
-      }
+  }
+  >li.user-info {
+    i.icon.user {
+      background-image: url('/assets/images/user.png');
     }
-    >li.history-info {
-      i.icon.history {
-        background-image: url('/assets/images/history.png');
-      }
+  }
+  >li.history-info {
+    i.icon.history {
+      background-image: url('/assets/images/history.png');
     }
+  }
+}
+
+// 人物经历
+.ant-menu {
+  .experience-title {
+    display: block;
+    height: 2rem;
+    line-height: 2rem;
+    background: #f0f2f5;
+    clear: both;
+    i {
+      float: right;
+    }
+    >span {
+      float: left;
+      margin-left: 0.9rem;
+      .line-ellipsis(10.646465rem);
+    }
+  }
+  .experience-title.open {
+    height: auto;
+    i.arrow.icon-right {
+      display: none;
+    }
+    i.arrow.icon-down {
+      display: block;
+    }
+    ul.experiences {
+      display: block;
+    }
+  }
+}
+
+// 人物经历明细
+.experiences {
+  display: none;
+  clear: both;
+  background: #fff;
+  margin-top: 1px;
+  font-size: .606061rem;
+  padding-left: 2.777778rem;
+  color: #bcc1c2;
+  >li {
+    min-height: 1.262626rem;
+    line-height: 1.262626rem;
+  }
+  span {
+    color: #6a7488;
   }
 }

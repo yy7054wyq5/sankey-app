@@ -1,6 +1,15 @@
 .bottom-shadow {
   box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.1);
 }
+
 .box-shadow {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.line-ellipsis(@width) {
+  display: inline-block;
+  width: @width;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

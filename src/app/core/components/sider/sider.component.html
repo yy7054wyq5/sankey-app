@@ -1,16 +1,33 @@
 <aside>
   <ul nz-menu [nzSelectable]="true">
     <li [class]="item.className" nz-menu-item *ngFor="let item of siderMenus" [nzSelected]="item.actived">
-      <span>
+      <span class="menu-info">
         <i class="icon {{item.icon}}"></i>
         <span class="nav-text">{{item.txt}}</span>
         <i class="icon arrow icon-right"></i>
         <i class="icon arrow icon-down"></i>
       </span>
-      <ul class="info"></ul>
-      <ul class="experiences">
-        <li></li>
-      </ul>
+      <ng-container *ngIf="item.className==='user-info'">
+        <span class="experience-title" [class.open]="open" (click)="open=!open">
+          <span>
+            01&nbsp;&nbsp;&nbsp;打打看了解到卡死机读卡接口就量较大上看到杰卡斯基多拉
+          </span>
+          <i class="icon arrow icon-right"></i>
+          <i class="icon arrow icon-down"></i>
+          <ul class="experiences">
+            <li>
+              <span>大大:</span>
+              大大的卡是经典款
+            </li>
+            <li>
+              <span>大大:</span>
+            </li>
+            <li>
+              大大的卡是经典款大大的卡是经典款大大的卡是经典款大大的卡是经典款大大的卡是经典款大大的卡是经典款
+            </li>
+          </ul>
+        </span>
+      </ng-container>
     </li>
   </ul>
 </aside>
