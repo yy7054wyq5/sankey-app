@@ -3,14 +3,14 @@
     <button nz-button nzType="primary" (click)="search()">匹配</button>
   </section>
   <section class="core-body">
-    <nz-sider>
+    <aside>
       <ul nz-menu [nzSelectable]="false">
-        <li nz-menu-item *ngFor="let item of siderMenus" [nzSelected]="item.actived">
+        <li [class]="item.className" nz-menu-item *ngFor="let item of siderMenus" [nzSelected]="item.actived">
           <span>
-            <i class="anticon {{item.icon}}"></i>
+            <i class="icon {{item.icon}}"></i>
             <span class="nav-text">{{item.txt}}</span>
-            <i class="anticon anticon-right"></i>
-            <i class="anticon anticon-down"></i>
+            <i class="icon icon-right"></i>
+            <i class="icon icon-down"></i>
           </span>
           <ul class="info"></ul>
           <ul class="experiences">
@@ -18,9 +18,10 @@
           </ul>
         </li>
       </ul>
-    </nz-sider>
+    </aside>
     <section class="core-content">
       <app-chart [eoption]="option" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)"></app-chart>
     </section>
+    <section class="core-hack" style="width: 5%;"></section>
   </section>
 </nz-layout>

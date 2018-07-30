@@ -1,17 +1,20 @@
 export interface SideMenuItem {
   txt: string;
   icon: string;
+  className: string;
   actived: boolean;
 }
 
 const siderMenus: SideMenuItem[] = [{
   txt: '人物信息',
   actived: false,
-  icon: 'anticon-user',
+  icon: 'user',
+  className: 'user-info'
 }, {
   txt: '历史信息',
   actived: false,
-  icon: 'anticon-clock-circle-o',
+  icon: 'history',
+  className: 'history-info'
 }];
 
 const chartConfig = {

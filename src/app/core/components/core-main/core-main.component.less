@@ -1,51 +1,62 @@
+@import '../../../../less/variable.less';
 app-core-main {
   display: flex;
   width: 100%;
-  .core-main.ant-layout.ant-layout-has-sider {
+  .core-main {
     display: flex;
     flex: 1;
     flex-direction: column;
-    .core-body {
+    section.core-body {
       display: flex;
       flex: 1;
       flex-direction: row;
-      padding-right: 60px;
-      nz-sider {
+      aside {
+        // 侧栏
+        width: 15%;
         background: transparent;
-        .ant-menu-vertical {
+        .ant-menu {
           border: 0;
           >li {
-            // 图标显隐
-            &.ant-menu-item-selected {
-              .anticon-down {
-                display: block;
-              }
-              .anticon-right {
-                display: none;
-              }
-            }
-            .anticon-down {
-              display: none;
-              float: right;
-            }
-            .anticon-right {
-              float: right;
-            }
-            span {
+            >span {
               &::after {
                 clear: both;
               }
               >* {
                 float: left;
               }
-              i {
+              span.nav-text {
+                font-size: @siderFontSize;
+                color: @siderColor;
+              }
+              i.icon {
                 line-height: 40px;
+              } // 图标显隐
+              &.ant-menu-item-selected {
+                .icon-down {
+                  display: block;
+                }
+                .icon-right {
+                  display: none;
+                }
+              }
+              .icon-down {
+                display: none;
+                float: right;
+              }
+              .icon-right {
+                float: right;
               }
             }
           }
+          >li.user-info {
+            i.icon.user {
+              background: url('/assets/images/user.png');
+            }
+          }
         }
-      }
+      } // 内容区
       .core-content {
+        width: 80%;
         flex: 1;
         display: flex;
         flex-direction: column;
