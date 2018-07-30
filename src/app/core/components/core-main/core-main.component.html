@@ -30,7 +30,26 @@
         </div>
         <app-chart *ngIf="option" [eoption]="option" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)"></app-chart>
       </ng-container>
-      <div class="chart-tips"></div>
+      <div class="hack" style="height: .606061rem"></div>
+      <ul class="chart-color-bar">
+        <li style="margin-left: 1.616162rem;">
+          <i [style]="'background-color:'+colorBar.humen | safeHtml:'style'"></i>
+          <span>人物</span>
+        </li>
+        <li>
+          <i [style]="'background-color:'+colorBar.event | safeHtml:'style'"></i>
+          <span>事件</span>
+        </li>
+        <li>
+          <i [style]="'background-color:'+colorBar.company | safeHtml:'style'"></i>
+          <span>公司</span>
+        </li>
+        <li>
+          <i [style]="'background-color:'+colorBar.point | safeHtml:'style'"></i>
+          <span>起点/终点</span>
+        </li>
+      </ul>
+      <div class="hack" style="height: .606061rem"></div>
     </section>
   </section>
 </nz-layout>

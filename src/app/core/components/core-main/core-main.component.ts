@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { siderMenus, SideMenuItem, chartConfig } from '../../config';
+import { siderMenus, SideMenuItem, chartOption, chartColorConfig } from '../../config';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -15,6 +15,7 @@ export class CoreMainComponent implements OnInit {
   ) { }
 
   option: any; // 图表配置项
+  colorBar = chartColorConfig;
   initCore = true; // 初始状态
   siderMenus: SideMenuItem[] = siderMenus;
 
@@ -26,7 +27,7 @@ export class CoreMainComponent implements OnInit {
   search() {
     this._http.get('assets/mock/search-result.json').subscribe(data => {
       this.initCore = false;
-      const _chartConfig = chartConfig;
+      const _chartConfig = chartOption;
       _chartConfig.series[0].data = data[0].nodes;
       _chartConfig.series[0].links = data[0].links;
       this.option = _chartConfig;

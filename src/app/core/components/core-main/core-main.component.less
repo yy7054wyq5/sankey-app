@@ -32,7 +32,7 @@ app-core-main {
               span.nav-text {
                 font-size: 1.111111rem;
                 line-height: 2.020202rem;
-                color: #343348;
+                color: @fontColor;
                 display: block;
                 height: 2.020202rem;
               }
@@ -87,18 +87,34 @@ app-core-main {
         flex: 1;
         display: flex;
         flex-direction: column;
-        border-radius: 6px;
-        >div.chart-tips {
+        >ul.chart-color-bar {
           width: 32.525253rem;
           height: 3.131313rem;
           background: #fff;
-          margin-top: 0.5rem;
+          border-radius: 3px;
+          display: flex;
+          font-size: .808081rem;
+          li {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            i {
+              background: #000;
+              display: block;
+              width: .909091rem;
+              height: .909091rem;
+            }
+            span {
+              margin-left: 1.010101rem;
+            }
+          }
         }
         >div.status {
           flex: 1;
           display: flex;
           background-color: #fff;
           flex-direction: column;
+          border-radius: 6px;
           align-items: center;
           img {
             width: 30.30303rem;
@@ -108,7 +124,7 @@ app-core-main {
           p {
             text-align: center;
             margin-top: 1.5rem;
-            color: #343348;
+            color: @fontColor;
             font-size: 1.111111rem;
           }
         }

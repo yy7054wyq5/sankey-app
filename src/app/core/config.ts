@@ -17,7 +17,14 @@ const siderMenus: SideMenuItem[] = [{
   className: 'history-info'
 }];
 
-const chartConfig = {
+const chartColorConfig = {
+  humen: '#a7ccf3',
+  event: '#f4bb8b',
+  company: '#2aace3',
+  point: '#2603ba'
+};
+
+const chartOption = {
   tooltip: {
     trigger: 'item',
     triggerOn: 'mousemove'
@@ -43,4 +50,4 @@ const chartConfig = {
   ]
 };
 
-export { siderMenus, chartConfig };
+export { siderMenus, chartOption, chartColorConfig };

@@ -1,4 +1,5 @@
 @import '../../../../less/mixin.less';
+@import '../../../../less/variable.less';
 app-search-bar {
   width: 100%;
   height: 6.060606rem;
@@ -27,7 +28,7 @@ app-search-bar {
       background: #fff;
     }
     .ant-select-selection-selected-value {
-      color: #343348;
+      color: @fontColor;
       font-size: 1.111111rem;
     }
   }
@@ -35,6 +36,7 @@ app-search-bar {
     // margin-left: 2.525253rem;
     height: 2.525253rem;
     font-size: 1.111111rem;
+    .bottom-shadow;
   }
 }
 
@@ -64,7 +66,7 @@ app-search-bar {
   z-index: 1;
   position: absolute;
   top: 4.191919rem;
-  left: 16.151515rem;
+  left: 18.151515rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,9 +79,10 @@ app-search-bar {
     line-height: 5.656566rem;
     width: 19.090909rem;
     height: 5.656566rem;
-    color: #343348;
+    color: @fontColor;
     font-size: .808081rem;
     margin-left: -1rem;
+    margin-top: -0.8rem;
     background: #fff;
     .box-shadow;
   }
