@@ -8,6 +8,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class SearchBarComponent implements OnInit {
 
+  start: string;
+  end: string;
+
   constructor() { }
 
   ngOnInit() {

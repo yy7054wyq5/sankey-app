@@ -18,9 +18,6 @@ const siderMenus: SideMenuItem[] = [{
 }];
 
 const chartConfig = {
-  title: {
-    text: 'Sankey Diagram'
-  },
   tooltip: {
     trigger: 'item',
     triggerOn: 'mousemove'

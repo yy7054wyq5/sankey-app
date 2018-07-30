@@ -1,3 +1,33 @@
-<p>
-  search-bar works!
-</p>
+<nz-select [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请输入您的姓名 或公司名称 或职务" [(ngModel)]="start" name="start">
+  <nz-option nzLabel="大姐大&nbsp;安吉达&nbsp;打卡打卡" nzValue="jack" [nzCustomContent]="true">
+    <div class="option-label">
+      <span>大姐大</span>
+      <span>安吉达</span>
+      <span>打卡打卡</span>
+    </div>
+  </nz-option>
+  <nz-option nzValue="lucy">
+    <div class="option-label">
+      <span>大姐大</span>
+      <span>安吉达</span>
+      <span>打卡打卡</span>
+    </div>
+  </nz-option>
+  <nz-option nzValue="tom">
+    <div class="option-label">
+      <span>大姐大</span>
+      <span>安吉达</span>
+      <span>打卡打卡</span>
+    </div>
+  </nz-option>
+</nz-select>
+<nz-select [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请输入对方的姓名 或公司名称 或职务" [(ngModel)]="end" name="end">
+  <nz-option nzLabel="大姐大,安吉达,打卡打卡" nzValue="jack" [nzCustomContent]="true">
+    <div class="option-label">
+      <span>大姐大</span>
+      <span>安吉达</span>
+      <span>打卡打卡</span>
+    </div>
+  </nz-option>
+</nz-select>
+<button nz-button [nzType]="'primary'" type="submit">智配关系</button>
