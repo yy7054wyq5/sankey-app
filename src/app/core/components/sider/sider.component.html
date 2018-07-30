@@ -1,0 +1,16 @@
+<aside>
+  <ul nz-menu [nzSelectable]="true">
+    <li [class]="item.className" nz-menu-item *ngFor="let item of siderMenus" [nzSelected]="item.actived">
+      <span>
+        <i class="icon {{item.icon}}"></i>
+        <span class="nav-text">{{item.txt}}</span>
+        <i class="icon arrow icon-right"></i>
+        <i class="icon arrow icon-down"></i>
+      </span>
+      <ul class="info"></ul>
+      <ul class="experiences">
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</aside>

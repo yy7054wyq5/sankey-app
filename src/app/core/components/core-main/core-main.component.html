@@ -1,22 +1,7 @@
 <nz-layout class="core-main">
   <app-search-bar></app-search-bar>
   <section class="core-body">
-    <aside>
-      <ul nz-menu [nzSelectable]="false">
-        <li [class]="item.className" nz-menu-item *ngFor="let item of siderMenus" [nzSelected]="item.actived">
-          <span>
-            <i class="icon {{item.icon}}"></i>
-            <span class="nav-text">{{item.txt}}</span>
-            <i class="icon arrow icon-right"></i>
-            <i class="icon arrow icon-down"></i>
-          </span>
-          <ul class="info"></ul>
-          <ul class="experiences">
-            <li></li>
-          </ul>
-        </li>
-      </ul>
-    </aside>
+    <app-sider></app-sider>
     <section class="core-content">
       <div *ngIf="initCore" class="status">
         <img src="/assets/images/init-status.png" alt="">

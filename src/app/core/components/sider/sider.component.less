@@ -1,0 +1,73 @@
+@import '../../../../less/variable.less';
+aside {
+  width: 14.646465rem;
+  padding-right: 1rem;
+  background: transparent;
+  .ant-menu {
+    border: 0;
+    >li {
+      padding: 0;
+      padding-left: 1.010101rem;
+      margin-top: 0;
+      padding-top: .252525rem;
+      >span {
+        &::after {
+          clear: both;
+        }
+        >* {
+          float: left;
+        }
+        span.nav-text {
+          font-size: 1.111111rem;
+          line-height: 2.020202rem;
+          color: @fontColor;
+          display: block;
+          height: 2.020202rem;
+        }
+        i.icon {
+          display: block;
+          width: 2.020202rem;
+          height: 2.020202rem;
+          background-size: 3.030303rem;
+          background-position: center;
+          background-repeat: no-repeat;
+          &.arrow {
+            float: right;
+            &.icon-down {
+              display: none;
+              background-image: url('/assets/images/arrow-down.png');
+            }
+            &.icon-right {
+              display: block;
+              background-image: url('/assets/images/arrow-right.png');
+            }
+          }
+        }
+      }
+    } //
+    // 图标显隐
+    //
+    >li.ant-menu-item-selected {
+      >span {
+        i.icon.arrow {
+          &.icon-down {
+            display: block;
+          }
+          &.icon-right {
+            display: none;
+          }
+        }
+      }
+    }
+    >li.user-info {
+      i.icon.user {
+        background-image: url('/assets/images/user.png');
+      }
+    }
+    >li.history-info {
+      i.icon.history {
+        background-image: url('/assets/images/history.png');
+      }
+    }
+  }
+}
