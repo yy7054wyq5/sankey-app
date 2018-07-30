@@ -10,13 +10,16 @@ app-core-main {
       display: flex;
       flex: 1;
       flex-direction: row;
+      //
+      // 侧栏
+      //
       aside {
-        // 侧栏
         width: 15%;
         background: transparent;
         .ant-menu {
           border: 0;
           >li {
+            padding: 0;
             >span {
               &::after {
                 clear: both;
@@ -25,36 +28,57 @@ app-core-main {
                 float: left;
               }
               span.nav-text {
-                font-size: @siderFontSize;
-                color: @siderColor;
+                font-size: 18px;
+                color: #343348;
+                display: block;
+                height: 3vh;
               }
               i.icon {
-                line-height: 40px;
-              } // 图标显隐
-              &.ant-menu-item-selected {
-                .icon-down {
-                  display: block;
-                }
-                .icon-right {
-                  display: none;
+                display: block;
+                width: 3vh;
+                height: 3vh;
+                background-size: 5vh;
+                background-position: center;
+                background-repeat: no-repeat;
+                &.arrow {
+                  float: right;
+                  &.icon-down {
+                    display: none;
+                    background-image: url('/assets/images/arrow-down.png');
+                  }
+                  &.icon-right {
+                    background-image: url('/assets/images/arrow-right.png');
+                  }
                 }
               }
-              .icon-down {
+            }
+          } //
+          // 图标显隐
+          //
+          >li.ant-menu-item-selected {
+            i.icon.arrow {
+              &.icon-down {
+                display: block;
+              }
+              &.icon-right {
                 display: none;
-                float: right;
-              }
-              .icon-right {
-                float: right;
               }
             }
           }
           >li.user-info {
             i.icon.user {
-              background: url('/assets/images/user.png');
+              background-image: url('/assets/images/user.png');
+            }
+          }
+          >li.history-info {
+            i.icon.history {
+              background-image: url('/assets/images/history.png');
             }
           }
         }
-      } // 内容区
+      } //
+      // 内容区
+      // 
       .core-content {
         width: 80%;
         flex: 1;

@@ -16,6 +16,6 @@ import { ChartComponent } from './components/chart/chart.component';
     NgZorroAntdModule
   ],
   declarations: [LayoutComponent, ErrorComponent, ChartComponent],
-  exports: [ChartComponent]
+  exports: [ChartComponent],
 })
 export class ShareModule { }
