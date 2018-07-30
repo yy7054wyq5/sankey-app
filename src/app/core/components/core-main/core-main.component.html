@@ -1,10 +1,8 @@
 <nz-layout class="core-main">
-  <section class="core-search-bar">
-    <button nz-button nzType="primary" (click)="search()">匹配</button>
-  </section>
+  <app-search-bar></app-search-bar>
   <section class="core-body">
     <aside>
-      <ul nz-menu [nzSelectable]="true">
+      <ul nz-menu [nzSelectable]="false">
         <li [class]="item.className" nz-menu-item *ngFor="let item of siderMenus" [nzSelected]="item.actived">
           <span>
             <i class="icon {{item.icon}}"></i>
