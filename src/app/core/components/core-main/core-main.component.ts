@@ -14,8 +14,8 @@ export class CoreMainComponent implements OnInit {
     private _http: HttpClient
   ) { }
 
-  option: any;
-  initCore = true;
+  option: any; // 图表配置项
+  initCore = true; // 初始状态
   siderMenus: SideMenuItem[] = siderMenus;
 
   ngOnInit() {

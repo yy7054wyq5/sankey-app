@@ -18,15 +18,16 @@
       </ul>
     </aside>
     <section class="core-content">
-      <div *ngIf="initCore" class="status init-status">
+      <div *ngIf="initCore" class="status">
         <img src="/assets/images/init-status.png" alt="">
         <p>告诉我您是谁？你想找谁？</p>
         <p>我会帮您找到他哦</p>
       </div>
       <ng-container *ngIf="!initCore">
-        <!-- <div class="status not-found">
-        <p>未找到合适信息哦</p>
-      </div> -->
+        <div class="status" *ngIf="!option">
+          <img src="/assets/images/not-found.png" alt="">
+          <p style="margin-left: -1rem;">未找到合适信息哦</p>
+        </div>
         <app-chart *ngIf="option" [eoption]="option" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)"></app-chart>
       </ng-container>
       <div class="chart-tips"></div>
