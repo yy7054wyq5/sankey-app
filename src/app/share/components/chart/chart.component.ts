@@ -1,4 +1,18 @@
-import { Component, OnInit, Input, ElementRef, AfterViewInit, NgZone, Renderer2, ViewEncapsulation, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ElementRef,
+  AfterViewInit,
+  NgZone,
+  Renderer2,
+  ViewEncapsulation,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import * as echarts from 'echarts';
 import theme from './theme';
 import { ChartService } from './chart.service';
@@ -34,7 +48,6 @@ enum FullStatus {
   no = 'no'
 }
 
-
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
@@ -42,7 +55,6 @@ enum FullStatus {
   encapsulation: ViewEncapsulation.None
 })
 export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
-
   @Input() ehasFullBtn = true;
   @Input() ewidth: string;
   @Input() eheight: string;
@@ -54,7 +66,8 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
   detail: any;
   fullStatus = FullStatus.no; // yes为全屏，no为
-  chartDom: HTMLElement;
+  chartDom: Element;
+  chartContainer: Element;
   chartInstance: any;
   bindedEvent: boolean;
   unlistenDomParentResize: any;
@@ -62,13 +75,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     return this.chartInstance ? true : false;
   }
 
-  constructor(
-    private _chart: ChartService,
-    private _element: ElementRef,
-    private _renderer: Renderer2,
-    private _zone: NgZone
-  ) { }
-
+  constructor(private _chart: ChartService, private _element: ElementRef, private _renderer: Renderer2, private _zone: NgZone) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes) {
@@ -79,6 +86,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   }
 
   ngOnInit() {
+    this.chartContainer = this._element.nativeElement;
     this.chartDom = this._element.nativeElement.querySelector('.chart');
   }
 
@@ -93,7 +101,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     this.unlistenDomParentResize = this._renderer.listen('window', 'resize', () => {
       this._resizeChart();
     });
-
   }
 
   ngOnDestroy() {
@@ -108,17 +115,27 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * 设置样式
    *
    * @private
-   * @param {HTMLElement} dom
+   * @param {Element} dom
    * @param {({ [styleKey: string]: string | number })} params
    * @memberof ChartComponent
    */
-  private _setStyle(dom: HTMLElement, params: { [styleKey: string]: string | number }) {
+  private _setStyle(dom: Element, params: { [styleKey: string]: string | number }) {
     for (const styleKey in params) {
       if (params.hasOwnProperty(styleKey)) {
         let styleValue = params[styleKey];
         styleValue = typeof styleValue === 'number' ? styleValue.toString() + 'px' : styleValue;
         this._renderer.setStyle(dom, styleKey, styleValue);
       }
+    }
+  }
+
+  private _showFullHack(bool) {
+    const hackClassName = 'full-hack';
+    const hackDIV = document.querySelector(`.${hackClassName}`) || document.createElement('div');
+    this._setStyle(hackDIV, { height: bool ? '9.090909rem' : '0' });
+    if (hackDIV.className.indexOf(hackClassName) < 0) {
+      hackDIV.className = hackClassName;
+      this.chartContainer.appendChild(hackDIV);
     }
   }
 
@@ -130,19 +147,8 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    */
   public toFull(tag: string) {
     this.fullStatus = FullStatus[tag];
-    // 重写寻找父级的方法
-    if (tag === 'no') {
-      this._wraper = () => {
-        return this.chartDom.parentElement;
-      };
-    } else {
-      this._wraper = () => {
-        return document.querySelector('.' + this.efullParentClassName);
-      };
-    }
     this._resizeChart();
   }
-
 
   /**
    * 改变全屏样式
@@ -151,30 +157,19 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @memberof ChartComponent
    */
   private _exchangeContainerStyle() {
-    const chartContainer = this._element.nativeElement; // app-chart
     if (this.fullStatus === 'yes') {
-      const wraper = this._wraper();
-      const left = wraper.offsetLeft;
-      const top = wraper.offsetTop;
+      const wraper = document.querySelector('.' + this.efullParentClassName);
+      const left = wraper['offsetLeft'];
+      const top = wraper['offsetTop'];
       const width = wraper.clientWidth;
       const height = wraper.clientHeight;
-      this._setStyle(chartContainer, { position: 'fixed', left, top, width, height });
+      this._showFullHack(true);
+      this._setStyle(this.chartContainer, { position: 'fixed', left, top, width, height });
     } else {
-      this._setStyle(chartContainer, { position: 'relative', left: 0, top: 0, width: '100%', height: '100%' });
+      this._showFullHack(false);
+      this._setStyle(this.chartContainer, { position: 'relative', left: 0, top: 0, width: '100%', height: '100%' });
     }
   }
-
-
-  /**
-   * 返回图表父级
-   *
-   * @private
-   * @memberof ChartComponent
-   */
-  private _wraper = (): HTMLElement => {
-    return this.chartDom.parentElement;
-  }
-
 
   /**
    * 重绘
@@ -194,7 +189,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       }
     });
   }
-
 
   /**
    * 销毁图表
@@ -231,7 +225,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     }
   }
 
-
   /**
    * 绑定事件
    *
@@ -247,22 +240,20 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     });
   }
 
-
   /**
    * 设置宽高
    *
    * @private
-   * @param {HTMLElement} chartDom
+   * @param {Element} chartDom
    * @param {string} width
    * @param {string} height
-   * @returns {HTMLElement}
+   * @returns {Element}
    * @memberof ChartComponent
    */
-  private _setChartWH(chartDom: HTMLElement, width: string, height: string): HTMLElement {
+  private _setChartWH(chartDom: Element, width: string, height: string): Element {
     if (width && height) {
       this._setStyle(chartDom, { width, height });
     }
     return chartDom;
   }
-
 }

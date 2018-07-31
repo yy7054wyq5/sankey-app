@@ -6,19 +6,27 @@ app-chart {
   display: flex;
   flex-direction: column;
   background: #fff;
+  flex: 1;
   .chart {
     flex: 1;
   }
   .full-screen-btn {
     font-size: 18px;
+    display: block;
+    width: 3.131313rem;
+    height: 3.131313rem;
     position: absolute;
-    top: 0;
-    left: 0;
-    background: #fff;
+    top: 1.262626rem;
+    left: 1.262626rem;
+    background: #fff url('/assets/images/full-screen-btn.png') no-repeat center;
+    background-size: 3.131313rem;
   }
-  .drop {
+  .select-chart {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 1.262626rem;
+    background: #000;
+    right: 2.525253rem;
+    width: 15.151515rem;
+    height: 2.525253rem;
   }
 }

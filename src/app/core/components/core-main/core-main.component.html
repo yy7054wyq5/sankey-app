@@ -13,7 +13,7 @@
           <img src="/assets/images/not-found.png" alt="">
           <p style="margin-left: -1rem;">未找到合适信息哦</p>
         </div>
-        <app-chart *ngIf="option" [eoption]="option" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)"></app-chart>
+        <app-chart [eoption]="option" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)"></app-chart>
       </ng-container>
       <div class="hack" style="height: .606061rem"></div>
       <ul class="chart-color-bar">
