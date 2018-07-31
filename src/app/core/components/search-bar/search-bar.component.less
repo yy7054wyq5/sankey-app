@@ -5,41 +5,44 @@ app-search-bar {
   width: 100%;
   height: 6.060606rem;
   padding-left: 14.646465rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: relative;
-  .@{perfix} {
-    width: 31.111111rem;
-    height: 2.323232rem;
-    .@{perfix}-selection {
-      background: #e6e6e6;
+  form {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .@{perfix} {
+      width: 31.111111rem;
+      height: 2.323232rem;
+      .@{perfix}-selection {
+        background: #e6e6e6;
+      }
+      .@{perfix}-selection__placeholder {
+        padding-left: 1.919192rem;
+        font-size: 0.808081rem;
+        font-weight: 300;
+        color: #b3bac8;
+      }
+    } // 已选中
+    .@{perfix}.ng-valid.ng-touched {
+      .@{perfix}-selection {
+        background: #fff;
+      }
+      .@{perfix}-selection-selected-value {
+        color: @fontColor;
+        font-size: 1.111111rem;
+      }
     }
-    .@{perfix}-selection__placeholder {
-      padding-left: 1.919192rem;
-      font-size: 0.808081rem;
-      font-weight: 300;
-      color: #b3bac8;
-    }
-  } // 已选中
-  .@{perfix}.ng-valid.ng-touched {
-    .@{perfix}-selection {
-      background: #fff;
-    }
-    .@{perfix}-selection-selected-value {
-      color: @fontColor;
+    button {
+      // margin-left: 2.525253rem;
+      height: 2.525253rem;
       font-size: 1.111111rem;
-    }
-  }
-  button {
-    // margin-left: 2.525253rem;
-    height: 2.525253rem;
-    font-size: 1.111111rem;
-    .bottom-shadow;
-    &.ant-btn-primary:hover,
-    &.ant-btn-primary:focus {
-      border-color: @themeHoverColor;
-      background: @themeHoverColor;
+      .bottom-shadow;
+      &.ant-btn-primary:hover,
+      &.ant-btn-primary:focus {
+        border-color: @themeHoverColor;
+        background: @themeHoverColor;
+      }
     }
   }
 }
@@ -58,7 +61,7 @@ app-search-bar {
     &:last-child {
       border-bottom: 0;
     }
-    > div {
+    >div {
       display: flex;
       padding: 0 1.010101rem;
       justify-content: space-between;
@@ -74,11 +77,11 @@ app-search-bar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  > img {
+  >img {
     width: 5rem;
     height: 4.5rem;
   }
-  > div {
+  >div {
     text-align: center;
     line-height: 5.656566rem;
     width: 19.090909rem;

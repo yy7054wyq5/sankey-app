@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonService } from '../../services/common/common.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -7,13 +9,18 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class SearchBarComponent implements OnInit {
-
   start: string;
   end: string;
 
-  constructor() { }
+  constructor(private _http: HttpClient, private _common: CommonService) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ////////////////
+
+  search() {
+    this._http.get('assets/mock/search-result.json').subscribe(data => {
+      this._common.search$.next(data);
+    });
   }
-
 }

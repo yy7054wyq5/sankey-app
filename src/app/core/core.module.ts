@@ -6,17 +6,12 @@ import { ShareModule } from '../share/share.module';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FormsModule } from '@angular/forms';
 import { SiderComponent } from './components/sider/sider.component';
+import { CommonService } from './services/common/common.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ShareModule,
-    NgZorroAntdModule
-  ],
-  exports: [
-    CoreMainComponent
-  ],
-  declarations: [CoreMainComponent, SearchBarComponent, SiderComponent]
+  imports: [CommonModule, FormsModule, ShareModule, NgZorroAntdModule],
+  exports: [CoreMainComponent],
+  declarations: [CoreMainComponent, SearchBarComponent, SiderComponent],
+  providers: [CommonService]
 })
-export class CoreModule { }
+export class CoreModule {}

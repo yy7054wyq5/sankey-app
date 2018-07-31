@@ -22,20 +22,20 @@ const siderMenus: SideMenuItem[] = [
 
 const chartColorConfig = {
   humen: {
-    bg: '#f4b98c',
-    hover: '#f4b98c'
+    bg: '#00dbff',
+    hover: '#0080ff'
   },
   event: {
     bg: '#f4b98c',
     hover: '#ff6700'
   },
   company: {
-    bg: '#ff6700',
-    hover: '#ff6700'
+    bg: '#29abe2',
+    hover: '#00dbff'
   },
   point: {
-    bg: '#ff6700',
-    hover: '#ff6700'
+    bg: '#2702bb',
+    hover: '#2500ff'
   }
 };
 
