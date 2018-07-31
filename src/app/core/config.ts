@@ -21,7 +21,7 @@ const chartColorConfig = {
   humen: '#a7ccf3',
   event: '#f4bb8b',
   company: '#2aace3',
-  point: '#2603ba'
+  point: '#2702bb'
 };
 
 const chartOption = {
