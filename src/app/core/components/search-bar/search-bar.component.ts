@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../../services/common/common.service';
 import { Observable, fromEvent, of } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { StorageService } from '../../../share/services/storage/storage.service';
 
 enum SearchStatus {
   pending = 'pending',
@@ -30,12 +31,23 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   tipsLeft = ['21rem', '59rem', '83rem'];
   tip: Element;
 
-  constructor(private _http: HttpClient, private _common: CommonService, private _element: ElementRef, private _renderer: Renderer2) {}
+  constructor(
+    private _http: HttpClient,
+    private _common: CommonService,
+    private _element: ElementRef,
+    private _renderer: Renderer2,
+    private _storge: StorageService
+  ) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
     this.tip = this._element.nativeElement.querySelector('.search-tips');
+    if (this._storge.get('noSearchTips')) {
+      this.tip.remove();
+    } else {
+      this._showTips(true);
+    }
     // 搜起点
     this._bindSearchEvent('start-point').subscribe(res => {
       this._http
@@ -138,6 +150,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
           },
           () => {
             this.tip.remove();
+            this._storge.put('noSearchTips', true);
             this.searchStatus.emit(SearchStatus.complate);
           }
         );
