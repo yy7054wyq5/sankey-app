@@ -1,37 +1,27 @@
 <form (submit)="search()">
-  <nz-select [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请输入您的姓名 或公司名称 或职务" [(ngModel)]="start" name="start">
-    <nz-option nzLabel="大姐大&nbsp;安吉达&nbsp;打卡打卡" nzValue="jack" [nzCustomContent]="true">
+  <!-- 选择起点 -->
+  <nz-select class="start-point" [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请输入您的姓名 或公司名称 或职务" [(ngModel)]="start" name="start" (ngModelChange)="selected($event, 'start')" (nzOpenChange)="open($event)">
+    <nz-option *ngFor="let option of startOptions" nzLabel="{{option['名字']}}&nbsp;{{option['公司名']}}&nbsp;{{option['职位']}}" nzValue="{{option['id']}}" [nzCustomContent]="true">
       <div class="option-label">
-        <span>大姐大</span>
-        <span>安吉达</span>
-        <span>打卡打卡</span>
-      </div>
-    </nz-option>
-    <nz-option nzValue="lucy">
-      <div class="option-label">
-        <span>大姐大</span>
-        <span>安吉达</span>
-        <span>打卡打卡</span>
-      </div>
-    </nz-option>
-    <nz-option nzValue="tom">
-      <div class="option-label">
-        <span>大姐大</span>
-        <span>安吉达</span>
-        <span>打卡打卡</span>
+        <span>{{option['名字']}}</span>
+        <span>{{option['公司名']}}</span>
+        <span>{{option['职位']}}</span>
       </div>
     </nz-option>
   </nz-select>
-  <nz-select [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请输入对方的姓名 或公司名称 或职务" [(ngModel)]="end" name="end">
-    <nz-option nzLabel="大姐大,安吉达,打卡打卡" nzValue="jack" [nzCustomContent]="true">
+  <!-- 选择终点 -->
+  <nz-select class="end-point" [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请输入对方的姓名 或公司名称 或职务" [(ngModel)]="end" name="end" (ngModelChange)="selected($event, 'end')" (nzOpenChange)="open($event)">
+    <nz-option *ngFor="let option of endOptions" nzLabel="{{option['名字']}}&nbsp;{{option['公司名']}}&nbsp;{{option['职位']}}" nzValue="{{option['id']}}" [nzCustomContent]="true">
       <div class="option-label">
-        <span>大姐大</span>
-        <span>安吉达</span>
-        <span>打卡打卡</span>
+        <span>{{option['名字']}}</span>
+        <span>{{option['公司名']}}</span>
+        <span>{{option['职位']}}</span>
       </div>
     </nz-option>
   </nz-select>
+  <!-- 匹配 -->
   <button nz-button [nzType]="'primary'" type="submit">智配关系</button>
+  <!-- 引导 -->
   <div class="search-tips">
     <img src="/assets/images/arrow-guide.png" alt="">
     <div>请输入您的关键字，以“空格”隔开</div>
