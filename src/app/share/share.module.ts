@@ -7,27 +7,12 @@ import { ErrorComponent } from './components/error/error.component';
 import { RouterModule } from '@angular/router';
 import { ChartComponent } from './components/chart/chart.component';
 import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
-
+import { CheckPointComponent } from './components/check-point/check-point.component';
 
 @NgModule({
-  imports: [
-    RouterModule,
-    CommonModule,
-    HttpClientModule,
-    NgZorroAntdModule
-  ],
-  declarations: [
-    LayoutComponent,
-    ErrorComponent,
-    ChartComponent,
-    SafeHtmlPipe
-  ],
-  providers: [
-    SafeHtmlPipe,
-  ],
-  exports: [
-    ChartComponent,
-    SafeHtmlPipe
-  ],
+  imports: [RouterModule, CommonModule, HttpClientModule, NgZorroAntdModule],
+  declarations: [LayoutComponent, ErrorComponent, ChartComponent, SafeHtmlPipe, CheckPointComponent],
+  providers: [SafeHtmlPipe],
+  exports: [ChartComponent, SafeHtmlPipe, CheckPointComponent]
 })
-export class ShareModule { }
+export class ShareModule {}

@@ -1,10 +1,13 @@
+<!-- 上方留白 -->
 <div class="hack" style="height: 5.050505rem"></div>
 <div class="chart"></div>
+<div class="point-info">
+  {{pointDetail}}
+</div>
 <ng-container *ngIf="chartActived">
   <ng-container *ngIf="ehasFullBtn">
     <i *ngIf="fullStatus==='no'" class="anticon full-screen-btn" (click)="toFull('yes')"></i>
     <i *ngIf="fullStatus==='yes'" class="anticon full-screen-btn" (click)="toFull('no')"></i>
   </ng-container>
-  <div class="select-chart"></div>
+  <app-check-point *ngIf="echeckPoints"></app-check-point>
 </ng-container>
-<!-- <div class="full-hack" style="height: 9.090909rem;"></div> -->

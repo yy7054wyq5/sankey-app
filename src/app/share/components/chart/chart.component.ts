@@ -60,18 +60,22 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   @Input() eheight: string;
   @Input() eloading: boolean;
   @Input() efullParentClassName: string;
+  @Input() echeckPoints = true;
   @Input() eoption: any; // http://echarts.baidu.com/option.html
+  @Output() efullStatus = new EventEmitter<boolean>();
   @Output() emouseover = new EventEmitter<any>();
   @Output() eclick = new EventEmitter<any>();
 
-  detail: any;
-  fullStatus = FullStatus.no; // yes为全屏，no为
-  chartDom: Element;
-  chartContainer: Element;
-  chartInstance: any;
-  bindedEvent: boolean;
-  unlistenDomParentResize: any;
+  selectOpenStatus = false;
+  pointDetail: any; // 鼠标经过或点击的文字
+  fullStatus = FullStatus.no; // yes为全屏
+  chartDom: Element; // 图表结构
+  chartContainer: Element; // 整个组件
+  chartInstance: any; // 图表实例
+  bindedEvent: boolean; // 是否已绑定事件
+  unlistenDomParentResize: any; // 监听窗口大小变化事件
   get chartActived() {
+    // 图表是否激活
     return this.chartInstance ? true : false;
   }
 
@@ -129,7 +133,14 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     }
   }
 
-  private _showFullHack(bool) {
+  /**
+   * 手动设置全屏模式下底部的高度
+   *
+   * @private
+   * @param {*} bool
+   * @memberof ChartComponent
+   */
+  private _showPointInfo(bool) {
     const hackClassName = 'full-hack';
     const hackDIV = document.querySelector(`.${hackClassName}`) || document.createElement('div');
     this._setStyle(hackDIV, { height: bool ? '9.090909rem' : '0' });
@@ -163,10 +174,12 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       const top = wraper['offsetTop'];
       const width = wraper.clientWidth;
       const height = wraper.clientHeight;
-      this._showFullHack(true);
+      // this._showPointInfo(true);
+      this.efullStatus.emit(true);
       this._setStyle(this.chartContainer, { position: 'fixed', left, top, width, height });
     } else {
-      this._showFullHack(false);
+      // this._showPointInfo(true);
+      this.efullStatus.emit(false);
       this._setStyle(this.chartContainer, { position: 'relative', left: 0, top: 0, width: '100%', height: '100%' });
     }
   }
@@ -234,9 +247,15 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   private _bindEvent() {
     this.chartInstance.on('click', (params: ChartEventCbParams) => {
       this.eclick.emit(params);
+      this._zone.run(() => {
+        this.pointDetail = 'CLICK' + JSON.stringify(params.data);
+      });
     });
     this.chartInstance.on('mouseover', (params: ChartEventCbParams) => {
       this.emouseover.emit(params);
+      this._zone.run(() => {
+        this.pointDetail = 'MOUSEOVER' + JSON.stringify(params.data);
+      });
     });
   }
 
