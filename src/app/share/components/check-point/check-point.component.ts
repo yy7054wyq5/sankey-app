@@ -8,8 +8,15 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 })
 export class CheckPointComponent implements OnInit {
   show: boolean;
+  pointsTag = 'company';
 
   constructor() {}
 
   ngOnInit() {}
+
+  //////
+
+  showItems(tag: string) {
+    this.pointsTag = tag;
+  }
 }

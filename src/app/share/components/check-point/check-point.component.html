@@ -1,15 +1,18 @@
 <div class="select-chart">
   <div class="bar" (click)="show=!show">
     <span>显示或隐藏关系</span>
-    <i></i>
+    <i class="arrow"></i>
   </div>
   <div class="container" *ngIf="show">
     <ul class="tabs">
-      <li class="actived">公司</li>
-      <li>事件</li>
+      <li [class.actived]="pointsTag==='company'" (click)="showItems('company')">公司</li>
+      <li [class.actived]="pointsTag==='event'" (click)="showItems('event')">事件</li>
     </ul>
-    <ul class="points">
-      <li class="points-item"></li>
+    <ul class="points" [class.event]="pointsTag==='event'" [class.company]="pointsTag==='company'">
+      <li class="points-item">
+        <i class="anticon anticon-check"></i>
+        <span>2016-12-1&nbsp;大大所大奥多所</span>
+      </li>
     </ul>
   </div>
 </div>

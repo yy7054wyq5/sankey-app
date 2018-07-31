@@ -13,7 +13,7 @@ app-check-point {
       color: #34334b;
       font-size: 1.111111rem;
       padding-left: 1.262626rem;
-      i {
+      i.arrow {
         .icon-mixin;
         background-image: url('/assets/images/arrow-down.png');
       }
@@ -21,17 +21,55 @@ app-check-point {
   }
   .container {
     background: #f2f2f2;
-    padding: 0.252525rem 0.505051rem 0 0.505051rem;
+    padding: 0.5rem;
     .tabs {
       height: 2.020202rem;
       display: flex;
+      margin-bottom: 0;
       li {
+        line-height: 2.020202rem;
         text-align: center;
         flex: 1;
       }
       li.actived {
         background: #fff;
         border-radius: @border-radius-base @border-radius-base 0 0;
+      }
+    }
+    .points {
+      background: #fff;
+      padding: 0 0.757576rem 0 0.757576rem;
+      height: 25rem;
+      overflow: auto;
+      margin-bottom: 0;
+      li {
+        border-bottom: 1px solid #f0f0f0;
+        height: 2.525253rem;
+        color: #717a88;
+        display: flex;
+        align-items: center;
+        i {
+          display: inline-block;
+          border-width: 1px;
+          border-style: solid;
+        }
+        span {
+          margin-left: 1rem;
+          display: inline-block;
+          .line-ellipsis(11rem);
+        }
+      }
+    }
+    .points.event {
+      i {
+        border-color: orange;
+        color: orange;
+      }
+    }
+    .points.company {
+      i {
+        border-color: blue;
+        color: blue;
       }
     }
   }
