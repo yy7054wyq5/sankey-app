@@ -1,15 +1,15 @@
 <div class="select-chart">
-  <div>
+  <div class="bar" (click)="show=!show">
     <span>显示或隐藏关系</span>
     <i></i>
   </div>
-  <ng-container *ngIf="show">
+  <div class="container" *ngIf="show">
     <ul class="tabs">
-      <li>公司</li>
+      <li class="actived">公司</li>
       <li>事件</li>
     </ul>
     <ul class="points">
       <li class="points-item"></li>
     </ul>
-  </ng-container>
+  </div>
 </div>

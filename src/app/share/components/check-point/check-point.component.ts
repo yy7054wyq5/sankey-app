@@ -7,7 +7,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class CheckPointComponent implements OnInit {
-  @Input() show: boolean;
+  show: boolean;
 
   constructor() {}
 

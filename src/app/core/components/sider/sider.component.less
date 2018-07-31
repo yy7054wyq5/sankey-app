@@ -6,12 +6,7 @@ aside {
   background: transparent;
   overflow: auto;
   i.icon {
-    display: block;
-    width: 2.020202rem;
-    height: 2.020202rem;
-    background-size: 3.030303rem;
-    background-position: center;
-    background-repeat: no-repeat;
+    .icon-mixin;
     &.arrow {
       &.icon-down {
         display: none;
@@ -27,7 +22,7 @@ aside {
 
 .ant-menu {
   border: 0;
-  >li {
+  > li {
     padding: 0;
     margin-top: 0;
     overflow: hidden;
@@ -38,7 +33,7 @@ aside {
       height: 2.020202rem; // padding-top: 0.45rem;
       display: block;
       padding-left: 1.010101rem;
-      >* {
+      > * {
         float: left;
         &.arrow {
           float: right;
@@ -53,7 +48,7 @@ aside {
       }
     }
   }
-  >li.ant-menu-item-selected {
+  > li.ant-menu-item-selected {
     // 1级图标显隐
     height: auto;
     background: transparent;
@@ -71,12 +66,12 @@ aside {
       }
     }
   }
-  >li.user-info {
+  > li.user-info {
     i.icon.user {
       background-image: url('/assets/images/user.png');
     }
   }
-  >li.history-info {
+  > li.history-info {
     i.icon.history {
       background-image: url('/assets/images/history.png');
     }
@@ -102,7 +97,7 @@ aside {
       i {
         float: right;
       }
-      >span {
+      > span {
         float: left;
         margin-left: 0.9rem;
         .line-ellipsis(10.646465rem);
@@ -129,10 +124,10 @@ aside {
   clear: both;
   background: #fff;
   margin-top: 1px;
-  font-size: .606061rem;
+  font-size: 0.606061rem;
   padding-left: 2.777778rem;
   color: #bcc1c2;
-  >li {
+  > li {
     min-height: 1.5rem;
     line-height: 1.5rem;
     white-space: pre-wrap;
@@ -144,11 +139,11 @@ aside {
 
 .histores {
   padding-left: 2.929293rem;
-  padding-top: .909091rem;
+  padding-top: 0.909091rem;
   li {
     white-space: pre-wrap;
     color: #6a7587;
-    margin-bottom: .808081rem;
+    margin-bottom: 0.808081rem;
   }
 }
 
@@ -166,6 +161,6 @@ aside {
   span {
     display: inline-block;
     color: #6a7587;
-    margin-left: .505051rem;
+    margin-left: 0.505051rem;
   }
 }
