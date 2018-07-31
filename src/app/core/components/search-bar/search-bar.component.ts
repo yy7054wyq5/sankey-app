@@ -101,6 +101,19 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * 展示提示框
+   *
+   * @private
+   * @param {boolean} show
+   * @memberof SearchBarComponent
+   */
+  private _showTips(show: boolean) {
+    if (this.tip) {
+      this._renderer.setStyle(this.tip, 'display', show ? 'flex' : 'none');
+    }
+  }
+
+  /**
    * 请求匹配关系
    *
    * @memberof SearchBarComponent
@@ -124,6 +137,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
             this.searchStatus.emit(SearchStatus.fail);
           },
           () => {
+            this.tip.remove();
             this.searchStatus.emit(SearchStatus.complate);
           }
         );
@@ -136,8 +150,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
    * @param {*} value
    * @memberof SearchBarComponent
    */
-  open(value) {
-    this._renderer.setStyle(this.tip, 'display', 'none');
+  open(isopen: boolean) {
+    if (isopen) {
+      this._showTips(false);
+    }
   }
 
   /**
@@ -148,7 +164,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
    * @memberof SearchBarComponent
    */
   selected(value: any, tag: string) {
-    this._renderer.setStyle(this.tip, 'display', 'flex');
+    this._showTips(true);
     if (tag === 'start') {
       this.start = value;
       this._moveTips(this.tipsLeft[1]);
