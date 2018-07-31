@@ -1,5 +1,6 @@
 @import '../../../../less/mixin.less';
 @import '../../../../less/variable.less';
+@perfix: ant-select;
 app-search-bar {
   width: 100%;
   height: 6.060606rem;
@@ -8,26 +9,24 @@ app-search-bar {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  .ant-select {
+  .@{perfix} {
     width: 31.111111rem;
-    height: 2.323232rem; // &:nth-child(2) {
-    //   margin-left: 2.323232rem;
-    // }
-    .ant-select-selection {
+    height: 2.323232rem;
+    .@{perfix}-selection {
       background: #e6e6e6;
     }
-    .ant-select-selection__placeholder {
+    .@{perfix}-selection__placeholder {
       padding-left: 1.919192rem;
-      font-size: .808081rem;
+      font-size: 0.808081rem;
       font-weight: 300;
       color: #b3bac8;
     }
   } // 已选中
-  .ant-select.ng-valid.ng-touched {
-    .ant-select-selection {
+  .@{perfix}.ng-valid.ng-touched {
+    .@{perfix}-selection {
       background: #fff;
     }
-    .ant-select-selection-selected-value {
+    .@{perfix}-selection-selected-value {
       color: @fontColor;
       font-size: 1.111111rem;
     }
@@ -50,7 +49,7 @@ app-search-bar {
   background: #fff;
   li {
     height: 3.030303rem;
-    font-size: .909091rem;
+    font-size: 0.909091rem;
     color: #6a7587;
     line-height: 3.030303rem;
     border-bottom: 1px solid #cccccc;
@@ -59,7 +58,7 @@ app-search-bar {
     &:last-child {
       border-bottom: 0;
     }
-    >div {
+    > div {
       display: flex;
       padding: 0 1.010101rem;
       justify-content: space-between;
@@ -75,17 +74,17 @@ app-search-bar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  >img {
+  > img {
     width: 5rem;
     height: 4.5rem;
   }
-  >div {
+  > div {
     text-align: center;
     line-height: 5.656566rem;
     width: 19.090909rem;
     height: 5.656566rem;
     color: @fontColor;
-    font-size: .808081rem;
+    font-size: 0.808081rem;
     margin-left: -1rem;
     margin-top: -0.8rem;
     background: #fff;

@@ -4,23 +4,23 @@ aside {
   width: 14.646465rem;
   padding-right: 1rem;
   background: transparent;
-}
-
-i.icon {
-  display: block;
-  width: 2.020202rem;
-  height: 2.020202rem;
-  background-size: 3.030303rem;
-  background-position: center;
-  background-repeat: no-repeat;
-  &.arrow {
-    &.icon-down {
-      display: none;
-      background-image: url('/assets/images/arrow-down.png');
-    }
-    &.icon-right {
-      display: block;
-      background-image: url('/assets/images/arrow-right.png');
+  overflow: auto;
+  i.icon {
+    display: block;
+    width: 2.020202rem;
+    height: 2.020202rem;
+    background-size: 3.030303rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    &.arrow {
+      &.icon-down {
+        display: none;
+        background-image: url('/assets/images/arrow-down.png');
+      }
+      &.icon-right {
+        display: block;
+        background-image: url('/assets/images/arrow-right.png');
+      }
     }
   }
 }
@@ -52,10 +52,9 @@ i.icon {
         height: 2.020202rem;
       }
     }
-  } //
-  // 1级图标显隐
-  //
+  }
   >li.ant-menu-item-selected {
+    // 1级图标显隐
     height: auto;
     background: transparent;
     color: @fontColor;
@@ -84,40 +83,42 @@ i.icon {
   }
 }
 
-
 // 人物经历
 .ant-menu {
-  .sub-container{
+  // 二级菜单
+  .sub-container {
     display: flex;
     flex-direction: column;
-  }
-
-  .experience-container {
-    flex: 1;
-    display: block;
-    height: 2rem;
-    line-height: 2rem;
-    background: #f0f2f5;
-    clear: both;
-    i {
-      float: right;
-    }
-    >span {
-      float: left;
-      margin-left: 0.9rem;
-      .line-ellipsis(10.646465rem);
-    }
-  }
-  .experience-container.open {
-    height: auto;
-    i.arrow.icon-right {
-      display: none;
-    }
-    i.arrow.icon-down {
+    margin-top: 1.212121rem;
+    .experience-container {
+      // 三级菜单
+      flex: 1;
       display: block;
+      height: 2rem;
+      line-height: 2rem;
+      background: #f0f2f5;
+      clear: both;
+      margin-bottom: 1.010101rem;
+      i {
+        float: right;
+      }
+      >span {
+        float: left;
+        margin-left: 0.9rem;
+        .line-ellipsis(10.646465rem);
+      }
     }
-    ul.experiences {
-      display: block;
+    .experience-container.open {
+      height: auto;
+      i.arrow.icon-right {
+        display: none;
+      }
+      i.arrow.icon-down {
+        display: block;
+      }
+      ul.experiences {
+        display: block;
+      }
     }
   }
 }
@@ -138,5 +139,33 @@ i.icon {
   }
   span {
     color: #6a7488;
+  }
+}
+
+.histores {
+  padding-left: 2.929293rem;
+  padding-top: .909091rem;
+  li {
+    white-space: pre-wrap;
+    color: #6a7587;
+    margin-bottom: .808081rem;
+  }
+}
+
+.clear-history {
+  margin-top: 4.242424rem;
+  height: 2.020202rem;
+  line-height: 2.020202rem;
+  display: flex;
+  justify-content: flex-end;
+  i.icon.delete {
+    display: inline-block;
+    background-image: url('/assets/images/delete-history.png');
+    background-size: 3.030303rem;
+  }
+  span {
+    display: inline-block;
+    color: #6a7587;
+    margin-left: .505051rem;
   }
 }

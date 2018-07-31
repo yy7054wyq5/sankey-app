@@ -1,5 +1,5 @@
 <aside>
-  <ul nz-menu [nzSelectable]="true">
+  <ul nz-menu [nzSelectable]="false">
     <li [class]="item.className" nz-menu-item *ngFor="let item of siderMenus" [nzSelected]="item.actived">
       <span class="menu-info">
         <i class="icon {{item.icon}}"></i>
@@ -7,6 +7,7 @@
         <i class="icon arrow icon-right"></i>
         <i class="icon arrow icon-down"></i>
       </span>
+      <!-- 用户相关 -->
       <ng-container *ngIf="item.className==='user-info'">
         <div class="sub-container">
           <span class="experience-container" [class.open]="open" (click)="open=!open">
@@ -28,6 +29,18 @@
               </li>
             </ul>
           </span>
+        </div>
+      </ng-container>
+      <!-- 历史记录 -->
+      <ng-container *ngIf="item.className==='history-info'">
+        <ul class="histores">
+          <li>jdadjaj->的骄傲的骄傲刻录机啊</li>
+          <li>jdadjaj->的骄傲的骄傲刻录机啊的骄傲的骄傲刻录机啊的骄傲的骄傲刻录机啊的骄傲的骄傲刻录机啊</li>
+          <li>jdadjaj->的骄傲的骄傲刻录机啊</li>
+        </ul>
+        <div class="clear-history">
+          <i class="icon delete"></i>
+          <span>清空历史</span>
         </div>
       </ng-container>
     </li>
