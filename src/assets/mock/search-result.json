@@ -2,9 +2,13 @@
   "status": 0,
   "data": {
     "nodes": [
-      { "name": "改1", "id": "person68b01e385f2211e8bf82005056c00008" },
-      { "name": "改2", "id": "case67d35d2f869211e8998f000c2974e9f6" },
-      { "name": "Land use" },
+      {
+        "name": "人物",
+        "id": "person68b01e385f2211e8bf82005056c00008",
+        "value": 11
+      },
+      { "name": "事件", "id": "case67d35d2f869211e8998f000c2974e9f6" },
+      { "name": "公司", "id": "organizationd87ddda2323sdd" },
       { "name": "Cocoa butter (Organic)" },
       { "name": "Cocoa mass (Organic)" },
       { "name": "Hazelnuts (Organic)" },
@@ -37,31 +41,31 @@
       },
       {
         "source": "case67d35d2f869211e8998f000c2974e9f6",
-        "target": "Land use",
+        "target": "organizationd87ddda2323sdd",
         "value": 0.32322870366987
       },
       {
-        "source": "Land use",
+        "source": "organizationd87ddda2323sdd",
         "target": "Cocoa butter (Organic)",
         "value": 0.177682517071359
       },
       {
-        "source": "Land use",
+        "source": "organizationd87ddda2323sdd",
         "target": "Cocoa mass (Organic)",
         "value": 0.137241325342711
       },
       {
-        "source": "Land use",
+        "source": "organizationd87ddda2323sdd",
         "target": "Hazelnuts (Organic)",
         "value": 0.00433076373512774
       },
       {
-        "source": "Land use",
+        "source": "organizationd87ddda2323sdd",
         "target": "Cane sugar (Organic)",
         "value": 0.00296956039863467
       },
       {
-        "source": "Land use",
+        "source": "organizationd87ddda2323sdd",
         "target": "Vegetables (Organic)",
         "value": 0.00100453712203756
       },

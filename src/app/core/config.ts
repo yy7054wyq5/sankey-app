@@ -21,15 +21,15 @@ const siderMenus: SideMenuItem[] = [
 ];
 
 const chartColorConfig = {
-  humen: {
+  person: {
     bg: '#00dbff',
     hover: '#0080ff'
   },
-  event: {
+  case: {
     bg: '#f4b98c',
     hover: '#ff6700'
   },
-  company: {
+  organization: {
     bg: '#29abe2',
     hover: '#00dbff'
   },

@@ -23,7 +23,10 @@ import { environment } from '../../../../environments/environment';
 
 export interface ChartNode {
   name: string;
-  id: any;
+  id: string;
+  value?: any;
+  emphasis?: any; // 高亮样式
+  itemStyle?: any; // 展示样式
   dis?: string;
 }
 

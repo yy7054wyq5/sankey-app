@@ -27,11 +27,44 @@ export class CoreMainComponent implements OnInit {
 
   /////////////////////////
 
+  private _setItemStyle(
+    node: ChartNode,
+    normalColor: string,
+    highlightColor: string
+  ) {
+    node.itemStyle = {};
+    node.itemStyle.color = node.itemStyle.borderColor = normalColor;
+    node.emphasis = {};
+    node.emphasis.itemStyle = {};
+    node.emphasis.itemStyle.color = node.emphasis.itemStyle.borderColor = highlightColor;
+  }
+
   private _rebuildNodesData(nodes: ChartNode[]): Observable<ChartNode[]> {
-    // nodes.forEach(node => {
-    //   node.dis = node.name;
-    //   node.name = node.id;
-    // });
+    nodes.forEach(node => {
+      if (node.id) {
+        if (node.id.indexOf('person') === 0) {
+          this._setItemStyle(
+            node,
+            chartColorConfig.person.bg,
+            chartColorConfig.person.hover
+          );
+        }
+        if (node.id.indexOf('case') === 0) {
+          this._setItemStyle(
+            node,
+            chartColorConfig.case.bg,
+            chartColorConfig.case.hover
+          );
+        }
+        if (node.id.indexOf('organization') === 0) {
+          this._setItemStyle(
+            node,
+            chartColorConfig.organization.bg,
+            chartColorConfig.organization.hover
+          );
+        }
+      }
+    });
     return of(nodes);
   }
 

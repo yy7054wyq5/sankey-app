@@ -54,7 +54,8 @@ enum FullStatus {
   styleUrls: ['./chart.component.less'],
   encapsulation: ViewEncapsulation.None
 })
-export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
+export class ChartComponent
+  implements OnChanges, OnInit, AfterViewInit, OnDestroy {
   @Input() ehasFullBtn = true;
   @Input() ewidth: string;
   @Input() eheight: string;
@@ -79,7 +80,12 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     return this.chartInstance ? true : false;
   }
 
-  constructor(private _chart: ChartService, private _element: ElementRef, private _renderer: Renderer2, private _zone: NgZone) {}
+  constructor(
+    private _chart: ChartService,
+    private _element: ElementRef,
+    private _renderer: Renderer2,
+    private _zone: NgZone
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes) {
@@ -102,9 +108,13 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     }, 1);
 
     // 监听窗口变化
-    this.unlistenDomParentResize = this._renderer.listen('window', 'resize', () => {
-      this._resizeChart();
-    });
+    this.unlistenDomParentResize = this._renderer.listen(
+      'window',
+      'resize',
+      () => {
+        this._resizeChart();
+      }
+    );
   }
 
   ngOnDestroy() {
@@ -123,11 +133,17 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @param {({ [styleKey: string]: string | number })} params
    * @memberof ChartComponent
    */
-  private _setStyle(dom: Element, params: { [styleKey: string]: string | number }) {
+  private _setStyle(
+    dom: Element,
+    params: { [styleKey: string]: string | number }
+  ) {
     for (const styleKey in params) {
       if (params.hasOwnProperty(styleKey)) {
         let styleValue = params[styleKey];
-        styleValue = typeof styleValue === 'number' ? styleValue.toString() + 'px' : styleValue;
+        styleValue =
+          typeof styleValue === 'number'
+            ? styleValue.toString() + 'px'
+            : styleValue;
         this._renderer.setStyle(dom, styleKey, styleValue);
       }
     }
@@ -142,7 +158,9 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    */
   private _showPointInfo(bool) {
     const hackClassName = 'full-hack';
-    const hackDIV = document.querySelector(`.${hackClassName}`) || document.createElement('div');
+    const hackDIV =
+      document.querySelector(`.${hackClassName}`) ||
+      document.createElement('div');
     this._setStyle(hackDIV, { height: bool ? '9.090909rem' : '0' });
     if (hackDIV.className.indexOf(hackClassName) < 0) {
       hackDIV.className = hackClassName;
@@ -176,11 +194,23 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       const height = wraper.clientHeight;
       // this._showPointInfo(true);
       this.efullStatus.emit(true);
-      this._setStyle(this.chartContainer, { position: 'fixed', left, top, width, height });
+      this._setStyle(this.chartContainer, {
+        position: 'fixed',
+        left,
+        top,
+        width,
+        height
+      });
     } else {
       // this._showPointInfo(true);
       this.efullStatus.emit(false);
-      this._setStyle(this.chartContainer, { position: 'relative', left: 0, top: 0, width: '100%', height: '100%' });
+      this._setStyle(this.chartContainer, {
+        position: 'relative',
+        left: 0,
+        top: 0,
+        width: '100%',
+        height: '100%'
+      });
     }
   }
 
@@ -226,7 +256,11 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     if (!this.chartDom || !this.eoption) {
       return;
     }
-    const _chartDom = this._setChartWH(this.chartDom, this.ewidth, this.eheight);
+    const _chartDom = this._setChartWH(
+      this.chartDom,
+      this.ewidth,
+      this.eheight
+    );
     this._zone.runOutsideAngular(() => {
       this.chartInstance = echarts.init(_chartDom, 'sn');
       this.chartInstance.setOption(this.eoption);
@@ -253,6 +287,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     });
     this.chartInstance.on('mouseover', (params: ChartEventCbParams) => {
       this.emouseover.emit(params);
+      console.log(params);
       this._zone.run(() => {
         this.pointDetail = 'MOUSEOVER' + JSON.stringify(params.data);
       });
@@ -269,7 +304,11 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @returns {Element}
    * @memberof ChartComponent
    */
-  private _setChartWH(chartDom: Element, width: string, height: string): Element {
+  private _setChartWH(
+    chartDom: Element,
+    width: string,
+    height: string
+  ): Element {
     if (width && height) {
       this._setStyle(chartDom, { width, height });
     }
