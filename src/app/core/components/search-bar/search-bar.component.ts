@@ -20,21 +20,10 @@ import {
 } from 'rxjs/operators';
 import { StorageService } from '../../../share/services/storage/storage.service';
 import { environment } from '../../../../environments/environment';
-
-export interface ChartNode {
-  name: string;
-  id: string;
-  value?: any;
-  emphasis?: any; // 高亮样式
-  itemStyle?: any; // 展示样式
-  dis?: string;
-}
-
-export interface ChartLink {
-  source: string;
-  target: string;
-  value: string;
-}
+import {
+  ChartLink,
+  ChartNode
+} from '../../../share/components/chart/chart.service';
 
 /**
  * 搜索的状态

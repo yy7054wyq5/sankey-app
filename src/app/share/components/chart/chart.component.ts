@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import * as echarts from 'echarts';
 import theme from './theme';
-import { ChartService } from './chart.service';
+import { ChartService, QueryLinksData } from './chart.service';
 
 export interface ChartEventCbParams {
   // 当前点击的图形元素所属的组件名称，
@@ -32,7 +32,10 @@ export interface ChartEventCbParams {
   // 数据在传入的 data 数组中的 index
   dataIndex: number;
   // 传入的原始数据项
-  data: Object;
+  data: {
+    id: string;
+    name: string;
+  };
   // sankey、graph 等图表同时含有 nodeData 和 edgeData 两种 data，
   // dataType 的值会是 'node' 或者 'edge'，表示当前点击在 node 还是 edge 上。
   // 其他大部分图表中只有一种 data，dataType 无意义。
@@ -52,7 +55,8 @@ enum FullStatus {
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.less'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [ChartService]
 })
 export class ChartComponent
   implements OnChanges, OnInit, AfterViewInit, OnDestroy {
@@ -75,6 +79,8 @@ export class ChartComponent
   chartInstance: any; // 图表实例
   bindedEvent: boolean; // 是否已绑定事件
   unlistenDomParentResize: any; // 监听窗口大小变化事件
+  highlightRecord = {}; // 以dataIndex为key记录高亮，将该点数据全部存入
+  relation: QueryLinksData;
   get chartActived() {
     // 图表是否激活
     return this.chartInstance ? true : false;
@@ -241,6 +247,7 @@ export class ChartComponent
    */
   private _destroyChart() {
     if (this.chartInstance) {
+      this.highlightRecord = {};
       this.chartInstance.dispose();
       this._setChartWH(this.chartDom, '0px', '0px');
     }
@@ -256,6 +263,7 @@ export class ChartComponent
     if (!this.chartDom || !this.eoption) {
       return;
     }
+    this.highlightRecord = {};
     const _chartDom = this._setChartWH(
       this.chartDom,
       this.ewidth,
@@ -270,6 +278,11 @@ export class ChartComponent
       this._bindEvent();
       this.bindedEvent = true;
     }
+    this._chart
+      .buildQueryLinksData(this.eoption.series[0].links)
+      .subscribe(links => {
+        this.relation = links;
+      });
   }
 
   /**
@@ -281,16 +294,47 @@ export class ChartComponent
   private _bindEvent() {
     this.chartInstance.on('click', (params: ChartEventCbParams) => {
       this.eclick.emit(params);
+      let highOrDown;
+      if (!this.highlightRecord[params.dataIndex]) {
+        highOrDown = 'highlight';
+        this.highlightRecord[params.dataIndex] = params;
+        const id = params.data.id;
+        const tartgets = this.relation[id].tartget;
+        const sources = this.relation[id].source;
+        tartgets.forEach(tartget => {
+          console.log(`${id} > ${tartget}`);
+          this.chartInstance.dispatchAction({
+            type: 'highlight',
+            name: `${id} > ${tartget}`
+          });
+        });
+        sources.forEach(source => {
+          console.log(`${source} > ${id}}`);
+          this.chartInstance.dispatchAction({
+            type: 'highlight',
+            name: `${source} > ${id}`
+          });
+        });
+      } else {
+        delete this.highlightRecord[params.dataIndex];
+        highOrDown = 'downplay';
+      }
+      if (params.dataType === 'node') {
+        this.chartInstance.dispatchAction({
+          type: highOrDown,
+          dataIndex: params.dataIndex
+        });
+      }
       this._zone.run(() => {
         this.pointDetail = 'CLICK' + JSON.stringify(params.data);
       });
     });
+    this.chartInstance.on('mouseout', (params: ChartEventCbParams) => {});
     this.chartInstance.on('mouseover', (params: ChartEventCbParams) => {
-      this.emouseover.emit(params);
-      console.log(params);
-      this._zone.run(() => {
-        this.pointDetail = 'MOUSEOVER' + JSON.stringify(params.data);
-      });
+      // this.emouseover.emit(params);
+      // this._zone.run(() => {
+      //   this.pointDetail = 'MOUSEOVER' + JSON.stringify(params.data);
+      // });
     });
   }
 

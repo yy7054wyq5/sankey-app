@@ -36,13 +36,19 @@ const chartColorConfig = {
   point: {
     bg: '#2702bb',
     hover: '#2500ff'
-  }
+  },
+  line: '#ececec'
 };
 
 const chartOption = {
-  tooltip: {
-    trigger: 'item',
-    triggerOn: 'mousemove'
+  // tooltip: {
+  //   trigger: 'item',
+  //   triggerOn: 'mousemove'
+  // },
+  label: {
+    formatter: params => {
+      return params.name;
+    }
   },
   series: [
     {
@@ -50,15 +56,14 @@ const chartOption = {
       layout: 'none',
       data: [],
       links: [],
-      itemStyle: {
-        normal: {
-          borderWidth: 1,
-          borderColor: '#aaa'
-        }
-      },
       lineStyle: {
-        normal: {
-          curveness: 0.5
+        color: chartColorConfig.line,
+        opacity: 0.2
+      },
+      emphasis: {
+        lineStyle: {
+          color: chartColorConfig.line,
+          opacity: 0.6
         }
       }
     }
