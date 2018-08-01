@@ -1,15 +1,50 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, AfterViewInit, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  ElementRef,
+  AfterViewInit,
+  Input,
+  Output,
+  EventEmitter,
+  Renderer2
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../../services/common/common.service';
 import { Observable, fromEvent, of } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import {
+  map,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap
+} from 'rxjs/operators';
 import { StorageService } from '../../../share/services/storage/storage.service';
+import { environment } from '../../../../environments/environment';
 
+/**
+ * 搜索的状态
+ *
+ * @enum {number}
+ */
 enum SearchStatus {
   pending = 'pending',
   success = 'success',
   fail = 'fail',
   complate = 'complate'
+}
+
+/**
+ * 搜索数据返回
+ *
+ * @export
+ * @interface SearchResult
+ */
+export interface SearchResult {
+  status: number;
+  data: {
+    links: any[];
+    nodes: any[];
+  };
 }
 
 @Component({
@@ -26,6 +61,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   endOptions = [];
 
   @Input() searchDelaytTime = 1000;
+  @Output() searchResult = new EventEmitter<SearchResult>();
   @Output() searchStatus = new EventEmitter<string>();
 
   tipsLeft = ['21rem', '59rem', '83rem'];
@@ -89,7 +125,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
    * @memberof SearchBarComponent
    */
   private _bindSearchEvent(className: string): Observable<string> {
-    const $input = this._element.nativeElement.querySelector('.' + className).querySelector('.ant-select-search__field');
+    const $input = this._element.nativeElement
+      .querySelector('.' + className)
+      .querySelector('.ant-select-search__field');
     return fromEvent($input, 'input').pipe(
       map((e: Event) => e.target['value']),
       debounceTime(this.searchDelaytTime),
@@ -131,30 +169,31 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
    * @memberof SearchBarComponent
    */
   search() {
-    if (this.start && this.end) {
-      this.searchStatus.emit(SearchStatus.pending);
-      this._http
-        .get('assets/mock/search-result.json', {
-          params: {
-            source: this.start,
-            target: this.end
-          }
-        })
-        .subscribe(
-          data => {
-            this.searchStatus.emit(SearchStatus.success);
-            this._common.search$.next(data);
-          },
-          error => {
-            this.searchStatus.emit(SearchStatus.fail);
-          },
-          () => {
-            this.tip.remove();
-            this._storge.put('noSearchTips', true);
-            this.searchStatus.emit(SearchStatus.complate);
-          }
-        );
+    if (environment.production && (!this.start || !this.end)) {
+      return;
     }
+    this.searchStatus.emit(SearchStatus.pending);
+    this._http
+      .get('assets/mock/search-result.json', {
+        params: {
+          source: this.start,
+          target: this.end
+        }
+      })
+      .subscribe(
+        (data: SearchResult) => {
+          this.searchStatus.emit(SearchStatus.success);
+          this.searchResult.emit(data);
+        },
+        error => {
+          this.searchStatus.emit(SearchStatus.fail);
+        },
+        () => {
+          this.tip.remove();
+          this._storge.put('noSearchTips', true);
+          this.searchStatus.emit(SearchStatus.complate);
+        }
+      );
   }
 
   /**

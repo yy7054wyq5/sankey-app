@@ -3,7 +3,5 @@ import { Subject } from '../../../../../node_modules/rxjs';
 
 @Injectable()
 export class CommonService {
-  search$ = new Subject();
-
   constructor() {}
 }

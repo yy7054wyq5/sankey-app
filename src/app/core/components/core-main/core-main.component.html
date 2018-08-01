@@ -1,5 +1,5 @@
 <nz-layout class="core-main">
-  <app-search-bar></app-search-bar>
+  <app-search-bar (searchResult)="getSearchResult($event)"></app-search-bar>
   <section class="core-body">
     <app-sider></app-sider>
     <section class="core-content">
