@@ -1,0 +1,322 @@
+{
+  "status": 0,
+  "data": {
+    "nodes": [
+      {
+        "name": "王季民",
+        "id": "person68b01e385f2211e8bf82005056c00008"
+      },
+      {
+        "name": "830884_华盛供水_2014-07-16_华盛供水-公开转让说明书",
+        "id": "case67d35d2f869211e8998f000c2974e9f6"
+      },
+      {
+        "name": "王丽",
+        "id": "person68ce550a5f2211e8b0aa005056c00008"
+      },
+      {
+        "name": "2017年01月17日-百傲化学首次公开发行股票并上市招股说明书",
+        "id": "casebe0165516a0111e8a353000c2974e9f6"
+      },
+      {
+        "name": "唐靓",
+        "id": "person790ee1065f2211e8a406005056c00008"
+      },
+      {
+        "name":
+          "2017年04月28日-金一文化：发行股份及支付现金购买资产并募集配套资金暨关联交易报告书（草案）",
+        "id": "casef99be44c6a0111e8a353000c2974e9f6"
+      },
+      {
+        "name": "顾仁荣",
+        "id": "person8199488a5f2211e8b1a7005056c00008"
+      },
+      {
+        "name": "2015年03月25日-千山药机：重大资产购买暨关联交易报告书（草案）",
+        "id": "case5186b0fb6a0111e8a353000c2974e9f6"
+      },
+      {
+        "name":
+          "2016年11月28日-中科电气：发行股份及支付现金购买资产报告书（草案）（修订稿）",
+        "id": "case6498f5776a0111e8a353000c2974e9f6"
+      },
+      {
+        "name": "832140_戈兰迪_2015-02-27_戈兰迪-公开转让说明书",
+        "id": "case67d35d61869211e8998f000c2974e9f6"
+      },
+      {
+        "name": "张敬前",
+        "id": "person8c0d5ec85f2211e8bf34005056c00008"
+      },
+      {
+        "name":
+          "2016年05月06日-中山联合光电科技股份有限公司首次公开发行股票说明书",
+        "id": "case7901e86679cf11e8a0f6000c2974e9f6"
+      },
+      {
+        "name": "刘祥茂",
+        "id": "person81c673b45f2211e885f1005056c00008"
+      },
+      {
+        "name":
+          "2014年04月25日-安记食品股份有限公司首次公开发行股票招股说明书（申报稿2014年4月23日报送）",
+        "id": "case0d473f5e6a0211e8a353000c2974e9f6"
+      },
+      {
+        "name":
+          "2017年01月18日-中科电气：发行股份及支付现金购买资产报告书（草案）（修订稿）",
+        "id": "case4a5f90dc6a0111e8a353000c2974e9f6"
+      },
+      {
+        "name": "839728_模式生物_2016-10-28_模式生物-公开转让说明书",
+        "id": "case088d4d157e6611e8a0f6000c2974e9f6"
+      },
+      {
+        "name": "吴明德",
+        "id": "person6c6062cc5f2211e88b11005056c00008"
+      },
+      {
+        "name":
+          "2016年11月17日-欣龙控股：发行股份及支付现金购买资产并募集配套资金暨关联交易报告书（草案）",
+        "id": "casee55767df6a0111e8a353000c2974e9f6",
+        "category": 5,
+        "draggable": "true"
+      },
+      {
+        "name": "黄新",
+        "id": "persona1b890025f2211e8b586005056c00008"
+      },
+      {
+        "name":
+          "2016年04月02日-华天酒店：益阳市资阳商贸投资开发有限公司资产转让评估项目资产评估报告",
+        "id": "case8b5740f36a0111e8a353000c2974e9f6"
+      },
+      {
+        "name":
+          "2016年12月20日-金一文化：发行股份及支付现金购买资产并募集配套资金暨关联交易报告书（草案）（修订稿）",
+        "id": "case492e4b996a0111e8a353000c2974e9f6"
+      },
+      {
+        "name":
+          "2016年08月23日-中科电气：发行股份及支付现金购买资产报告书（草案）",
+        "id": "case6498f4af6a0111e8a353000c2974e9f6"
+      },
+      {
+        "name": "肖石",
+        "id": "person7910409c5f2211e8ac9d005056c00008"
+      },
+      {
+        "name":
+          "2016年11月28日-中科电气：中瑞国际资产评估（北京）有限公司关于公司发行股份及支付现金购买资产行政许可项目审查一次反馈意见中资产评估相关问题的回复",
+        "id": "case03bd6ca06a0211e8a353000c2974e9f6"
+      },
+      {
+        "name":
+          "2016年09月13日-中科电气：中瑞国际资产评估（北京）有限公司关于深圳证券交易所《关于对湖南中科电气股份有限公司的重组问询函》之核查意见",
+        "id": "case031c771e6a0211e8a353000c2974e9f6"
+      }
+    ],
+    "links": [
+      {
+        "source": "case67d35d2f869211e8998f000c2974e9f6",
+        "value": "参与",
+        "target": "person68b01e385f2211e8bf82005056c00008"
+      },
+      {
+        "source": "case67d35d2f869211e8998f000c2974e9f6",
+        "value": "参与",
+        "target": "person68ce550a5f2211e8b0aa005056c00008"
+      },
+      {
+        "source": "casebe0165516a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person68ce550a5f2211e8b0aa005056c00008"
+      },
+      {
+        "source": "casebe0165516a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person790ee1065f2211e8a406005056c00008"
+      },
+      {
+        "source": "casef99be44c6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person68b01e385f2211e8bf82005056c00008"
+      },
+      {
+        "source": "casef99be44c6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person8199488a5f2211e8b1a7005056c00008"
+      },
+      {
+        "source": "case5186b0fb6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person8199488a5f2211e8b1a7005056c00008"
+      },
+      {
+        "source": "case5186b0fb6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person790ee1065f2211e8a406005056c00008"
+      },
+      {
+        "source": "casef99be44c6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person68b01e385f2211e8bf82005056c00008"
+      },
+      {
+        "source": "casef99be44c6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person8199488a5f2211e8b1a7005056c00008"
+      },
+      {
+        "source": "case6498f5776a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person8199488a5f2211e8b1a7005056c00008"
+      },
+      {
+        "source": "case6498f5776a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person790ee1065f2211e8a406005056c00008"
+      },
+      {
+        "source": "case67d35d61869211e8998f000c2974e9f6",
+        "value": "参与",
+        "target": "person68b01e385f2211e8bf82005056c00008"
+      },
+      {
+        "source": "case67d35d61869211e8998f000c2974e9f6",
+        "value": "参与",
+        "target": "person8c0d5ec85f2211e8bf34005056c00008"
+      },
+      {
+        "source": "case7901e86679cf11e8a0f6000c2974e9f6",
+        "value": "参与",
+        "target": "person8c0d5ec85f2211e8bf34005056c00008"
+      },
+      {
+        "source": "case7901e86679cf11e8a0f6000c2974e9f6",
+        "value": "参与",
+        "target": "person81c673b45f2211e885f1005056c00008"
+      },
+      {
+        "source": "case0d473f5e6a0211e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person81c673b45f2211e885f1005056c00008"
+      },
+      {
+        "source": "case0d473f5e6a0211e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person790ee1065f2211e8a406005056c00008"
+      },
+      {
+        "source": "casef99be44c6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person68b01e385f2211e8bf82005056c00008"
+      },
+      {
+        "source": "casef99be44c6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person8199488a5f2211e8b1a7005056c00008"
+      },
+      {
+        "source": "case4a5f90dc6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person8199488a5f2211e8b1a7005056c00008"
+      },
+      {
+        "source": "case4a5f90dc6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person790ee1065f2211e8a406005056c00008"
+      },
+      {
+        "source": "case088d4d157e6611e8a0f6000c2974e9f6",
+        "value": "参与",
+        "target": "person68b01e385f2211e8bf82005056c00008"
+      },
+      {
+        "source": "case088d4d157e6611e8a0f6000c2974e9f6",
+        "value": "参与",
+        "target": "person6c6062cc5f2211e88b11005056c00008"
+      },
+      {
+        "source": "casee55767df6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person6c6062cc5f2211e88b11005056c00008"
+      },
+      {
+        "source": "casee55767df6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "persona1b890025f2211e8b586005056c00008"
+      },
+      {
+        "source": "case8b5740f36a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "persona1b890025f2211e8b586005056c00008"
+      },
+      {
+        "source": "case8b5740f36a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person790ee1065f2211e8a406005056c00008"
+      },
+      {
+        "source": "case492e4b996a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person68b01e385f2211e8bf82005056c00008"
+      },
+      {
+        "source": "case492e4b996a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person8199488a5f2211e8b1a7005056c00008"
+      },
+      {
+        "source": "case6498f4af6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person8199488a5f2211e8b1a7005056c00008"
+      },
+      {
+        "source": "case6498f4af6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person7910409c5f2211e8ac9d005056c00008"
+      },
+      {
+        "source": "case03bd6ca06a0211e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person7910409c5f2211e8ac9d005056c00008"
+      },
+      {
+        "source": "case03bd6ca06a0211e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person790ee1065f2211e8a406005056c00008"
+      },
+      {
+        "source": "case492e4b996a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person68b01e385f2211e8bf82005056c00008"
+      },
+      {
+        "source": "case492e4b996a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person8199488a5f2211e8b1a7005056c00008"
+      },
+      {
+        "source": "case6498f4af6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person8199488a5f2211e8b1a7005056c00008"
+      },
+      {
+        "source": "case6498f4af6a0111e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person7910409c5f2211e8ac9d005056c00008"
+      },
+      {
+        "source": "case031c771e6a0211e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person7910409c5f2211e8ac9d005056c00008"
+      },
+      {
+        "source": "case031c771e6a0211e8a353000c2974e9f6",
+        "value": "参与",
+        "target": "person790ee1065f2211e8a406005056c00008"
+      }
+    ]
+  }
+}

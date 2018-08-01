@@ -21,12 +21,24 @@ import {
 import { StorageService } from '../../../share/services/storage/storage.service';
 import { environment } from '../../../../environments/environment';
 
+export interface ChartNode {
+  name: string;
+  id: any;
+  dis?: string;
+}
+
+export interface ChartLink {
+  source: string;
+  target: string;
+  value: string;
+}
+
 /**
  * 搜索的状态
  *
  * @enum {number}
  */
-enum SearchStatus {
+export enum SearchStatus {
   pending = 'pending',
   success = 'success',
   fail = 'fail',
@@ -42,8 +54,8 @@ enum SearchStatus {
 export interface SearchResult {
   status: number;
   data: {
-    links: any[];
-    nodes: any[];
+    links: ChartLink[];
+    nodes: ChartNode[];
   };
 }
 
@@ -64,6 +76,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   @Output() searchResult = new EventEmitter<SearchResult>();
   @Output() searchStatus = new EventEmitter<string>();
 
+  mockFail = 0;
   tipsLeft = ['21rem', '59rem', '83rem'];
   tip: Element;
 
@@ -181,9 +194,14 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
         }
       })
       .subscribe(
-        (data: SearchResult) => {
+        (res: SearchResult) => {
           this.searchStatus.emit(SearchStatus.success);
-          this.searchResult.emit(data);
+          this.mockFail += 1;
+          this.searchResult.emit(
+            !(this.mockFail % 2)
+              ? res
+              : { status: this.mockFail, data: { nodes: [], links: [] } }
+          );
         },
         error => {
           this.searchStatus.emit(SearchStatus.fail);
