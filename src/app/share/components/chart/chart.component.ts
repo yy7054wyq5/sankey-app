@@ -298,6 +298,7 @@ export class ChartComponent
       const id = params.data.id;
       const tartgets = this.relation[id].tartget;
       const sources = this.relation[id].source;
+      // TODO: 高亮行为不一致待调整
       if (!this.highlightRecord) {
         highOrDown = 'highlight';
         this.highlightRecord = params;
