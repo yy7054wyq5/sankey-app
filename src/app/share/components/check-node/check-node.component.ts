@@ -1,13 +1,18 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { ChartNode } from '../chart/chart.service';
 
+interface UInodes {
+  event: ChartNode[];
+  company: ChartNode[];
+}
+
 @Component({
-  selector: 'app-check-point',
-  templateUrl: './check-point.component.html',
-  styleUrls: ['./check-point.component.less'],
+  selector: 'app-check-node',
+  templateUrl: './check-node.component.html',
+  styleUrls: ['./check-node.component.less'],
   encapsulation: ViewEncapsulation.None
 })
-export class CheckPointComponent implements OnInit {
+export class CheckNodeComponent implements OnInit {
   show: boolean;
   pointsTag = 'company';
 

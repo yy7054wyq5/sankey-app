@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CheckPointComponent } from './check-point.component';
+import { CheckNodeComponent } from './check-node.component';
 
-describe('CheckPointComponent', () => {
-  let component: CheckPointComponent;
-  let fixture: ComponentFixture<CheckPointComponent>;
+describe('CheckNodeComponent', () => {
+  let component: CheckNodeComponent;
+  let fixture: ComponentFixture<CheckNodeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CheckPointComponent ]
+      declarations: [ CheckNodeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CheckPointComponent);
+    fixture = TestBed.createComponent(CheckNodeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

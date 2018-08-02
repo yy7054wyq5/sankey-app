@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from '../../../../../node_modules/rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class CommonService {

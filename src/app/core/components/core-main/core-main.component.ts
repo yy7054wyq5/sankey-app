@@ -2,8 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { chartOption, chartColorConfig } from '../../config';
 import { CommonService } from '../../services/common/common.service';
 import { SearchResult, SearchStatus } from '../search-bar/search-bar.component';
-import { NzMessageService } from '../../../../../node_modules/ng-zorro-antd';
-import { Observable, of } from '../../../../../node_modules/rxjs';
+import { NzMessageService } from 'ng-zorro-antd';
+import { Observable, of } from 'rxjs';
 import { ChartNode } from '../../../share/components/chart/chart.service';
 
 @Component({
