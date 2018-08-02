@@ -1,12 +1,19 @@
 @import '../../../../less/variable.less';
 @import '../../../../less/mixin.less';
+@headerHeight: 4.242424rem;
 .layout {
   min-height: 100vh;
+  padding-top: @headerHeight;
   .header {
+    width: 100%;
     background: #fff;
-    height: 4.242424rem;
-    line-height: 4.242424rem;
+    height: @headerHeight;
+    line-height: @headerHeight;
     padding-right: 4.545455rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
     .bottom-shadow;
     .menu {
       height: 100%;

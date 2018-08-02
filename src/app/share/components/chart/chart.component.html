@@ -2,7 +2,8 @@
 <div class="hack" style="height: 5.050505rem"></div>
 <div class="chart"></div>
 <div class="point-info">
-  {{pointDetail}}
+  <h3>{{pointDetail.date}}</h3>
+  <p>{{pointDetail.txt}}</p>
 </div>
 <ng-container *ngIf="chartActived">
   <ng-container *ngIf="ehasFullBtn">

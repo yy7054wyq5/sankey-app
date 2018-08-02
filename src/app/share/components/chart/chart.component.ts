@@ -35,7 +35,8 @@ export interface ChartEventCbParams {
   data: {
     id: any;
     name: string;
-    node: any;
+    node?: any;
+    date?: string;
   };
   // sankey、graph 等图表同时含有 nodeData 和 edgeData 两种 data，
   // dataType 的值会是 'node' 或者 'edge'，表示当前点击在 node 还是 edge 上。
@@ -73,7 +74,11 @@ export class ChartComponent
   @Output() eclick = new EventEmitter<any>();
 
   selectOpenStatus = false;
-  pointDetail: any; // 鼠标经过或点击的文字
+  // 鼠标经过或点击的文字
+  pointDetail = {
+    date: '',
+    txt: ''
+  };
   fullStatus = FullStatus.no; // yes为全屏
   chartDom: Element; // 图表结构
   chartContainer: Element; // 整个组件
@@ -343,7 +348,10 @@ export class ChartComponent
       this._highlightNode(params);
       // 显示点击文字
       this._zone.run(() => {
-        this.pointDetail = 'CLICK' + JSON.stringify(params.data);
+        this.pointDetail = {
+          date: params.data.date,
+          txt: params.data.name
+        };
       });
     });
     this.chartInstance.on('mouseover', (params: ChartEventCbParams) => {

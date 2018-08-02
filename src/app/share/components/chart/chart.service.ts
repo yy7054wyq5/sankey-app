@@ -33,6 +33,7 @@ export interface QueryLinksData {
 export interface ChartNode {
   name: string;
   id: any;
+  date?: string;
   node: any;
   actived?: boolean; // 用于选中
   value?: any;
