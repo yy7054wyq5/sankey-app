@@ -1,4 +1,5 @@
 import { ChartOption } from '../share/components/chart/chart.service';
+import { ChartEventCbParams } from '../share/components/chart/chart.component';
 
 export interface SideMenuItem {
   txt: string;
@@ -48,8 +49,19 @@ const chartOption: ChartOption = {
   //   triggerOn: 'mousemove'
   // },
   label: {
-    formatter: params => {
-      return params.name;
+    formatter: (params: ChartEventCbParams) => {
+      const data = params.data;
+      const cutWord = (txt: string) => {
+        if (txt.length > 6) {
+          return txt.substr(0, 6) + '...';
+        }
+        return txt;
+      };
+      const name = cutWord(data.name);
+      if (data.date) {
+        return data.date + '\n' + name;
+      }
+      return name;
     }
   },
   series: [
