@@ -78,9 +78,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     private _element: ElementRef,
     private _renderer: Renderer2,
     private _storge: StorageService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngAfterViewInit() {
     this.tip = this._element.nativeElement.querySelector('.search-tips');

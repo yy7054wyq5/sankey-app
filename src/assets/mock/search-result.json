@@ -3,41 +3,56 @@
   "data": {
     "nodes": [
       {
-        "name": "吴大伟",
-        "id": "person68b01e385f2211e8bf82005056c00008",
-        "value": 11
+        "id": "persona137502e5f2211e881f0005056c00008",
+        "name": "张大庆"
       },
-      { "name": "小明", "id": "person790ee1065f2211e8a406005056c00008" },
-      { "name": "小红", "id": "person8199488a5f2211e8b1a7005056c00008" },
-      { "name": "买房", "id": "case67d35d2f869211e8998f000c2974e9f6" },
-      { "name": "万达", "id": "organizationd87ddda2323sdd" },
-      { "name": "买车", "id": "casef99be44c6a0111e8a353000c2974e9f6" }
+      {
+        "id": "case6237ac4a6a0111e8a353000c2974e9f60",
+        "name": "买房"
+      },
+      {
+        "id": "organization6c6062cc5f2211e88b11005056c00008",
+        "name": "春秋航空"
+      },
+      {
+        "id": "caseef8467ff7e6511e8a0f6000c2974e9f61",
+        "name": "买车"
+      },
+      {
+        "id": "person7136dc2e5f2211e896ae005056c000081",
+        "name": "小红"
+      }
     ],
     "links": [
       {
-        "source": "person68b01e385f2211e8bf82005056c00008",
-        "target": "case67d35d2f869211e8998f000c2974e9f6",
-        "value": 0.342284047256003
+        "source": "persona137502e5f2211e881f0005056c00008",
+        "target": "case6237ac4a6a0111e8a353000c2974e9f60",
+        "value": 15848
       },
       {
-        "source": "case67d35d2f869211e8998f000c2974e9f6",
-        "target": "organizationd87ddda2323sdd",
-        "value": 0.32322870366987
+        "source": "persona137502e5f2211e881f0005056c00008",
+        "target": "organization6c6062cc5f2211e88b11005056c00008",
+        "value": 9521
       },
       {
-        "source": "organizationd87ddda2323sdd",
-        "target": "person790ee1065f2211e8a406005056c00008",
-        "value": 0.177682517071359
+        "source": "persona137502e5f2211e881f0005056c00008",
+        "target": "caseef8467ff7e6511e8a0f6000c2974e9f61",
+        "value": 7124
       },
       {
-        "source": "organizationd87ddda2323sdd",
-        "target": "casef99be44c6a0111e8a353000c2974e9f6",
-        "value": 0.137241325342711
+        "source": "case6237ac4a6a0111e8a353000c2974e9f60",
+        "target": "person7136dc2e5f2211e896ae005056c000081",
+        "value": 19742
       },
       {
-        "source": "organizationd87ddda2323sdd",
-        "target": "person8199488a5f2211e8b1a7005056c00008",
-        "value": 0.00433076373512774
+        "source": "organization6c6062cc5f2211e88b11005056c00008",
+        "target": "person7136dc2e5f2211e896ae005056c000081",
+        "value": 4535
+      },
+      {
+        "source": "caseef8467ff7e6511e8a0f6000c2974e9f61",
+        "target": "person7136dc2e5f2211e896ae005056c000081",
+        "value": 2920
       }
     ]
   }

@@ -13,14 +13,14 @@ import { ChartNode } from '../../../share/components/chart/chart.service';
   encapsulation: ViewEncapsulation.None
 })
 export class CoreMainComponent implements OnInit {
-  constructor(private _common: CommonService, private _msg: NzMessageService) {}
+  constructor(private _common: CommonService, private _msg: NzMessageService) { }
 
   loadingId: any;
   option: any; // 图表配置项
   colorBar = chartColorConfig;
   initCore = true; // 初始状态
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   /////////////////////////
 

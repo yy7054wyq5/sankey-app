@@ -3,14 +3,15 @@ import { Observable, of } from 'rxjs';
 
 export interface QueryLinksData {
   [id: string]: {
-    tartget: any[];
-    source: any[];
+    tartgets: any[];
+    sources: any[];
   };
 }
 
 export interface ChartNode {
   name: string;
-  id: string;
+  id: any;
+  node: any;
   value?: any;
   emphasis?: any; // 高亮样式
   itemStyle?: any; // 展示样式
@@ -25,27 +26,35 @@ export interface ChartLink {
 
 @Injectable()
 export class ChartService {
-  constructor() {}
+  constructor() { }
 
+
+  /**
+   * 将links重新组装以便查找路线
+   *
+   * @param {ChartLink[]} links
+   * @returns {Observable<QueryLinksData>}
+   * @memberof ChartService
+   */
   buildQueryLinksData(links: ChartLink[]): Observable<QueryLinksData> {
     const tmp: QueryLinksData = {};
     links.forEach(link => {
       // 以source为key存入tartget
       if (!tmp[link.source]) {
         tmp[link.source] = {
-          tartget: [],
-          source: []
+          tartgets: [],
+          sources: []
         };
       }
-      tmp[link.source].tartget.push(link.target);
+      tmp[link.source].tartgets.push(link.target);
       // 以target为key存入source
       if (!tmp[link.target]) {
         tmp[link.target] = {
-          tartget: [],
-          source: []
+          tartgets: [],
+          sources: []
         };
       }
-      tmp[link.target].source.push(link.source);
+      tmp[link.target].sources.push(link.source);
     });
     return of(tmp);
   }

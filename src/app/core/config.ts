@@ -45,6 +45,9 @@ const chartOption = {
   //   trigger: 'item',
   //   triggerOn: 'mousemove'
   // },
+  legend: {
+    formatter: '{name}'
+  },
   label: {
     formatter: params => {
       return params.name;

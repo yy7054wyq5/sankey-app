@@ -33,8 +33,9 @@ export interface ChartEventCbParams {
   dataIndex: number;
   // 传入的原始数据项
   data: {
-    id: string;
+    id: any;
     name: string;
+    node: any;
   };
   // sankey、graph 等图表同时含有 nodeData 和 edgeData 两种 data，
   // dataType 的值会是 'node' 或者 'edge'，表示当前点击在 node 还是 edge 上。
@@ -79,8 +80,15 @@ export class ChartComponent
   chartInstance: any; // 图表实例
   bindedEvent: boolean; // 是否已绑定事件
   unlistenDomParentResize: any; // 监听窗口大小变化事件
-  highlightRecord: any; // 以dataIndex为key记录高亮，将该点数据全部存入
-  relation: QueryLinksData;
+  clickedNode: ChartEventCbParams;
+
+  /**
+   * 用于点击节点高亮连线
+   *
+   * @type {QueryLinksData}
+   * @memberof ChartComponent
+   */
+  // relation: QueryLinksData;
   get chartActived() {
     // 图表是否激活
     return this.chartInstance ? true : false;
@@ -91,7 +99,7 @@ export class ChartComponent
     private _element: ElementRef,
     private _renderer: Renderer2,
     private _zone: NgZone
-  ) {}
+  ) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes) {
@@ -126,6 +134,7 @@ export class ChartComponent
   ngOnDestroy() {
     this._destroyChart();
     this.eoption = null;
+    this.clickedNode = null;
     this.unlistenDomParentResize();
   }
 
@@ -247,7 +256,7 @@ export class ChartComponent
    */
   private _destroyChart() {
     if (this.chartInstance) {
-      this.highlightRecord = {};
+      this.clickedNode = null;
       this.chartInstance.dispose();
       this._setChartWH(this.chartDom, '0px', '0px');
     }
@@ -263,7 +272,7 @@ export class ChartComponent
     if (!this.chartDom || !this.eoption) {
       return;
     }
-    this.highlightRecord = {};
+    this.clickedNode = null;
     const _chartDom = this._setChartWH(
       this.chartDom,
       this.ewidth,
@@ -278,11 +287,35 @@ export class ChartComponent
       this._bindEvent();
       this.bindedEvent = true;
     }
-    this._chart
-      .buildQueryLinksData(this.eoption.series[0].links)
-      .subscribe(links => {
-        this.relation = links;
+    // this._chart
+    //   .buildQueryLinksData(this.eoption.series[0].links)
+    //   .subscribe(links => {
+    //     this.relation = links;
+    //     console.log(links);
+    //   });
+  }
+
+
+  /**
+   * 高亮节点
+   *
+   * @private
+   * @param {ChartEventCbParams} params
+   * @memberof ChartComponent
+   */
+  private _highlightNode(params: ChartEventCbParams) {
+    if (this.clickedNode) {
+      this.chartInstance.dispatchAction({
+        type: 'downplay',
+        dataIndex: this.clickedNode.dataIndex
       });
+    }
+    // 节点的高亮
+    this.clickedNode = params;
+    this.chartInstance.dispatchAction({
+      type: 'highlight',
+      dataIndex: params.dataIndex
+    });
   }
 
   /**
@@ -293,46 +326,17 @@ export class ChartComponent
    */
   private _bindEvent() {
     this.chartInstance.on('click', (params: ChartEventCbParams) => {
+      // console.log(params);
+      if (params.dataType !== 'node') {
+        return;
+      }
       this.eclick.emit(params);
-      let highOrDown;
-      const id = params.data.id;
-      const tartgets = this.relation[id].tartget;
-      const sources = this.relation[id].source;
-      // TODO: 高亮行为不一致待调整
-      if (!this.highlightRecord) {
-        highOrDown = 'highlight';
-        this.highlightRecord = params;
-      } else {
-        this.highlightRecord = null;
-        highOrDown = 'downplay';
-      }
-      // 节点的高亮
-      if (params.dataType === 'node') {
-        this.chartInstance.dispatchAction({
-          type: highOrDown,
-          dataIndex: params.dataIndex
-        });
-      }
-      // 线的高亮
-      tartgets.forEach(tartget => {
-        console.log(`${id} > ${tartget}`);
-        this.chartInstance.dispatchAction({
-          type: highOrDown,
-          name: `${id} > ${tartget}`
-        });
-      });
-      sources.forEach(source => {
-        console.log(`${source} > ${id}}`);
-        this.chartInstance.dispatchAction({
-          type: highOrDown,
-          name: `${source} > ${id}`
-        });
-      });
+      this._highlightNode(params);
+      // 显示点击文字
       this._zone.run(() => {
         this.pointDetail = 'CLICK' + JSON.stringify(params.data);
       });
     });
-    this.chartInstance.on('mouseout', (params: ChartEventCbParams) => {});
     this.chartInstance.on('mouseover', (params: ChartEventCbParams) => {
       // this.emouseover.emit(params);
       // this._zone.run(() => {
