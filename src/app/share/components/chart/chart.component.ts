@@ -79,7 +79,7 @@ export class ChartComponent
   chartInstance: any; // 图表实例
   bindedEvent: boolean; // 是否已绑定事件
   unlistenDomParentResize: any; // 监听窗口大小变化事件
-  highlightRecord = {}; // 以dataIndex为key记录高亮，将该点数据全部存入
+  highlightRecord: any; // 以dataIndex为key记录高亮，将该点数据全部存入
   relation: QueryLinksData;
   get chartActived() {
     // 图表是否激活
@@ -295,36 +295,38 @@ export class ChartComponent
     this.chartInstance.on('click', (params: ChartEventCbParams) => {
       this.eclick.emit(params);
       let highOrDown;
-      if (!this.highlightRecord[params.dataIndex]) {
+      const id = params.data.id;
+      const tartgets = this.relation[id].tartget;
+      const sources = this.relation[id].source;
+      if (!this.highlightRecord) {
         highOrDown = 'highlight';
-        this.highlightRecord[params.dataIndex] = params;
-        const id = params.data.id;
-        const tartgets = this.relation[id].tartget;
-        const sources = this.relation[id].source;
-        tartgets.forEach(tartget => {
-          console.log(`${id} > ${tartget}`);
-          this.chartInstance.dispatchAction({
-            type: 'highlight',
-            name: `${id} > ${tartget}`
-          });
-        });
-        sources.forEach(source => {
-          console.log(`${source} > ${id}}`);
-          this.chartInstance.dispatchAction({
-            type: 'highlight',
-            name: `${source} > ${id}`
-          });
-        });
+        this.highlightRecord = params;
       } else {
-        delete this.highlightRecord[params.dataIndex];
+        this.highlightRecord = null;
         highOrDown = 'downplay';
       }
+      // 节点的高亮
       if (params.dataType === 'node') {
         this.chartInstance.dispatchAction({
           type: highOrDown,
           dataIndex: params.dataIndex
         });
       }
+      // 线的高亮
+      tartgets.forEach(tartget => {
+        console.log(`${id} > ${tartget}`);
+        this.chartInstance.dispatchAction({
+          type: highOrDown,
+          name: `${id} > ${tartget}`
+        });
+      });
+      sources.forEach(source => {
+        console.log(`${source} > ${id}}`);
+        this.chartInstance.dispatchAction({
+          type: highOrDown,
+          name: `${source} > ${id}`
+        });
+      });
       this._zone.run(() => {
         this.pointDetail = 'CLICK' + JSON.stringify(params.data);
       });
