@@ -1,10 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+export interface ChartOption {
+  label: {
+    formatter: Function
+  };
+  series: [{
+    type: string,
+    layout: string,
+    data: ChartNode[],
+    links: ChartLink[],
+    lineStyle: {
+      color: string,
+      opacity: number
+    },
+    emphasis: {
+      lineStyle: {
+        color: string,
+        opacity: number
+      }
+    }
+  }];
+}
+
 export interface QueryLinksData {
   [id: string]: {
-    tartgets: any[];
-    sources: any[];
+    tartgets: string[];
+    sources: string[];
   };
 }
 

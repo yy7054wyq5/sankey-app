@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { ChartNode } from '../chart/chart.service';
 
 @Component({
   selector: 'app-check-point',
@@ -10,9 +11,13 @@ export class CheckPointComponent implements OnInit {
   show: boolean;
   pointsTag = 'company';
 
+  @Input() nodes: ChartNode[];
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.nodes);
+  }
 
   //////
 

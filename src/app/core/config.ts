@@ -1,3 +1,5 @@
+import { ChartOption } from '../share/components/chart/chart.service';
+
 export interface SideMenuItem {
   txt: string;
   icon: string;
@@ -40,14 +42,11 @@ const chartColorConfig = {
   line: '#ececec'
 };
 
-const chartOption = {
+const chartOption: ChartOption = {
   // tooltip: {
   //   trigger: 'item',
   //   triggerOn: 'mousemove'
   // },
-  legend: {
-    formatter: '{name}'
-  },
   label: {
     formatter: params => {
       return params.name;

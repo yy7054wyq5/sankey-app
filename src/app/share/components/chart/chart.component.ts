@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import * as echarts from 'echarts';
 import theme from './theme';
-import { ChartService, QueryLinksData } from './chart.service';
+import { ChartService, QueryLinksData, ChartNode, ChartOption } from './chart.service';
 
 export interface ChartEventCbParams {
   // 当前点击的图形元素所属的组件名称，
@@ -67,7 +67,7 @@ export class ChartComponent
   @Input() eloading: boolean;
   @Input() efullParentClassName: string;
   @Input() echeckPoints = true;
-  @Input() eoption: any; // http://echarts.baidu.com/option.html
+  @Input() eoption: ChartOption; // http://echarts.baidu.com/option.html
   @Output() efullStatus = new EventEmitter<boolean>();
   @Output() emouseover = new EventEmitter<any>();
   @Output() eclick = new EventEmitter<any>();
@@ -81,6 +81,7 @@ export class ChartComponent
   bindedEvent: boolean; // 是否已绑定事件
   unlistenDomParentResize: any; // 监听窗口大小变化事件
   clickedNode: ChartEventCbParams;
+  nodes: ChartNode[] = [];
 
   /**
    * 用于点击节点高亮连线
@@ -281,6 +282,8 @@ export class ChartComponent
     this._zone.runOutsideAngular(() => {
       this.chartInstance = echarts.init(_chartDom, 'sn');
       this.chartInstance.setOption(this.eoption);
+      // 显隐数据
+      this.nodes = this.eoption.series[0].data;
       this.eloading = false;
     });
     if (!this.bindedEvent) {
