@@ -9,5 +9,5 @@
     <i *ngIf="fullStatus==='no'" class="anticon full-screen-btn" (click)="toFull('yes')"></i>
     <i *ngIf="fullStatus==='yes'" class="anticon full-screen-btn" (click)="toFull('no')"></i>
   </ng-container>
-  <app-check-node [nodes]="nodes" *ngIf="echeckPoints"></app-check-node>
+  <app-check-node [nodes]="nodes" (outCheckedNodes)="getCheckedNodes($event)" *ngIf="echeckPoints"></app-check-node>
 </ng-container>

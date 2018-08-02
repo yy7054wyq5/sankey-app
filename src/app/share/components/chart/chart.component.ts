@@ -141,6 +141,12 @@ export class ChartComponent
 
   /////////////////////////////////////////////////
 
+  getCheckedNodes(activedNodes: ChartNode[]) {
+    this.eoption.series[0].data = activedNodes;
+    console.log(this.eoption);
+    this.chartInstance.setOption(this.eoption);
+  }
+
   /**
    * 设置样式
    *

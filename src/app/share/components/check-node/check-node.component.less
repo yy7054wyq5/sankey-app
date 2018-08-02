@@ -1,6 +1,6 @@
 @import '../../../../less/mixin.less';
 @import '../../../../theme.less';
-app-check-point {
+app-check-node {
   width: 15.151515rem;
   min-height: 2.020202rem;
   .select-chart {
@@ -36,7 +36,7 @@ app-check-point {
         border-radius: @border-radius-base @border-radius-base 0 0;
       }
     }
-    .points {
+    .nodes {
       background: #fff;
       padding: 0 0.757576rem 0 0.757576rem;
       height: 25rem;
@@ -52,6 +52,9 @@ app-check-point {
           display: inline-block;
           border-width: 1px;
           border-style: solid;
+          width: 1rem;
+          height: 1rem;
+          border-color: #717a88;
         }
         span {
           margin-left: 1rem;
@@ -60,16 +63,22 @@ app-check-point {
         }
       }
     }
-    .points.event {
-      i {
+    .nodes.case {
+      i.actived {
         border-color: orange;
         color: orange;
       }
+      li.organization {
+        display: none;
+      }
     }
-    .points.company {
-      i {
+    .nodes.organization {
+      i.actived {
         border-color: blue;
         color: blue;
+      }
+      li.case {
+        display: none;
       }
     }
   }

@@ -34,10 +34,10 @@ export interface ChartNode {
   name: string;
   id: any;
   node: any;
+  actived?: boolean; // 用于选中
   value?: any;
   emphasis?: any; // 高亮样式
   itemStyle?: any; // 展示样式
-  dis?: string;
 }
 
 export interface ChartLink {
@@ -49,7 +49,6 @@ export interface ChartLink {
 @Injectable()
 export class ChartService {
   constructor() { }
-
 
   /**
    * 将links重新组装以便查找路线

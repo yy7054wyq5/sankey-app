@@ -5,13 +5,17 @@
   </div>
   <div class="container" *ngIf="show">
     <ul class="tabs">
-      <li [class.actived]="pointsTag==='company'" (click)="showItems('company')">公司</li>
-      <li [class.actived]="pointsTag==='event'" (click)="showItems('event')">事件</li>
+      <li [class.actived]="pointsTag==='organization'" (click)="showItems('organization')">公司</li>
+      <li [class.actived]="pointsTag==='case'" (click)="showItems('case')">事件</li>
     </ul>
-    <ul class="points" [class.event]="pointsTag==='event'" [class.company]="pointsTag==='company'">
-      <li class="points-item">
-        <i class="anticon anticon-check"></i>
-        <span>2016-12-1&nbsp;大大所大奥多所</span>
+    <ul class="nodes" [class.case]="pointsTag==='case'" [class.organization]="pointsTag==='organization'">
+      <li class="nodes-item case" *ngFor="let case of uiNodes.cases">
+        <i class="anticon" [class.anticon-check]="case.actived" [class.actived]="case.actived" (click)="check(case)"></i>
+        <span>{{case.name}}</span>
+      </li>
+      <li class="nodes-item organization" *ngFor="let org of uiNodes.organizations">
+        <i class="anticon" [class.anticon-check]="org.actived" [class.actived]="org.actived" (click)="check(org)"></i>
+        <span>{{org.name}}</span>
       </li>
     </ul>
   </div>
