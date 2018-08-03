@@ -24,6 +24,15 @@ export class CoreMainComponent implements OnInit {
 
   /////////////////////////
 
+  /**
+   * 加颜色的方法
+   *
+   * @private
+   * @param {ChartNode} node
+   * @param {string} normalColor
+   * @param {string} highlightColor
+   * @memberof CoreMainComponent
+   */
   private _setItemStyle(node: ChartNode, normalColor: string, highlightColor: string) {
     node.itemStyle = {};
     node.itemStyle.color = node.itemStyle.borderColor = normalColor;
@@ -32,6 +41,14 @@ export class CoreMainComponent implements OnInit {
     node.emphasis.itemStyle.color = node.emphasis.itemStyle.borderColor = highlightColor;
   }
 
+  /**
+   * 设置节点背景色和高亮色
+   *
+   * @private
+   * @param {ChartNode[]} nodes
+   * @returns {Observable<ChartNode[]>}
+   * @memberof CoreMainComponent
+   */
   private _rebuildNodesData(nodes: ChartNode[]): Observable<ChartNode[]> {
     nodes.forEach(node => {
       if (node.id) {
@@ -49,6 +66,12 @@ export class CoreMainComponent implements OnInit {
     return of(nodes);
   }
 
+  /**
+   * 根据搜索状态展示loading
+   *
+   * @param {SearchStatus} status
+   * @memberof CoreMainComponent
+   */
   getSearchStatus(status: SearchStatus) {
     if (status === SearchStatus.pending) {
       this.loadingId = this._msg.loading('请求数据中...', {
@@ -59,6 +82,12 @@ export class CoreMainComponent implements OnInit {
     }
   }
 
+  /**
+   * 获取关系数据
+   *
+   * @param {SearchResult} res
+   * @memberof CoreMainComponent
+   */
   getSearchResult(res: SearchResult) {
     console.log(res);
     this.initCore = false;
