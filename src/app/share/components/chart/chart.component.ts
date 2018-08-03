@@ -106,7 +106,11 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   ngOnChanges(changes: SimpleChanges) {
     if (changes) {
       if (changes.eoption && !changes.eoption.isFirstChange()) {
-        this._initChart();
+        if (!this.chartInstance) {
+          this._initChart();
+        } else {
+          this.chartInstance.setOption(this.eoption);
+        }
       }
     }
   }
