@@ -60,8 +60,7 @@ enum FullStatus {
   encapsulation: ViewEncapsulation.None,
   providers: [ChartService]
 })
-export class ChartComponent
-  implements OnChanges, OnInit, AfterViewInit, OnDestroy {
+export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
   @Input() ehasFullBtn = true;
   @Input() ewidth: string;
   @Input() eheight: string;
@@ -97,18 +96,12 @@ export class ChartComponent
    */
   // relation: QueryLinksData;
 
-
   get chartActived() {
     // 图表是否激活
     return this.chartInstance ? true : false;
   }
 
-  constructor(
-    private _chart: ChartService,
-    private _element: ElementRef,
-    private _renderer: Renderer2,
-    private _zone: NgZone
-  ) { }
+  constructor(private _chart: ChartService, private _element: ElementRef, private _renderer: Renderer2, private _zone: NgZone) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes) {
@@ -131,13 +124,9 @@ export class ChartComponent
     }, 1);
 
     // 监听窗口变化
-    this.unlistenDomParentResize = this._renderer.listen(
-      'window',
-      'resize',
-      () => {
-        this._resizeChart();
-      }
-    );
+    this.unlistenDomParentResize = this._renderer.listen('window', 'resize', () => {
+      this._resizeChart();
+    });
   }
 
   ngOnDestroy() {
@@ -163,17 +152,11 @@ export class ChartComponent
    * @param {({ [styleKey: string]: string | number })} params
    * @memberof ChartComponent
    */
-  private _setStyle(
-    dom: Element,
-    params: { [styleKey: string]: string | number }
-  ) {
+  private _setStyle(dom: Element, params: { [styleKey: string]: string | number }) {
     for (const styleKey in params) {
       if (params.hasOwnProperty(styleKey)) {
         let styleValue = params[styleKey];
-        styleValue =
-          typeof styleValue === 'number'
-            ? styleValue.toString() + 'px'
-            : styleValue;
+        styleValue = typeof styleValue === 'number' ? styleValue.toString() + 'px' : styleValue;
         this._renderer.setStyle(dom, styleKey, styleValue);
       }
     }
@@ -188,9 +171,7 @@ export class ChartComponent
    */
   private _showPointInfo(bool) {
     const hackClassName = 'full-hack';
-    const hackDIV =
-      document.querySelector(`.${hackClassName}`) ||
-      document.createElement('div');
+    const hackDIV = document.querySelector(`.${hackClassName}`) || document.createElement('div');
     this._setStyle(hackDIV, { height: bool ? '9.090909rem' : '0' });
     if (hackDIV.className.indexOf(hackClassName) < 0) {
       hackDIV.className = hackClassName;
@@ -288,11 +269,7 @@ export class ChartComponent
       return;
     }
     this.clickedNode = null;
-    const _chartDom = this._setChartWH(
-      this.chartDom,
-      this.ewidth,
-      this.eheight
-    );
+    const _chartDom = this._setChartWH(this.chartDom, this.ewidth, this.eheight);
     this._zone.runOutsideAngular(() => {
       this.chartInstance = echarts.init(_chartDom, 'sn');
       this.chartInstance.setOption(this.eoption);
@@ -311,7 +288,6 @@ export class ChartComponent
     //     console.log(links);
     //   });
   }
-
 
   /**
    * 高亮节点并返回点击的节点数据
@@ -334,6 +310,14 @@ export class ChartComponent
     this.clickedNode = params;
   }
 
+  /**
+   * 点击后是否显示点的
+   *
+   * @private
+   * @param {string} id
+   * @returns {boolean}
+   * @memberof ChartComponent
+   */
   private _showClickedNodeInfo(id: string): boolean {
     if (id.indexOf('case') === 0) {
       return true;
@@ -382,11 +366,7 @@ export class ChartComponent
    * @returns {Element}
    * @memberof ChartComponent
    */
-  private _setChartWH(
-    chartDom: Element,
-    width: string,
-    height: string
-  ): Element {
+  private _setChartWH(chartDom: Element, width: string, height: string): Element {
     if (width && height) {
       this._setStyle(chartDom, { width, height });
     }
