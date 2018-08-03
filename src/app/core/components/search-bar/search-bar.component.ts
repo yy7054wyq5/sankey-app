@@ -43,6 +43,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   start: string;
   end: string;
 
+  startLoading = false;
+  endLoading = false;
+
   startOptions = [];
   endOptions = [];
 
@@ -73,31 +76,45 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     }
     // 搜起点
     this._bindSearchEvent('start-point').subscribe(res => {
+      this.startLoading = true;
       this._http
         .get('assets/mock/start-end.json', {
-          params: {
-            string: res
-          }
+          params: { string: res }
         })
-        .subscribe((bak: { status: number; data: any[] }) => {
-          if (!bak.status) {
-            this.startOptions = bak.data;
+        .subscribe(
+          (bak: { status: number; data: any[] }) => {
+            if (!bak.status) {
+              this.startOptions = bak.data;
+            }
+          },
+          error => {
+            this.startLoading = false;
+          },
+          () => {
+            this.startLoading = false;
           }
-        });
+        );
     });
     // 搜终点
     this._bindSearchEvent('end-point').subscribe(res => {
+      this.endLoading = true;
       this._http
         .get('assets/mock/start-end.json', {
-          params: {
-            string: res
-          }
+          params: { string: res }
         })
-        .subscribe((bak: { status: number; data: any[] }) => {
-          if (!bak.status) {
-            this.endOptions = bak.data;
+        .subscribe(
+          (bak: { status: number; data: any[] }) => {
+            if (!bak.status) {
+              this.endOptions = bak.data;
+            }
+          },
+          error => {
+            this.endLoading = false;
+          },
+          () => {
+            this.endLoading = false;
           }
-        });
+        );
     });
   }
 
