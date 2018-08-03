@@ -15,38 +15,7 @@ import {
 } from '@angular/core';
 import * as echarts from 'echarts';
 import theme from './theme';
-import { ChartService, QueryLinksData, ChartNode, ChartOption } from './chart.service';
-
-export interface ChartEventCbParams {
-  // 当前点击的图形元素所属的组件名称，
-  // 其值如 'series'、'markLine'、'markPoint'、'timeLine' 等。
-  componentType: string;
-  // 系列类型。值可能为：'line'、'bar'、'pie' 等。当 componentType 为 'series' 时有意义。
-  seriesType: string;
-  // 系列在传入的 option.series 中的 index。当 componentType 为 'series' 时有意义。
-  seriesIndex: number;
-  // 系列名称。当 componentType 为 'series' 时有意义。
-  seriesName: string;
-  // 数据名，类目名
-  name: string;
-  // 数据在传入的 data 数组中的 index
-  dataIndex: number;
-  // 传入的原始数据项
-  data: {
-    id: any;
-    name: string;
-    node?: any;
-    date?: string;
-  };
-  // sankey、graph 等图表同时含有 nodeData 和 edgeData 两种 data，
-  // dataType 的值会是 'node' 或者 'edge'，表示当前点击在 node 还是 edge 上。
-  // 其他大部分图表中只有一种 data，dataType 无意义。
-  dataType: string;
-  // 传入的数据值
-  value: number | any[];
-  // 数据图形的颜色。当 componentType 为 'series' 时有意义。
-  color: string;
-}
+import { ChartService, QueryLinksData, ChartNode, ChartOption, ChartEventCbParams } from './chart.service';
 
 enum FullStatus {
   yes = 'yes',
@@ -94,7 +63,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @type {QueryLinksData}
    * @memberof ChartComponent
    */
-  // relation: QueryLinksData;
+  relation: QueryLinksData;
 
   get chartActived() {
     // 图表是否激活
@@ -142,9 +111,14 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
   /////////////////////////////////////////////////
 
+  /**
+   * 从节点下拉框返回的已选中节点数据
+   *
+   * @param {ChartNode[]} activedNodes
+   * @memberof ChartComponent
+   */
   getCheckedNodes(activedNodes: ChartNode[]) {
     this.eoption.series[0].data = activedNodes;
-    console.log(this.eoption);
     this.chartInstance.setOption(this.eoption);
   }
 
@@ -163,23 +137,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         styleValue = typeof styleValue === 'number' ? styleValue.toString() + 'px' : styleValue;
         this._renderer.setStyle(dom, styleKey, styleValue);
       }
-    }
-  }
-
-  /**
-   * 手动设置全屏模式下底部的高度
-   *
-   * @private
-   * @param {*} bool
-   * @memberof ChartComponent
-   */
-  private _showPointInfo(bool) {
-    const hackClassName = 'full-hack';
-    const hackDIV = document.querySelector(`.${hackClassName}`) || document.createElement('div');
-    this._setStyle(hackDIV, { height: bool ? '9.090909rem' : '0' });
-    if (hackDIV.className.indexOf(hackClassName) < 0) {
-      hackDIV.className = hackClassName;
-      this.chartContainer.appendChild(hackDIV);
     }
   }
 
@@ -285,12 +242,10 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       this._bindEvent();
       this.bindedEvent = true;
     }
-    // this._chart
-    //   .buildQueryLinksData(this.eoption.series[0].links)
-    //   .subscribe(links => {
-    //     this.relation = links;
-    //     console.log(links);
-    //   });
+    this._chart.buildQueryLinksData(this.eoption.series[0].links).subscribe(links => {
+      this.relation = links;
+      console.log(links);
+    });
   }
 
   /**
@@ -315,18 +270,22 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   }
 
   /**
-   * 点击后是否显示点的
+   * 显示点的信息
    *
    * @private
-   * @param {string} id
-   * @returns {boolean}
    * @memberof ChartComponent
    */
-  private _showClickedNodeInfo(id: string): boolean {
-    if (id.indexOf('case') === 0) {
-      return true;
+  private _showNodeInfo(params: ChartEventCbParams): void {
+    if (params.dataType !== 'node') {
+      return;
     }
-    return false;
+    this._zone.run(() => {
+      this.UI_nodeDetail = {
+        show: true,
+        date: params.data.date,
+        txt: params.data.name
+      };
+    });
   }
 
   /**
@@ -336,27 +295,16 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @memberof ChartComponent
    */
   private _bindEvent() {
+    // 点击事件
     this.chartInstance.on('click', (params: ChartEventCbParams) => {
       // console.log(params);
-      if (params.dataType !== 'node') {
-        return;
-      }
       this.eclick.emit(params);
       this._highlightNode(params);
-      // 显示点击文字
-      this._zone.run(() => {
-        this.UI_nodeDetail = {
-          show: this._showClickedNodeInfo(params.data.id),
-          date: params.data.date,
-          txt: params.data.name
-        };
-      });
     });
+    // 鼠标经过事件
     this.chartInstance.on('mouseover', (params: ChartEventCbParams) => {
-      // this.emouseover.emit(params);
-      // this._zone.run(() => {
-      //   this.UI_nodeDetail = 'MOUSEOVER' + JSON.stringify(params.data);
-      // });
+      this.emouseover.emit(params);
+      this._showNodeInfo(params);
     });
   }
 

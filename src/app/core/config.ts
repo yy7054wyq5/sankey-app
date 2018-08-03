@@ -1,5 +1,4 @@
-import { ChartOption } from '../share/components/chart/chart.service';
-import { ChartEventCbParams } from '../share/components/chart/chart.component';
+import { ChartOption, ChartEventCbParams } from '../share/components/chart/chart.service';
 
 export interface SideMenuItem {
   txt: string;
