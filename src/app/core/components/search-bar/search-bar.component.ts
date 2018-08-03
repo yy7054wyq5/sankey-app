@@ -1,29 +1,11 @@
-import {
-  Component,
-  OnInit,
-  ViewEncapsulation,
-  ElementRef,
-  AfterViewInit,
-  Input,
-  Output,
-  EventEmitter,
-  Renderer2
-} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, AfterViewInit, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../../services/common/common.service';
 import { Observable, fromEvent, of } from 'rxjs';
-import {
-  map,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap
-} from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { StorageService } from '../../../share/services/storage/storage.service';
 import { environment } from '../../../../environments/environment';
-import {
-  ChartLink,
-  ChartNode
-} from '../../../share/components/chart/chart.service';
+import { ChartLink, ChartNode } from '../../../share/components/chart/chart.service';
 
 /**
  * 搜索的状态
@@ -68,7 +50,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   @Output() searchResult = new EventEmitter<SearchResult>();
   @Output() searchStatus = new EventEmitter<string>();
 
-  mockFail = 0;
+  countSearchTimes = 1;
   tipsLeft = ['21rem', '59rem', '83rem'];
   tip: Element;
 
@@ -78,9 +60,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     private _element: ElementRef,
     private _renderer: Renderer2,
     private _storge: StorageService
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.tip = this._element.nativeElement.querySelector('.search-tips');
@@ -130,9 +112,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
    * @memberof SearchBarComponent
    */
   private _bindSearchEvent(className: string): Observable<string> {
-    const $input = this._element.nativeElement
-      .querySelector('.' + className)
-      .querySelector('.ant-select-search__field');
+    const $input = this._element.nativeElement.querySelector('.' + className).querySelector('.ant-select-search__field');
     return fromEvent($input, 'input').pipe(
       map((e: Event) => e.target['value']),
       debounceTime(this.searchDelaytTime),
@@ -168,6 +148,11 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     }
   }
 
+  private _removeTips() {
+    this.tip.remove();
+    this._storge.put('noSearchTips', true);
+  }
+
   /**
    * 请求匹配关系
    *
@@ -177,9 +162,19 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     if (environment.production && (!this.start || !this.end)) {
       return;
     }
+
+    const url = (() => {
+      return `assets/mock/search-result${this.countSearchTimes}.json`;
+    })();
+
+    this.countSearchTimes += 1;
+    if (this.countSearchTimes === 4) {
+      this.countSearchTimes = 1;
+    }
+
     this.searchStatus.emit(SearchStatus.pending);
     this._http
-      .get('assets/mock/search-result.json', {
+      .get(url, {
         params: {
           source: this.start,
           target: this.end
@@ -188,20 +183,15 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
       .subscribe(
         (res: SearchResult) => {
           this.searchStatus.emit(SearchStatus.success);
-          this.mockFail += 1;
-          this.searchResult.emit(
-            !(this.mockFail % 2)
-              ? res
-              : { status: this.mockFail, data: { nodes: [], links: [] } }
-          );
+          this.searchResult.emit(res);
         },
         error => {
           this.searchStatus.emit(SearchStatus.fail);
+          this._removeTips();
         },
         () => {
-          this.tip.remove();
-          this._storge.put('noSearchTips', true);
           this.searchStatus.emit(SearchStatus.complate);
+          this._removeTips();
         }
       );
   }

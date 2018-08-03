@@ -13,22 +13,18 @@ import { ChartNode } from '../../../share/components/chart/chart.service';
   encapsulation: ViewEncapsulation.None
 })
 export class CoreMainComponent implements OnInit {
-  constructor(private _common: CommonService, private _msg: NzMessageService) { }
+  constructor(private _common: CommonService, private _msg: NzMessageService) {}
 
   loadingId: any;
   option: any; // 图表配置项
   colorBar = chartColorConfig;
   initCore = true; // 初始状态
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   /////////////////////////
 
-  private _setItemStyle(
-    node: ChartNode,
-    normalColor: string,
-    highlightColor: string
-  ) {
+  private _setItemStyle(node: ChartNode, normalColor: string, highlightColor: string) {
     node.itemStyle = {};
     node.itemStyle.color = node.itemStyle.borderColor = normalColor;
     node.emphasis = {};
@@ -40,25 +36,13 @@ export class CoreMainComponent implements OnInit {
     nodes.forEach(node => {
       if (node.id) {
         if (node.id.indexOf('person') === 0) {
-          this._setItemStyle(
-            node,
-            chartColorConfig.person.bg,
-            chartColorConfig.person.hover
-          );
+          this._setItemStyle(node, chartColorConfig.person.bg, chartColorConfig.person.hover);
         }
         if (node.id.indexOf('case') === 0) {
-          this._setItemStyle(
-            node,
-            chartColorConfig.case.bg,
-            chartColorConfig.case.hover
-          );
+          this._setItemStyle(node, chartColorConfig.case.bg, chartColorConfig.case.hover);
         }
         if (node.id.indexOf('organization') === 0) {
-          this._setItemStyle(
-            node,
-            chartColorConfig.organization.bg,
-            chartColorConfig.organization.hover
-          );
+          this._setItemStyle(node, chartColorConfig.organization.bg, chartColorConfig.organization.hover);
         }
       }
     });
@@ -81,8 +65,7 @@ export class CoreMainComponent implements OnInit {
       this._rebuildNodesData(res.data.nodes).subscribe(nodes => {
         _chartConfig.series[0].data = nodes;
         _chartConfig.series[0].links = res.data.links;
-        console.log(_chartConfig);
-        this.option = _chartConfig;
+        this.option = Object.assign({}, _chartConfig);
         this._msg.remove(this.loadingId);
       });
     } else {
