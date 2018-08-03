@@ -22,9 +22,6 @@ export class InterceptorsService implements HttpInterceptor {
         },
         error => {
           this._loading.close();
-        },
-        () => {
-          this._loading.close();
         }
       )
     );

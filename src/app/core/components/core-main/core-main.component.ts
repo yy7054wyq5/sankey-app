@@ -54,6 +54,8 @@ export class CoreMainComponent implements OnInit {
       this.loadingId = this._msg.loading('请求数据中...', {
         nzDuration: 0
       }).messageId;
+    } else {
+      this._msg.remove(this.loadingId);
     }
   }
 

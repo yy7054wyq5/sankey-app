@@ -165,6 +165,12 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * 移除引导提示
+   *
+   * @private
+   * @memberof SearchBarComponent
+   */
   private _removeTips() {
     this.tip.remove();
     this._storge.put('noSearchTips', true);
