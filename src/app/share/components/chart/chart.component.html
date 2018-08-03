@@ -1,9 +1,11 @@
 <!-- 上方留白 -->
 <div class="hack" style="height: 5.050505rem"></div>
 <div class="chart"></div>
-<div class="point-info">
-  <h3>{{pointDetail.date}}</h3>
-  <p>{{pointDetail.txt}}</p>
+<div class="point-info" [class.no-boder]="!UI_nodeDetail.show">
+  <ng-container *ngIf="UI_nodeDetail.show">
+    <h3>{{UI_nodeDetail.date}}</h3>
+    <p>{{UI_nodeDetail.txt}}</p>
+  </ng-container>
 </div>
 <ng-container *ngIf="chartActived">
   <ng-container *ngIf="ehasFullBtn">

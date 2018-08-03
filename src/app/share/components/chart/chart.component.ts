@@ -75,7 +75,8 @@ export class ChartComponent
 
   selectOpenStatus = false;
   // 鼠标经过或点击的文字
-  pointDetail = {
+  UI_nodeDetail = {
+    show: false,
     date: '',
     txt: ''
   };
@@ -95,6 +96,8 @@ export class ChartComponent
    * @memberof ChartComponent
    */
   // relation: QueryLinksData;
+
+
   get chartActived() {
     // 图表是否激活
     return this.chartInstance ? true : false;
@@ -311,7 +314,7 @@ export class ChartComponent
 
 
   /**
-   * 高亮节点
+   * 高亮节点并返回点击的节点数据
    *
    * @private
    * @param {ChartEventCbParams} params
@@ -324,12 +327,18 @@ export class ChartComponent
         dataIndex: this.clickedNode.dataIndex
       });
     }
-    // 节点的高亮
-    this.clickedNode = params;
     this.chartInstance.dispatchAction({
       type: 'highlight',
       dataIndex: params.dataIndex
     });
+    this.clickedNode = params;
+  }
+
+  private _showClickedNodeInfo(id: string): boolean {
+    if (id.indexOf('case') === 0) {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -348,7 +357,8 @@ export class ChartComponent
       this._highlightNode(params);
       // 显示点击文字
       this._zone.run(() => {
-        this.pointDetail = {
+        this.UI_nodeDetail = {
+          show: this._showClickedNodeInfo(params.data.id),
           date: params.data.date,
           txt: params.data.name
         };
@@ -357,7 +367,7 @@ export class ChartComponent
     this.chartInstance.on('mouseover', (params: ChartEventCbParams) => {
       // this.emouseover.emit(params);
       // this._zone.run(() => {
-      //   this.pointDetail = 'MOUSEOVER' + JSON.stringify(params.data);
+      //   this.UI_nodeDetail = 'MOUSEOVER' + JSON.stringify(params.data);
       // });
     });
   }

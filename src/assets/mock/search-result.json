@@ -30,32 +30,32 @@
       {
         "source": "persona137502e5f2211e881f0005056c00008",
         "target": "case6237ac4a6a0111e8a353000c2974e9f60",
-        "value": 15848
+        "value": 1
       },
       {
         "source": "persona137502e5f2211e881f0005056c00008",
         "target": "organization6c6062cc5f2211e88b11005056c00008",
-        "value": 9521
+        "value": 1
       },
       {
         "source": "persona137502e5f2211e881f0005056c00008",
         "target": "caseef8467ff7e6511e8a0f6000c2974e9f61",
-        "value": 7124
+        "value": 1
       },
       {
         "source": "case6237ac4a6a0111e8a353000c2974e9f60",
         "target": "person7136dc2e5f2211e896ae005056c000081",
-        "value": 19742
+        "value": 1
       },
       {
         "source": "organization6c6062cc5f2211e88b11005056c00008",
         "target": "person7136dc2e5f2211e896ae005056c000081",
-        "value": 4535
+        "value": 1
       },
       {
         "source": "caseef8467ff7e6511e8a0f6000c2974e9f61",
         "target": "person7136dc2e5f2211e896ae005056c000081",
-        "value": 2920
+        "value": 1
       }
     ]
   }
