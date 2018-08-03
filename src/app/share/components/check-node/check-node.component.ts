@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { ChartNode } from '../chart/chart.service';
-import { Observable, of } from '../../../../../node_modules/rxjs';
+import { Observable, of } from 'rxjs';
 
 interface UInodes {
   persons: ChartNode[];
