@@ -119,7 +119,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     private _storge: StorageService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.records.data = this._storge.get('histories') || [];
+  }
 
   ngAfterViewInit() {
     this.tip = this._element.nativeElement.querySelector('.search-tips');
@@ -251,6 +253,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.records.data.push(data);
       }
     }
+    this._storge.put('histories', this.records.data);
     return of(this.records.data);
   }
 
@@ -261,6 +264,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   clearRecords() {
     this.records.clear();
+    this._storge.remove('histories');
   }
 
   /**
