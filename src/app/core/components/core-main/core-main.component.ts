@@ -105,6 +105,16 @@ export class CoreMainComponent implements OnInit {
     }
   }
 
+  /**
+   * 获取
+   *
+   * @param {*} data
+   * @memberof CoreMainComponent
+   */
+  getSuccessRecords(data: any) {
+    console.log('搜索成功的记录', data);
+  }
+
   mouseoverChartEvent(data) {
     console.log('over', data);
   }

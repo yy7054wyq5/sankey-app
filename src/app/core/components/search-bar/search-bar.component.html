@@ -3,7 +3,7 @@
   <nz-spin [nzSpinning]="startLoading">
     <nz-select class="start-point" [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请输入您的姓名 或公司名称 或职务" [(ngModel)]="start" name="start" (ngModelChange)="selected($event, 'start')" (nzOpenChange)="open($event)">
       <nz-option *ngFor="let option of startOptions" nzLabel="{{option['名字']}}&nbsp;{{option['公司名']}}&nbsp;{{option['职位']}}" nzValue="{{option['id']}}" [nzCustomContent]="true">
-        <div class="option-label">
+        <div class="option-label" (click)="getStartAndEndData(option ,'start')">
           <span>{{option['名字']}}</span>
           <span>{{option['公司名']}}</span>
           <span>{{option['职位']}}</span>
@@ -16,7 +16,7 @@
   <nz-spin [nzSpinning]="endLoading">
     <nz-select class="end-point" [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请输入对方的姓名 或公司名称 或职务" [(ngModel)]="end" name="end" (ngModelChange)="selected($event, 'end')" (nzOpenChange)="open($event)">
       <nz-option *ngFor="let option of endOptions" nzLabel="{{option['名字']}}&nbsp;{{option['公司名']}}&nbsp;{{option['职位']}}" nzValue="{{option['id']}}" [nzCustomContent]="true">
-        <div class="option-label">
+        <div class="option-label"  (click)="getStartAndEndData(option ,'end')">
           <span>{{option['名字']}}</span>
           <span>{{option['公司名']}}</span>
           <span>{{option['职位']}}</span>

@@ -1,8 +1,8 @@
 <nz-layout class="core-main">
   <!-- 搜索栏 -->
-  <app-search-bar (searchResult)="getSearchResult($event)" (searchStatus)="getSearchStatus($event)"></app-search-bar>
+  <app-search-bar #searchBar (outSearchResult)="getSearchResult($event)" (outSearchStatus)="getSearchStatus($event)"></app-search-bar>
   <section class="core-body">
-    <app-sider></app-sider>
+    <app-sider [histories]="searchBar.records.data" [searchBar]="searchBar"></app-sider>
     <section class="core-content">
       <!-- 初始状态 -->
       <div *ngIf="initCore" class="status">

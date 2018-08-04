@@ -1,4 +1,15 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, AfterViewInit, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  ElementRef,
+  AfterViewInit,
+  Input,
+  Output,
+  EventEmitter,
+  Renderer2,
+  OnDestroy
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../../services/common/common.service';
 import { Observable, fromEvent, of } from 'rxjs';
@@ -33,29 +44,72 @@ export interface SearchResult {
   };
 }
 
+/**
+ * 内部记录有成功返回数据的起点和终点数据
+ *
+ * @interface SuccessSearchRecord
+ */
+export interface SuccessSearchRecord {
+  start: { id: string; [key: string]: any };
+  end: { id: string; [key: string]: any };
+}
+
+/**
+ * 搜索记录集合
+ *
+ * @interface Record
+ */
+class Record {
+  startAndEnd: SuccessSearchRecord = {
+    start: { id: '' },
+    end: { id: '' }
+  };
+  data: SuccessSearchRecord[] = [];
+  dataOnlyIds: { [key: string]: string[] } = {};
+  clear = () => {
+    this.data = [];
+    this.dataOnlyIds = {};
+  }
+}
+
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.less'],
   encapsulation: ViewEncapsulation.None
 })
-export class SearchBarComponent implements OnInit, AfterViewInit {
-  start: string;
-  end: string;
+export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
+  protected start: string;
+  protected end: string;
 
-  startLoading = false;
-  endLoading = false;
+  protected startLoading = false;
+  protected endLoading = false;
 
-  startOptions = [];
-  endOptions = [];
+  protected startOptions = [];
+  protected endOptions = [];
+
+  /**
+   * 外部以模板变量的方式获取内部变量
+   *
+   * @memberof SearchBarComponent
+   */
+  records = new Record();
 
   @Input() searchDelaytTime = 1000;
-  @Output() searchResult = new EventEmitter<SearchResult>();
-  @Output() searchStatus = new EventEmitter<string>();
+  @Output() outSearchResult = new EventEmitter<SearchResult>();
+  @Output() outSearchStatus = new EventEmitter<string>();
+  @Output() outSearchSuccessRecords = new EventEmitter<SuccessSearchRecord[]>();
 
   countSearchTimes = 1;
   tipsLeft = ['21rem', '59rem', '83rem'];
   tip: Element;
+  errorBakData: SearchResult = {
+    status: 0,
+    data: {
+      nodes: [],
+      links: []
+    }
+  };
 
   constructor(
     private _http: HttpClient,
@@ -83,14 +137,12 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
         })
         .subscribe(
           (bak: { status: number; data: any[] }) => {
+            this.startLoading = false;
             if (!bak.status) {
               this.startOptions = bak.data;
             }
           },
           error => {
-            this.startLoading = false;
-          },
-          () => {
             this.startLoading = false;
           }
         );
@@ -104,21 +156,23 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
         })
         .subscribe(
           (bak: { status: number; data: any[] }) => {
+            this.endLoading = false;
             if (!bak.status) {
               this.endOptions = bak.data;
             }
           },
           error => {
             this.endLoading = false;
-          },
-          () => {
-            this.endLoading = false;
           }
         );
     });
   }
 
-  ////////////////
+  ngOnDestroy() {
+    this.clearRecords();
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
 
   /**
    * 绑定搜索
@@ -177,12 +231,66 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * 更新记录
+   *
+   * @private
+   * @returns {Observable<SuccessSearchRecord[]>}
+   * @memberof SearchBarComponent
+   */
+  private _updateRecords(): Observable<SuccessSearchRecord[]> {
+    const data = Object.assign({}, this.records.startAndEnd);
+    const start = data.start.id;
+    const end = data.end.id;
+    const recordsOnlyIds = this.records.dataOnlyIds;
+    if (!recordsOnlyIds[start]) {
+      this.records.dataOnlyIds[start] = [end];
+      this.records.data.push(data);
+    } else {
+      if (recordsOnlyIds[start].indexOf(end) < 0) {
+        this.records.dataOnlyIds[start].push(end);
+        this.records.data.push(data);
+      }
+    }
+    return of(this.records.data);
+  }
+
+  /**
+   * 清除历史
+   *
+   * @memberof SearchBarComponent
+   */
+  clearRecords() {
+    this.records.clear();
+  }
+
+  /**
+   * 是否请求到完整的数据
+   *
+   * @private
+   * @param {SearchResult} res
+   * @returns {boolean}
+   * @memberof SearchBarComponent
+   */
+  private _isSuccessBack(res: SearchResult): boolean {
+    if (!res.status) {
+      if (res.data) {
+        if (res.data.links && res.data.links.length > 0 && (res.data.nodes && res.data.nodes.length > 0)) {
+          return true;
+        }
+        return false;
+      }
+      return false;
+    }
+    return false;
+  }
+
+  /**
    * 请求匹配关系
    *
    * @memberof SearchBarComponent
    */
   search() {
-    if (environment.production && (!this.start || !this.end)) {
+    if (!this.start || !this.end) {
       return;
     }
 
@@ -195,28 +303,30 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
       this.countSearchTimes = 1;
     }
 
-    this.searchStatus.emit(SearchStatus.pending);
-    this._http
-      .get(url, {
-        params: {
-          source: this.start,
-          target: this.end
+    this.outSearchStatus.emit(SearchStatus.pending);
+
+    this._http.get(url, { params: { source: this.start, target: this.end } }).subscribe(
+      (res: SearchResult) => {
+        if (this._isSuccessBack(res)) {
+          this.outSearchResult.emit(res);
+          this._updateRecords().subscribe(data => {
+            this.outSearchSuccessRecords.emit(data);
+          });
+        } else {
+          this.outSearchResult.emit(this.errorBakData);
         }
-      })
-      .subscribe(
-        (res: SearchResult) => {
-          this.searchStatus.emit(SearchStatus.success);
-          this.searchResult.emit(res);
-        },
-        error => {
-          this.searchStatus.emit(SearchStatus.fail);
-          this._removeTips();
-        },
-        () => {
-          this.searchStatus.emit(SearchStatus.complate);
-          this._removeTips();
-        }
-      );
+        this.outSearchStatus.emit(SearchStatus.success);
+      },
+      error => {
+        this.outSearchResult.emit(this.errorBakData);
+        this.outSearchStatus.emit(SearchStatus.fail);
+        this._removeTips();
+      },
+      () => {
+        this.outSearchStatus.emit(SearchStatus.complate);
+        this._removeTips();
+      }
+    );
   }
 
   /**
@@ -229,6 +339,17 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     if (isopen) {
       this._showTips(false);
     }
+  }
+
+  /**
+   * 获取起点和终点的完整数据
+   *
+   * @param {*} data
+   * @param {string} tag
+   * @memberof SearchBarComponent
+   */
+  getStartAndEndData(data: any, tag: string) {
+    this.records.startAndEnd[tag] = data;
   }
 
   /**
