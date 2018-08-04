@@ -27,6 +27,10 @@ export class SiderComponent implements OnInit {
 
   ///////////////////////////////
 
+  toSearch(data: SuccessSearchRecord) {
+    this.searchBar.search(data);
+  }
+
   clear() {
     if (this.historyMenus.length) {
       this._modal.confirm({

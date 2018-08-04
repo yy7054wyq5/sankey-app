@@ -66,6 +66,7 @@ class Record {
   };
   data: SuccessSearchRecord[] = [];
   dataOnlyIds: { [key: string]: string[] } = {};
+  // prettier-ignore
   clear = () => {
     this.data = [];
     this.dataOnlyIds = {};
@@ -120,7 +121,11 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.records.data = this._storge.get('histories') || [];
+    const histories: SuccessSearchRecord[] = this._storge.get('histories');
+    if (histories) {
+      this.records.data = histories;
+      this._synRecordsByStorages(histories);
+    }
   }
 
   ngAfterViewInit() {
@@ -232,6 +237,16 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     this._storge.put('noSearchTips', true);
   }
 
+  private _synRecordsByStorages(data: SuccessSearchRecord[]) {
+    data.forEach(item => {
+      if (!this.records.dataOnlyIds[item.start.id]) {
+        this.records.dataOnlyIds[item.start.id] = [item.end.id];
+      } else {
+        this.records.dataOnlyIds[item.start.id].push(item.end.id);
+      }
+    });
+  }
+
   /**
    * 更新记录
    *
@@ -291,9 +306,18 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * 请求匹配关系
    *
+   * @param {SuccessSearchRecord} [searchData]
    * @memberof SearchBarComponent
    */
-  search() {
+  search(searchData?: SuccessSearchRecord) {
+    if (searchData) {
+      this.records.startAndEnd = searchData;
+      this.startOptions = [searchData.start];
+      this.endOptions = [searchData.end];
+      this.start = searchData.start.id;
+      this.end = searchData.end.id;
+    }
+
     if (!this.start || !this.end) {
       return;
     }

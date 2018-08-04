@@ -34,7 +34,7 @@
       <!-- 历史记录 -->
       <ng-container *ngIf="item.className==='history-info'">
         <ul class="histores">
-          <li *ngFor="let history of historyMenus">
+          <li *ngFor="let history of historyMenus" (click)="toSearch(history)">
             {{history.start['公司名']}}/{{history.start['名字']}}->{{history.end['公司名']}}/{{history.end['名字']}}
           </li>
         </ul>
