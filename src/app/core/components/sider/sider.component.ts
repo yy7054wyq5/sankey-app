@@ -34,6 +34,7 @@ export class SiderComponent implements OnInit {
   clear() {
     if (this.historyMenus.length) {
       this._modal.confirm({
+        nzWrapClassName: 'sn',
         nzTitle: '清空',
         nzContent: '您确定清除历史吗？',
         nzOnOk: () => {
