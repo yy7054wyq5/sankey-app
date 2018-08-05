@@ -1,5 +1,8 @@
 @import '../../../../less/variable.less';
 @import '../../../../less/mixin.less';
+
+@paddingLeft: 2.777778rem;
+
 aside {
   width: 14.646465rem;
   padding-right: 1rem;
@@ -45,6 +48,16 @@ aside {
         color: @fontColor;
         display: block;
         height: 2.020202rem;
+      }
+    }
+    .person-info{
+      background: #fff;
+      display: block;
+      clear: both;
+      height: auto;
+      padding-left: @paddingLeft;
+      li{
+        white-space: pre-wrap;
       }
     }
   }
@@ -125,7 +138,7 @@ aside {
   background: #fff;
   margin-top: 1px;
   font-size: 0.606061rem;
-  padding-left: 2.777778rem;
+  padding-left: @paddingLeft;
   color: #bcc1c2;
   > li {
     min-height: 1.5rem;

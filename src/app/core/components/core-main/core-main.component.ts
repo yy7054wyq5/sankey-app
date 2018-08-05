@@ -4,7 +4,8 @@ import { CommonService } from '../../services/common/common.service';
 import { SearchResult, SearchStatus, SearchBarComponent } from '../search-bar/search-bar.component';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Observable, of } from 'rxjs';
-import { ChartNode } from '../../../share/components/chart/chart.service';
+import { ChartNode, ChartEventCbParams } from '../../../share/components/chart/chart.service';
+import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 
 @Component({
   selector: 'app-core-main',
@@ -13,12 +14,13 @@ import { ChartNode } from '../../../share/components/chart/chart.service';
   encapsulation: ViewEncapsulation.None
 })
 export class CoreMainComponent implements OnInit {
-  constructor(private _common: CommonService, private _msg: NzMessageService) {}
+  constructor(private _common: CommonService, private _msg: NzMessageService, private _http: HttpClient) {}
 
   loadingId: any;
   option: any; // 图表配置项
   colorBar = chartColorConfig;
   initCore = true; // 初始状态
+  person; // 侧栏任务信息
 
   @ViewChild('searchBar') searchBar: SearchBarComponent;
 
@@ -131,7 +133,18 @@ export class CoreMainComponent implements OnInit {
    * @param {*} data
    * @memberof CoreMainComponent
    */
-  clickChartEvent(data) {
-    console.log('click', data);
+  clickChartEvent(node: ChartEventCbParams) {
+    if (node.dataType === 'node' && node.data.id.indexOf('person') === 0) {
+      console.log(node.data.id);
+      this._http
+        .get('/assets/mock/user.json', {
+          params: {
+            id: node.data.id
+          }
+        })
+        .subscribe(res => {
+          this.person = res['data'];
+        });
+    }
   }
 }

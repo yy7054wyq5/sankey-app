@@ -1,14 +1,23 @@
 <aside>
-  <ul nz-menu [nzSelectable]="true">
-    <li [class]="item.className" nz-menu-item *ngFor="let item of siderMenus" [nzSelected]="item.actived">
-      <span class="menu-info">
-        <i class="icon {{item.icon}}"></i>
-        <span class="nav-text">{{item.txt}}</span>
+  <ul nz-menu [nzSelectable]="false">
+    <li class="user-info" nz-menu-item [class.ant-menu-item-selected]="userActived">
+      <span class="menu-info" (click)="userActived=!userActived">
+        <i class="icon user"></i>
+        <span class="nav-text">人物信息</span>
         <i class="icon arrow icon-right"></i>
         <i class="icon arrow icon-down"></i>
       </span>
-      <!-- 用户相关 -->
-      <ng-container *ngIf="item.className==='user-info'">
+      <ng-container *ngIf="personMenus&&personMenus.length">
+        <span class="person-info">
+          <ul class="info">
+            <li *ngFor="let info of personMenus[0] | keyvalue">
+              <ng-container *ngIf="info.key!=='id'">
+                <span>{{info.key}}:</span>
+                {{info.value}}
+              </ng-container>
+            </li>
+          </ul>
+        </span>
         <div class="sub-container">
           <span class="experience-container" [class.open]="open" (click)="open=!open">
             <span>
@@ -31,18 +40,23 @@
           </span>
         </div>
       </ng-container>
-      <!-- 历史记录 -->
-      <ng-container *ngIf="item.className==='history-info'">
-        <ul class="histores">
-          <li *ngFor="let history of historyMenus" (click)="toSearch(history)">
-            {{history.start['公司名']}}/{{history.start['名字']}}->{{history.end['公司名']}}/{{history.end['名字']}}
-          </li>
-        </ul>
-        <div class="clear-history" *ngIf="historyMenus.length">
-          <i class="icon delete"></i>
-          <span (click)="clear()">清空历史</span>
-        </div>
-      </ng-container>
+    </li>
+    <li class="history-info" nz-menu-item [class.ant-menu-item-selected]="historyActived" (click)="historyActived=!historyActived">
+      <span class="menu-info">
+        <i class="icon history"></i>
+        <span class="nav-text">历史信息</span>
+        <i class="icon arrow icon-right"></i>
+        <i class="icon arrow icon-down"></i>
+      </span>
+      <ul class="histores">
+        <li *ngFor="let history of historyMenus" (click)="toSearch(history)">
+          {{history.start['公司名']}}/{{history.start['名字']}}->{{history.end['公司名']}}/{{history.end['名字']}}
+        </li>
+      </ul>
+      <div class="clear-history" *ngIf="historyMenus.length">
+        <i class="icon delete"></i>
+        <span (click)="clear()">清空历史</span>
+      </div>
     </li>
   </ul>
 </aside>

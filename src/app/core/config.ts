@@ -1,27 +1,5 @@
 import { ChartOption, ChartEventCbParams } from '../share/components/chart/chart.service';
 
-export interface SideMenuItem {
-  txt: string;
-  icon: string;
-  className: string;
-  actived: boolean;
-}
-
-const siderMenus: SideMenuItem[] = [
-  {
-    txt: '人物信息',
-    actived: false,
-    icon: 'user',
-    className: 'user-info'
-  },
-  {
-    txt: '历史信息',
-    actived: false,
-    icon: 'history',
-    className: 'history-info'
-  }
-];
-
 const chartColorConfig = {
   person: {
     bg: '#00dbff',
@@ -83,4 +61,4 @@ const chartOption: ChartOption = {
   ]
 };
 
-export { siderMenus, chartOption, chartColorConfig };
+export { chartOption, chartColorConfig };

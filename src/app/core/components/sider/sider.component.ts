@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation, Input, Output } from '@angular/core';
-import { siderMenus, SideMenuItem } from '../../config';
 import { SuccessSearchRecord, SearchBarComponent } from '../search-bar/search-bar.component';
 import { NzModalService } from '../../../../../node_modules/ng-zorro-antd';
 
@@ -10,11 +9,21 @@ import { NzModalService } from '../../../../../node_modules/ng-zorro-antd';
 })
 export class SiderComponent implements OnInit {
   open = false;
-  siderMenus: SideMenuItem[] = siderMenus;
-
+  userActived = false;
+  historyActived = false;
   historyMenus: SuccessSearchRecord[] = [];
+  personMenus = [];
 
   @Input() searchBar: SearchBarComponent;
+
+  @Input()
+  set person(data: any[]) {
+    this.personMenus = data;
+    if (data && data.length) {
+      this.open = false;
+      this.userActived = true;
+    }
+  }
 
   @Input()
   set histories(data: SuccessSearchRecord[]) {
