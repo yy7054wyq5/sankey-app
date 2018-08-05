@@ -54,21 +54,23 @@ export class CoreMainComponent implements OnInit {
   private _rebuildNodesData(nodes: ChartNode[]): Observable<ChartNode[]> {
     const startPoint = this.searchBar.records.startAndEnd.start.id;
     const endPoint = this.searchBar.records.startAndEnd.end.id;
+    let tag = '';
     nodes.forEach(node => {
       if (node.id) {
         if (node.id.indexOf('person') === 0) {
           if (node.id === startPoint || node.id === endPoint) {
-            this._setItemStyle(node, chartColorConfig.point.bg, chartColorConfig.point.hover);
+            tag = 'point';
           } else {
-            this._setItemStyle(node, chartColorConfig.person.bg, chartColorConfig.person.hover);
+            tag = 'person';
           }
         } else if (node.id.indexOf('case') === 0) {
-          this._setItemStyle(node, chartColorConfig.case.bg, chartColorConfig.case.hover);
+          tag = 'case';
         } else if (node.id.indexOf('organization') === 0) {
-          this._setItemStyle(node, chartColorConfig.organization.bg, chartColorConfig.organization.hover);
+          tag = 'organization';
         } else {
           // do something
         }
+        this._setItemStyle(node, chartColorConfig[tag].bg, chartColorConfig[tag].hover);
       }
     });
     return of(nodes);
