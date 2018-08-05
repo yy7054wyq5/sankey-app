@@ -38,7 +38,7 @@
             {{history.start['公司名']}}/{{history.start['名字']}}->{{history.end['公司名']}}/{{history.end['名字']}}
           </li>
         </ul>
-        <div class="clear-history">
+        <div class="clear-history" *ngIf="historyMenus.length">
           <i class="icon delete"></i>
           <span (click)="clear()">清空历史</span>
         </div>

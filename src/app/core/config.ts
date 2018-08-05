@@ -32,8 +32,8 @@ const chartColorConfig = {
     hover: '#ff6700'
   },
   organization: {
-    bg: '#29abe2',
-    hover: '#00dbff'
+    bg: '#00dbff',
+    hover: '#29abe2'
   },
   point: {
     bg: '#2702bb',

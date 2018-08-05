@@ -27,10 +27,21 @@ export class SiderComponent implements OnInit {
 
   ///////////////////////////////
 
+  /**
+   * 点击历史搜索
+   *
+   * @param {SuccessSearchRecord} data
+   * @memberof SiderComponent
+   */
   toSearch(data: SuccessSearchRecord) {
     this.searchBar.search(data);
   }
 
+  /**
+   * 清空历史
+   *
+   * @memberof SiderComponent
+   */
   clear() {
     if (this.historyMenus.length) {
       this._modal.confirm({

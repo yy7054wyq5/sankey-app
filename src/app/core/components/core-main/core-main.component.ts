@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { chartOption, chartColorConfig } from '../../config';
 import { CommonService } from '../../services/common/common.service';
-import { SearchResult, SearchStatus } from '../search-bar/search-bar.component';
+import { SearchResult, SearchStatus, SearchBarComponent } from '../search-bar/search-bar.component';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Observable, of } from 'rxjs';
 import { ChartNode } from '../../../share/components/chart/chart.service';
@@ -19,6 +19,8 @@ export class CoreMainComponent implements OnInit {
   option: any; // 图表配置项
   colorBar = chartColorConfig;
   initCore = true; // 初始状态
+
+  @ViewChild('searchBar') searchBar: SearchBarComponent;
 
   ngOnInit() {}
 
@@ -50,16 +52,22 @@ export class CoreMainComponent implements OnInit {
    * @memberof CoreMainComponent
    */
   private _rebuildNodesData(nodes: ChartNode[]): Observable<ChartNode[]> {
+    const startPoint = this.searchBar.records.startAndEnd.start.id;
+    const endPoint = this.searchBar.records.startAndEnd.end.id;
     nodes.forEach(node => {
       if (node.id) {
         if (node.id.indexOf('person') === 0) {
-          this._setItemStyle(node, chartColorConfig.person.bg, chartColorConfig.person.hover);
-        }
-        if (node.id.indexOf('case') === 0) {
+          if (node.id === startPoint || node.id === endPoint) {
+            this._setItemStyle(node, chartColorConfig.point.bg, chartColorConfig.point.hover);
+          } else {
+            this._setItemStyle(node, chartColorConfig.person.bg, chartColorConfig.person.hover);
+          }
+        } else if (node.id.indexOf('case') === 0) {
           this._setItemStyle(node, chartColorConfig.case.bg, chartColorConfig.case.hover);
-        }
-        if (node.id.indexOf('organization') === 0) {
+        } else if (node.id.indexOf('organization') === 0) {
           this._setItemStyle(node, chartColorConfig.organization.bg, chartColorConfig.organization.hover);
+        } else {
+          // do something
         }
       }
     });
@@ -106,18 +114,21 @@ export class CoreMainComponent implements OnInit {
   }
 
   /**
-   * 获取
+   * 图表事件
    *
    * @param {*} data
    * @memberof CoreMainComponent
    */
-  getSuccessRecords(data: any) {
-    console.log('搜索成功的记录', data);
-  }
-
   mouseoverChartEvent(data) {
     console.log('over', data);
   }
+
+  /**
+   * 图表事件
+   *
+   * @param {*} data
+   * @memberof CoreMainComponent
+   */
   clickChartEvent(data) {
     console.log('click', data);
   }
