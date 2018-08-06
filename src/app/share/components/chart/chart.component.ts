@@ -298,12 +298,16 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     // 点击事件
     this.chartInstance.on('click', (params: ChartEventCbParams) => {
       // console.log(params);
-      this.eclick.emit(params);
+      this._zone.run(() => {
+        this.eclick.emit(params);
+      });
       this._highlightNode(params);
     });
     // 鼠标经过事件
     this.chartInstance.on('mouseover', (params: ChartEventCbParams) => {
-      this.emouseover.emit(params);
+      this._zone.run(() => {
+        this.emouseover.emit(params);
+      });
       this._showNodeInfo(params);
     });
   }

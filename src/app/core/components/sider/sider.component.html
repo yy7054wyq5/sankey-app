@@ -7,55 +7,67 @@
         <i class="icon arrow icon-right"></i>
         <i class="icon arrow icon-down"></i>
       </span>
-      <ng-container *ngIf="personMenus&&personMenus.length">
+      <div class="content" *ngIf="personMenus">
         <span class="person-info">
           <ul class="info">
-            <li *ngFor="let info of personMenus[0] | keyvalue">
-              <ng-container *ngIf="info.key!=='id'">
-                <span>{{info.key}}:</span>
-                {{info.value}}
-              </ng-container>
+            <li>
+              <span>姓名:</span>
+              {{personMenus['name']['full_name_cn']}}
+            </li>
+            <li>
+              <span>出生日期:</span>
+              {{personMenus['per_info']['date_of_birth']}}
+            </li>
+            <li>
+              <span>工作单位:</span>
+              {{personMenus['company']['name']}}
+            </li>
+            <li>
+              <span>现任职位:</span>
+              {{personMenus['title']}}
+            </li>
+            <li>
+              <span>个人简介:</span>
+              {{personMenus['description']}}
             </li>
           </ul>
         </span>
         <div class="sub-container">
-          <span class="experience-container" [class.open]="open" (click)="open=!open">
+          <span class="experience-container" *ngFor="let work of personMenus['exp']['working'];index as i" [class.open]="work.open" (click)="work.open=!work.open">
             <span>
-              01&nbsp;&nbsp;&nbsp;打打看了解到卡死机读卡接口就量较大上看到杰卡斯基多拉
+              {{i+1}}&nbsp;&nbsp;&nbsp;{{work._from}}-{{work._to}} {{work.company}} {{work.title}}
             </span>
             <i class="icon arrow icon-right"></i>
             <i class="icon arrow icon-down"></i>
             <ul class="experiences">
               <li>
-                <span>大大:</span>
-                大大的卡是经典款
+                <span>工作单位:</span>
+                {{work.company}}
               </li>
               <li>
-                <span>大大:</span>
-              </li>
-              <li>
-                大大的卡是经典款大大的卡是经典款大大的卡是经典款大大的卡是经典款大大的卡是经典款大大的卡是经典款
+                <span>职位:</span>
+                {{work.title}}
               </li>
             </ul>
           </span>
         </div>
-      </ng-container>
+      </div>
     </li>
-    <li class="history-info" nz-menu-item [class.ant-menu-item-selected]="historyActived" (click)="historyActived=!historyActived">
-      <span class="menu-info">
-        <i class="icon history"></i>
-        <span class="nav-text">历史信息</span>
-        <i class="icon arrow icon-right"></i>
-        <i class="icon arrow icon-down"></i>
+    <li class="history-info " nz-menu-item [class.ant-menu-item-selected]="historyActived " (click)="historyActived=!historyActived ">
+      <span class="menu-info ">
+        <i class="icon history "></i>
+        <span class="nav-text ">历史信息</span>
+        <i class="icon arrow icon-right "></i>
+        <i class="icon arrow icon-down "></i>
       </span>
-      <ul class="histores">
-        <li *ngFor="let history of historyMenus" (click)="toSearch(history)">
+      <ul class="histores ">
+        <li *ngFor="let history of historyMenus " (click)="toSearch(history) ">
           {{history.start['公司名']}}/{{history.start['名字']}}->{{history.end['公司名']}}/{{history.end['名字']}}
         </li>
       </ul>
-      <div class="clear-history" *ngIf="historyMenus.length">
-        <i class="icon delete"></i>
-        <span (click)="clear()">清空历史</span>
+      <div class="clear-history " *ngIf="historyMenus.length ">
+        <i class="icon delete "></i>
+        <span (click)="clear() ">清空历史</span>
       </div>
     </li>
   </ul>

@@ -12,15 +12,14 @@ export class SiderComponent implements OnInit {
   userActived = false;
   historyActived = false;
   historyMenus: SuccessSearchRecord[] = [];
-  personMenus = [];
+  personMenus = {};
 
   @Input() searchBar: SearchBarComponent;
 
   @Input()
   set person(data: any[]) {
     this.personMenus = data;
-    if (data && data.length) {
-      this.open = false;
+    if (data) {
       this.userActived = true;
     }
   }

@@ -79,6 +79,19 @@ export class CoreMainComponent implements OnInit {
   }
 
   /**
+   * loading效果
+   *
+   * @private
+   * @returns {*}
+   * @memberof CoreMainComponent
+   */
+  private _showLoading(): any {
+    return this._msg.loading('请求数据中...', {
+      nzDuration: 0
+    }).messageId;
+  }
+
+  /**
    * 根据搜索状态展示loading
    *
    * @param {SearchStatus} status
@@ -86,9 +99,7 @@ export class CoreMainComponent implements OnInit {
    */
   getSearchStatus(status: SearchStatus) {
     if (status === SearchStatus.pending) {
-      this.loadingId = this._msg.loading('请求数据中...', {
-        nzDuration: 0
-      }).messageId;
+      this.loadingId = this._showLoading();
     } else {
       this._msg.remove(this.loadingId);
     }
@@ -135,16 +146,24 @@ export class CoreMainComponent implements OnInit {
    */
   clickChartEvent(node: ChartEventCbParams) {
     if (node.dataType === 'node' && node.data.id.indexOf('person') === 0) {
-      console.log(node.data.id);
+      const loadingId = this._showLoading();
       this._http
         .get('/assets/mock/user.json', {
           params: {
             id: node.data.id
           }
         })
-        .subscribe(res => {
-          this.person = res['data'];
-        });
+        .subscribe(
+          (res: any) => {
+            if (!res.status && res.data) {
+              this._msg.remove(loadingId);
+              this.person = res.data;
+            }
+          },
+          error => {
+            this._msg.remove(loadingId);
+          }
+        );
     }
   }
 }
