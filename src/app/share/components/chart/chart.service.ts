@@ -27,28 +27,6 @@ export interface ChartEventCbParams {
   color: string;
 }
 
-export interface ChartOption {
-  label: {
-    formatter: Function
-  };
-  series: [{
-    type: string,
-    layout: string,
-    data: ChartNode[],
-    links: ChartLink[],
-    lineStyle: {
-      color: string,
-      opacity: number
-    },
-    emphasis: {
-      lineStyle: {
-        color: string,
-        opacity: number
-      }
-    }
-  }];
-}
-
 export interface QueryLinksData {
   [id: string]: {
     tartgets: string[];
@@ -75,7 +53,7 @@ export interface ChartLink {
 
 @Injectable()
 export class ChartService {
-  constructor() { }
+  constructor() {}
 
   /**
    * 将links重新组装以便查找路线

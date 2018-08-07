@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import * as echarts from 'echarts';
 import theme from './theme';
-import { ChartService, QueryLinksData, ChartNode, ChartOption, ChartEventCbParams } from './chart.service';
+import { ChartService, QueryLinksData, ChartNode, ChartEventCbParams } from './chart.service';
 
 enum FullStatus {
   yes = 'yes',
@@ -36,7 +36,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   @Input() eloading: boolean;
   @Input() efullParentClassName: string;
   @Input() echeckPoints = true;
-  @Input() eoption: ChartOption; // http://echarts.baidu.com/option.html
+  @Input() eoption: any; // http://echarts.baidu.com/option.html
   @Output() efullStatus = new EventEmitter<boolean>();
   @Output() emouseover = new EventEmitter<any>();
   @Output() eclick = new EventEmitter<any>();

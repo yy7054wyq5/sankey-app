@@ -1,8 +1,8 @@
-import { ChartOption, ChartEventCbParams } from '../share/components/chart/chart.service';
+import { ChartEventCbParams } from '../share/components/chart/chart.service';
 
 const chartColorConfig = {
   person: {
-    bg: '#00dbff',
+    bg: '#a8cbf4',
     hover: '#0080ff'
   },
   case: {
@@ -20,11 +20,7 @@ const chartColorConfig = {
   line: '#ececec'
 };
 
-const chartOption: ChartOption = {
-  // tooltip: {
-  //   trigger: 'item',
-  //   triggerOn: 'mousemove'
-  // },
+const chartOption = {
   label: {
     formatter: (params: ChartEventCbParams) => {
       const data = params.data;
@@ -49,12 +45,12 @@ const chartOption: ChartOption = {
       links: [],
       lineStyle: {
         color: chartColorConfig.line,
-        opacity: 0.2
+        opacity: 0.6
       },
       emphasis: {
         lineStyle: {
           color: chartColorConfig.line,
-          opacity: 0.6
+          opacity: 0.8
         }
       }
     }

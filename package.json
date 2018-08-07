@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open --aot --port 4444",
+    "start": "ng serve --hmr  --open --aot --port 4444",
     "build": "ng build --prod --base-href ./",
     "test": "ng test",
     "lint": "ng lint",
