@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._rem.setDpr();
-    this._title.setTitle('sn');
+    this._title.setTitle('智配关系');
     this._unlistenWindowResize = this._renderer.listen('window', 'resize', () => {
       this._rem.setDpr();
     });

@@ -11,28 +11,32 @@
         <span class="person-info">
           <ul class="info">
             <li>
-              <span>姓名:</span>
-              {{personMenus['name']['full_name_cn']}}
+              <span>中文名:</span>
+              {{personMenus['中文名']}}
+            </li>
+            <li>
+              <span>性别:</span>
+              {{personMenus['性别']}}
             </li>
             <li>
               <span>出生日期:</span>
-              {{personMenus['per_info']['date_of_birth']}}
+              {{personMenus['出生日期']}}
             </li>
             <li>
               <span>工作单位:</span>
-              {{personMenus['company']['name']}}
+              {{personMenus['所在公司']}}
             </li>
             <li>
               <span>现任职位:</span>
-              {{personMenus['title']}}
+              {{personMenus['角色']}}
             </li>
             <li>
               <span>个人简介:</span>
-              {{personMenus['description']}}
+              {{personMenus['描述']}}
             </li>
           </ul>
         </span>
-        <div class="sub-container">
+        <!-- <div class="sub-container">
           <span class="experience-container" *ngFor="let work of personMenus['exp']['working'];index as i" [class.open]="work.open" (click)="work.open=!work.open">
             <span>
               {{i+1}}&nbsp;&nbsp;&nbsp;{{work._from}}-{{work._to}} {{work.company}} {{work.title}}
@@ -50,7 +54,7 @@
               </li>
             </ul>
           </span>
-        </div>
+        </div> -->
       </div>
     </li>
     <li class="history-info " nz-menu-item [class.ant-menu-item-selected]="historyActived " (click)="historyActived=!historyActived ">

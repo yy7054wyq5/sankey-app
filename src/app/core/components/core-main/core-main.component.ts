@@ -26,7 +26,15 @@ export class CoreMainComponent implements OnInit {
 
   @ViewChild('searchBar') searchBar: SearchBarComponent;
 
-  ngOnInit() {}
+  ngOnInit() {
+    // 临时
+    this.clickChartEvent({
+      dataType: 'node',
+      data: {
+        id: 'persona6f1f0ba5fc611e8ab04005056c00008'
+      }
+    });
+  }
 
   /////////////////////////
 
@@ -146,7 +154,7 @@ export class CoreMainComponent implements OnInit {
    * @param {*} data
    * @memberof CoreMainComponent
    */
-  clickChartEvent(node: ChartEventCbParams) {
+  clickChartEvent(node) { // ChartEventCbParams
     if (node.dataType === 'node' && node.data.id.indexOf('person') === 0) {
       const loadingId = this._showLoading();
       this._http

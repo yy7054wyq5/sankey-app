@@ -17,10 +17,11 @@ export class SiderComponent implements OnInit {
   @Input() searchBar: SearchBarComponent;
 
   @Input()
-  set person(data: any[]) {
+  set person(data: any) {
     this.personMenus = data;
     if (data) {
       this.userActived = true;
+      this._cutDesc(data['描述']);
     }
   }
 
@@ -34,6 +35,23 @@ export class SiderComponent implements OnInit {
   ngOnInit() {}
 
   ///////////////////////////////
+
+  private _cutDesc(data: string): { desc: string; works: string[] } {
+    const _desc = data.split('。');
+    const desc = [];
+    _desc.forEach((des: string, index: number) => {
+      if (index !== _desc.length - 1) {
+        desc.push(des);
+      }
+    });
+
+    console.log(_desc);
+
+    return {
+      desc: desc.join(',') + '。',
+      works: []
+    };
+  }
 
   /**
    * 点击历史搜索
