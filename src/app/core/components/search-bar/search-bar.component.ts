@@ -80,14 +80,14 @@ class Record {
   encapsulation: ViewEncapsulation.None
 })
 export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
-  protected start: string;
-  protected end: string;
+   start: string;
+   end: string;
 
-  protected startLoading = false;
-  protected endLoading = false;
+   startLoading = false;
+   endLoading = false;
 
-  protected startOptions = [];
-  protected endOptions = [];
+   startOptions = [];
+   endOptions = [];
 
   /**
    * 外部以模板变量的方式获取内部变量
