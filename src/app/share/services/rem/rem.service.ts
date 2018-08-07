@@ -22,7 +22,7 @@ export class RemService {
     if (htmlEl.clientWidth < 1000) {
       fontSize = 14;
     }
-    console.log(this.rem);
+    // console.log(this.rem);
     htmlEl.setAttribute('style', `font-size: ${fontSize}px !important;`);
     metaEl.setAttribute('content', 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0');
   }

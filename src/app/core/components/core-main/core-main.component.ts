@@ -7,6 +7,8 @@ import { Observable, of } from 'rxjs';
 import { ChartNode, ChartEventCbParams } from '../../../share/components/chart/chart.service';
 import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 
+const searchPersonDetailApi = '/api/web/Detail/detail';
+
 @Component({
   selector: 'app-core-main',
   templateUrl: './core-main.component.html',
@@ -148,9 +150,9 @@ export class CoreMainComponent implements OnInit {
     if (node.dataType === 'node' && node.data.id.indexOf('person') === 0) {
       const loadingId = this._showLoading();
       this._http
-        .get('/assets/mock/user.json', {
+        .get(searchPersonDetailApi, {
           params: {
-            id: node.data.id
+            P_id: node.data.id
           }
         })
         .subscribe(
