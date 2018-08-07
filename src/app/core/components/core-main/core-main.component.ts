@@ -28,6 +28,7 @@ export class CoreMainComponent implements OnInit {
 
   ngOnInit() {
     // 临时
+    alert('临时显示侧栏人物详情');
     this.clickChartEvent({
       dataType: 'node',
       data: {
