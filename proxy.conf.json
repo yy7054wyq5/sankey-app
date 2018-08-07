@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target":"http://match.aimer.ai/",
+    "changeOrigin": true,
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

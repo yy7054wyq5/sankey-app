@@ -114,7 +114,7 @@ export class CoreMainComponent implements OnInit {
   getSearchResult(res: SearchResult) {
     console.log(res);
     this.initCore = false;
-    if (!res.status && res.data) {
+    if (!res.code && res.data && res.data.links.length && res.data.nodes.length) {
       const _chartConfig = chartOption;
       this._rebuildNodesData(res.data.nodes).subscribe(nodes => {
         _chartConfig.series[0].data = nodes;

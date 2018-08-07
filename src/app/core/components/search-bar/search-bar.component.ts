@@ -37,7 +37,8 @@ export enum SearchStatus {
  * @interface SearchResult
  */
 export interface SearchResult {
-  status: number;
+  code: number;
+  message: string;
   data: {
     links: ChartLink[];
     nodes: ChartNode[];
@@ -73,6 +74,9 @@ class Record {
   }
 }
 
+const searchPersonApi = '/api/web/Extract/extract';
+const searchRelationApi = '/api/web/Relation/relation';
+
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
@@ -80,14 +84,14 @@ class Record {
   encapsulation: ViewEncapsulation.None
 })
 export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
-   start: string;
-   end: string;
+  start: string;
+  end: string;
 
-   startLoading = false;
-   endLoading = false;
+  startLoading = false;
+  endLoading = false;
 
-   startOptions = [];
-   endOptions = [];
+  startOptions = [];
+  endOptions = [];
 
   /**
    * 外部以模板变量的方式获取内部变量
@@ -101,11 +105,11 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() outSearchStatus = new EventEmitter<string>();
   @Output() outSearchSuccessRecords = new EventEmitter<SuccessSearchRecord[]>();
 
-  countSearchTimes = 1;
   tipsLeft = ['21rem', '59rem', '83rem'];
   tip: Element;
   errorBakData: SearchResult = {
-    status: 0,
+    code: 0,
+    message: '',
     data: {
       nodes: [],
       links: []
@@ -139,13 +143,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     this._bindSearchEvent('start-point').subscribe(res => {
       this.startLoading = true;
       this._http
-        .get('assets/mock/start-end.json', {
-          params: { string: res }
+        .get(searchPersonApi, {
+          params: { name: res }
         })
         .subscribe(
-          (bak: { status: number; data: any[] }) => {
+          (bak: { code: number; data: any[] }) => {
             this.startLoading = false;
-            if (!bak.status) {
+            if (!bak.code) {
               this.startOptions = bak.data;
             }
           },
@@ -158,13 +162,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     this._bindSearchEvent('end-point').subscribe(res => {
       this.endLoading = true;
       this._http
-        .get('assets/mock/start-end.json', {
-          params: { string: res }
+        .get(searchPersonApi, {
+          params: { name: res }
         })
         .subscribe(
-          (bak: { status: number; data: any[] }) => {
+          (bak: { code: number; data: any[] }) => {
             this.endLoading = false;
-            if (!bak.status) {
+            if (!bak.code) {
               this.endOptions = bak.data;
             }
           },
@@ -237,6 +241,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     this._storge.put('noSearchTips', true);
   }
 
+  /**
+   * 同步更新记录
+   *
+   * @private
+   * @param {SuccessSearchRecord[]} data
+   * @memberof SearchBarComponent
+   */
   private _synRecordsByStorages(data: SuccessSearchRecord[]) {
     data.forEach(item => {
       if (!this.records.dataOnlyIds[item.start.id]) {
@@ -291,7 +302,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof SearchBarComponent
    */
   private _isSuccessBack(res: SearchResult): boolean {
-    if (!res.status) {
+    if (!res.code) {
       if (res.data) {
         if (res.data.links && res.data.links.length > 0 && (res.data.nodes && res.data.nodes.length > 0)) {
           return true;
@@ -322,18 +333,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    const url = (() => {
-      return `assets/mock/search-result${this.countSearchTimes}.json`;
-    })();
-
-    this.countSearchTimes += 1;
-    if (this.countSearchTimes === 4) {
-      this.countSearchTimes = 1;
-    }
-
     this.outSearchStatus.emit(SearchStatus.pending);
 
-    this._http.get(url, { params: { source: this.start, target: this.end } }).subscribe(
+    this._http.get(searchRelationApi, { params: { source: this.start, target: this.end } }).subscribe(
       (res: SearchResult) => {
         if (this._isSuccessBack(res)) {
           this.outSearchResult.emit(res);
