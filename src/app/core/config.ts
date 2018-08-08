@@ -20,17 +20,19 @@ const chartColorConfig = {
   line: '#ececec'
 };
 
+const cutWord = (txt: string) => {
+  if (txt.length > 6) {
+    return txt.substr(0, 6) + '...';
+  }
+  return txt;
+};
+
 const chartOption = {
   label: {
     formatter: (params: ChartEventCbParams) => {
+      console.log(params);
       const data = params.data;
-      const cutWord = (txt: string) => {
-        if (txt.length > 6) {
-          return txt.substr(0, 6) + '...';
-        }
-        return txt;
-      };
-      const name = cutWord(data.name);
+      const name = cutWord(params.name);
       if (data.date) {
         return data.date + '\n' + name;
       }

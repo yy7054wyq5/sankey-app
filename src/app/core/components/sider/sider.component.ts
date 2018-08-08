@@ -60,6 +60,7 @@ export class SiderComponent implements OnInit {
    * @memberof SiderComponent
    */
   toSearch(data: SuccessSearchRecord) {
+    console.log(data);
     this.searchBar.search(data);
   }
 

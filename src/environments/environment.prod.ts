@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  requestDelayTime: 0
+  requestDelayTime: 0,
+  apiHost: 'http://match.aimer.ai'
 };

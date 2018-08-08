@@ -26,22 +26,29 @@ export class CheckNodeComponent implements OnInit, OnChanges {
   @Input() nodes: ChartNode[];
   @Output() outCheckedNodes = new EventEmitter<ChartNode[]>();
 
-  constructor() { }
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes && !changes.nodes.isFirstChange()) {
-      this._creatData(this.nodes).subscribe(data => this.uiNodes = data);
+      this._creatData(this.nodes).subscribe(data => (this.uiNodes = data));
     }
   }
 
   ngOnInit() {
     console.log(this.nodes);
-    this._creatData(this.nodes).subscribe(data => this.uiNodes = data);
+    this._creatData(this.nodes).subscribe(data => (this.uiNodes = data));
   }
 
   ////////////////////////////////////
 
-
+  /**
+   * 创建下拉数据
+   *
+   * @private
+   * @param {ChartNode[]} data
+   * @returns {Observable<UInodes>}
+   * @memberof CheckNodeComponent
+   */
   private _creatData(data: ChartNode[]): Observable<UInodes> {
     const tmp: UInodes = {
       cases: [],
@@ -50,17 +57,25 @@ export class CheckNodeComponent implements OnInit, OnChanges {
     };
     data.forEach(node => {
       node.actived = true;
-      if (node.id.indexOf(Tag.case) > -1) {
-        tmp.cases.push(node);
-      } else if (node.id.indexOf(Tag.organization) > -1) {
-        tmp.organizations.push(node);
-      } else {
-        tmp.persons.push(node);
+      if (node.id) {
+        if (node.id.indexOf(Tag.case) > -1) {
+          tmp.cases.push(node);
+        } else if (node.id.indexOf(Tag.organization) > -1) {
+          tmp.organizations.push(node);
+        } else {
+          tmp.persons.push(node);
+        }
       }
     });
     return of(tmp);
   }
 
+  /**
+   * 勾选节点
+   *
+   * @param {ChartNode} chartNode
+   * @memberof CheckNodeComponent
+   */
   check(chartNode: ChartNode) {
     chartNode.actived = !chartNode.actived;
     const tmp = [...this.uiNodes.cases, ...this.uiNodes.organizations, ...this.uiNodes.persons];

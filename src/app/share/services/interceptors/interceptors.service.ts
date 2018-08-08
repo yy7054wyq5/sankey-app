@@ -13,6 +13,8 @@ export class InterceptorsService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this._loading.open();
+    req.clone({ url: environment.apiHost + req.url });
+    // console.log(req);
     // 开发环境将请求延迟500ms，以查看loading效果是否有效
     return next.handle(req).pipe(
       delay(environment.requestDelayTime),

@@ -15,8 +15,8 @@ import { CommonService } from '../../services/common/common.service';
 import { Observable, fromEvent, of } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { StorageService } from '../../../share/services/storage/storage.service';
-import { environment } from '../../../../environments/environment';
 import { ChartLink, ChartNode } from '../../../share/components/chart/chart.service';
+import { environment } from '../../../../environments/environment.prod';
 
 /**
  * 搜索的状态
@@ -74,8 +74,8 @@ class Record {
   }
 }
 
-const searchPersonApi = 'http://match.aimer.ai/api/web/Extract/extract';
-const searchRelationApi = 'http://match.aimer.ai/api/web/Relation/relation';
+const searchPersonApi = '/api/web/Extract/extract';
+const searchRelationApi = '/api/web/Relation/relation';
 
 @Component({
   selector: 'app-search-bar',
@@ -100,7 +100,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   records = new Record();
 
-  @Input() searchDelaytTime = 1000;
+  @Input() searchDelaytTime = 500;
   @Output() outSearchResult = new EventEmitter<SearchResult>();
   @Output() outSearchStatus = new EventEmitter<string>();
   @Output() outSearchSuccessRecords = new EventEmitter<SuccessSearchRecord[]>();
@@ -325,8 +325,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.records.startAndEnd = searchData;
       this.startOptions = [searchData.start];
       this.endOptions = [searchData.end];
-      this.start = searchData.start.id;
-      this.end = searchData.end.id;
+      this.start = searchData.start.p_id;
+      this.end = searchData.end.p_id;
     }
 
     if (!this.start || !this.end) {

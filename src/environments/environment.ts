@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  requestDelayTime: 500
+  requestDelayTime: 500,
+  apiHost: ''
 };
 
 /*

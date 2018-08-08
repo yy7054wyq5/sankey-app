@@ -63,10 +63,14 @@ app-search-bar {
     &:last-child {
       border-bottom: 0;
     }
-    > div {
+    > div.option-label {
       display: flex;
       padding: 0 1.010101rem;
-      justify-content: space-between;
+      > span {
+        width: 33.33%;
+        display: block;
+        overflow: hidden;
+      }
     }
   }
 }
