@@ -21,7 +21,7 @@ export class SiderComponent implements OnInit {
     this.personMenus = data;
     if (data) {
       this.userActived = true;
-      this._cutDesc(data['描述']);
+      // this._cutDesc(data['描述']);
     }
   }
 
