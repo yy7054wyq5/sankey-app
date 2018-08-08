@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 import { ChartNode, ChartEventCbParams } from '../../../share/components/chart/chart.service';
 import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 
-const searchPersonDetailApi = '/api/web/Detail/detail';
+const searchPersonDetailApi = 'http://match.aimer.ai/api/web/Detail/detail';
 
 @Component({
   selector: 'app-core-main',
@@ -28,7 +28,6 @@ export class CoreMainComponent implements OnInit {
 
   ngOnInit() {
     // 临时
-    alert('临时显示侧栏人物详情');
     this.clickChartEvent({
       dataType: 'node',
       data: {

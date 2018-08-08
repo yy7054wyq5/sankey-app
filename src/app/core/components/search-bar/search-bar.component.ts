@@ -74,8 +74,8 @@ class Record {
   }
 }
 
-const searchPersonApi = '/api/web/Extract/extract';
-const searchRelationApi = '/api/web/Relation/relation';
+const searchPersonApi = 'http://match.aimer.ai/api/web/Extract/extract';
+const searchRelationApi = 'http://match.aimer.ai/api/web/Relation/relation';
 
 @Component({
   selector: 'app-search-bar',
