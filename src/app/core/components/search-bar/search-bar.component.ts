@@ -56,7 +56,7 @@ export interface SuccessSearchRecord {
 }
 
 /**
- * 搜索记录集合
+ * 搜索记录集合以供侧栏显示，侧栏内历史记录的清空和点击历史项都是调用本组件的内部方法来实现的
  *
  * @interface Record
  */
