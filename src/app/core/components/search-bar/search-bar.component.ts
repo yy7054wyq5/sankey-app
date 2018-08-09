@@ -127,7 +127,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     const histories: SuccessSearchRecord[] = this._storge.get('histories');
     if (histories) {
-      this.records.data = histories;
+      this.records.data = JSON.parse(JSON.stringify(histories));
       this._synRecordsByStorages(histories);
     }
   }
@@ -322,7 +322,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   search(searchData?: SuccessSearchRecord) {
     if (searchData) {
-      this.records.startAndEnd = searchData;
+      this.records.startAndEnd = JSON.parse(JSON.stringify(searchData));
       this.startOptions = [searchData.start];
       this.endOptions = [searchData.end];
       this.start = searchData.start.p_id;
