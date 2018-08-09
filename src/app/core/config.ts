@@ -30,7 +30,7 @@ const cutWord = (txt: string) => {
 const chartOption = {
   label: {
     formatter: (params: ChartEventCbParams) => {
-      console.log(params);
+      // console.log(params);
       const data = params.data;
       const name = cutWord(params.name);
       if (data.date) {
@@ -45,6 +45,8 @@ const chartOption = {
       layout: 'none',
       data: [],
       links: [],
+      layoutIterations: 0,
+      focusNodeAdjacency: 'allEdges',
       lineStyle: {
         color: chartColorConfig.line,
         opacity: 0.6

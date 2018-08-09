@@ -30,16 +30,26 @@ enum FullStatus {
   providers: [ChartService]
 })
 export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
-  @Input() ehasFullBtn = true;
-  @Input() ewidth: string;
-  @Input() eheight: string;
-  @Input() eloading: boolean;
-  @Input() efullParentClassName: string;
-  @Input() echeckPoints = true;
-  @Input() eoption: any; // http://echarts.baidu.com/option.html
-  @Output() efullStatus = new EventEmitter<boolean>();
-  @Output() emouseover = new EventEmitter<any>();
-  @Output() eclick = new EventEmitter<any>();
+  @Input()
+  ehasFullBtn = true;
+  @Input()
+  ewidth: string;
+  @Input()
+  eheight: string;
+  @Input()
+  eloading: boolean;
+  @Input()
+  efullParentClassName: string;
+  @Input()
+  echeckPoints = true;
+  @Input()
+  eoption: any; // http://echarts.baidu.com/option.html
+  @Output()
+  efullStatus = new EventEmitter<boolean>();
+  @Output()
+  emouseover = new EventEmitter<any>();
+  @Output()
+  eclick = new EventEmitter<any>();
 
   selectOpenStatus = false;
   // 鼠标经过或点击的文字
@@ -242,10 +252,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       this._bindEvent();
       this.bindedEvent = true;
     }
-    this._chart.buildQueryLinksData(this.eoption.series[0].links).subscribe(links => {
-      this.relation = links;
-      console.log(links);
-    });
   }
 
   /**
