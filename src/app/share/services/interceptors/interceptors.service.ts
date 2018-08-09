@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
 
 import { Observable, Observer } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { LoadingService } from '../loading/loading.service';
 
@@ -16,24 +16,18 @@ export class InterceptorsService implements HttpInterceptor {
     const secureReq = req.clone({ url: environment.apiHost + req.url });
     // console.log(req);
     // 开发环境将请求延迟500ms，以查看loading效果是否有效
-    return Observable.create((ob: Observer<HttpEvent<any>>) => {
-      next
-        .handle(secureReq)
-        .pipe(delay(environment.requestDelayTime))
-        .subscribe(
-          (res: HttpEvent<any>) => {
-            if (res instanceof HttpResponse) {
-              ob.next(res);
-              ob.complete();
-              this._loading.close();
-            }
-          },
-          error => {
+    return next.handle(secureReq).pipe(
+      delay(environment.requestDelayTime),
+      tap(
+        (event: HttpEvent<any>) => {
+          if (event instanceof HttpResponse) {
             this._loading.close();
-            ob.next(error);
-            ob.complete();
           }
-        );
-    });
+        },
+        error => {
+          this._loading.close();
+        }
+      )
+    );
   }
 }
