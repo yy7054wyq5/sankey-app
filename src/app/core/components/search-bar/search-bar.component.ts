@@ -51,8 +51,8 @@ export interface SearchResult {
  * @interface SuccessSearchRecord
  */
 export interface SuccessSearchRecord {
-  start: { id: string; [key: string]: any };
-  end: { id: string; [key: string]: any };
+  start: { p_id: string; [key: string]: any };
+  end: { p_id: string; [key: string]: any };
 }
 
 /**
@@ -62,8 +62,8 @@ export interface SuccessSearchRecord {
  */
 class Record {
   startAndEnd: SuccessSearchRecord = {
-    start: { id: '' },
-    end: { id: '' }
+    start: { p_id: '' },
+    end: { p_id: '' }
   };
   data: SuccessSearchRecord[] = [];
   dataOnlyIds: { [key: string]: string[] } = {};
