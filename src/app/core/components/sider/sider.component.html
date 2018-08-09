@@ -7,54 +7,36 @@
         <i class="icon arrow icon-right"></i>
         <i class="icon arrow icon-down"></i>
       </span>
-      <div class="content" *ngIf="personMenus">
-        <span class="person-info">
-          <ul class="info">
-            <li>
-              <span>中文名:</span>
-              {{personMenus['中文名']}}
-            </li>
-            <li>
-              <span>性别:</span>
-              {{personMenus['性别']}}
-            </li>
-            <li>
-              <span>出生日期:</span>
-              {{personMenus['出生日期']}}
-            </li>
-            <li>
-              <span>工作单位:</span>
-              {{personMenus['所在公司']}}
-            </li>
-            <li>
-              <span>现任职位:</span>
-              {{personMenus['角色']}}
-            </li>
-            <li>
-              <span>个人简介:</span>
-              {{personMenus['描述']}}
-            </li>
-          </ul>
-        </span>
-        <!-- <div class="sub-container">
-          <span class="experience-container" *ngFor="let work of personMenus['exp']['working'];index as i" [class.open]="work.open" (click)="work.open=!work.open">
-            <span>
-              {{i+1}}&nbsp;&nbsp;&nbsp;{{work._from}}-{{work._to}} {{work.company}} {{work.title}}
+      <div class="content">
+        <ng-container *ngFor="let menu of personMenus">
+          <ng-container *ngIf="menu&&menu['中文名']">
+            <span class="person-info">
+              <ul class="info">
+                <ng-container *ngFor="let item of menu | keyvalue">
+                  <li *ngIf="item.key!=='个人经历'">
+                    <span>{{item.key}}</span>:&nbsp; {{item.value}}
+                  </li>
+                </ng-container>
+              </ul>
             </span>
-            <i class="icon arrow icon-right"></i>
-            <i class="icon arrow icon-down"></i>
-            <ul class="experiences">
-              <li>
-                <span>工作单位:</span>
-                {{work.company}}
-              </li>
-              <li>
-                <span>职位:</span>
-                {{work.title}}
-              </li>
-            </ul>
-          </span>
-        </div> -->
+            <div class="sub-container" *ngIf="menu['个人经历']">
+              <span class="experience-container" *ngFor="let work of menu['个人经历'];index as i" [class.open]="work.open" (click)="work.open=!work.open">
+                <span>
+                  {{i+1}}&nbsp;&nbsp;&nbsp;{{work['起始时间']}}-{{work['结束时间']}} {{work['所在公司']}} {{work['职位']}}
+                </span>
+                <i class="icon arrow icon-right"></i>
+                <i class="icon arrow icon-down"></i>
+                <ul class="experiences">
+                  <ng-container *ngFor="let witem of work | keyvalue">
+                    <li *ngIf="witem.key!=='open'">
+                      <span>{{witem.key}}</span>:&nbsp; {{witem.value}}
+                    </li>
+                  </ng-container>
+                </ul>
+              </span>
+            </div>
+          </ng-container>
+        </ng-container>
       </div>
     </li>
     <li class="history-info " nz-menu-item [class.ant-menu-item-selected]="historyActived ">

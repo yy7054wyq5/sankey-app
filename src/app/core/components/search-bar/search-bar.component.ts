@@ -16,7 +16,7 @@ import { Observable, fromEvent, of } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { StorageService } from '../../../share/services/storage/storage.service';
 import { ChartLink, ChartNode } from '../../../share/components/chart/chart.service';
-import { environment } from '../../../../environments/environment.prod';
+import { environment } from '../../../../environments/environment';
 
 /**
  * 搜索的状态
@@ -340,6 +340,11 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.endOptions = [searchData.end];
       this.start = searchData.start.p_id;
       this.end = searchData.end.p_id;
+    }
+
+    if (!environment.production) {
+      this.start = 'persona137502e5f2211e881f0005056c00008';
+      this.end = 'person8abbfaa65f2211e8afad005056c00008';
     }
 
     if (!this.start || !this.end) {
