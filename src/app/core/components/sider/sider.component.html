@@ -8,6 +8,7 @@
         <i class="icon arrow icon-down"></i>
       </span>
       <div class="content">
+        <div *ngIf="!personMenus.length">没有该人物信息</div>
         <ng-container *ngFor="let menu of personMenus">
           <ng-container *ngIf="menu&&menu['中文名']">
             <span class="person-info">

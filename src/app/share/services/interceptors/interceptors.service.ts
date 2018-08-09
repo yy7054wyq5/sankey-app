@@ -12,6 +12,9 @@ export class InterceptorsService implements HttpInterceptor {
   constructor(private _loading: LoadingService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (environment.production && !environment.apiHost) {
+      environment.apiHost = 'http://match.aimer.ai';
+    }
     this._loading.open();
     req.clone({ url: environment.apiHost + req.url });
     // console.log(req);

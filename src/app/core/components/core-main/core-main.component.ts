@@ -24,10 +24,10 @@ export class CoreMainComponent implements OnInit {
   initCore = true; // 初始状态
   person; // 侧栏任务信息
 
-  @ViewChild('searchBar') searchBar: SearchBarComponent;
+  @ViewChild('searchBar')
+  searchBar: SearchBarComponent;
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   /////////////////////////
 
@@ -147,7 +147,8 @@ export class CoreMainComponent implements OnInit {
    * @param {*} data
    * @memberof CoreMainComponent
    */
-  clickChartEvent(node) { // ChartEventCbParams
+  clickChartEvent(node) {
+    // ChartEventCbParams
     if (node.dataType === 'node' && node.data.id.indexOf('person') === 0) {
       const loadingId = this._showLoading();
       this._http
@@ -158,9 +159,11 @@ export class CoreMainComponent implements OnInit {
         })
         .subscribe(
           (res: any) => {
+            this._msg.remove(loadingId);
             if (!res.status && res.data) {
-              this._msg.remove(loadingId);
               this.person = res.data;
+            } else {
+              this.person = [];
             }
           },
           error => {
