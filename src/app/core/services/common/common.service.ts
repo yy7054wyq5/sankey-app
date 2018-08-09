@@ -68,11 +68,18 @@ export class CommonService {
   rebuildLinks(searchBar: SearchBarComponent, links: ChartLink[]): ChartLink[] {
     const start = searchBar.records.startAndEnd.start.p_id;
     const end = searchBar.records.startAndEnd.end.p_id;
-    const _tmp = [];
+    const _tmp: ChartLink[] = [];
 
     this.buildLinksToObjByNodeId(links).subscribe(_links => {
       const startSource = _links[start].sources;
       const startTargets = _links[start].tartgets;
+      startSource.forEach(id => {
+        _tmp.push({
+          source: start,
+          target: id,
+          value: 1
+        });
+      });
     });
     links.forEach(link => {});
     return [];
