@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ChartLink, QueryLinksData, ChartNode } from '../../../share/components/chart/chart.service';
+import { ChartLink, ChartNode } from '../../../share/components/chart/chart.service';
 import { Observable, of } from '../../../../../node_modules/rxjs';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { chartColorConfig } from '../../config';
+
+export interface QueryLinksData {
+  [id: string]: {
+    tartgets: string[];
+    sources: string[];
+  };
+}
 
 @Injectable()
 export class CommonService {
@@ -17,7 +24,7 @@ export class CommonService {
    * @param {string} highlightColor
    * @memberof CoreMainComponent
    */
-  private _setItemStyle(node: ChartNode, normalColor: string, highlightColor: string) {
+  private _setStyle(node: ChartNode, normalColor: string, highlightColor: string) {
     node.itemStyle = {};
     node.itemStyle.color = node.itemStyle.borderColor = normalColor;
     node.emphasis = {};
@@ -52,20 +59,33 @@ export class CommonService {
         } else {
           // do something
         }
-        this._setItemStyle(node, chartColorConfig[tag].bg, chartColorConfig[tag].hover);
+        this._setStyle(node, chartColorConfig[tag].bg, chartColorConfig[tag].hover);
       }
     });
     return of(nodes);
   }
 
+  rebuildLinks(searchBar: SearchBarComponent, links: ChartLink[]): ChartLink[] {
+    const start = searchBar.records.startAndEnd.start.p_id;
+    const end = searchBar.records.startAndEnd.end.p_id;
+    const _tmp = [];
+
+    this.buildLinksToObjByNodeId(links).subscribe(_links => {
+      const startSource = _links[start].sources;
+      const startTargets = _links[start].tartgets;
+    });
+    links.forEach(link => {});
+    return [];
+  }
+
   /**
-   * 将links重新组装以便查找路线
+   * 将links重新组装以便展示
    *
    * @param {ChartLink[]} links
    * @returns {Observable<QueryLinksData>}
    * @memberof ChartService
    */
-  buildQueryLinksData(links: ChartLink[]): Observable<QueryLinksData> {
+  buildLinksToObjByNodeId(links: ChartLink[]): Observable<QueryLinksData> {
     const tmp: QueryLinksData = {};
     links.forEach(link => {
       // 以source为key存入tartget

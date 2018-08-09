@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import * as echarts from 'echarts';
 import theme from './theme';
-import { ChartService, QueryLinksData, ChartNode, ChartEventCbParams } from './chart.service';
+import { ChartService, ChartNode, ChartEventCbParams } from './chart.service';
 
 enum FullStatus {
   yes = 'yes',
@@ -66,14 +66,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   unlistenDomParentResize: any; // 监听窗口大小变化事件
   clickedNode: ChartEventCbParams;
   nodes: ChartNode[] = [];
-
-  /**
-   * 用于点击节点高亮连线
-   *
-   * @type {QueryLinksData}
-   * @memberof ChartComponent
-   */
-  relation: QueryLinksData;
 
   get chartActived() {
     // 图表是否激活

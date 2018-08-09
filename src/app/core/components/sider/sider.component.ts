@@ -36,23 +36,6 @@ export class SiderComponent implements OnInit {
 
   ///////////////////////////////
 
-  private _cutDesc(data: string): { desc: string; works: string[] } {
-    const _desc = data.split('。');
-    const desc = [];
-    _desc.forEach((des: string, index: number) => {
-      if (index !== _desc.length - 1) {
-        desc.push(des);
-      }
-    });
-
-    console.log(_desc);
-
-    return {
-      desc: desc.join(',') + '。',
-      works: []
-    };
-  }
-
   /**
    * 点击历史搜索
    *

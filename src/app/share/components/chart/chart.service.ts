@@ -27,13 +27,6 @@ export interface ChartEventCbParams {
   color: string;
 }
 
-export interface QueryLinksData {
-  [id: string]: {
-    tartgets: string[];
-    sources: string[];
-  };
-}
-
 export interface ChartNode {
   name: string;
   id: any;
@@ -48,7 +41,7 @@ export interface ChartNode {
 export interface ChartLink {
   source: string;
   target: string;
-  value: string;
+  value: number;
 }
 
 @Injectable()
