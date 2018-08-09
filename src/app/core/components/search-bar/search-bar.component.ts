@@ -127,7 +127,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     const histories: SuccessSearchRecord[] = this._storge.get('histories');
     if (histories) {
-      this.records.data = JSON.parse(JSON.stringify(histories));
+      this.records.data = histories;
       this._synRecordsByStorages(histories);
     }
   }
@@ -250,10 +250,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private _synRecordsByStorages(data: SuccessSearchRecord[]) {
     data.forEach(item => {
-      if (!this.records.dataOnlyIds[item.start.id]) {
-        this.records.dataOnlyIds[item.start.id] = [item.end.id];
+      if (!this.records.dataOnlyIds[item.start.p_id]) {
+        this.records.dataOnlyIds[item.start.p_id] = [item.end.p_id];
       } else {
-        this.records.dataOnlyIds[item.start.id].push(item.end.id);
+        this.records.dataOnlyIds[item.start.p_id].push(item.end.p_id);
       }
     });
   }
@@ -267,8 +267,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private _updateRecords(): Observable<SuccessSearchRecord[]> {
     const data = Object.assign({}, this.records.startAndEnd);
-    const start = data.start.id;
-    const end = data.end.id;
+    const start = data.start.p_id;
+    const end = data.end.p_id;
     const recordsOnlyIds = this.records.dataOnlyIds;
     if (!recordsOnlyIds[start]) {
       this.records.dataOnlyIds[start] = [end];
@@ -322,6 +322,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   search(searchData?: SuccessSearchRecord) {
     if (searchData) {
+      // 避免将外部变量的索引传入；导致内部记录，跟随起点或重点的选中使记录同步变化的问题
       this.records.startAndEnd = JSON.parse(JSON.stringify(searchData));
       this.startOptions = [searchData.start];
       this.endOptions = [searchData.end];
