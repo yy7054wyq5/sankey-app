@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SuccessSearchRecord, SearchBarComponent } from '../search-bar/search-bar.component';
 import { NzModalService } from '../../../../../node_modules/ng-zorro-antd';
 
@@ -12,7 +12,7 @@ export class SiderComponent implements OnInit {
   userActived = false;
   historyActived = false;
   historyMenus: SuccessSearchRecord[] = [];
-  personMenus = {};
+  personMenus = [];
 
   @Input() searchBar: SearchBarComponent;
 
