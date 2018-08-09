@@ -67,9 +67,18 @@ app-search-bar {
       display: flex;
       padding: 0 1.010101rem;
       > span {
-        width: 33.33%;
+        width: 60%;
         display: block;
         overflow: hidden;
+        text-align: center;
+        &:first-child {
+          width: 20%;
+          text-align: left;
+        }
+        &:last-child {
+          width: 20%;
+          text-align: right;
+        }
       }
     }
   }

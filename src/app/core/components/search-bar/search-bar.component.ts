@@ -45,6 +45,14 @@ export interface SearchResult {
   };
 }
 
+export interface Option {
+  name: string;
+  company: string;
+  p_id: string;
+  role: string;
+  title: string;
+}
+
 /**
  * 内部记录有成功返回数据的起点和终点数据
  *
@@ -100,10 +108,14 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   records = new Record();
 
-  @Input() searchDelaytTime = 500;
-  @Output() outSearchResult = new EventEmitter<SearchResult>();
-  @Output() outSearchStatus = new EventEmitter<string>();
-  @Output() outSearchSuccessRecords = new EventEmitter<SuccessSearchRecord[]>();
+  @Input()
+  searchDelaytTime = 500;
+  @Output()
+  outSearchResult = new EventEmitter<SearchResult>();
+  @Output()
+  outSearchStatus = new EventEmitter<string>();
+  @Output()
+  outSearchSuccessRecords = new EventEmitter<SuccessSearchRecord[]>();
 
   tipsLeft = ['21rem', '59rem', '83rem'];
   tip: Element;
@@ -399,5 +411,16 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.end = value;
       this._moveTips(this.tipsLeft[2]);
     }
+  }
+
+  /**
+   * 返回option最后显示的值
+   *
+   * @param {Option} option
+   * @returns
+   * @memberof SearchBarComponent
+   */
+  lastOptionLable(option: Option) {
+    return option.title || option.role;
   }
 }
