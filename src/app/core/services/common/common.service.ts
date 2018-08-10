@@ -71,9 +71,16 @@ export class CommonService {
     const _tmp: ChartLink[] = [];
 
     this.buildLinksToObjByNodeId(links).subscribe(_links => {
-      const startSource = _links[start].sources;
-      const startTargets = _links[start].tartgets;
-      startSource.forEach(id => {
+      const source = _links[start].sources;
+      const targets = _links[start].tartgets;
+      source.forEach(id => {
+        _tmp.push({
+          source: start,
+          target: id,
+          value: 1
+        });
+      });
+      targets.forEach(id => {
         _tmp.push({
           source: start,
           target: id,

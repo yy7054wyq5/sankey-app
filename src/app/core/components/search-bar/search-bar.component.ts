@@ -83,7 +83,7 @@ class Record {
 }
 
 const searchPersonApi = '/api/web/Extract/extract';
-const searchRelationApi = '/api/web/Relation/relation';
+let searchRelationApi = '/api/web/Relation/relation';
 
 @Component({
   selector: 'app-search-bar',
@@ -343,8 +343,12 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (!environment.production) {
-      this.start = 'persona137502e5f2211e881f0005056c00008';
-      this.end = 'person8abbfaa65f2211e8afad005056c00008';
+      this.records.startAndEnd.start.p_id = this.start = 'persona137502e5f2211e881f0005056c00008';
+      this.records.startAndEnd.end.p_id = this.end = 'person8abbfaa65f2211e8afad005056c00008';
+    }
+
+    if (environment.useRelationJson) {
+      searchRelationApi = '/assets/mock/relation.json';
     }
 
     if (!this.start || !this.end) {

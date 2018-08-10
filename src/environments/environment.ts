@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   requestDelayTime: 500,
-  apiHost: ''
+  apiHost: '',
+  useRelationJson: false
 };
 
 /*
