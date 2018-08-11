@@ -45,6 +45,13 @@ export interface SearchResult {
   };
 }
 
+
+/**
+ * 起点终点返回的数据
+ *
+ * @export
+ * @interface Option
+ */
 export interface Option {
   name: string;
   company: string;
@@ -69,12 +76,16 @@ export interface SuccessSearchRecord {
  * @interface Record
  */
 class Record {
+  // 起点终点的完整数据
   startAndEnd: SuccessSearchRecord = {
     start: { p_id: '' },
     end: { p_id: '' }
   };
+  // 有成功返回的搜索历史
   data: SuccessSearchRecord[] = [];
+  // 记录起点和终点的id集合，以免重复存入记录
   dataOnlyIds: { [key: string]: string[] } = {};
+  // 清空记录的方法
   // prettier-ignore
   clear = () => {
     this.data = [];
@@ -92,14 +103,14 @@ let searchRelationApi = '/api/web/Relation/relation';
   encapsulation: ViewEncapsulation.None
 })
 export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
-  start: string;
-  end: string;
+  start: string; // 起点id
+  end: string; // 终点id
 
-  startLoading = false;
-  endLoading = false;
+  startLoading = false; // 起点下拉loading开关
+  endLoading = false; // 终点下拉loading开关
 
-  startOptions = [];
-  endOptions = [];
+  startOptions = []; // 起点下拉option数据
+  endOptions = []; // 终点下拉option数据
 
   /**
    * 外部以模板变量的方式获取内部变量
@@ -117,7 +128,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output()
   outSearchSuccessRecords = new EventEmitter<SuccessSearchRecord[]>();
 
+  // 引导提示的偏移值
   tipsLeft = ['21rem', '59rem', '83rem'];
+  // 提示
   tip: Element;
   errorBakData: SearchResult = {
     code: 0,
@@ -394,7 +407,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
-   * 获取起点和终点的完整数据
+   * 更新起点和终点的完整数据
    *
    * @param {*} data
    * @param {string} tag

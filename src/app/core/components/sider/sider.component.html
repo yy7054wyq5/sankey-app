@@ -7,7 +7,8 @@
         <i class="icon arrow icon-right"></i>
         <i class="icon arrow icon-down"></i>
       </span>
-      <div class="content">
+      <div *ngIf="!personMenus.length" style="text-align: center;">没有相关信息</div>
+      <div *ngIf="personMenus.length" class="content">
         <ng-container *ngFor="let menu of personMenus">
           <ng-container *ngIf="menu&&menu['中文名']">
             <span class="person-info">

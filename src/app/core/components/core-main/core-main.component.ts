@@ -21,7 +21,7 @@ export class CoreMainComponent implements OnInit {
   option: any; // 图表配置项
   colorBar = chartColorConfig;
   initCore = true; // 初始状态
-  person; // 侧栏任务信息
+  person = []; // 侧栏任务信息
 
   @ViewChild('searchBar')
   searchBar: SearchBarComponent;

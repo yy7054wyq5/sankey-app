@@ -8,20 +8,23 @@ import { NzModalService } from '../../../../../node_modules/ng-zorro-antd';
   styleUrls: ['./sider.component.less']
 })
 export class SiderComponent implements OnInit {
-  open = false;
+  // 控制个人信息展开或关闭
   userActived = false;
+  // 消息历史展开或关闭
   historyActived = false;
+  // 消息历史菜单
   historyMenus: SuccessSearchRecord[] = [];
+  // 任务信心菜单
   personMenus = [];
 
+  // 搜索栏组件
   @Input() searchBar: SearchBarComponent;
 
   @Input()
-  set person(data: any) {
+  set person(data: any[]) {
     this.personMenus = data;
-    if (data) {
+    if (data.length) {
       this.userActived = true;
-      // this._cutDesc(data['描述']);
     }
   }
 
