@@ -19,3 +19,30 @@
 |(efullStatus)|boolean|无|图表全屏状态|
 |(emouseover)|EventEmitter|无|鼠标经过图表事件回调|
 |(eclick)|EventEmitter|无|鼠标点击事件回调|
+
+### [CheckNodeComponent](./components/check-node/check-node.component.ts)
+
+|参数|类型|默认值|说明|
+|--|--|--|--|
+|[nodes]|ChartNode[]|[]|节点集合|
+|(outCheckedNodes)|EventEmitter<ChartNode[]>|无|去掉隐藏的节点集合|
+
+### [ErrorComponent](./components/error/error.component.ts): 错误页或404页
+
+### [LayoutComponent](./components/layout/layout.component.ts): 项目结构
+
+## pipes
+
+### [SafeHtmlPipe](./pipes/safe-html/safe-html.pipe.ts): 信任html的管道
+
+## services
+
+### [InterceptorsService](./services/interceptors/interceptors.service.ts): 用于拦截请求或相应
+
+### [LoadingService](./services/loading/loading.service.ts): 请求时的全屏遮罩
+
+### [RemService](./services/rem/rem.service.ts): 常用语移动端的布局方案，这里用于PC响应式布局
+
+### [StorageService](./services/storage/storage.service.ts): localStorage的封装
+
+### [UtilsService](./services/utils/utils.service.ts): 工具方法函数集合，暂无
