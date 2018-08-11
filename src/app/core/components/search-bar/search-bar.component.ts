@@ -348,7 +348,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (environment.useRelationJson) {
-      searchRelationApi = '/assets/mock/relation.json';
+      searchRelationApi = '/assets/mock/relation-right.json';
     }
 
     if (!this.start || !this.end) {
