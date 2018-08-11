@@ -37,8 +37,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   @Input()
   eheight: string;
   @Input()
-  eloading: boolean;
-  @Input()
   efullParentClassName: string;
   @Input()
   echeckPoints = true;
@@ -238,7 +236,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       this.chartInstance.setOption(this.eoption);
       // 显隐数据
       this.nodes = this.eoption.series[0].data;
-      this.eloading = false;
     });
     if (!this.bindedEvent) {
       this._bindEvent();
