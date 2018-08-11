@@ -18,12 +18,12 @@
 |文件名|说明|
 |--|--|
 |app|项目源码|
-|--core|核心模块|
+|--core|核心模块，在此扩展核心功能|
 |----components|组件|
 |----services|服务|
 |----config|图表配置|
 |--home|首页|
-|--share|共享模块|
+|--share|共享模块，在此扩展全局共享功能|
 |----components|组件|
 |----pipes|管道|
 |----services|服务|
