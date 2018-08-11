@@ -70,6 +70,7 @@ export class CommonService {
     return arr.indexOf(item) > -1;
   }
 
+  // no used
   private _deleteIdInObjTypeLinksData(id: string, startId: string, olinks: ObjTypeLinksData, tag: string = 'source'): ObjTypeLinksData {
     let index: number;
     try {
@@ -92,6 +93,7 @@ export class CommonService {
     return this._deleteIdInObjTypeLinksData(id, startId, olinks, 'target');
   }
 
+  // no used
   private _rebuildLinksStartToEnd(startId: string, olinks: ObjTypeLinksData, results?: ChartLink[]): ChartLink[] {
     const _tmp = results || [];
     const { targets, sources } = olinks[startId];
@@ -115,6 +117,7 @@ export class CommonService {
     return _tmp;
   }
 
+  // no used
   rebuildLinks(start: string, end: string, links: ChartLink[]): Observable<ChartLink[]> {
     return this.buildLinksToObjByNodeId(links).pipe(
       mergeMap(_links => {

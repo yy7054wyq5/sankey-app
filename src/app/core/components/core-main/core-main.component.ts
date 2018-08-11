@@ -71,8 +71,6 @@ export class CoreMainComponent implements OnInit {
       this._common.setNodesStyle(this.searchBar, res.data.nodes).subscribe(nodes => {
         _chartConfig.series[0].data = nodes;
         _chartConfig.series[0].links = res.data.links;
-        const startId = this.searchBar.records.startAndEnd.start.p_id;
-        const endId = this.searchBar.records.startAndEnd.end.p_id;
         this.option = Object.assign({}, _chartConfig);
         this._msg.remove(this.loadingId);
       });
