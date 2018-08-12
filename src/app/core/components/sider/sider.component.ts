@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SuccessSearchRecord, SearchBarComponent } from '../search-bar/search-bar.component';
 import { NzModalService } from '../../../../../node_modules/ng-zorro-antd';
 
@@ -8,6 +8,7 @@ import { NzModalService } from '../../../../../node_modules/ng-zorro-antd';
   styleUrls: ['./sider.component.less']
 })
 export class SiderComponent implements OnInit {
+  fold = false;
   // 控制个人信息展开或关闭
   userActived = false;
   // 消息历史展开或关闭
@@ -18,7 +19,8 @@ export class SiderComponent implements OnInit {
   personMenus = [];
 
   // 搜索栏组件
-  @Input() searchBar: SearchBarComponent;
+  @Input()
+  searchBar: SearchBarComponent;
 
   @Input()
   set person(data: any[]) {
@@ -33,11 +35,24 @@ export class SiderComponent implements OnInit {
     this.historyMenus = data;
   }
 
+  @Output()
+  outFoldStatus = new EventEmitter<boolean>();
+
   constructor(private _modal: NzModalService) {}
 
   ngOnInit() {}
 
   ///////////////////////////////
+
+  /**
+   * 菜单展开收起
+   *
+   * @memberof SiderComponent
+   */
+  folder() {
+    this.fold = !this.fold;
+    this.outFoldStatus.emit(this.fold);
+  }
 
   /**
    * 点击历史搜索

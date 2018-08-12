@@ -7,6 +7,18 @@ aside {
   width: 14.646465rem;
   padding-right: 1rem;
   background: transparent;
+  .fold-bar {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    > i.anticon {
+      font-size: 1.2rem;
+    }
+  }
+  &.fold {
+    width: 35rem;
+  }
   i.icon {
     .icon-mixin;
     &.arrow {

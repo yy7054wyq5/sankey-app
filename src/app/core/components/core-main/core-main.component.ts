@@ -4,6 +4,7 @@ import { CommonService } from '../../services/common/common.service';
 import { SearchResult, SearchStatus, SearchBarComponent } from '../search-bar/search-bar.component';
 import { NzMessageService } from 'ng-zorro-antd';
 import { HttpClient } from '../../../../../node_modules/@angular/common/http';
+import { ChartComponent } from '../../../share/components/chart/chart.component';
 
 const searchPersonDetailApi = '/api/web/Detail/detail';
 
@@ -25,10 +26,24 @@ export class CoreMainComponent implements OnInit {
 
   @ViewChild('searchBar')
   searchBar: SearchBarComponent;
+  @ViewChild('chart')
+  chart: ChartComponent;
 
   ngOnInit() {}
 
   /////////////////////////
+
+  /**
+   * 侧栏展开状态
+   *
+   * @param {*} bool
+   * @memberof CoreMainComponent
+   */
+  siderFoldStatus(isFold) {
+    if (this.chart) {
+      this.chart.mustResize();
+    }
+  }
 
   /**
    * loading效果

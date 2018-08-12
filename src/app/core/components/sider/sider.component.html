@@ -1,4 +1,10 @@
-<aside>
+<aside [class.fold]="fold">
+  <div class="fold-bar" (click)="folder()">
+    <span *ngIf="!fold">展开</span>
+    <span *ngIf="fold">收起</span>
+    &nbsp;
+    <i class="anticon" [class.anticon-menu-unfold]="!fold" [class.anticon-menu-fold]="fold"></i>
+  </div>
   <ul nz-menu [nzSelectable]="false">
     <li class="user-info" nz-menu-item [class.ant-menu-item-selected]="userActived">
       <span class="menu-info" (click)="userActived=!userActived">

@@ -151,6 +151,13 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     this._resizeChart();
   }
 
+  public mustResize() {
+    setTimeout(() => {
+      const ev = new Event('resize', { bubbles: true, cancelable: false });
+      window.dispatchEvent(ev);
+    }, 1);
+  }
+
   /**
    * 改变全屏样式
    *
@@ -215,7 +222,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     if (this.chartInstance) {
       this.clickedNode = null;
       this.chartInstance.dispose();
-      this._setChartWH(this.chartDom, '0px', '0px');
     }
   }
 
