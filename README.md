@@ -11,6 +11,9 @@
 ## 第三方说明
 
 * [ng-zorro-antd](https://ng-zorro.github.io/docs/getting-started/zh): UI库
+
+> 注意：在theme.less中配置了本地的UI字体路径，若UI升级了需注意是否变更并更新路径
+
 * [echarts](http://echarts.baidu.com/): 图表插件
 
 ## 项目结构说明，src内

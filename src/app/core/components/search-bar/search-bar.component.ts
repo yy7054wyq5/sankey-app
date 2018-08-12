@@ -45,7 +45,6 @@ export interface SearchResult {
   };
 }
 
-
 /**
  * 起点终点返回的数据
  *
@@ -119,12 +118,35 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   records = new Record();
 
+  /**
+   * 搜索延迟时间
+   *
+   * @memberof SearchBarComponent
+   */
   @Input()
   searchDelaytTime = 500;
+
+  /**
+   * 传出搜索结果
+   *
+   * @memberof SearchBarComponent
+   */
   @Output()
   outSearchResult = new EventEmitter<SearchResult>();
+
+  /**
+   * 传出搜索状态
+   *
+   * @memberof SearchBarComponent
+   */
   @Output()
   outSearchStatus = new EventEmitter<string>();
+
+  /**
+   * 传出搜索成功的记录
+   *
+   * @memberof SearchBarComponent
+   */
   @Output()
   outSearchSuccessRecords = new EventEmitter<SuccessSearchRecord[]>();
 
@@ -355,10 +377,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.end = searchData.end.p_id;
     }
 
-    if (!environment.production) {
-      this.records.startAndEnd.start.p_id = this.start = 'persona137502e5f2211e881f0005056c00008';
-      this.records.startAndEnd.end.p_id = this.end = 'person8abbfaa65f2211e8afad005056c00008';
-    }
+    // if (!environment.production) {
+    //   this.records.startAndEnd.start.p_id = this.start = 'persona137502e5f2211e881f0005056c00008';
+    //   this.records.startAndEnd.end.p_id = this.end = 'person8abbfaa65f2211e8afad005056c00008';
+    // }
 
     if (environment.useRelationJson) {
       searchRelationApi = '/assets/mock/relation-right.json';
