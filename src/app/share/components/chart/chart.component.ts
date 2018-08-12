@@ -152,6 +152,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   }
 
   public mustResize() {
+    // https://developer.mozilla.org/zh-CN/docs/Web/API/Event/Event
     setTimeout(() => {
       const ev = new Event('resize', { bubbles: true, cancelable: false });
       window.dispatchEvent(ev);
