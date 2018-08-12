@@ -33,11 +33,11 @@
 |assets|图片和json|
 |environments|环境变量|
 |less|基础样式和mixin样式|
-|theme.less|UI主题颜色配置|
+|theme.less|UI主题配置|
 
 ## 开发说明
 
 * npm install 安装项目依赖
 * npm start 开启本地开发
 * npm run prod 生产打包
-* proxy.conf.json为本地开发时配置请求代理的文件
+* proxy.conf.json 为本地开发时配置请求代理的文件

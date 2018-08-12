@@ -4,7 +4,7 @@
 
 ### [ChartComponent](./components/chart/chart.component.ts): 图表组件
 
-> 单独有个ChartService，以便后期扩展，目前包含类型定义
+> 单独有个ChartService，以便后期扩展，目前包含类型定义；图表可以依据传入的高宽来设置固定大小，不传入高宽则依据父级的高宽自动布局
 
 * 参数说明
 
@@ -25,7 +25,7 @@
 |参数|类型|默认值|说明|
 |--|--|--|--|
 |[nodes]|ChartNode[]|[]|节点集合|
-|(outCheckedNodes)|EventEmitter<ChartNode[]>|无|去掉隐藏的节点集合|
+|(outCheckedNodes)|EventEmitter<ChartNode[]>|无|去掉隐藏后的节点集合|
 
 ### [ErrorComponent](./components/error/error.component.ts): 错误页或404页
 
@@ -41,7 +41,7 @@
 
 ### [LoadingService](./services/loading/loading.service.ts): 请求时的全屏遮罩
 
-### [RemService](./services/rem/rem.service.ts): 常用语移动端的布局方案，这里用于PC响应式布局
+### [RemService](./services/rem/rem.service.ts): 常用于移动端的布局方案，这里用于PC响应式布局
 
 ### [StorageService](./services/storage/storage.service.ts): localStorage的封装
 

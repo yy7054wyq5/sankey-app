@@ -97,7 +97,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     }, 1);
 
     // 监听窗口变化
-    this.unlistenDomParentResize = this._renderer.listen('window', 'resize', () => {
+    this.unlistenDomParentResize = this._renderer.listen(window, 'resize', () => {
       this._resizeChart();
     });
   }
