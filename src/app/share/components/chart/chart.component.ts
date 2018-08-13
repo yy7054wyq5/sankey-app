@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import * as echarts from 'echarts';
 import theme from './theme';
-import { ChartService, ChartNode, ChartEventCbParams } from './chart.service';
+import { ChartService, ChartNode, ChartEventCbParams, ChartLink } from './chart.service';
 
 enum FullStatus {
   yes = 'yes',
@@ -39,8 +39,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   @Input()
   efullParentClassName: string;
   @Input()
-  echeckPoints = true;
-  @Input()
   eoption: any; // http://echarts.baidu.com/option.html
   @Output()
   efullStatus = new EventEmitter<boolean>();
@@ -63,7 +61,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   bindedEvent: boolean; // 是否已绑定事件
   unlistenDomParentResize: any; // 监听窗口大小变化事件
   clickedNode: ChartEventCbParams;
-  nodes: ChartNode[] = [];
 
   get chartActived() {
     // 图表是否激活
@@ -110,18 +107,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   }
 
   /////////////////////////////////////////////////
-
-  /**
-   * 从节点下拉框返回的已选中节点数据
-   *
-   * @param {ChartNode[]} activedNodes
-   * @memberof ChartComponent
-   */
-  getCheckedNodes(activedNodes: ChartNode[]) {
-    this.eoption.series[0].data = activedNodes;
-    this.chartInstance.setOption(this.eoption);
-  }
-
   /**
    * 设置样式
    *
@@ -241,8 +226,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     this._zone.runOutsideAngular(() => {
       this.chartInstance = echarts.init(_chartDom, 'sn');
       this.chartInstance.setOption(this.eoption);
-      // 显隐数据
-      this.nodes = this.eoption.series[0].data;
     });
     if (!this.bindedEvent) {
       this._bindEvent();

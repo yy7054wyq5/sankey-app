@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { chartOption, chartColorConfig } from '../../config';
-import { CommonService } from '../../services/common/common.service';
+import { CommonService, ObjTypeLinksData } from '../../services/common/common.service';
 import { SearchResult, SearchStatus, SearchBarComponent } from '../search-bar/search-bar.component';
 import { NzMessageService } from 'ng-zorro-antd';
 import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 import { ChartComponent } from '../../../share/components/chart/chart.component';
+import { ChartNode, ChartLink } from '../../../share/components/chart/chart.service';
 
 const searchPersonDetailApi = '/api/web/Detail/detail';
 
@@ -23,6 +24,8 @@ export class CoreMainComponent implements OnInit {
   colorBar = chartColorConfig;
   initCore = true; // 初始状态
   person = []; // 侧栏任务信息
+  nodes: ChartNode[] = [];
+  links: ChartLink[] = [];
 
   @ViewChild('searchBar')
   searchBar: SearchBarComponent;
@@ -32,6 +35,42 @@ export class CoreMainComponent implements OnInit {
   ngOnInit() {}
 
   /////////////////////////
+
+  /**
+   * 获取可隐藏的点
+   *
+   * @private
+   * @param {ChartLink[]} links
+   * @param {ChartNode[]} nodes
+   * @memberof CoreMainComponent
+   */
+  private _buildCanHiddenNodes(links: ChartLink[], nodes: ChartNode[], cb: Function) {
+    this._common.buildLinksToObjByNodeId(links).subscribe((_newLinks: ObjTypeLinksData) => {
+      const startId = this.searchBar.records.startAndEnd.start.p_id;
+      const startTargets = _newLinks[startId].targets;
+      for (let idx = 0; idx < nodes.length; idx++) {
+        const node = nodes[idx];
+        const index = startTargets.indexOf(node.id);
+        if (index > -1) {
+          node.canHidden = true; // 添加可隐藏标记
+          if (index === startTargets.length - 1) {
+            cb();
+            return;
+          }
+        }
+      }
+    });
+  }
+
+  /**
+   * 从节点下拉框返回的已选中节点数据
+   *
+   * @param {ChartNode[]} activedNodes
+   * @memberof ChartComponent
+   */
+  getCheckedNodes(notHiddenNodes: ChartNode[]) {
+    this._setChartOption(notHiddenNodes, this.links);
+  }
 
   /**
    * 侧栏展开状态
@@ -59,6 +98,21 @@ export class CoreMainComponent implements OnInit {
   }
 
   /**
+   * 配置图表
+   *
+   * @private
+   * @param {ChartNode[]} nodes
+   * @param {ChartLink[]} links
+   * @memberof CoreMainComponent
+   */
+  private _setChartOption(nodes: ChartNode[], links: ChartLink[]) {
+    const _chartConfig = chartOption;
+    _chartConfig.series[0].data = nodes;
+    _chartConfig.series[0].links = links;
+    this.option = Object.assign({}, _chartConfig);
+  }
+
+  /**
    * 根据搜索状态展示loading
    *
    * @param {SearchStatus} status
@@ -67,8 +121,6 @@ export class CoreMainComponent implements OnInit {
   getSearchStatus(status: SearchStatus) {
     if (status === SearchStatus.pending) {
       this.loadingId = this._showLoading();
-    } else {
-      this._msg.remove(this.loadingId);
     }
   }
 
@@ -82,12 +134,13 @@ export class CoreMainComponent implements OnInit {
     // console.log(res);
     this.initCore = false;
     if (!res.code && res.data && res.data.links.length && res.data.nodes.length) {
-      const _chartConfig = chartOption;
       this._common.setNodesStyle(this.searchBar, res.data.nodes).subscribe(nodes => {
-        _chartConfig.series[0].data = nodes;
-        _chartConfig.series[0].links = res.data.links;
-        this.option = Object.assign({}, _chartConfig);
-        this._msg.remove(this.loadingId);
+        this._setChartOption(nodes, res.data.links);
+        this.nodes = nodes;
+        this.links = res.data.links;
+        this._buildCanHiddenNodes(res.data.links, nodes, () => {
+          this._msg.remove(this.loadingId);
+        });
       });
     } else {
       this._msg.remove(this.loadingId);

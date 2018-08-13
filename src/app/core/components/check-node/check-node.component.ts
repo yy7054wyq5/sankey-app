@@ -1,6 +1,19 @@
-import { Component, OnInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { ChartNode } from '../chart/chart.service';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewEncapsulation,
+  OnChanges,
+  SimpleChanges,
+  Output,
+  EventEmitter,
+  AfterViewInit,
+  ElementRef,
+  Renderer2
+} from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { ChartNode } from '../../../share/components/chart/chart.service';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 interface UInodes {
   persons: ChartNode[];
@@ -18,15 +31,23 @@ enum Tag {
   styleUrls: ['./check-node.component.less'],
   encapsulation: ViewEncapsulation.None
 })
-export class CheckNodeComponent implements OnInit, OnChanges {
+export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   show: boolean;
   pointsTag = 'organization';
   uiNodes: UInodes;
 
-  @Input() nodes: ChartNode[];
-  @Output() outCheckedNodes = new EventEmitter<ChartNode[]>();
+  @Input()
+  top: number;
+  @Input()
+  right: number;
+  @Input()
+  searchBar: SearchBarComponent;
+  @Input()
+  nodes: ChartNode[] = [];
+  @Output()
+  outCheckedNodes = new EventEmitter<ChartNode[]>();
 
-  constructor() {}
+  constructor(private _element: ElementRef, private _render: Renderer2) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes && !changes.nodes.isFirstChange()) {
@@ -39,8 +60,11 @@ export class CheckNodeComponent implements OnInit, OnChanges {
     this._creatData(this.nodes).subscribe(data => (this.uiNodes = data));
   }
 
-  ////////////////////////////////////
+  ngAfterViewInit() {
+    this._render.setAttribute(this._element.nativeElement, 'style', `top: ${this.top}rem;right: ${this.right}rem; position: absolute;`);
+  }
 
+  ////////////////////////////////////
   /**
    * 创建下拉数据
    *

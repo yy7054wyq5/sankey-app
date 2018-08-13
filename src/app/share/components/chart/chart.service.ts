@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
 
 export interface ChartEventCbParams {
   // 当前点击的图形元素所属的组件名称，
@@ -30,6 +29,7 @@ export interface ChartEventCbParams {
 export interface ChartNode {
   name: string;
   id: any;
+  canHidden?: boolean;
   date?: string;
   node: any;
   actived?: boolean; // 用于选中

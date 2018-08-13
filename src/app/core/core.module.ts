@@ -6,11 +6,12 @@ import { ShareModule } from '../share/share.module';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FormsModule } from '@angular/forms';
 import { SiderComponent } from './components/sider/sider.component';
+import { CheckNodeComponent } from './components/check-node/check-node.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ShareModule, NgZorroAntdModule],
   exports: [CoreMainComponent],
-  declarations: [CoreMainComponent, SearchBarComponent, SiderComponent],
+  declarations: [CoreMainComponent, SearchBarComponent, SiderComponent, CheckNodeComponent],
   providers: []
 })
 export class CoreModule {}

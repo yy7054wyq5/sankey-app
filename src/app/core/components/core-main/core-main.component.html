@@ -17,7 +17,10 @@
         <p style="margin-left: -1rem;">未找到合适信息哦</p>
       </div>
       <!-- 图表 -->
-      <app-chart #chart *ngIf="option" [eoption]="option" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)"></app-chart>
+      <app-chart #chart *ngIf="option" [eoption]="option" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)">
+        <!-- 选择隐藏节点 -->
+        <app-check-node *ngIf="nodes" [top]="1.262626" [right]="2.525253" [nodes]="nodes" (outCheckedNodes)="getCheckedNodes($event)"></app-check-node>
+      </app-chart>
       <div class="hack" style="height: .606061rem"></div>
       <!-- 颜色盘 -->
       <ul class="chart-color-bar">
