@@ -26,3 +26,14 @@
 |[searchBar]|无|SearchBarComponent|
 |[person]|[]|人物信息数据，使用setter比较方便的接收数据|
 |[histories]|[]|历史记录，使用setter比较方便的接收数据|
+
+### [CheckNodeComponent](./components/check-node/check-node.component.ts)
+
+> 在页面中，实际上是将该组件置于图表组件中；默认的将该组件绝对定位于图表组件中，所以需要设置top和right值
+
+|参数|类型|默认值|说明|
+|--|--|--|--|
+|[top]|number|无|单位rem|
+|[right]|number|无|单位rem|
+|[nodes]|ChartNode[]|[]|图表所有节点集合，只是带上了是否可以隐藏的tag|
+|(outCheckedNodes)|EventEmitter<ChartNode[]>|无|去掉隐藏后的节点集合|

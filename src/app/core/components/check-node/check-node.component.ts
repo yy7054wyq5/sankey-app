@@ -13,13 +13,23 @@ import {
 } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ChartNode } from '../../../share/components/chart/chart.service';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
 
+/**
+ * 页面展示用数据结构
+ *
+ * @interface UInodes
+ */
 interface UInodes {
   persons: ChartNode[];
   cases: ChartNode[];
   organizations: ChartNode[];
 }
+
+/**
+ * 可显示隐藏的节点tag
+ *
+ * @enum {number}
+ */
 enum Tag {
   case = 'case',
   organization = 'organization'
@@ -32,20 +42,24 @@ enum Tag {
   encapsulation: ViewEncapsulation.None
 })
 export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
-  show: boolean;
-  pointsTag = 'organization';
-  uiNodes: UInodes;
+  show: boolean; // 控制下拉是否显示
+  pointsTag = 'organization'; // 下拉公司与事件的切换
+  uiNodes: UInodes; // 下拉显示的各节点数据
 
   @Input()
   top: number;
   @Input()
   right: number;
   @Input()
-  searchBar: SearchBarComponent;
-  @Input()
-  nodes: ChartNode[] = [];
+  nodes: ChartNode[] = []; // 图表所有节点集合，只是带上了是否可以隐藏的tag
+
+  /**
+   * 返回了隐藏的点和需要显示的点，实际上外部只用了隐藏的点，这里保留为了以后作钩子
+   *
+   * @memberof CheckNodeComponent
+   */
   @Output()
-  outCheckedNodes = new EventEmitter<{ out: ChartNode[]; hidden: ChartNode[] }>();
+  outCheckedNodes = new EventEmitter<{ out: string[]; hidden: string[] }>();
 
   constructor(private _element: ElementRef, private _render: Renderer2) {}
 
@@ -61,6 +75,7 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // 定位下拉框
     this._render.setAttribute(this._element.nativeElement, 'style', `top: ${this.top}rem;right: ${this.right}rem; position: absolute;`);
   }
 
@@ -107,12 +122,11 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
     const hidden = [];
     tmp.forEach(node => {
       if (node.actived) {
-        out.push(node);
+        out.push(node.id);
       } else {
         hidden.push(node.id);
       }
     });
-    console.log(out);
     this.outCheckedNodes.emit({
       out,
       hidden

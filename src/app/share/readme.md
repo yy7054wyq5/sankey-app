@@ -14,18 +14,10 @@
 |[ewidth]|number|无|图表固定宽度，可以不设|
 |[eheight]|number|无|图表固定高度，可以不设|
 |[efullParentClassName]|string|无|图标全屏时的父级，全屏功能必须|
-|[echeckPoints]|boolean|true|是否启用选择节点功能，就是图表右上的下拉框|
 |[eoption]|any|无|图表配置|
 |(efullStatus)|boolean|无|图表全屏状态|
 |(emouseover)|EventEmitter|无|鼠标经过图表事件回调|
 |(eclick)|EventEmitter|无|鼠标点击事件回调|
-
-### [CheckNodeComponent](./components/check-node/check-node.component.ts)
-
-|参数|类型|默认值|说明|
-|--|--|--|--|
-|[nodes]|ChartNode[]|[]|节点集合|
-|(outCheckedNodes)|EventEmitter<ChartNode[]>|无|去掉隐藏后的节点集合|
 
 ### [ErrorComponent](./components/error/error.component.ts): 错误页或404页
 

@@ -4,6 +4,12 @@ import { Observable, of } from '../../../../../node_modules/rxjs';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { chartColorConfig } from '../../config';
 
+/**
+ * 为隐藏点准备的数据结构，由buildLinksToObjByNodeId函数生成
+ *
+ * @export
+ * @interface ObjTypeLinksData
+ */
 export interface ObjTypeLinksData {
   [id: string]: {
     targets: string[];
@@ -65,12 +71,20 @@ export class CommonService {
     return of(nodes);
   }
 
-  hasPusedInArr(item: string, arr: string[]) {
+  /**
+   * 是否已推进数组中
+   *
+   * @param {string} item
+   * @param {string[]} arr
+   * @returns {boolean}
+   * @memberof CommonService
+   */
+  hasPusedInArr(item: string, arr: string[]): boolean {
     return arr.indexOf(item) > -1;
   }
 
   /**
-   * 将links重新组装以便展示
+   * 将links重新组装以便展示；隐藏点操作的前置数据准备函数
    *
    * @param {ChartLink[]} links
    * @returns {Observable<ObjTypeLinksData>}
@@ -103,24 +117,34 @@ export class CommonService {
     return of(tmp);
   }
 
+  /**
+   * 获取隐藏点对应的一条线上的点
+   *
+   * @param {string[]} ids
+   * @param {ObjTypeLinksData} objTypeLinksData
+   * @param {string[]} [data]
+   * @returns {string[]}
+   * @memberof CommonService
+   */
   getHiddenNodesInLine(ids: string[], objTypeLinksData: ObjTypeLinksData, data?: string[]): string[] {
     const hiddenNodesInLine = data || [];
-    if (ids.length === 1) {
-      if (!this.hasPusedInArr(ids[0], hiddenNodesInLine)) {
-        hiddenNodesInLine.push(ids[0]);
-      }
-    }
     for (let index = 0; index < ids.length; index++) {
       const id = ids[index];
-      const targets = objTypeLinksData[id].targets;
+      const targets = objTypeLinksData[id].targets; // 该点的所有目标点
       if (targets.length > 1) {
         for (let idx = 0; idx < targets.length; idx++) {
           const target = targets[idx];
+          // 若目标点只对应了一个源点
           if (objTypeLinksData[target].sources.length === 1) {
             if (!this.hasPusedInArr(target, hiddenNodesInLine)) {
               hiddenNodesInLine.push(target);
             }
           }
+        }
+      } else {
+        // 若该点只有一个目标点
+        if (!this.hasPusedInArr(id, hiddenNodesInLine)) {
+          hiddenNodesInLine.push(id);
         }
       }
       this.getHiddenNodesInLine(targets, objTypeLinksData, hiddenNodesInLine);
