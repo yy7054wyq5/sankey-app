@@ -37,3 +37,7 @@
 |[right]|number|无|单位rem|
 |[nodes]|ChartNode[]|[]|图表所有节点集合，只是带上了是否可以隐藏的tag|
 |(outCheckedNodes)|EventEmitter<ChartNode[]>|无|去掉隐藏后的节点集合|
+
+## services
+
+### [CommonService](./services/common/common.service.ts): 内部含有核心方法
