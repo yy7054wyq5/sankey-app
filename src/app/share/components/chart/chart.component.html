@@ -3,7 +3,7 @@
 <div class="chart"></div>
 <div class="point-info" [class.no-boder]="!UI_nodeDetail.show">
   <ng-container *ngIf="UI_nodeDetail.show">
-    <h3>{{UI_nodeDetail.date}}</h3>
+    <h3>{{UI_nodeDetail.date}}--{{UI_nodeDetail.id}}</h3>
     <p>{{UI_nodeDetail.txt}}</p>
   </ng-container>
 </div>

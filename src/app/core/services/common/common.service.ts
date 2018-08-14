@@ -65,7 +65,7 @@ export class CommonService {
     return of(nodes);
   }
 
-  private _hasPusedInArr(item: string, arr: string[]) {
+  hasPusedInArr(item: string, arr: string[]) {
     return arr.indexOf(item) > -1;
   }
 
@@ -86,7 +86,7 @@ export class CommonService {
           sources: []
         };
       }
-      if (!this._hasPusedInArr(link.target, tmp[link.source].targets)) {
+      if (!this.hasPusedInArr(link.target, tmp[link.source].targets)) {
         tmp[link.source].targets.push(link.target);
       }
       // 以target为key存入source
@@ -96,11 +96,35 @@ export class CommonService {
           sources: []
         };
       }
-      if (!this._hasPusedInArr(link.source, tmp[link.target].sources)) {
+      if (!this.hasPusedInArr(link.source, tmp[link.target].sources)) {
         tmp[link.target].sources.push(link.source);
       }
     });
     return of(tmp);
   }
 
+  getHiddenNodesInLine(ids: string[], objTypeLinksData: ObjTypeLinksData, data?: string[]): string[] {
+    const hiddenNodesInLine = data || [];
+    if (ids.length === 1) {
+      if (!this.hasPusedInArr(ids[0], hiddenNodesInLine)) {
+        hiddenNodesInLine.push(ids[0]);
+      }
+    }
+    for (let index = 0; index < ids.length; index++) {
+      const id = ids[index];
+      const targets = objTypeLinksData[id].targets;
+      if (targets.length > 1) {
+        for (let idx = 0; idx < targets.length; idx++) {
+          const target = targets[idx];
+          if (objTypeLinksData[target].sources.length === 1) {
+            if (!this.hasPusedInArr(target, hiddenNodesInLine)) {
+              hiddenNodesInLine.push(target);
+            }
+          }
+        }
+      }
+      this.getHiddenNodesInLine(targets, objTypeLinksData, hiddenNodesInLine);
+    }
+    return hiddenNodesInLine;
+  }
 }

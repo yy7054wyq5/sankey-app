@@ -52,7 +52,8 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   UI_nodeDetail = {
     show: false,
     date: '',
-    txt: ''
+    txt: '',
+    id: ''
   };
   fullStatus = FullStatus.no; // yes为全屏
   chartDom: Element; // 图表结构
@@ -268,7 +269,8 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       this.UI_nodeDetail = {
         show: true,
         date: params.data.date,
-        txt: params.data.name
+        txt: params.data.name,
+        id: params.data.id
       };
     });
   }

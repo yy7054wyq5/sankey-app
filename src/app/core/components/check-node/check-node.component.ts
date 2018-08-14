@@ -45,7 +45,7 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   @Input()
   nodes: ChartNode[] = [];
   @Output()
-  outCheckedNodes = new EventEmitter<ChartNode[]>();
+  outCheckedNodes = new EventEmitter<{ out: ChartNode[]; hidden: ChartNode[] }>();
 
   constructor(private _element: ElementRef, private _render: Renderer2) {}
 
@@ -104,13 +104,19 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
     chartNode.actived = !chartNode.actived;
     const tmp = [...this.uiNodes.cases, ...this.uiNodes.organizations, ...this.uiNodes.persons];
     const out = [];
+    const hidden = [];
     tmp.forEach(node => {
       if (node.actived) {
         out.push(node);
+      } else {
+        hidden.push(node.id);
       }
     });
     console.log(out);
-    this.outCheckedNodes.emit(out);
+    this.outCheckedNodes.emit({
+      out,
+      hidden
+    });
   }
 
   showItems(tag: string) {

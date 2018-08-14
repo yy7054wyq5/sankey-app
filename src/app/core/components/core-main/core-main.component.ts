@@ -6,6 +6,8 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 import { ChartComponent } from '../../../share/components/chart/chart.component';
 import { ChartNode, ChartLink } from '../../../share/components/chart/chart.service';
+import { Observable, of } from '../../../../../node_modules/rxjs';
+import { mergeMap } from '../../../../../node_modules/rxjs/operators';
 
 const searchPersonDetailApi = '/api/web/Detail/detail';
 
@@ -24,8 +26,10 @@ export class CoreMainComponent implements OnInit {
   colorBar = chartColorConfig;
   initCore = true; // 初始状态
   person = []; // 侧栏任务信息
-  nodes: ChartNode[] = [];
+  nodesHasCanHiddenAttr: ChartNode[] = []; // check-node组件所需节点数据
   links: ChartLink[] = [];
+  private _nodesExchangeToObjUseIdkey: { [id: string]: ChartNode } = {};
+  private _objTypeLinksData: ObjTypeLinksData;
 
   @ViewChild('searchBar')
   searchBar: SearchBarComponent;
@@ -37,29 +41,52 @@ export class CoreMainComponent implements OnInit {
   /////////////////////////
 
   /**
-   * 获取可隐藏的点
+   * 将数组转换为对象结构数据
+   *
+   * @private
+   * @param {ChartNode[]} nodes
+   * @returns {Observable<{ [id: string]: ChartNode }>}
+   * @memberof CoreMainComponent
+   */
+  private _exchangeArrToObj(nodes: ChartNode[]): Observable<{ [id: string]: ChartNode }> {
+    const tmp = {};
+    nodes.forEach(node => {
+      tmp[node.id] = node;
+    });
+    return of(tmp);
+  }
+
+  /**
+   * 为可隐藏的点加标记并返回对象类links
    *
    * @private
    * @param {ChartLink[]} links
    * @param {ChartNode[]} nodes
    * @memberof CoreMainComponent
    */
-  private _buildCanHiddenNodes(links: ChartLink[], nodes: ChartNode[], cb: Function) {
-    this._common.buildLinksToObjByNodeId(links).subscribe((_newLinks: ObjTypeLinksData) => {
-      const startId = this.searchBar.records.startAndEnd.start.p_id;
-      const startTargets = _newLinks[startId].targets;
-      for (let idx = 0; idx < nodes.length; idx++) {
-        const node = nodes[idx];
-        const index = startTargets.indexOf(node.id);
-        if (index > -1) {
-          node.canHidden = true; // 添加可隐藏标记
-          if (index === startTargets.length - 1) {
-            cb();
-            return;
+  private _addCanHiddenAttrInNodeAndBackObjLinks(
+    links: ChartLink[],
+    nodes: ChartNode[]
+  ): Observable<{ nodes: ChartNode[]; objLinks: ObjTypeLinksData }> {
+    return this._common.buildLinksToObjByNodeId(links).pipe(
+      mergeMap((_newLinks: ObjTypeLinksData) => {
+        const startId = this.searchBar.records.startAndEnd.start.p_id;
+        const startTargets = _newLinks[startId].targets;
+        for (let idx = 0; idx < nodes.length; idx++) {
+          const node = nodes[idx];
+          const index = startTargets.indexOf(node.id);
+          if (index > -1) {
+            node.canHidden = true; // 添加可隐藏标记
+            if (index === startTargets.length - 1) {
+              return of({
+                nodes: nodes,
+                objLinks: _newLinks
+              });
+            }
           }
         }
-      }
-    });
+      })
+    );
   }
 
   /**
@@ -68,8 +95,26 @@ export class CoreMainComponent implements OnInit {
    * @param {ChartNode[]} activedNodes
    * @memberof ChartComponent
    */
-  getCheckedNodes(notHiddenNodes: ChartNode[]) {
-    this._setChartOption(notHiddenNodes, this.links);
+  getCheckedNodes(data: { out: ChartNode[]; hidden: string[] }) {
+    console.log('被隐藏的起点', data.hidden);
+    const _loadingId = this._showLoading('图表重绘中....');
+    const hiddenNodesId = this._common.getHiddenNodesInLine(data.hidden, this._objTypeLinksData);
+    hiddenNodesId.pop(); // 删除终点
+    const _newNodes = [];
+    const _tmp = Object.assign({}, this._nodesExchangeToObjUseIdkey);
+    console.log('被隐藏的一条线上的点', hiddenNodesId);
+    hiddenNodesId.forEach(id => {
+      delete _tmp[id];
+    });
+    for (const id in _tmp) {
+      if (_tmp.hasOwnProperty(id)) {
+        const node = _tmp[id];
+        _newNodes.push(node);
+      }
+    }
+    console.log(_newNodes);
+    this._msg.remove(_loadingId);
+    this._setChartOption(_newNodes, this.links);
   }
 
   /**
@@ -91,8 +136,8 @@ export class CoreMainComponent implements OnInit {
    * @returns {*}
    * @memberof CoreMainComponent
    */
-  private _showLoading(): any {
-    return this._msg.loading('请求数据中...', {
+  private _showLoading(msg = '请求数据中...'): any {
+    return this._msg.loading(msg, {
       nzDuration: 0
     }).messageId;
   }
@@ -136,10 +181,12 @@ export class CoreMainComponent implements OnInit {
     if (!res.code && res.data && res.data.links.length && res.data.nodes.length) {
       this._common.setNodesStyle(this.searchBar, res.data.nodes).subscribe(nodes => {
         this._setChartOption(nodes, res.data.links);
-        this.nodes = nodes;
         this.links = res.data.links;
-        this._buildCanHiddenNodes(res.data.links, nodes, () => {
+        this._addCanHiddenAttrInNodeAndBackObjLinks(res.data.links, nodes).subscribe(data => {
           this._msg.remove(this.loadingId);
+          this.nodesHasCanHiddenAttr = data.nodes;
+          this._objTypeLinksData = data.objLinks;
+          this._exchangeArrToObj(nodes).subscribe(_newNodes => (this._nodesExchangeToObjUseIdkey = _newNodes));
         });
       });
     } else {
