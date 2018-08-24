@@ -70,6 +70,7 @@ export class CoreMainComponent implements OnInit {
   ): Observable<{ nodes: ChartNode[]; objLinks: ObjTypeLinksData }> {
     return this._common.buildLinksToObjByNodeId(links).pipe(
       mergeMap((_newLinks: ObjTypeLinksData) => {
+        console.log(_newLinks);
         const startId = this.searchBar.records.startAndEnd.start.p_id;
         const startTargets = _newLinks[startId].targets;
         for (let idx = 0; idx < nodes.length; idx++) {
@@ -179,14 +180,14 @@ export class CoreMainComponent implements OnInit {
     // console.log(res);
     this.initCore = false;
     if (!res.code && res.data && res.data.links.length && res.data.nodes.length) {
-      this._common.setNodesStyle(this.searchBar, res.data.nodes).subscribe(nodes => {
-        this._setChartOption(nodes, res.data.links);
+      this._common.setNodesAndLinksStyle(this.searchBar, res.data.nodes, res.data.links).subscribe(data => {
+        this._setChartOption(data.nodes, data.links);
         this.links = res.data.links;
-        this._addCanHiddenAttrInNodeAndBackObjLinks(res.data.links, nodes).subscribe(data => {
+        this._addCanHiddenAttrInNodeAndBackObjLinks(data.links, data.nodes).subscribe(_data => {
           this._msg.remove(this.loadingId);
           this.nodesHasCanHiddenAttr = data.nodes;
-          this._objTypeLinksData = data.objLinks;
-          this._exchangeArrToObj(nodes).subscribe(_newNodes => (this._nodesExchangeToObjUseIdkey = _newNodes));
+          this._objTypeLinksData = _data.objLinks;
+          this._exchangeArrToObj(data.nodes).subscribe(_newNodes => (this._nodesExchangeToObjUseIdkey = _newNodes));
         });
       });
     } else {

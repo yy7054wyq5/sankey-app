@@ -377,13 +377,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.end = searchData.end.p_id;
     }
 
-    // if (!environment.production) {
-    //   this.records.startAndEnd.start.p_id = this.start = 'persona137502e5f2211e881f0005056c00008';
-    //   this.records.startAndEnd.end.p_id = this.end = 'person8abbfaa65f2211e8afad005056c00008';
-    // }
+    if (!environment.production) {
+      this.records.startAndEnd.start.p_id = this.start = 'personc2df03b796f911e88b0c005056c00008';
+      this.records.startAndEnd.end.p_id = this.end = 'personce8d18585fc511e8bfac005056c00008';
+    }
 
     if (environment.useRelationJson) {
-      searchRelationApi = '/assets/mock/relation-right.json';
+      searchRelationApi = '/assets/mock/new-relation3.json';
     }
 
     if (!this.start || !this.end) {

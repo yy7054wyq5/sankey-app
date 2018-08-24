@@ -30,12 +30,20 @@ export class CommonService {
    * @param {string} highlightColor
    * @memberof CoreMainComponent
    */
-  private _setStyle(node: ChartNode, normalColor: string, highlightColor: string) {
+  private _setNodeStyle(node: ChartNode, normalColor: string, highlightColor: string) {
     node.itemStyle = {};
     node.itemStyle.color = node.itemStyle.borderColor = normalColor;
     node.emphasis = {};
     node.emphasis.itemStyle = {};
     node.emphasis.itemStyle.color = node.emphasis.itemStyle.borderColor = highlightColor;
+  }
+
+  private _setLinkStyle(link: ChartLink, normalColor: string, highlightColor: string) {
+    link.lineStyle = {};
+    link.lineStyle.color = normalColor;
+    link.emphasis = {};
+    link.emphasis.lineStyle = {};
+    link.emphasis.lineStyle.color = highlightColor;
   }
 
   /**
@@ -46,7 +54,7 @@ export class CommonService {
    * @returns {Observable<ChartNode[]>}
    * @memberof CommonService
    */
-  setNodesStyle(searchBar: SearchBarComponent, nodes: ChartNode[]): Observable<ChartNode[]> {
+  setNodesAndLinksStyle(searchBar: SearchBarComponent, nodes: ChartNode[], links: ChartLink[]): Observable<{nodes: ChartNode[],links: ChartLink[]}> {
     const startPoint = searchBar.records.startAndEnd.start.p_id;
     const endPoint = searchBar.records.startAndEnd.end.p_id;
     let tag = '';
@@ -65,10 +73,13 @@ export class CommonService {
         } else {
           // do something
         }
-        this._setStyle(node, chartColorConfig[tag].bg, chartColorConfig[tag].hover);
+        this._setNodeStyle(node, chartColorConfig[tag].bg, chartColorConfig[tag].hover);
       }
     });
-    return of(nodes);
+    links.forEach(link => {
+      this._setLinkStyle(link, link.color, link.color);
+    });
+    return of({ nodes, links });
   }
 
   /**

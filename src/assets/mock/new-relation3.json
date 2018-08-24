@@ -1,0 +1,115 @@
+{
+  "code": null,
+  "message": null,
+  "data": {
+    "nodes": [
+      {
+        "name": "2010年05月31日-中国银行公开发行A股可转换公司债券募集说明书",
+        "id": "case6237aeaf6a0111e8a353000c2974e9f6",
+        "date": "2010-05-31"
+      },
+      {
+        "name": "2017年04月01日-中国银行2016年年度报告",
+        "id": "case6367d9eb6a0111e8a353000c2974e9f6",
+        "date": "2017-04-01"
+      },
+      {
+        "name": "2016年04月22日-上汽集团2015年年度报告",
+        "id": "case7b3f4d716a0111e8a353000c2974e9f6",
+        "date": "2016-04-22"
+      },
+      {
+        "name": "丁颖华",
+        "id": "person912faf585f2211e8be35005056c00008",
+        "date": null
+      },
+      {
+        "name": "马小龙",
+        "id": "personbcbaf8745f2411e8a37f005056c00008",
+        "date": null
+      },
+      {
+        "name": "朱根林",
+        "id": "personc2df03b796f911e88b0c005056c00008",
+        "date": null
+      },
+      {
+        "name": "张三分",
+        "id": "personce8d18585fc511e8bfac005056c00008",
+        "date": null
+      }
+    ],
+    "links": [
+      {
+        "source": "personc2df03b796f911e88b0c005056c00008",
+        "target": "case7b3f4d716a0111e8a353000c2974e9f6",
+        "relation": "参与",
+        "value": 1,
+        "color": "RED"
+      },
+      {
+        "source": "case7b3f4d716a0111e8a353000c2974e9f6",
+        "target": "person912faf585f2211e8be35005056c00008",
+        "relation": "参与",
+        "value": 1,
+        "color": "RED"
+      },
+      {
+        "source": "person912faf585f2211e8be35005056c00008",
+        "target": "case6237aeaf6a0111e8a353000c2974e007",
+        "relation": "参与",
+        "value": 1,
+        "color": "RED"
+      },
+      {
+        "source": "case6237aeaf6a0111e8a353000c2974e007",
+        "target": "personce8d18585fc511e8bfac005056c00008",
+        "relation": "参与",
+        "value": 1,
+        "color": "RED"
+      },
+      {
+        "source": "personc2df03b796f911e88b0c005056c00008",
+        "target": "case7b3f4d716a0111e8a353000c2974e9f6",
+        "relation": "参与",
+        "value": 1,
+        "color": "BLUE"
+      },
+      {
+        "source": "case7b3f4d716a0111e8a353000c2974e9f6",
+        "target": "person912faf585f2211e8be35005056c00008",
+        "relation": "参与",
+        "value": 1,
+        "color": "BLUE"
+      },
+      {
+        "source": "person912faf585f2211e8be35005056c00008",
+        "target": "case6237aeaf6a0111e8a353000c2974e9f6",
+        "relation": "参与",
+        "value": 1,
+        "color": "BLUE"
+      },
+      {
+        "source": "case6237aeaf6a0111e8a353000c2974e9f6",
+        "target": "personbcbaf8745f2411e8a37f005056c00008",
+        "relation": "参与",
+        "value": 1,
+        "color": "BLUE"
+      },
+      {
+        "source": "personbcbaf8745f2411e8a37f005056c00008",
+        "target": "case6367d9eb6a0111e8a353000c2974e9f6",
+        "relation": "参与",
+        "value": 1,
+        "color": "BLUE"
+      },
+      {
+        "source": "case6367d9eb6a0111e8a353000c2974e9f6",
+        "target": "personce8d18585fc511e8bfac005056c00008",
+        "relation": "参与",
+        "value": 1,
+        "color": "BLUE"
+      }
+    ]
+  }
+}

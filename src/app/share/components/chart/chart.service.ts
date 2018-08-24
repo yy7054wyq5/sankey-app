@@ -42,6 +42,10 @@ export interface ChartLink {
   source: string;
   target: string;
   value: number;
+  color?: string;
+  relation?: string;
+  lineStyle?: any;
+  emphasis?: any;
 }
 
 @Injectable()
