@@ -19,7 +19,7 @@
       <!-- 图表 -->
       <app-chart #chart *ngIf="option" [eoption]="option" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)">
         <!-- 选择隐藏节点 -->
-        <app-check-node *ngIf="nodesHasCanHiddenAttr" [top]="1.262626" [right]="2.525253" [nodes]="nodesHasCanHiddenAttr" (outCheckedNodes)="getCheckedNodes($event)"></app-check-node>
+        <app-check-node *ngIf="nodesHasCanHiddenAttr" [tabs]="checknodesTab" placeholder="显示隐藏关系" [top]="1.262626" [right]="2.525253" (outCheckedNodes)="getCheckedNodes($event)"></app-check-node>
       </app-chart>
       <div class="hack" style="height: .606061rem"></div>
       <!-- 颜色盘 -->

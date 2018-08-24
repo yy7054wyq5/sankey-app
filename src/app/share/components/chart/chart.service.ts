@@ -29,10 +29,9 @@ export interface ChartEventCbParams {
 export interface ChartNode {
   name: string;
   id: any;
-  canHidden?: boolean;
+  canHidden?: boolean; // 可隐藏标记
   date?: string;
   node: any;
-  actived?: boolean; // 用于选中
   value?: any;
   emphasis?: any; // 高亮样式
   itemStyle?: any; // 展示样式

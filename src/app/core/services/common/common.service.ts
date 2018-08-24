@@ -3,6 +3,7 @@ import { ChartNode, ChartLink } from '../../../share/components/chart/chart.serv
 import { Observable, of } from '../../../../../node_modules/rxjs';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { chartColorConfig } from '../../config';
+import { CheckOption } from '../../components/check-node/check-node.component';
 
 /**
  * 为隐藏点准备的数据结构，由buildLinksToObjByNodeId函数生成
@@ -15,6 +16,17 @@ export interface ObjTypeLinksData {
     targets: string[];
     sources: string[];
   };
+}
+
+/**
+ * 节点分类
+ *
+ * @enum {number}
+ */
+export enum NodeCate {
+  person = 'person',
+  case = 'case',
+  organization = 'organization'
 }
 
 @Injectable()
@@ -47,6 +59,50 @@ export class CommonService {
   }
 
   /**
+   * 创建下拉数据
+   *
+   * @private
+   * @param {ChartNode[]} data
+   * @returns {Observable<UInodes>}
+   * @memberof CheckNodeComponent
+   */
+  separateNode(data: ChartNode[]): Observable<{ [tag: string]: CheckOption[] }> {
+    const tmp = {};
+    data.forEach(node => {
+      const _node: CheckOption = {
+        ...node,
+        actived: true
+      };
+      if (_node.id) {
+        if (node.id.indexOf(NodeCate.case) > -1) {
+          this._newObjArr(tmp, NodeCate.case).push(_node);
+        } else if (node.id.indexOf(NodeCate.organization) > -1) {
+          this._newObjArr(tmp, NodeCate.organization).push(_node);
+        } else if (node.id.indexOf(NodeCate.person) > -1) {
+          this._newObjArr(tmp, NodeCate.person).push(_node);
+        }
+      }
+    });
+    return of(tmp);
+  }
+
+  /**
+   * 创建类型为数组的对象属性
+   *
+   * @private
+   * @param {Object} obj
+   * @param {string} tag
+   * @returns
+   * @memberof CommonService
+   */
+  private _newObjArr(obj: Object, tag: string) {
+    if (!obj[tag]) {
+      obj[tag] = [];
+    }
+    return obj[tag];
+  }
+
+  /**
    * 设置node节点的颜色和高亮
    *
    * @param {SearchBarComponent} searchBar
@@ -54,7 +110,11 @@ export class CommonService {
    * @returns {Observable<ChartNode[]>}
    * @memberof CommonService
    */
-  setNodesAndLinksStyle(searchBar: SearchBarComponent, nodes: ChartNode[], links: ChartLink[]): Observable<{nodes: ChartNode[],links: ChartLink[]}> {
+  setNodesAndLinksStyle(
+    searchBar: SearchBarComponent,
+    nodes: ChartNode[],
+    links: ChartLink[]
+  ): Observable<{ nodes: ChartNode[]; links: ChartLink[] }> {
     const startPoint = searchBar.records.startAndEnd.start.p_id;
     const endPoint = searchBar.records.startAndEnd.end.p_id;
     let tag = '';

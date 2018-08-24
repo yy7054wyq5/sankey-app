@@ -1,6 +1,6 @@
-<div class="select-chart">
+<!-- <div class="select-chart">
   <div class="bar" (click)="show=!show">
-    <span>显示或隐藏关系</span>
+    <span>{{placeholder}}</span>
     <i class="arrow"></i>
   </div>
   <div class="container" *ngIf="show">
@@ -20,6 +20,29 @@
           <i class="anticon" [class.anticon-check]="org.actived" [class.actived]="org.actived" (click)="check(org)"></i>
           <span [title]="org.name">{{org.name}}</span>
         </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>
+ -->
+
+<div class="select-chart">
+  <div class="bar" (click)="show=!show">
+    <span>{{placeholder}}</span>
+    <i class="arrow"></i>
+  </div>
+  <div class="container" *ngIf="show">
+    <ul class="tabs">
+      <li *ngFor="let tab of tabs" [class.actived]="pointsTag===tab.tag" (click)="showItems(tab.tag)">{{tab.title}}</li>
+    </ul>
+    <ul class="nodes">
+      <ng-container *ngFor="let tab of tabs">
+        <ng-container *ngFor="let option of tab.options">
+          <li class="nodes-item case" *ngIf="option.canHidden && tab.tag === pointsTag">
+            <i class="anticon" [class.anticon-check]="option.actived" [style]="optionActiveStyle(option, tab, pointsTag)" (click)="check(option)"></i>
+            <span [title]="option.name">{{option.name}}</span>
+          </li>
+        </ng-container>
       </ng-container>
     </ul>
   </div>

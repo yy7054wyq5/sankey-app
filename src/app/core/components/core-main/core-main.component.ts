@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { chartOption, chartColorConfig } from '../../config';
-import { CommonService, ObjTypeLinksData } from '../../services/common/common.service';
+import { CommonService, ObjTypeLinksData, NodeCate } from '../../services/common/common.service';
 import { SearchResult, SearchStatus, SearchBarComponent } from '../search-bar/search-bar.component';
 import { NzMessageService } from 'ng-zorro-antd';
 import { HttpClient } from '../../../../../node_modules/@angular/common/http';
@@ -8,6 +8,7 @@ import { ChartComponent } from '../../../share/components/chart/chart.component'
 import { ChartNode, ChartLink } from '../../../share/components/chart/chart.service';
 import { Observable, of } from '../../../../../node_modules/rxjs';
 import { mergeMap } from '../../../../../node_modules/rxjs/operators';
+import { CheckTab } from '../check-node/check-node.component';
 
 const searchPersonDetailApi = '/api/web/Detail/detail';
 
@@ -28,6 +29,7 @@ export class CoreMainComponent implements OnInit {
   person = []; // 侧栏任务信息
   nodesHasCanHiddenAttr: ChartNode[] = []; // check-node组件所需节点数据
   links: ChartLink[] = [];
+  checknodesTab: CheckTab[] = [];
   private _nodesExchangeToObjUseIdkey: { [id: string]: ChartNode } = {};
   private _objTypeLinksData: ObjTypeLinksData;
 
@@ -36,9 +38,22 @@ export class CoreMainComponent implements OnInit {
   @ViewChild('chart')
   chart: ChartComponent;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._initCheckNodeData();
+  }
 
   /////////////////////////
+
+  /**
+   * 初始化显隐节点的数据结构
+   *
+   * @private
+   * @memberof CoreMainComponent
+   */
+  private _initCheckNodeData() {
+    this.checknodesTab[0] = new CheckTab('organization', '公司', 'blue');
+    this.checknodesTab[1] = new CheckTab('case', '事件', 'orange');
+  }
 
   /**
    * 将数组转换为对象结构数据
@@ -185,7 +200,18 @@ export class CoreMainComponent implements OnInit {
         this.links = res.data.links;
         this._addCanHiddenAttrInNodeAndBackObjLinks(data.links, data.nodes).subscribe(_data => {
           this._msg.remove(this.loadingId);
-          this.nodesHasCanHiddenAttr = data.nodes;
+          this.nodesHasCanHiddenAttr = _data.nodes;
+
+          this._common.separateNode(_data.nodes).subscribe(cheknodes => {
+            this.checknodesTab.forEach((tab, idx) => {
+              if (tab.tag === NodeCate.case) {
+                this.checknodesTab[idx].options = cheknodes[NodeCate.case];
+              } else if (tab.tag === NodeCate.organization) {
+                this.checknodesTab[idx].options = cheknodes[NodeCate.organization];
+              }
+            });
+          });
+
           this._objTypeLinksData = _data.objLinks;
           this._exchangeArrToObj(data.nodes).subscribe(_newNodes => (this._nodesExchangeToObjUseIdkey = _newNodes));
         });

@@ -11,28 +11,25 @@ import {
   ElementRef,
   Renderer2
 } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { ChartNode } from '../../../share/components/chart/chart.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { NodeCate } from '../../services/common/common.service';
 
-/**
- * 页面展示用数据结构
- *
- * @interface UInodes
- */
-interface UInodes {
-  persons: ChartNode[];
-  cases: ChartNode[];
-  organizations: ChartNode[];
+export class CheckTab {
+  tag: string;
+  title: string;
+  checkboxColor: string;
+  options: CheckOption[];
+  constructor(tag: string, title: string, checkboxColor: string) {
+    this.tag = tag;
+    this.title = title;
+    this.checkboxColor = checkboxColor;
+    this.options = [];
+  }
 }
 
-/**
- * 可显示隐藏的节点tag
- *
- * @enum {number}
- */
-enum Tag {
-  case = 'case',
-  organization = 'organization'
+export interface CheckOption extends ChartNode {
+  actived: boolean;
 }
 
 @Component({
@@ -44,12 +41,16 @@ enum Tag {
 export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   show: boolean; // 控制下拉是否显示
   pointsTag = 'organization'; // 下拉公司与事件的切换
-  uiNodes: UInodes; // 下拉显示的各节点数据
+  // uiNodes: UInodes; // 下拉显示的各节点数据
 
   @Input()
   top: number;
   @Input()
   right: number;
+  @Input()
+  tabs: CheckTab[];
+  @Input()
+  placeholder: string;
   @Input()
   nodes: ChartNode[] = []; // 图表所有节点集合，只是带上了是否可以隐藏的tag
 
@@ -61,17 +62,16 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   @Output()
   outCheckedNodes = new EventEmitter<{ out: string[]; hidden: string[] }>();
 
-  constructor(private _element: ElementRef, private _render: Renderer2) {}
+  constructor(private _element: ElementRef, private _render: Renderer2, private safe: DomSanitizer) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes && !changes.nodes.isFirstChange()) {
-      this._creatData(this.nodes).subscribe(data => (this.uiNodes = data));
-    }
+    // if (changes && !changes.nodes.isFirstChange()) {
+    //   this._creatData(this.nodes).subscribe(data => (this.uiNodes = data));
+    // }
   }
 
   ngOnInit() {
     console.log(this.nodes);
-    this._creatData(this.nodes).subscribe(data => (this.uiNodes = data));
   }
 
   ngAfterViewInit() {
@@ -80,44 +80,35 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ////////////////////////////////////
+
   /**
-   * 创建下拉数据
+   * 选中样式
    *
-   * @private
-   * @param {ChartNode[]} data
-   * @returns {Observable<UInodes>}
+   * @param {CheckOption} checkOption
+   * @param {string} color
+   * @returns
    * @memberof CheckNodeComponent
    */
-  private _creatData(data: ChartNode[]): Observable<UInodes> {
-    const tmp: UInodes = {
-      cases: [],
-      persons: [],
-      organizations: []
-    };
-    data.forEach(node => {
-      node.actived = true;
-      if (node.id) {
-        if (node.id.indexOf(Tag.case) > -1) {
-          tmp.cases.push(node);
-        } else if (node.id.indexOf(Tag.organization) > -1) {
-          tmp.organizations.push(node);
-        } else {
-          tmp.persons.push(node);
-        }
-      }
-    });
-    return of(tmp);
+  optionActiveStyle(checkOption: CheckOption, tab: CheckTab, tag: NodeCate) {
+    let color = '#717a88';
+    if (checkOption.actived && tab.tag === tag) {
+      color = tab.checkboxColor;
+    }
+    return this.safe.bypassSecurityTrustStyle(`border-color: ${color};color: ${color};`);
   }
 
   /**
    * 勾选节点
    *
-   * @param {ChartNode} chartNode
+   * @param {checkOption} chartNode
    * @memberof CheckNodeComponent
    */
-  check(chartNode: ChartNode) {
-    chartNode.actived = !chartNode.actived;
-    const tmp = [...this.uiNodes.cases, ...this.uiNodes.organizations, ...this.uiNodes.persons];
+  check(checkOption: CheckOption) {
+    checkOption.actived = !checkOption.actived;
+    let tmp = [];
+    this.tabs.forEach(tab => {
+      tmp = tmp.concat(tab.options);
+    });
     const out = [];
     const hidden = [];
     tmp.forEach(node => {
