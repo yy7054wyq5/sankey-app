@@ -40,7 +40,7 @@ export interface SearchResult {
   code: number;
   message: string;
   data: {
-    links: ChartLink[];
+    links: {[key: number]: ChartLink[]};
     nodes: ChartNode[];
   };
 }
@@ -352,7 +352,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   private _isSuccessBack(res: SearchResult): boolean {
     if (!res.code) {
       if (res.data) {
-        if (res.data.links && res.data.links.length > 0 && (res.data.nodes && res.data.nodes.length > 0)) {
+        if (res.data.links && res.data.nodes) {
           return true;
         }
         return false;
@@ -384,7 +384,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (environment.useRelationJson) {
-      searchRelationApi = '/assets/mock/relation-right.json';
+      // searchRelationApi = '/assets/mock/relation-right.json';
+      searchRelationApi = '/assets/mock/new-relation3.json';
     }
 
     if (!this.start || !this.end) {

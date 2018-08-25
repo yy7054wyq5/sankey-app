@@ -1,31 +1,3 @@
-<!-- <div class="select-chart">
-  <div class="bar" (click)="show=!show">
-    <span>{{placeholder}}</span>
-    <i class="arrow"></i>
-  </div>
-  <div class="container" *ngIf="show">
-    <ul class="tabs">
-      <li [class.actived]="pointsTag==='organization'" (click)="showItems('organization')">公司</li>
-      <li [class.actived]="pointsTag==='case'" (click)="showItems('case')">事件</li>
-    </ul>
-    <ul class="nodes" [class.case]="pointsTag==='case'" [class.organization]="pointsTag==='organization'">
-      <ng-container *ngFor="let case of uiNodes.cases">
-        <li class="nodes-item case" *ngIf="case.canHidden">
-          <i class="anticon" [class.anticon-check]="case.actived" [class.actived]="case.actived" (click)="check(case)"></i>
-          <span [title]="case.name">{{case.name}}</span>
-        </li>
-      </ng-container>
-      <ng-container *ngFor="let org of uiNodes.organizations">
-        <li class="nodes-item organization" *ngIf="org.canHidden">
-          <i class="anticon" [class.anticon-check]="org.actived" [class.actived]="org.actived" (click)="check(org)"></i>
-          <span [title]="org.name">{{org.name}}</span>
-        </li>
-      </ng-container>
-    </ul>
-  </div>
-</div>
- -->
-
 <div class="select-chart">
   <div class="bar" (click)="show=!show">
     <span>{{placeholder}}</span>
@@ -38,8 +10,8 @@
     <ul class="nodes">
       <ng-container *ngFor="let tab of tabs">
         <ng-container *ngFor="let option of tab.options">
-          <li class="nodes-item case" *ngIf="option.canHidden && tab.tag === pointsTag">
-            <i class="anticon" [class.anticon-check]="option.actived" [style]="optionActiveStyle(option, tab, pointsTag)" (click)="check(option)"></i>
+          <li class="nodes-item" *ngIf="option.canHidden && tab.tag === pointsTag" (click)="check(option)">
+            <i class="anticon" [class.anticon-check]="option.actived" [style]="optionActiveStyle(option, tab, pointsTag)"></i>
             <span [title]="option.name">{{option.name}}</span>
           </li>
         </ng-container>

@@ -31,7 +31,7 @@ export interface ChartNode {
   id: any;
   canHidden?: boolean; // 可隐藏标记
   date?: string;
-  node: any;
+  node?: any;
   value?: any;
   emphasis?: any; // 高亮样式
   itemStyle?: any; // 展示样式

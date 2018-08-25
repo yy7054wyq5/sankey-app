@@ -1,119 +1,136 @@
-{
-  "code": null,
-  "message": null,
-  "data": {
-    "nodes": [
-      {
-        "name": "2010年05月31日-中国银行公开发行A股可转换公司债券募集说明书",
-        "id": "case6237aeaf6a0111e8a353000c2974e9f6",
-        "date": "2010-05-31"
-      },
-      {
-        "name": "2017年04月01日-中国银行2016年年度报告",
-        "id": "case6367d9eb6a0111e8a353000c2974e9f6",
-        "date": "2017-04-01"
-      },
-      {
-        "name": "2016年04月22日-上汽集团2015年年度报告",
-        "id": "case7b3f4d716a0111e8a353000c2974e9f6",
-        "date": "2016-04-22"
-      },
-      {
-        "name": "丁颖华",
-        "id": "person912faf585f2211e8be35005056c00008",
-        "date": null
-      },
-      {
-        "name": "马小龙",
-        "id": "personbcbaf8745f2411e8a37f005056c00008",
-        "date": null
-      },
-      {
-        "name": "朱根林",
-        "id": "personc2df03b796f911e88b0c005056c00008",
-        "date": null
-      },
-      {
-        "name": "张三分",
-        "id": "personce8d18585fc511e8bfac005056c00008",
-        "date": null
-      }
-    ],
-    "links": [
-      [
-        {
-          "source": "personc2df03b796f911e88b0c005056c00008",
-          "target": "case7b3f4d716a0111e8a353000c2974e9f6",
-          "relation": "参与",
-          "value": 1,
-          "color": "RED"
-        },
-        {
-          "source": "case7b3f4d716a0111e8a353000c2974e9f6",
-          "target": "person912faf585f2211e8be35005056c00008",
-          "relation": "参与",
-          "value": 1,
-          "color": "RED"
-        },
-        {
-          "source": "person912faf585f2211e8be35005056c00008",
-          "target": "case6237aeaf6a0111e8a353000c2974e007",
-          "relation": "参与",
-          "value": 1,
-          "color": "RED"
-        },
-        {
-          "source": "case6237aeaf6a0111e8a353000c2974e007",
-          "target": "personce8d18585fc511e8bfac005056c00008",
-          "relation": "参与",
-          "value": 1,
-          "color": "RED"
-        }
-      ],
-      [
-        {
-          "source": "personc2df03b796f911e88b0c005056c00008",
-          "target": "case7b3f4d716a0111e8a353000c2974e9f6",
-          "relation": "参与",
-          "value": 1,
-          "color": "BLUE"
-        },
-        {
-          "source": "case7b3f4d716a0111e8a353000c2974e9f6",
-          "target": "person912faf585f2211e8be35005056c00008",
-          "relation": "参与",
-          "value": 1,
-          "color": "BLUE"
-        },
-        {
-          "source": "person912faf585f2211e8be35005056c00008",
-          "target": "case6237aeaf6a0111e8a353000c2974e9f6",
-          "relation": "参与",
-          "value": 1,
-          "color": "BLUE"
-        },
-        {
-          "source": "case6237aeaf6a0111e8a353000c2974e9f6",
-          "target": "personbcbaf8745f2411e8a37f005056c00008",
-          "relation": "参与",
-          "value": 1,
-          "color": "BLUE"
-        },
-        {
-          "source": "personbcbaf8745f2411e8a37f005056c00008",
-          "target": "case6367d9eb6a0111e8a353000c2974e9f6",
-          "relation": "参与",
-          "value": 1,
-          "color": "BLUE"
-        },
-        {
-          "source": "case6367d9eb6a0111e8a353000c2974e9f6",
-          "target": "personce8d18585fc511e8bfac005056c00008",
-          "relation": "参与",
-          "value": 1,
-          "color": "BLUE"
-        }
-      ]
-    ]
-  }
+"links": {
+  "2": [
+    {
+      "source": "persona137502e5f2211e881f0005056c00008",
+      "target": "caseda052a676a0111e8a353000c2974e9f6",
+      "relation": "参与",
+      "value": 1,
+      "color": "red"
+    },
+    {
+      "source": "caseda052a676a0111e8a353000c2974e9f6",
+      "target": "person5c4cd4825f2311e8bb43005056c00008",
+      "relation": "参与",
+      "value": 1,
+      "color": "red"
+    },
+    {
+      "source": "person5c4cd4825f2311e8bb43005056c00008",
+      "target": "case5697bca56a0211e8a353000c2974e9f6",
+      "relation": "参与",
+      "value": 1,
+      "color": "red"
+    },
+    {
+      "source": "case5697bca56a0211e8a353000c2974e9f6",
+      "target": "person8abbfaa65f2211e8afad005056c00008",
+      "relation": "参与",
+      "value": 1,
+      "color": "red"
+    }
+  ],
+  "3": [
+    {
+      "source": "persona137502e5f2211e881f0005056c00008",
+      "target": "caseda052a676a0111e8a353000c2974e9f6",
+      "relation": "参与",
+      "value": 1,
+      "color": "blue"
+    },
+    {
+      "source": "caseda052a676a0111e8a353000c2974e9f6",
+      "target": "person5c4cd4825f2311e8bb43005056c00008",
+      "relation": "参与",
+      "value": 1,
+      "color": "blue"
+    },
+    {
+      "source": "person5c4cd4825f2311e8bb43005056c00008",
+      "target": "case5697bca56a0211e8a353000c2974e9f6",
+      "relation": "参与",
+      "value": 1,
+      "color": "blue"
+    },
+    {
+      "source": "case5697bca56a0211e8a353000c2974e9f6",
+      "target": "person8a76da545f2211e8a5d1005056c00008",
+      "relation": "参与",
+      "value": 1,
+      "color": "blue"
+    },
+    {
+      "source": "person8a76da545f2211e8a5d1005056c00008",
+      "target": "organization8e5ded345e7011e8a22a005056c00008",
+      "relation": "2018隶属于",
+      "value": 1,
+      "color": "blue"
+    },
+    {
+      "source": "organization8e5ded345e7011e8a22a005056c00008",
+      "target": "person8abbfaa65f2211e8afad005056c00008",
+      "relation": "2017隶属于",
+      "value": 1,
+      "color": "blue"
+    },
+    {
+      "source": "persona137502e5f2211e881f0005056c00008",
+      "target": "case39fbad7d6a0211e8a353000c2974e9f6",
+      "relation": "参与",
+      "value": 1
+    },
+    {
+      "source": "case39fbad7d6a0211e8a353000c2974e9f6",
+      "target": "person6ccd7e145f2211e8ae1c005056c00008",
+      "relation": "参与",
+      "value": 1
+    },
+    {
+      "source": "person6ccd7e145f2211e8ae1c005056c00008",
+      "target": "case838535ac6a0111e8a353000c2974e9f6",
+      "relation": "参与",
+      "value": 1
+    },
+    {
+      "source": "case838535ac6a0111e8a353000c2974e9f6",
+      "target": "person905474ca5f2611e8be4f005056c00008",
+      "relation": "参与",
+      "value": 3
+    },
+    {
+      "source": "person905474ca5f2611e8be4f005056c00008",
+      "target": "case4cc2abd76a0111e8a353000c2974e9f6",
+      "relation": "参与",
+      "value": 1
+    },
+    {
+      "source": "case4cc2abd76a0111e8a353000c2974e9f6",
+      "target": "person8abbfaa65f2211e8afad005056c00008",
+      "relation": "参与",
+      "value": 1
+    },
+    {
+      "source": "person905474ca5f2611e8be4f005056c00008",
+      "target": "case4df2aef76a0111e8a353000c2974e9f6",
+      "relation": "参与",
+      "value": 1
+    },
+    {
+      "source": "case4df2aef76a0111e8a353000c2974e9f6",
+      "target": "person8abbfaa65f2211e8afad005056c00008",
+      "relation": "参与",
+      "value": 1
+    },
+    {
+      "source": "person905474ca5f2611e8be4f005056c00008",
+      "target": "caseff9142316a0111e8a353000c2974e9f6",
+      "relation": "参与",
+      "value": 1
+    },
+    {
+      "source": "caseff9142316a0111e8a353000c2974e9f6",
+      "target": "person8abbfaa65f2211e8afad005056c00008",
+      "relation": "参与",
+      "value": 1
+    }
+  ]
 }

@@ -40,8 +40,7 @@ export interface CheckOption extends ChartNode {
 })
 export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   show: boolean; // 控制下拉是否显示
-  pointsTag = 'organization'; // 下拉公司与事件的切换
-  // uiNodes: UInodes; // 下拉显示的各节点数据
+  pointsTag: string; // 下拉公司与事件的切换
 
   @Input()
   top: number;
@@ -52,7 +51,7 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   @Input()
   placeholder: string;
   @Input()
-  nodes: ChartNode[] = []; // 图表所有节点集合，只是带上了是否可以隐藏的tag
+  // nodes: ChartNode[] = []; // 图表所有节点集合，只是带上了是否可以隐藏的tag
 
   /**
    * 返回了隐藏的点和需要显示的点，实际上外部只用了隐藏的点，这里保留为了以后作钩子
@@ -65,13 +64,17 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(private _element: ElementRef, private _render: Renderer2, private safe: DomSanitizer) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    // if (changes && !changes.nodes.isFirstChange()) {
-    //   this._creatData(this.nodes).subscribe(data => (this.uiNodes = data));
-    // }
+    if (changes && !changes.tabs.isFirstChange()) {
+      this.pointsTag = this.tabs.length ? this.tabs[0].tag : '';
+      console.log(this.pointsTag);
+    }
+    // console.log(this.tabs);
   }
 
   ngOnInit() {
-    console.log(this.nodes);
+    this.pointsTag = this.tabs[0].tag;
+    // console.log(this.nodes);
+    // console.log(this.tabs, this.tabs[0].tag);
   }
 
   ngAfterViewInit() {

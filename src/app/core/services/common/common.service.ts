@@ -34,6 +34,18 @@ export class CommonService {
   constructor() {}
 
   /**
+   * 获取n度人脉links
+   *
+   * @param {{[key: number]: ChartLink[]}} allLinks
+   * @param {number} [n]
+   * @returns {ChartLink[]}
+   * @memberof CommonService
+   */
+  getLinks(allLinks: {[key: number]: ChartLink[]}, n?: number): ChartLink[] {
+    return allLinks[n || Object.keys(allLinks)[0]];
+  }
+
+  /**
    * 加颜色的方法
    *
    * @private
