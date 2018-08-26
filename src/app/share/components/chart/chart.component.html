@@ -1,6 +1,8 @@
 <!-- 上方留白 -->
 <div class="hack" style="height: 5.050505rem"></div>
-<div class="chart"></div>
+<div class="chart-container">
+  <div class="chart"></div>
+</div>
 <div class="point-info" [class.no-boder]="!UI_nodeDetail.show">
   <ng-container *ngIf="UI_nodeDetail.show">
     <h3>{{UI_nodeDetail.date}}--{{UI_nodeDetail.id}}</h3>
