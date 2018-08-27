@@ -93,8 +93,8 @@ class Record {
 }
 
 const searchPersonApi = '/api/web/Extract/extract';
-let searchRelationApi = '/api/web/Relation/relation';
-// let searchRelationApi = '/api/web/Relation/relationWithColor';
+// let searchRelationApi = '/api/web/Relation/relation';
+let searchRelationApi = '/api/web/Relation/relationWithColor';
 
 @Component({
   selector: 'app-search-bar',
@@ -379,9 +379,20 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (!environment.production) {
-      this.records.startAndEnd.start.p_id = this.start = 'persona137502e5f2211e881f0005056c00008';
-      this.records.startAndEnd.end.p_id = this.end = 'person8abbfaa65f2211e8afad005056c00008';
-      searchRelationApi = '/assets/mock/new-relation3.json';
+      // this.records.startAndEnd.start.p_id = this.start = 'persona137502e5f2211e881f0005056c00008';
+      // this.records.startAndEnd.end.p_id = this.end = 'person8abbfaa65f2211e8afad005056c00008';
+      // searchRelationApi = '/assets/mock/new-relation3.json';
+      this.records.startAndEnd.start.p_id = this.start = 'person8e1bad0c5f2211e8b58f005056c00008';
+      this.records.startAndEnd.end.p_id = this.end = 'persone35b74805fc611e88ec2005056c00008';
+
+      // /api/web/Relation/relationWithColor?source=personc2df03b796f911e88b0c005056c00008&target=personce8d18585fc511e8bfac005056c00008
+      // /api/web/Relation/relationWithColor?source=personce8d18585fc511e8bfac005056c00008&target=personc2df03b796f911e88b0c005056c00008
+      // /api/web/Relation/relationWithColor?source=person169a51625f2311e88d75005056c00008&target=persone33c2c3a5fc611e883b3005056c00008
+      // /api/web/Relation/relationWithColor?source=person8e1bad0c5f2211e8b58f005056c00008&target=persone35b74805fc611e88ec2005056c00008
+      // /api/web/Relation/relationWithColor?source=person6a3823865f2211e8a235005056c00008&target=person80a797cbb988e17e0eff845e1b06ecee
+      // /api/web/Relation/relationWithColor?source=person7b9435c85f2211e8ba01005056c00008&target=personfad44d585fc411e8b4de005056c00008
+      // /api/web/Relation/relationWithColor?source=person9c20f8dc5fc411e8988f005056c00008&target=person36b233064ab55779878d69c01d7c2544
+
     }
 
     if (!this.start || !this.end) {

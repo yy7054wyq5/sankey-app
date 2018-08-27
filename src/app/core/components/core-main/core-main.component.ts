@@ -240,7 +240,7 @@ export class CoreMainComponent implements OnInit {
         canHidden: true,
         name: key + '度',
         id: parseInt(key, 10),
-        actived: parseInt(key, 10) === 2 ? true : false
+        actived: parseInt(key, 10) === 1 ? true : false
       });
     });
     return [tab];
