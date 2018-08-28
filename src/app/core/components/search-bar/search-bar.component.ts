@@ -40,7 +40,7 @@ export interface SearchResult {
   code: number;
   message: string;
   data: {
-    links: {[key: number]: ChartLink[]};
+    links: { [key: number]: ChartLink[] };
     nodes: ChartNode[];
   };
 }
@@ -198,7 +198,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
           (bak: { code: number; data: any[] }) => {
             this.startLoading = false;
             if (!bak.code) {
-              this.startOptions = bak.data;
+              this._concatData(bak.data).subscribe(data => {
+                this.startOptions = data;
+              });
             }
           },
           error => {
@@ -217,7 +219,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
           (bak: { code: number; data: any[] }) => {
             this.endLoading = false;
             if (!bak.code) {
-              this.endOptions = bak.data;
+              this._concatData(bak.data).subscribe(data => {
+                this.endOptions = data;
+              });
             }
           },
           error => {
@@ -232,6 +236,39 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * 将数据改变结构以适应相同id数据的展示
+   *
+   * @private
+   * @param {Option[]} data
+   * @returns {Observable<any[]>}
+   * @memberof SearchBarComponent
+   */
+  private _concatData(data: Option[]): Observable<any[]> {
+    const _tmp: { [id: string]: { name: string; p_id: string; company: string; info: Option[] } } = {};
+    data.forEach(item => {
+      if (item && item.name) {
+        if (!_tmp[item.p_id]) {
+          _tmp[item.p_id] = {
+            name: item.name,
+            p_id: item.p_id,
+            company: item.company,
+            info: []
+          };
+        }
+        _tmp[item.p_id].info.push(item);
+      }
+    });
+    const _arr = [];
+    for (const id in _tmp) {
+      if (_tmp.hasOwnProperty(id)) {
+        const item = _tmp[id];
+        _arr.push(item);
+      }
+    }
+    return of(_arr);
+  }
 
   /**
    * 绑定搜索
@@ -382,17 +419,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       // this.records.startAndEnd.start.p_id = this.start = 'persona137502e5f2211e881f0005056c00008';
       // this.records.startAndEnd.end.p_id = this.end = 'person8abbfaa65f2211e8afad005056c00008';
       // searchRelationApi = '/assets/mock/new-relation3.json';
-      this.records.startAndEnd.start.p_id = this.start = 'person8e1bad0c5f2211e8b58f005056c00008';
-      this.records.startAndEnd.end.p_id = this.end = 'persone35b74805fc611e88ec2005056c00008';
-
-      // /api/web/Relation/relationWithColor?source=personc2df03b796f911e88b0c005056c00008&target=personce8d18585fc511e8bfac005056c00008
-      // /api/web/Relation/relationWithColor?source=personce8d18585fc511e8bfac005056c00008&target=personc2df03b796f911e88b0c005056c00008
-      // /api/web/Relation/relationWithColor?source=person169a51625f2311e88d75005056c00008&target=persone33c2c3a5fc611e883b3005056c00008
-      // /api/web/Relation/relationWithColor?source=person8e1bad0c5f2211e8b58f005056c00008&target=persone35b74805fc611e88ec2005056c00008
-      // /api/web/Relation/relationWithColor?source=person6a3823865f2211e8a235005056c00008&target=person80a797cbb988e17e0eff845e1b06ecee
-      // /api/web/Relation/relationWithColor?source=person7b9435c85f2211e8ba01005056c00008&target=personfad44d585fc411e8b4de005056c00008
-      // /api/web/Relation/relationWithColor?source=person9c20f8dc5fc411e8988f005056c00008&target=person36b233064ab55779878d69c01d7c2544
-
+      this.records.startAndEnd.start.p_id = this.start = 'person7136dc2e5f2211e896ae005056c00008';
+      this.records.startAndEnd.end.p_id = this.end = 'persona137502e5f2211e881f0005056c00008';
     }
 
     if (!this.start || !this.end) {

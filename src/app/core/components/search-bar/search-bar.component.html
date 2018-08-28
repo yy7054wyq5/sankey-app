@@ -5,9 +5,13 @@
       <ng-container *ngFor="let option of startOptions">
         <nz-option *ngIf="option['name']" nzLabel="{{option['name']}}&nbsp;{{option['company']}}&nbsp;{{lastOptionLable(option)}}" nzValue="{{option['p_id']}}" [nzCustomContent]="true">
           <div class="option-label" (click)="getStartAndEndData(option ,'start')">
-            <span>{{option['name']}}</span>
-            <span>{{option['company']}}</span>
-            <span>{{lastOptionLable(option)}}</span>
+            <div class="name">{{option.name}}</div>
+            <div class="content">
+              <div *ngFor="let info of option.info">
+                <span class="company">{{info.company}}</span>
+                <span class="last">{{lastOptionLable(info)}}</span>
+              </div>
+            </div>
           </div>
         </nz-option>
       </ng-container>
@@ -20,9 +24,13 @@
       <ng-container *ngFor="let option of endOptions">
         <nz-option *ngIf="option['name']" nzLabel="{{option['name']}}&nbsp;{{option['company']}}&nbsp;{{lastOptionLable(option)}}" nzValue="{{option['p_id']}}" [nzCustomContent]="true">
           <div class="option-label" (click)="getStartAndEndData(option ,'end')">
-            <span>{{option['name']}}</span>
-            <span>{{option['company']}}</span>
-            <span>{{lastOptionLable(option)}}</span>
+            <div class="name">{{option.name}}</div>
+            <div class="content">
+              <div *ngFor="let info of option.info">
+                <span class="company">{{info.company}}</span>
+                <span class="last">{{lastOptionLable(info)}}</span>
+              </div>
+            </div>
           </div>
         </nz-option>
       </ng-container>
