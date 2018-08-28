@@ -501,7 +501,12 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @returns
    * @memberof SearchBarComponent
    */
-  lastOptionLable(option: Option) {
-    return option.title || option.role;
+  lastOptionLable(option: Option | Option[]) {
+    if (Array.isArray(option)) {
+      const _option = option[option.length - 1];
+      return _option.title || _option.role;
+    } else {
+      return option.title || option.role;
+    }
   }
 }
