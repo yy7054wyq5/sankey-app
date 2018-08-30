@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { chartOption, chartColorConfig } from '../../config';
 import { CommonService, ObjTypeLinksData, NodeCate } from '../../services/common/common.service';
-import { Contacts, SearchStatus, SearchBarComponent, AjaxResponse } from '../search-bar/search-bar.component';
+import { Contacts, SearchStatus, SearchBarComponent, AjaxResponse, Line } from '../search-bar/search-bar.component';
 import { NzMessageService } from 'ng-zorro-antd';
 import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 import { ChartComponent } from '../../../share/components/chart/chart.component';
@@ -86,22 +86,21 @@ export class CoreMainComponent implements OnInit {
   ): Observable<{ nodes: ChartNode[]; objLinks: ObjTypeLinksData }> {
     return this._common.buildLinksToObjByNodeId(links).pipe(
       mergeMap((_newLinks: ObjTypeLinksData) => {
+        console.log('节点对应关系', _newLinks);
         const startId = this.searchBar.records.startAndEnd.start.p_id;
         const startTargets = _newLinks[startId].targets;
-        console.log(startTargets);
+        console.log('起点目标点', startTargets);
         for (let idx = 0; idx < nodes.length; idx++) {
           const node = nodes[idx];
           const index = startTargets.indexOf(node.id);
           if (index > -1) {
             node.canHidden = true; // 添加可隐藏标记
-            if (index === startTargets.length - 1) {
-              return of({
-                nodes: nodes,
-                objLinks: _newLinks
-              });
-            }
           }
         }
+        return of({
+          nodes: nodes,
+          objLinks: _newLinks
+        });
       })
     );
   }
@@ -114,16 +113,21 @@ export class CoreMainComponent implements OnInit {
    */
   getCheckedContacts(data: { out: number[]; hidden: number[] }) {
     console.log(data);
-    let crtlinks = [];
-    let crtNodes = [];
+    let links = [];
+    let nodes = [];
     if (data.out.length) {
       // 遍历已选人脉
       data.out.forEach(contact => {
-        crtlinks = crtlinks.concat(this._common.outCrtContactLinks(this._ajaxData, contact));
-        crtNodes = crtNodes.concat(this._common.outCrtContactNodes(this._ajaxData, contact));
+        links = links.concat(this._common.outCrtContactLinks(this._ajaxData, contact));
+        nodes = nodes.concat(this._common.outCrtContactNodes(this._ajaxData, contact));
       });
     }
-    this._afterGetData(this._common.filterNodes(crtNodes), this._common.filterLinks(crtlinks));
+    const contactsAllNodes = nodes;
+    const filterNodes = this._common.filterNodes(contactsAllNodes);
+    const filterLinks = this._common.filterLinks(links);
+    console.log(filterLinks);
+    this._creatNodesCheckTab(contactsAllNodes, filterLinks);
+    this._afterGetData(filterNodes, filterLinks);
   }
 
   /**
@@ -132,26 +136,47 @@ export class CoreMainComponent implements OnInit {
    * @param {ChartNode[]} activedNodes
    * @memberof ChartComponent
    */
-  getCheckedNodes(data: { out: string[]; hidden: string[] }) {
-    console.log('被隐藏的起点', data.hidden);
-    const _loadingId = this._showLoading('图表重绘中....');
-    const hiddenNodesId = this._common.getHiddenNodesInLine(data.hidden, this._objTypeLinksData);
-    hiddenNodesId.pop(); // 删除终点
-    const _newNodes = [];
-    const _tmp = Object.assign({}, this._nodesExchangeToObjUseIdkey);
-    console.log('被隐藏的一条线上的点', hiddenNodesId);
-    hiddenNodesId.forEach(id => {
-      delete _tmp[id];
+  getCheckedNodes(data: { out: ChartNode[]; hidden: ChartNode[] }) {
+    console.log('选的节点', data);
+    const record = {};
+    data.out.forEach(chartNode => {
+      if (!record[chartNode.contact]) {
+        record[chartNode.contact] = [];
+      }
+      record[chartNode.contact].push(chartNode.line);
     });
-    for (const id in _tmp) {
-      if (_tmp.hasOwnProperty(id)) {
-        const node = _tmp[id];
-        _newNodes.push(node);
+    // 目前只对起点后面的做显隐，所以一个点就代表了一条线，所以可以直接根据返回的显示点来显示图表
+    let nodes = [];
+    let links = [];
+    for (const contact in record) {
+      if (record.hasOwnProperty(contact)) {
+        record[contact].forEach(lineIndex => {
+          const line: Line = this._ajaxData[contact][lineIndex];
+          nodes = [...nodes, ...line.nodes];
+          links = [...links, ...line.links];
+        });
       }
     }
-    console.log(_newNodes);
-    this._msg.remove(_loadingId);
-    this._setChartOption(_newNodes, this.crtlinks);
+    console.log(nodes, links);
+    this._afterGetData(this._common.filterNodes(nodes), this._common.filterLinks(links));
+    // const _loadingId = this._showLoading('图表重绘中....');
+    // const hiddenNodesId = this._common.getHiddenNodesInLine(data.hidden, this._objTypeLinksData);
+    // hiddenNodesId.pop(); // 删除终点
+    // const _newNodes = [];
+    // const _tmp = Object.assign({}, this._nodesExchangeToObjUseIdkey);
+    // console.log('被隐藏的一条线上的点', hiddenNodesId);
+    // hiddenNodesId.forEach(id => {
+    //   delete _tmp[id];
+    // });
+    // for (const id in _tmp) {
+    //   if (_tmp.hasOwnProperty(id)) {
+    //     const node = _tmp[id];
+    //     _newNodes.push(node);
+    //   }
+    // }
+    // console.log(_newNodes);
+    // this._msg.remove(_loadingId);
+    // this._setChartOption(_newNodes, this.crtlinks);
   }
 
   /**
@@ -176,25 +201,31 @@ export class CoreMainComponent implements OnInit {
     return [tab];
   }
 
-  private _creatNodesCheckTab(data: { links: ChartLink[]; nodes: ChartNode[] }) {
-    if (data.links.length) {
+  /**
+   * 创建节点下拉数据
+   *
+   * @private
+   * @param {{ links: ChartLink[]; nodes: ChartNode[] }} data
+   * @memberof CoreMainComponent
+   */
+  private _creatNodesCheckTab(nodes: ChartNode[], links: ChartLink[]) {
+    if (links.length) {
       // 初始化节点下拉框
       this.checknodesTab = [];
       this.checknodesTab[0] = new CheckTab('organization', '公司', 'blue');
       this.checknodesTab[1] = new CheckTab('case', '事件', 'orange');
-      this._addCanHiddenAttrInNodeAndBackObjLinks(data.links, data.nodes).subscribe(_data => {
-        this._msg.remove(this.loadingId);
+      this._addCanHiddenAttrInNodeAndBackObjLinks(links, nodes).subscribe(_data => {
         // 分离可以显隐的数据
         this._common.separateNode(_data.nodes).subscribe(cheknodes => {
           this.checknodesTab.forEach((tab, idx) => {
             if (tab.tag === NodeCate.case) {
-              this.checknodesTab[idx].options = cheknodes[NodeCate.case];
+              this.checknodesTab[idx].options = cheknodes[NodeCate.case] || [];
             } else if (tab.tag === NodeCate.organization) {
-              this.checknodesTab[idx].options = cheknodes[NodeCate.organization];
+              this.checknodesTab[idx].options = cheknodes[NodeCate.organization] || [];
             }
           });
         });
-        // console.log(this.checknodesTab[1]);
+        console.log(this.checknodesTab);
         // 隐藏单个节点，为隐藏整条线的准备数据
         // this._objTypeLinksData = _data.objLinks;
         // this._exchangeArrToObj(data.nodes).subscribe(_newNodes => (this._nodesExchangeToObjUseIdkey = _newNodes));
@@ -217,9 +248,11 @@ export class CoreMainComponent implements OnInit {
       this._ajaxData = res.data;
       this.checkcontactsTab = this._creatContactsCheckTab(this._ajaxData);
       // 默认显示已有的第一度人脉
-      const crtlinks = this._common.filterLinks(this._common.outCrtContactLinks(this._ajaxData));
-      const crtNodes = this._common.filterNodes(this._common.outCrtContactNodes(this._ajaxData));
-      this._afterGetData(crtNodes, crtlinks);
+      const linksforDis = this._common.filterLinks(this._common.outCrtContactLinks(this._ajaxData)); // 去重的links
+      const crtAllNodes = this._common.outCrtContactNodes(this._ajaxData); // 未去重的所有的nodes
+      const nodesForDis = this._common.filterNodes(crtAllNodes); // 去重的nodes
+      this._creatNodesCheckTab(crtAllNodes, linksforDis);
+      this._afterGetData(nodesForDis, linksforDis);
     } else {
       this._msg.remove(this.loadingId);
       this.option = null;
@@ -238,7 +271,6 @@ export class CoreMainComponent implements OnInit {
       // 生成图表
       this._setChartOption(data.nodes, data.links);
       this._msg.remove(this.loadingId);
-      this._creatNodesCheckTab(data);
     });
   }
 
@@ -301,7 +333,7 @@ export class CoreMainComponent implements OnInit {
    * @memberof CoreMainComponent
    */
   mouseoverChartEvent(data) {
-    console.log('over', data);
+    // console.log('over', data);
   }
 
   /**

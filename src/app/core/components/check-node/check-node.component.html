@@ -12,7 +12,7 @@
         <ng-container *ngFor="let option of tab.options">
           <li class="nodes-item" *ngIf="option.canHidden && tab.tag === pointsTag" (click)="check(option)">
             <i class="anticon" [class.anticon-check]="option.actived" [style]="optionActiveStyle(option, tab, pointsTag)"></i>
-            <span [title]="option.name">{{option.name}}</span>
+            <span [title]="option.name">{{disName(option)}}</span>
           </li>
         </ng-container>
       </ng-container>

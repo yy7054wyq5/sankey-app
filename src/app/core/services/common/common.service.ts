@@ -41,7 +41,7 @@ export class CommonService {
    * @returns
    * @memberof CommonService
    */
-  filterNodes(nodes: ChartNode[]) {
+  filterNodes(nodes: ChartNode[]): ChartNode[] {
     const nodesObj: { [id: string]: ChartNode } = {};
     nodes.forEach(node => {
       const _node: ChartNode = JSON.parse(JSON.stringify(node));
@@ -61,7 +61,7 @@ export class CommonService {
    * @returns
    * @memberof CommonService
    */
-  filterLinks(links: ChartLink[]) {
+  filterLinks(links: ChartLink[]): ChartLink[] {
     const _linksObj: { [id: string]: ChartLink } = {};
     links.forEach(link => {
       const _link: ChartLink = JSON.parse(JSON.stringify(link));
@@ -70,12 +70,12 @@ export class CommonService {
         _linksObj[id] = _link;
       }
     });
-    console.log(_linksObj);
+    // console.log(_linksObj);
     return objToArr(_linksObj);
   }
 
   /**
-   * 获取人脉下的需要的links
+   * 获取人脉下的需要的links，只传总数据则只返回第一个人脉的数据
    *
    * @param {Contacts} data
    * @param {number} [contact]
@@ -155,7 +155,7 @@ export class CommonService {
    * @returns {Observable<UInodes>}
    * @memberof CheckNodeComponent
    */
-  separateNode(data: ChartNode[]): Observable<{ [tag: string]: CheckOption[] }> {
+  separateNode(data: ChartNode[]): Observable<{ [tag: string]: CheckOption[] | undefined }> {
     const tmp = {};
     data.forEach(node => {
       const _node: CheckOption = {

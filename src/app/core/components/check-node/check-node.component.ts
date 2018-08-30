@@ -51,6 +51,8 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   @Input()
   placeholder: string;
   @Input()
+  outFullData = false;
+  @Input()
   // nodes: ChartNode[] = []; // 图表所有节点集合，只是带上了是否可以隐藏的tag
 
   /**
@@ -101,6 +103,20 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   /**
+   * option显示文字
+   *
+   * @param {CheckOption} option
+   * @returns
+   * @memberof CheckNodeComponent
+   */
+  disName(option: CheckOption) {
+    if (option.contact !== undefined && option.line !== undefined) {
+      return `${option.contact}度_${option.line} ${option.name}`;
+    }
+    return option.name;
+  }
+
+  /**
    * 勾选节点
    *
    * @param {checkOption} chartNode
@@ -114,11 +130,11 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
     });
     const out = [];
     const hidden = [];
-    tmp.forEach(node => {
-      if (node.actived) {
-        out.push(node.id);
+    tmp.forEach((node: CheckOption) => {
+      if (node.actived && node.canHidden) {
+        out.push(this.outFullData ? node : node.id);
       } else {
-        hidden.push(node.id);
+        hidden.push(this.outFullData ? node : node.id);
       }
     });
     this.outCheckedNodes.emit({
