@@ -27,15 +27,15 @@ export class CoreMainComponent implements OnInit {
   colorBar = chartColorConfig;
   initCore = true; // 初始状态
   person = []; // 侧栏任务信息
-  nodes: ChartNode[];
-  links: { [key: number]: ChartLink[] };
-  crtNodes: ChartNode[] = [];
-  crtlinks: ChartLink[] = [];
+  // nodes: ChartNode[];
+  // links: { [key: number]: ChartLink[] };
+  // crtNodes: ChartNode[] = [];
+  // crtlinks: ChartLink[] = [];
   checknodesTab: CheckTab[] = []; // 显示隐藏起点的一度节点
   checkcontactsTab: CheckTab[] = []; // 显示隐藏人脉
   private _ajaxData: Contacts;
-  private _nodesExchangeToObjUseIdkey: { [id: string]: ChartNode } = {};
-  private _objTypeLinksData: ObjTypeLinksData;
+  // private _nodesExchangeToObjUseIdkey: { [id: string]: ChartNode } = {};
+  // private _objTypeLinksData: ObjTypeLinksData;
 
   /**
    * 是否显示人脉或节点下拉框
