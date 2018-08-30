@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ChartNode, ChartLink } from '../../../share/components/chart/chart.service';
 import { Observable, of } from '../../../../../node_modules/rxjs';
-import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { SearchBarComponent, Contacts, Line } from '../../components/search-bar/search-bar.component';
 import { chartColorConfig } from '../../config';
 import { CheckOption } from '../../components/check-node/check-node.component';
+import { objToArr } from '../../../share/utils';
 
 /**
  * 为隐藏点准备的数据结构，由buildLinksToObjByNodeId函数生成
@@ -34,15 +35,91 @@ export class CommonService {
   constructor() {}
 
   /**
-   * 获取n度人脉links
+   * 过滤掉重复的node
    *
-   * @param {{[key: number]: ChartLink[]}} allLinks
-   * @param {number} [n]
+   * @param {ChartNode[]} nodes
+   * @returns
+   * @memberof CommonService
+   */
+  filterNodes(nodes: ChartNode[]) {
+    const nodesObj: { [id: string]: ChartNode } = {};
+    nodes.forEach(node => {
+      const _node: ChartNode = JSON.parse(JSON.stringify(node));
+      delete _node.contact;
+      delete _node.line;
+      if (!nodesObj[node.id]) {
+        nodesObj[node.id] = _node;
+      }
+    });
+    return objToArr(nodesObj);
+  }
+
+  /**
+   * 过滤掉重复的links
+   *
+   * @param {ChartLink[]} links
+   * @returns
+   * @memberof CommonService
+   */
+  filterLinks(links: ChartLink[]) {
+    const _linksObj: { [id: string]: ChartLink } = {};
+    links.forEach(link => {
+      const _link: ChartLink = JSON.parse(JSON.stringify(link));
+      const id = `s_${link.source}_t_${link.target}`;
+      if (!_linksObj[id]) {
+        _linksObj[id] = _link;
+      }
+    });
+    console.log(_linksObj);
+    return objToArr(_linksObj);
+  }
+
+  /**
+   * 获取人脉下的需要的links
+   *
+   * @param {Contacts} data
+   * @param {number} [contact]
+   * @param {number[]} [lines]
    * @returns {ChartLink[]}
    * @memberof CommonService
    */
-  getLinks(allLinks: {[key: number]: ChartLink[]}, n?: number): ChartLink[] {
-    return allLinks[n || Object.keys(allLinks)[0]];
+  outCrtContactLinks(data: Contacts, contact?: number, lines?: number[]): ChartLink[] {
+    let links = [];
+    const crtContactLine: Line[] = data[contact || Object.keys(data)[0]];
+    if (lines) {
+      lines.forEach(lineIndex => {
+        links = [...links, ...crtContactLine[lineIndex].links];
+      });
+    } else {
+      crtContactLine.forEach(line => {
+        links = [...links, ...line.links];
+      });
+    }
+    return links;
+  }
+
+  /**
+   * 返回人脉下所需nodes
+   *
+   * @param {Contacts} data
+   * @param {number} [contact]
+   * @param {number[]} [lines]
+   * @returns {ChartNode[]}
+   * @memberof CommonService
+   */
+  outCrtContactNodes(data: Contacts, contact?: number, lines?: number[]): ChartNode[] {
+    let nodes = [];
+    const crtContactLine: Line[] = data[contact || Object.keys(data)[0]];
+    if (lines) {
+      lines.forEach(lineIndex => {
+        nodes = [...nodes, ...crtContactLine[lineIndex].nodes];
+      });
+    } else {
+      crtContactLine.forEach(line => {
+        nodes = [...nodes, ...line.nodes];
+      });
+    }
+    return nodes;
   }
 
   /**

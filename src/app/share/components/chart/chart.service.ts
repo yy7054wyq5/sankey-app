@@ -29,6 +29,8 @@ export interface ChartEventCbParams {
 export interface ChartNode {
   name: string;
   id: any;
+  contact?: number; // 人脉
+  line?: number; // 线路
   canHidden?: boolean; // 可隐藏标记
   date?: string;
   node?: any;

@@ -1,6 +1,6 @@
 <nz-layout class="core-main">
   <!-- 搜索栏 -->
-  <app-search-bar #searchBar (outSearchResult)="getSearchResult($event)" (outSearchStatus)="getSearchStatus($event)"></app-search-bar>
+  <app-search-bar #searchBar (outSearchResult)="getContacts($event)" (outSearchStatus)="getSearchStatus($event)"></app-search-bar>
   <section class="core-body">
     <!-- sider以模板变量的方式接收app-search-bar某些变量或整个对象 -->
     <app-sider [histories]="searchBar.records.data" [person]="person" [searchBar]="searchBar" (outFoldStatus)="siderFoldStatus($event)"></app-sider>

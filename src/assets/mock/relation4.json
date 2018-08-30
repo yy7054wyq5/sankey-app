@@ -1,0 +1,176 @@
+{
+  "code": null,
+  "message": null,
+  "data": {
+    "2": [
+      {
+        "nodes": [
+          {
+            "name": "李鹏",
+            "id": "persona137502e5f2211e881f0005056c00008",
+            "date": null,
+            "contact": 2,
+            "line": 0
+          },
+          {
+            "name": "2017年03月22日-海天精工2016年年度报告",
+            "id": "caseda052a676a0111e8a353000c2974e9f6",
+            "date": "2017-03-22",
+            "contact": 2,
+            "line": 0
+          },
+          {
+            "name": "刘洋",
+            "id": "person5c4cd4825f2311e8bb43005056c00008",
+            "date": null,
+            "contact": 2,
+            "line": 0
+          },
+          {
+            "name": "2016年03月11日-卫宁健康：关于非公开发行新股的上市公告书",
+            "id": "case5697bca56a0211e8a353000c2974e9f6",
+            "date": "2016-03-11",
+            "contact": 2,
+            "line": 0
+          },
+          {
+            "name": "董尧",
+            "id": "person8abbfaa65f2211e8afad005056c00008",
+            "date": null,
+            "contact": 2,
+            "line": 0
+          }
+        ],
+        "links": [
+          {
+            "source": "persona137502e5f2211e881f0005056c00008",
+            "target": "caseda052a676a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "red"
+          },
+          {
+            "source": "caseda052a676a0111e8a353000c2974e9f6",
+            "target": "person5c4cd4825f2311e8bb43005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "red"
+          },
+          {
+            "source": "person5c4cd4825f2311e8bb43005056c00008",
+            "target": "case5697bca56a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "red"
+          },
+          {
+            "source": "case5697bca56a0211e8a353000c2974e9f6",
+            "target": "person8abbfaa65f2211e8afad005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "red"
+          }
+        ]
+      }
+    ],
+    "3": [
+      {
+        "nodes": [
+          {
+            "name": "李鹏",
+            "id": "persona137502e5f2211e881f0005056c00008",
+            "date": null,
+            "contact": 3,
+            "line": 0
+          },
+          {
+            "name": "2017年03月22日-海天精工2016年年度报告",
+            "id": "caseda052a676a0111e8a353000c2974e9f6",
+            "date": "2017-03-22",
+            "contact": 3,
+            "line": 0
+          },
+          {
+            "name": "刘洋",
+            "id": "person5c4cd4825f2311e8bb43005056c00008",
+            "date": null,
+            "contact": 3,
+            "line": 0
+          },
+          {
+            "name": "2016年03月11日-卫宁健康：关于非公开发行新股的上市公告书",
+            "id": "case5697bca56a0211e8a353000c2974e9f6",
+            "date": "2016-03-11",
+            "contact": 3,
+            "line": 0
+          },
+          {
+            "name": "肖厚发",
+            "id": "person8a76da545f2211e8a5d1005056c00008",
+            "date": null,
+            "contact": 3,
+            "line": 0
+          },
+          {
+            "name": "招商证券",
+            "id": "organization8e5ded345e7011e8a22a005056c00008",
+            "date": null,
+            "contact": 3,
+            "line": 0
+          },
+          {
+            "name": "董尧",
+            "id": "person8abbfaa65f2211e8afad005056c00008",
+            "date": null,
+            "contact": 3,
+            "line": 0
+          }
+        ],
+        "links": [
+          {
+            "source": "persona137502e5f2211e881f0005056c00008",
+            "target": "caseda052a676a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "blue"
+          },
+          {
+            "source": "caseda052a676a0111e8a353000c2974e9f6",
+            "target": "person5c4cd4825f2311e8bb43005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "blue"
+          },
+          {
+            "source": "person5c4cd4825f2311e8bb43005056c00008",
+            "target": "case5697bca56a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "blue"
+          },
+          {
+            "source": "case5697bca56a0211e8a353000c2974e9f6",
+            "target": "person8a76da545f2211e8a5d1005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "blue"
+          },
+          {
+            "source": "person8a76da545f2211e8a5d1005056c00008",
+            "target": "organization8e5ded345e7011e8a22a005056c00008",
+            "relation": "2018隶属于",
+            "value": 1,
+            "color": "blue"
+          },
+          {
+            "source": "organization8e5ded345e7011e8a22a005056c00008",
+            "target": "person8abbfaa65f2211e8afad005056c00008",
+            "relation": "2017隶属于",
+            "value": 1,
+            "color": "blue"
+          }
+        ]
+      }
+    ]
+  }
+}

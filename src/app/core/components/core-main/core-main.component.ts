@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { chartOption, chartColorConfig } from '../../config';
 import { CommonService, ObjTypeLinksData, NodeCate } from '../../services/common/common.service';
-import { SearchResult, SearchStatus, SearchBarComponent } from '../search-bar/search-bar.component';
+import { Contacts, SearchStatus, SearchBarComponent, AjaxResponse } from '../search-bar/search-bar.component';
 import { NzMessageService } from 'ng-zorro-antd';
 import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 import { ChartComponent } from '../../../share/components/chart/chart.component';
@@ -29,9 +29,11 @@ export class CoreMainComponent implements OnInit {
   person = []; // 侧栏任务信息
   nodes: ChartNode[];
   links: { [key: number]: ChartLink[] };
+  crtNodes: ChartNode[] = [];
   crtlinks: ChartLink[] = [];
   checknodesTab: CheckTab[] = []; // 显示隐藏起点的一度节点
   checkcontactsTab: CheckTab[] = []; // 显示隐藏人脉
+  private _ajaxData: Contacts;
   private _nodesExchangeToObjUseIdkey: { [id: string]: ChartNode } = {};
   private _objTypeLinksData: ObjTypeLinksData;
 
@@ -42,7 +44,7 @@ export class CoreMainComponent implements OnInit {
    * @memberof CoreMainComponent
    */
   get showCheckComponent() {
-    return this.links;
+    return this._ajaxData;
   }
 
   @ViewChild('searchBar')
@@ -104,20 +106,28 @@ export class CoreMainComponent implements OnInit {
     );
   }
 
+  /**
+   * 选择人脉
+   *
+   * @param {{ out: number[]; hidden: number[] }} data
+   * @memberof CoreMainComponent
+   */
   getCheckedContacts(data: { out: number[]; hidden: number[] }) {
     console.log(data);
-    this.crtlinks = [];
+    let crtlinks = [];
+    let crtNodes = [];
     if (data.out.length) {
-      data.out.forEach(id => {
-        this.crtlinks = this.crtlinks.concat(this.links[id]);
+      // 遍历已选人脉
+      data.out.forEach(contact => {
+        crtlinks = crtlinks.concat(this._common.outCrtContactLinks(this._ajaxData, contact));
+        crtNodes = crtNodes.concat(this._common.outCrtContactNodes(this._ajaxData, contact));
       });
     }
-    console.log(this.crtlinks);
-    this._afterGetData();
+    this._afterGetData(this._common.filterNodes(crtNodes), this._common.filterLinks(crtlinks));
   }
 
   /**
-   * 从节点下拉框返回的已选中节点数据
+   * 选择节点
    *
    * @param {ChartNode[]} activedNodes
    * @memberof ChartComponent
@@ -142,6 +152,106 @@ export class CoreMainComponent implements OnInit {
     console.log(_newNodes);
     this._msg.remove(_loadingId);
     this._setChartOption(_newNodes, this.crtlinks);
+  }
+
+  /**
+   * 生成人脉下拉
+   *
+   * @private
+   * @param {{ [key: number]: ChartLink[] }} links
+   * @returns {CheckTab[]}
+   * @memberof CoreMainComponent
+   */
+  private _creatContactsCheckTab(data: Contacts): CheckTab[] {
+    const tab = new CheckTab('contacts', '人脉', 'grey');
+    const firstContact = Object.keys(data)[0];
+    Object.keys(data).forEach(contact => {
+      tab.options.push({
+        canHidden: true,
+        name: contact + '度',
+        id: parseInt(contact, 10),
+        actived: contact === firstContact ? true : false
+      });
+    });
+    return [tab];
+  }
+
+  private _creatNodesCheckTab(data: { links: ChartLink[]; nodes: ChartNode[] }) {
+    if (data.links.length) {
+      // 初始化节点下拉框
+      this.checknodesTab = [];
+      this.checknodesTab[0] = new CheckTab('organization', '公司', 'blue');
+      this.checknodesTab[1] = new CheckTab('case', '事件', 'orange');
+      this._addCanHiddenAttrInNodeAndBackObjLinks(data.links, data.nodes).subscribe(_data => {
+        this._msg.remove(this.loadingId);
+        // 分离可以显隐的数据
+        this._common.separateNode(_data.nodes).subscribe(cheknodes => {
+          this.checknodesTab.forEach((tab, idx) => {
+            if (tab.tag === NodeCate.case) {
+              this.checknodesTab[idx].options = cheknodes[NodeCate.case];
+            } else if (tab.tag === NodeCate.organization) {
+              this.checknodesTab[idx].options = cheknodes[NodeCate.organization];
+            }
+          });
+        });
+        // console.log(this.checknodesTab[1]);
+        // 隐藏单个节点，为隐藏整条线的准备数据
+        // this._objTypeLinksData = _data.objLinks;
+        // this._exchangeArrToObj(data.nodes).subscribe(_newNodes => (this._nodesExchangeToObjUseIdkey = _newNodes));
+      });
+    } else {
+      this.checknodesTab = [];
+    }
+  }
+
+  /**
+   * 获取关系数据
+   *
+   * @param {Contacts} res
+   * @memberof CoreMainComponent
+   */
+  getContacts(res: AjaxResponse) {
+    console.log(res);
+    this.initCore = false;
+    if (!res.code && res.data && Object.keys(res.data).length) {
+      this._ajaxData = res.data;
+      this.checkcontactsTab = this._creatContactsCheckTab(this._ajaxData);
+      // 默认显示已有的第一度人脉
+      const crtlinks = this._common.filterLinks(this._common.outCrtContactLinks(this._ajaxData));
+      const crtNodes = this._common.filterNodes(this._common.outCrtContactNodes(this._ajaxData));
+      this._afterGetData(crtNodes, crtlinks);
+    } else {
+      this._msg.remove(this.loadingId);
+      this.option = null;
+    }
+  }
+
+  /**
+   * 当前人脉数据
+   *
+   * @private
+   * @memberof CoreMainComponent
+   */
+  private _afterGetData(nodes: ChartNode[], links: ChartLink[]) {
+    // 设置节点和线的样式
+    this._common.setNodesAndLinksStyle(this.searchBar, nodes, links).subscribe(data => {
+      // 生成图表
+      this._setChartOption(data.nodes, data.links);
+      this._msg.remove(this.loadingId);
+      this._creatNodesCheckTab(data);
+    });
+  }
+
+  /**
+   * 根据搜索状态展示loading
+   *
+   * @param {SearchStatus} status
+   * @memberof CoreMainComponent
+   */
+  getSearchStatus(status: SearchStatus) {
+    if (status === SearchStatus.pending) {
+      this.loadingId = this._showLoading();
+    }
   }
 
   /**
@@ -182,102 +292,6 @@ export class CoreMainComponent implements OnInit {
     _chartConfig.series[0].data = nodes;
     _chartConfig.series[0].links = links;
     this.option = Object.assign({}, _chartConfig);
-  }
-
-  /**
-   * 当前人脉数据
-   *
-   * @private
-   * @memberof CoreMainComponent
-   */
-  private _afterGetData() {
-    // 设置节点和线的样式
-    const allNodes = JSON.parse(JSON.stringify(this.nodes)); // 每次都重新从源数据中重新改造数据，因为函数内未对变量还原
-    this._common.setNodesAndLinksStyle(this.searchBar, allNodes, this.crtlinks).subscribe(data => {
-      // 初始化节点下拉框
-      this.checknodesTab = [];
-      this.checknodesTab[0] = new CheckTab('organization', '公司', 'blue');
-      this.checknodesTab[1] = new CheckTab('case', '事件', 'orange');
-      // 生成图表
-      this._setChartOption(data.nodes, data.links);
-      if (data.links.length) {
-        this._addCanHiddenAttrInNodeAndBackObjLinks(data.links, data.nodes).subscribe(_data => {
-          this._msg.remove(this.loadingId);
-          // 分离可以显隐的数据
-          this._common.separateNode(_data.nodes).subscribe(cheknodes => {
-            this.checknodesTab.forEach((tab, idx) => {
-              if (tab.tag === NodeCate.case) {
-                this.checknodesTab[idx].options = cheknodes[NodeCate.case];
-              } else if (tab.tag === NodeCate.organization) {
-                this.checknodesTab[idx].options = cheknodes[NodeCate.organization];
-              }
-            });
-          });
-          // console.log(this.checknodesTab[1]);
-          // 隐藏单个节点，为隐藏整条线的准备数据
-          this._objTypeLinksData = _data.objLinks;
-          this._exchangeArrToObj(data.nodes).subscribe(_newNodes => (this._nodesExchangeToObjUseIdkey = _newNodes));
-        });
-      } else {
-        this._msg.remove(this.loadingId);
-        this.checknodesTab = [];
-      }
-    });
-  }
-
-  /**
-   * 生成人脉下拉
-   *
-   * @private
-   * @param {{ [key: number]: ChartLink[] }} links
-   * @returns {CheckTab[]}
-   * @memberof CoreMainComponent
-   */
-  private _creatContactsCheckTab(links: { [key: number]: ChartLink[] }): CheckTab[] {
-    const tab = new CheckTab('contacts', '人脉', 'grey');
-    Object.keys(links).forEach(key => {
-      tab.options.push({
-        canHidden: true,
-        name: key + '度',
-        id: parseInt(key, 10),
-        actived: parseInt(key, 10) === 1 ? true : false
-      });
-    });
-    return [tab];
-  }
-
-  /**
-   * 根据搜索状态展示loading
-   *
-   * @param {SearchStatus} status
-   * @memberof CoreMainComponent
-   */
-  getSearchStatus(status: SearchStatus) {
-    if (status === SearchStatus.pending) {
-      this.loadingId = this._showLoading();
-    }
-  }
-
-  /**
-   * 获取关系数据
-   *
-   * @param {SearchResult} res
-   * @memberof CoreMainComponent
-   */
-  getSearchResult(res: SearchResult) {
-    console.log(res);
-    this.initCore = false;
-    if (!res.code && res.data && res.data.links && res.data.nodes.length) {
-      this.nodes = res.data.nodes;
-      this.links = res.data.links;
-      this.checkcontactsTab = this._creatContactsCheckTab(this.links);
-      // 默认显示二度人脉
-      this.crtlinks = this._common.getLinks(this.links);
-      this._afterGetData();
-    } else {
-      this._msg.remove(this.loadingId);
-      this.option = null;
-    }
   }
 
   /**

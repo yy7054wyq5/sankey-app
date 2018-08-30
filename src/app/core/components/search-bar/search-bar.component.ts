@@ -30,19 +30,25 @@ export enum SearchStatus {
   complate = 'complate'
 }
 
+export interface AjaxResponse {
+  code: number;
+  message: string;
+  data: Contacts;
+}
+
 /**
  * 搜索数据返回
  *
  * @export
  * @interface SearchResult
  */
-export interface SearchResult {
-  code: number;
-  message: string;
-  data: {
-    links: { [key: number]: ChartLink[] };
-    nodes: ChartNode[];
-  };
+export interface Contacts {
+  [contact: number]: Line[];
+}
+
+export interface Line {
+  links: ChartLink[];
+  nodes: ChartNode[];
 }
 
 /**
@@ -133,7 +139,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof SearchBarComponent
    */
   @Output()
-  outSearchResult = new EventEmitter<SearchResult>();
+  outSearchResult = new EventEmitter<AjaxResponse>();
 
   /**
    * 传出搜索状态
@@ -155,13 +161,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   tipsLeft = ['21rem', '59rem', '83rem'];
   // 提示
   tip: Element;
-  errorBakData: SearchResult = {
+  errorBakData: AjaxResponse = {
     code: 0,
     message: '',
-    data: {
-      nodes: [],
-      links: []
-    }
+    data: null
   };
 
   constructor(
@@ -386,10 +389,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @returns {boolean}
    * @memberof SearchBarComponent
    */
-  private _isSuccessBack(res: SearchResult): boolean {
+  private _isSuccessBack(res: AjaxResponse): boolean {
     if (!res.code) {
       if (res.data) {
-        if (res.data.links && res.data.nodes) {
+        if (Object.keys(res.data).length) {
           return true;
         }
         return false;
@@ -416,9 +419,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (!environment.production) {
-      // this.records.startAndEnd.start.p_id = this.start = 'persona137502e5f2211e881f0005056c00008';
-      // this.records.startAndEnd.end.p_id = this.end = 'person8abbfaa65f2211e8afad005056c00008';
-      // searchRelationApi = '/assets/mock/new-relation3.json';
+      this.records.startAndEnd.start.p_id = this.start = 'persona137502e5f2211e881f0005056c00008';
+      this.records.startAndEnd.end.p_id = this.end = 'person8abbfaa65f2211e8afad005056c00008';
+      searchRelationApi = '/assets/mock/relation4.json';
       // this.records.startAndEnd.start.p_id = this.start = 'person7136dc2e5f2211e896ae005056c00008';
       // this.records.startAndEnd.end.p_id = this.end = 'persona137502e5f2211e881f0005056c00008';
     }
@@ -430,7 +433,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.outSearchStatus.emit(SearchStatus.pending);
 
     this._http.get(searchRelationApi, { params: { source: this.start, target: this.end } }).subscribe(
-      (res: SearchResult) => {
+      (res: AjaxResponse) => {
         if (this._isSuccessBack(res)) {
           this.outSearchResult.emit(res);
           this._updateRecords().subscribe(data => {
