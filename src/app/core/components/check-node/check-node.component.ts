@@ -49,11 +49,11 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   @Input()
   tabs: CheckTab[];
   @Input()
+  positionType: 'absolute' | 'relative' | 'fixed' | null = 'absolute';
+  @Input()
   placeholder: string;
   @Input()
   outFullData = false;
-  @Input()
-  // nodes: ChartNode[] = []; // 图表所有节点集合，只是带上了是否可以隐藏的tag
 
   /**
    * 返回了隐藏的点和需要显示的点，实际上外部只用了隐藏的点，这里保留为了以后作钩子
@@ -66,9 +66,15 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(private _element: ElementRef, private _render: Renderer2, private safe: DomSanitizer) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes && !changes.tabs.isFirstChange()) {
-      this.pointsTag = this.tabs.length ? this.tabs[0].tag : '';
-      console.log(this.pointsTag);
+    if (changes) {
+      if (changes.tabs && !changes.tabs.isFirstChange()) {
+        this.pointsTag = this.tabs.length ? this.tabs[0].tag : '';
+        console.log(this.pointsTag);
+      }
+
+      if (changes.positionType) {
+        this._positionDiv(this.positionType);
+      }
     }
     // console.log(this.tabs);
   }
@@ -80,11 +86,19 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // 定位下拉框
-    this._render.setAttribute(this._element.nativeElement, 'style', `top: ${this.top}rem;right: ${this.right}rem; position: absolute;`);
+    this._positionDiv(this.positionType);
   }
 
   ////////////////////////////////////
+
+  private _positionDiv(positionType) {
+    // 定位下拉框
+    this._render.setAttribute(
+      this._element.nativeElement,
+      'style',
+      `top: ${this.top}rem;right: ${this.right}rem; position: ${positionType};`
+    );
+  }
 
   /**
    * 选中样式

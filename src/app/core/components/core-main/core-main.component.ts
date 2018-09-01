@@ -278,9 +278,6 @@ export class CoreMainComponent implements OnInit {
   private _exchangeCheckComponentPosition(lines: number) {
     // 拉伸
     if (lines > maxLines) {
-      // 全屏
-      if (this._chartFullStatus) {
-      }
     }
   }
 
