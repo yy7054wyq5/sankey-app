@@ -15,9 +15,12 @@ const maxLines = 10;
 
 // 得到两数之间的随机整数，包括两数
 function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  const a = Math.random();
+  if (a < 0.5) {
+    return min;
+  } else {
+    return max;
+  }
 }
 
 @Component({
@@ -263,17 +266,6 @@ export class CoreMainComponent implements OnInit {
 
   chartIsFull(isFull: boolean) {
     this._chartFullStatus = isFull;
-    const main: HTMLElement = document.querySelector('.core-main');
-    const chart: HTMLElement = document.querySelector('app-chart');
-    if (isFull) {
-      this._zone.runOutsideAngular(() => {
-        // 图表全屏时，依据全屏指定的父级而取的高度
-        this._render.setStyle(chart, 'height', '100%');
-        this._render.setStyle(main, 'height', `${chart.clientHeight}px;`);
-      });
-    } else {
-      this._render.removeStyle(main, 'height');
-    }
   }
 
   /**

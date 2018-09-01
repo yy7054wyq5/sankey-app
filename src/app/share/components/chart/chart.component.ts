@@ -146,7 +146,8 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    */
   public toFull(tag: string) {
     this.fullStatus = FullStatus[tag];
-    this._resizeChart();
+    this.mustResize();
+    // this._resizeChart();
   }
 
   public mustResize() {
@@ -165,23 +166,20 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    */
   private _exchangeContainerStyle() {
     if (this.fullStatus === 'yes') {
-      const wraper = document.querySelector('.' + this.efullParentClassName);
-      const left = wraper['offsetLeft'];
-      const top = wraper['offsetTop'];
-      const width = wraper.clientWidth;
-      const height = wraper.clientHeight;
-      // this._showPointInfo(true);
-      this.efullStatus.emit(true);
+      // 先使图表脱离文档流，使文档恢复原始状态，因为是flex布局，所以不用考虑没有高度的问题
       this._setStyle(this.chartContainer, {
-        position: 'fixed',
-        left,
-        top,
-        width,
-        height
+        position: 'fixed'
       });
+      const wraper = document.querySelector('.' + this.efullParentClassName);
+      // 设置图表容器的宽高和定位
+      this._setStyle(this.chartContainer, {
+        left: wraper['offsetLeft'],
+        top: wraper['offsetTop'],
+        width: wraper.clientWidth,
+        height: wraper.clientHeight
+      });
+      this.efullStatus.emit(true);
     } else {
-      // this._showPointInfo(true);
-      this.efullStatus.emit(false);
       this._setStyle(this.chartContainer, {
         position: 'relative',
         left: 0,
@@ -189,6 +187,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         width: '100%',
         height: '100%'
       });
+      this.efullStatus.emit(false);
     }
   }
 
