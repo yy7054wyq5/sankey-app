@@ -1,6 +1,6 @@
 <nz-layout class="core-main">
   <!-- 搜索栏 -->
-  <app-search-bar #searchBar (outSearchResult)="getContacts($event)" (outSearchStatus)="getSearchStatus($event)"></app-search-bar>
+  <app-search-bar #searchBar (outSearchResult)="getRealtions($event)" (outSearchStatus)="getSearchStatus($event)"></app-search-bar>
   <section class="core-body">
     <!-- sider以模板变量的方式接收app-search-bar某些变量或整个对象 -->
     <app-sider [histories]="searchBar.records.data" [person]="person" [searchBar]="searchBar" (outFoldStatus)="siderFoldStatus($event)"></app-sider>
@@ -17,7 +17,7 @@
         <p style="margin-left: -1rem;">未找到合适信息哦</p>
       </div>
       <!-- 图表 -->
-      <app-chart #chart *ngIf="option" [eoption]="option" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)">
+      <app-chart #chart *ngIf="option" [eoption]="option" [eheight]="chartHeight" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)" (efullStatus)="chartIsFull($event)">
         <!-- 选择人脉 -->
         <app-check-node *ngIf="showCheckComponent" [tabs]="checkcontactsTab" placeholder="显示隐藏人脉" [top]="1.262626" [right]="20.525253" (outCheckedNodes)="getCheckedContacts($event)"></app-check-node>
         <!-- 选择隐藏节点 -->

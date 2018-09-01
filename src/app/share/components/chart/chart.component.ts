@@ -11,7 +11,8 @@ import {
   OnChanges,
   SimpleChanges,
   Output,
-  EventEmitter
+  EventEmitter,
+  SimpleChange
 } from '@angular/core';
 import * as echarts from 'echarts';
 import theme from './theme';
@@ -70,7 +71,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
   constructor(private _chart: ChartService, private _element: ElementRef, private _renderer: Renderer2, private _zone: NgZone) {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: { eoption: SimpleChange; eheight: SimpleChange }) {
     if (changes) {
       if (changes.eoption && !changes.eoption.isFirstChange()) {
         if (!this.chartInstance) {
@@ -79,6 +80,16 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
           this.chartInstance.setOption(this.eoption);
         }
       }
+
+      if (changes.eheight) {
+        if (!this.chartInstance) {
+          this._initChart();
+        } else {
+          this._setChartWH(this.chartDom, null, this.eheight);
+          this._resizeChart();
+        }
+      }
+      // debugger;
     }
   }
 
@@ -108,6 +119,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   }
 
   /////////////////////////////////////////////////
+
   /**
    * 设置样式
    *
@@ -188,9 +200,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @memberof ChartComponent
    */
   private _resizeChart() {
-    if (this.ewidth || this.eheight) {
-      return;
-    }
     this._exchangeContainerStyle();
     this._zone.runOutsideAngular(() => {
       if (this.chartInstance) {
@@ -310,9 +319,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @memberof ChartComponent
    */
   private _setChartWH(chartDom: Element, width: string, height: string): Element {
-    if (width && height) {
-      this._setStyle(chartDom, { width, height });
-    }
+    this._setStyle(chartDom, { width: width || '100%', height: height || '100%' });
     return chartDom;
   }
 }

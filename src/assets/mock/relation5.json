@@ -1,0 +1,3276 @@
+{
+  "code": null,
+  "message": null,
+  "data": {
+    "1": [
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年12月17日-广电电气2015年第一次临时股东大会之法律意见书",
+            "id": "case44b614d76a0211e8a353000c2974e9f6",
+            "date": "2015-12-17"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case44b614d76a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case44b614d76a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年03月28日-联创股份：国浩律师（上海）事务所关于公司发行股份及支付现金购买资产并募集配套资金暨关联交易之补充法律意见书（二）",
+            "id": "case2e0f507b6a0211e8a353000c2974e9f6",
+            "date": "2016-03-28"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case2e0f507b6a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case2e0f507b6a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年03月24日-江苏张家港农村商业银行股份有限公司首次公开发行股票招股说明书（申报稿2016年2...",
+            "id": "case5b5c616c6a0211e8a353000c2974e9f6",
+            "date": "2016-03-24"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case5b5c616c6a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case5b5c616c6a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "831375_三强股份_2016-05-18_三强股份-2015年年度股东大会法律意见书",
+            "id": "case3490db81869211e8998f000c2974e9f6",
+            "date": "2016-05-18"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case3490db81869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case3490db81869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年08月26日-石岘纸业重大资产出售和重大资产购买暨关联交易报告书（草案）",
+            "id": "case1df7fdff6a0211e8a353000c2974e9f6",
+            "date": "2015-08-26"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case1df7fdff6a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case1df7fdff6a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所上海分所", "id": "organizationdda0de0a5f0811e887a8005056c00008", "date": null },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationdda0de0a5f0811e887a8005056c00008",
+            "relation": "2015隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "organizationdda0de0a5f0811e887a8005056c00008",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "2008隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年04月25日-联创股份：募集配套资金之非公开发行股票发行情况报告书",
+            "id": "case2cdec0546a0211e8a353000c2974e9f6",
+            "date": "2016-04-25"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case2cdec0546a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case2cdec0546a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：国浩律师（上海）事务所关于公司首次公开发行人民币普通股并在创业板上市之补充律师工作报告（五）",
+            "id": "case8b0b5e766a0211e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case8b0b5e766a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case8b0b5e766a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "835517_宏祥新材_2015-12-31_宏祥新材-公开转让说明书",
+            "id": "caseef8465f07e6511e8a0f6000c2974e9f6",
+            "date": "2015-12-31"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "caseef8465f07e6511e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "caseef8465f07e6511e8a0f6000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所", "id": "organizationde0d5d125f0811e89323005056c00008", "date": null },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationde0d5d125f0811e89323005056c00008",
+            "relation": "2017隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "organizationde0d5d125f0811e89323005056c00008",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "2018隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所上海分所", "id": "organizationdda0de0a5f0811e887a8005056c00008", "date": null },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationdda0de0a5f0811e887a8005056c00008",
+            "relation": "2015隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "organizationdda0de0a5f0811e887a8005056c00008",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "2016隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "831375_三强股份_2015-05-19_三强股份-2014年度股东大会法律意见书",
+            "id": "case322e73b2869211e8998f000c2974e9f6",
+            "date": "2015-05-19"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case322e73b2869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case322e73b2869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年01月27日-石岘纸业发行股份及支付现金购买资产并募集配套资金暨关联交易报告书（草案）（修订稿）",
+            "id": "case86a1c8f86a0111e8a353000c2974e9f6",
+            "date": "2016-01-27"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case86a1c8f86a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case86a1c8f86a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "837859_因为科技_2016-06-30_因为科技-补充法律意见书1",
+            "id": "case5722d2ee869211e8998f000c2974e9f6",
+            "date": "2016-06-30"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case5722d2ee869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case5722d2ee869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年04月25日-联创股份：国浩律师（上海）事务所关于公司发行股份及支付现金购买资产并募集配套资金暨关联交易的配套募集资金发行合法合规之法律意见书",
+            "id": "case914d427b6a0111e8a353000c2974e9f6",
+            "date": "2016-04-25"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case914d427b6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case914d427b6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年06月06日-信息发展：2016年第一次临时股东大会之法律意见书",
+            "id": "casee983f0af6a0111e8a353000c2974e9f6",
+            "date": "2016-06-06"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f0af6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "casee983f0af6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "300135_宝利国际_2018-02-26_2018年第一次临时股东大会之法律意见书",
+            "id": "casebcce547e89a411e89774000c2974e9f6",
+            "date": "2018-02-26"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casebcce547e89a411e89774000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "casebcce547e89a411e89774000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年01月14日-宝利沥青：2015年第一次临时股东大会之法律意见书",
+            "id": "case2bad72326a0211e8a353000c2974e9f6",
+            "date": "2015-01-14"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case2bad72326a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case2bad72326a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2014年12月26日-柘中建设：国浩律师（上海）事务所关于公司发行股份购买资产及吸收合并上海柘中（集团）有限公司暨关联交易实施情况之法律意见书",
+            "id": "case4f70aab96a0211e8a353000c2974e9f6",
+            "date": "2014-12-26"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case4f70aab96a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case4f70aab96a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "600332_白云山_2018-01-06_重大资产购买报告书（修订稿）",
+            "id": "case01598f7989a511e89774000c2974e9f6",
+            "date": "2018-01-06"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case01598f7989a511e89774000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case01598f7989a511e89774000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "837859_因为科技_2016-02-16_因为科技无锡股份有限公司公开转让说明书",
+            "id": "casedf6d54627e6511e8a0f6000c2974e9f6",
+            "date": "2016-02-16"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casedf6d54627e6511e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "casedf6d54627e6511e8a0f6000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年12月13日-张家港行：首次公开发行股票招股意向书（已取消）",
+            "id": "case5b5c618d6a0211e8a353000c2974e9f6",
+            "date": "2016-12-13"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case5b5c618d6a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case5b5c618d6a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年10月31日-宝利国际：2016年第二次临时股东大会之法律意见书",
+            "id": "case2e0f53b26a0211e8a353000c2974e9f6",
+            "date": "2016-10-31"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case2e0f53b26a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case2e0f53b26a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所上海分所", "id": "organizationdda0de0a5f0811e887a8005056c00008", "date": null },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationdda0de0a5f0811e887a8005056c00008",
+            "relation": "2015隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "organizationdda0de0a5f0811e887a8005056c00008",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "2007隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：国浩律师（上海）事务所关于公司首次公开发行人民币普通股并在创业板上市之补充法律意见书（七）",
+            "id": "casee983f0ad6a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f0ad6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "casee983f0ad6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年04月21日-信息发展：2015年年度股东大会之法律意见书",
+            "id": "case8b0b5e846a0211e8a353000c2974e9f6",
+            "date": "2016-04-21"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case8b0b5e846a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case8b0b5e846a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "836718_永锦电气_2015-12-22_上海永锦电气技术股份有限公司法律意见书",
+            "id": "case525e2fc5869211e8998f000c2974e9f6",
+            "date": "2015-12-22"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case525e2fc5869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case525e2fc5869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "600332_白云山_2017-12-23_重大资产购买报告书", "id": "case00285eae89a511e89774000c2974e9f6", "date": "2017-12-23" },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case00285eae89a511e89774000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case00285eae89a511e89774000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年04月25日-联创股份：国浩律师（上海）事务所关于公司发行股份及支付现金购买资产并募集配套资金暨关联交易的实施情况之法律意见书",
+            "id": "case2cdec08f6a0211e8a353000c2974e9f6",
+            "date": "2016-04-25"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case2cdec08f6a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case2cdec08f6a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "831098_通利农贷_2016-05-20_通利农贷-2015年年度股东大会法律意见书",
+            "id": "case30fe383e869211e8998f000c2974e9f6",
+            "date": "2016-05-20"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case30fe383e869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case30fe383e869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2014年10月22日-柘中建设：国浩律师（上海）事务所关于上海康峰投资管理有限公司及其一致行动人免于提交豁免要约收购申请之法律意见书",
+            "id": "casebb9f78c76a0111e8a353000c2974e9f6",
+            "date": "2014-10-22"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casebb9f78c76a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "casebb9f78c76a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "831375_三强股份_2014-11-14_三强股份-公开转让说明书",
+            "id": "cased38114617e6511e8a0f6000c2974e9f6",
+            "date": "2014-11-14"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "cased38114617e6511e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "cased38114617e6511e8a0f6000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年12月13日-张家港行：首次公开发行股票招股意向书（更新后）",
+            "id": "casec9ea84536a0111e8a353000c2974e9f6",
+            "date": "2016-12-13"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casec9ea84536a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "casec9ea84536a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年08月05日-广电电气：国浩律师（上海）事务所关于上海广电电气（集团）股份有限公司调整股权激励计划第二期授予方案涉及的行权价格和股票期权数量之法律意见书",
+            "id": "case44b614d86a0211e8a353000c2974e9f6",
+            "date": "2016-08-05"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case44b614d86a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case44b614d86a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年11月13日-联创股份：国浩律师（上海）事务所关于公司发行股份及支付现金购买资产并募集配套资金暨关联交易之法律意见书",
+            "id": "case901bfe276a0111e8a353000c2974e9f6",
+            "date": "2015-11-13"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case901bfe276a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case901bfe276a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年07月23日-信息发展：2015年第二次临时股东大会之法律意见书",
+            "id": "casee983f1076a0111e8a353000c2974e9f6",
+            "date": "2015-07-23"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1076a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "casee983f1076a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所", "id": "organizationde0d5d125f0811e89323005056c00008", "date": null },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationde0d5d125f0811e89323005056c00008",
+            "relation": "2017隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "organizationde0d5d125f0811e89323005056c00008",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "2015隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "837859_因为科技_2016-06-30_因为科技-公开转让说明书",
+            "id": "casedf6d54677e6511e8a0f6000c2974e9f6",
+            "date": "2016-06-30"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casedf6d54677e6511e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "casedf6d54677e6511e8a0f6000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年12月17日-广电电气2015年第一次临时股东大会之法律意见书",
+            "id": "case44b614d76a0211e8a353000c2974e9f6",
+            "date": "2015-12-17"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case44b614d76a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case44b614d76a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年06月21日-广电电气2015年年度股东大会之法律意见书",
+            "id": "casea924a38f6a0111e8a353000c2974e9f6",
+            "date": "2016-06-21"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casea924a38f6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "casea924a38f6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "831375_三强股份_2014-08-25_上海三强企业集团股份有限公司法律意见书",
+            "id": "case0c08bf30869211e8998f000c2974e9f6",
+            "date": "2014-08-25"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case0c08bf30869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case0c08bf30869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "2016年10月31日-天沃科技：重大资产购买报告书", "id": "case39fbada26a0211e8a353000c2974e9f6", "date": "2016-10-31" },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case39fbada26a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case39fbada26a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年09月17日-石岘纸业重大资产出售和重大资产购买暨关联交易报告书（草案）修订稿",
+            "id": "case86a1c9406a0111e8a353000c2974e9f6",
+            "date": "2015-09-17"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case86a1c9406a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case86a1c9406a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所上海分所", "id": "organizationdda0de0a5f0811e887a8005056c00008", "date": null },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationdda0de0a5f0811e887a8005056c00008",
+            "relation": "2015隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "organizationdda0de0a5f0811e887a8005056c00008",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "2015隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年09月14日-信息发展：2016年第二次临时股东大会之法律意见书",
+            "id": "casee983f10b6a0111e8a353000c2974e9f6",
+            "date": "2016-09-14"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f10b6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "casee983f10b6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所", "id": "organizationde0d5d125f0811e89323005056c00008", "date": null },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationde0d5d125f0811e89323005056c00008",
+            "relation": "2017隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "organizationde0d5d125f0811e89323005056c00008",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "2009隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所上海分所", "id": "organizationdda0de0a5f0811e887a8005056c00008", "date": null },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationdda0de0a5f0811e887a8005056c00008",
+            "relation": "2015隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "organizationdda0de0a5f0811e887a8005056c00008",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "2017隶属于",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：国浩律师（上海）事务所关于公司首次公开发行人民币普通股并在创业板上市之补充法律意见书（九）",
+            "id": "case8b0b5e786a0211e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case8b0b5e786a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case8b0b5e786a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年05月20日-信息发展国浩律师(上海)事务所关于公司首期限制性股票激励计划(草案)之法律意见书",
+            "id": "case8b0b5e856a0211e8a353000c2974e9f6",
+            "date": "2016-05-20"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case8b0b5e856a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case8b0b5e856a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "831375_三强股份_2014-11-14_三强股份-国浩律师(上海)事务所关于公司申请股票在全国中小企业股份转让系统挂牌并公开转让之补充法律意见书(一)",
+            "id": "case20671482869211e8998f000c2974e9f6",
+            "date": "2014-11-14"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case20671482869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case20671482869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "831375_三强股份_2014-11-14_三强股份-国浩律师(上海)事务所关于公司申请股票在全国中小企业股份转让系统挂牌并公开转让之法律意见书",
+            "id": "case41adb556869211e8998f000c2974e9f6",
+            "date": "2014-11-14"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case41adb556869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case41adb556869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：国浩律师（上海）事务所关于公司首次公开发行人民币普通股并在创业板上市之补充法律意见书（六）",
+            "id": "casee983f0b66a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f0b66a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "casee983f0b66a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年05月10日-石岘纸业：国浩律师（上海）事务所关于深圳九有股份有限公司发行股份及支付现金购买资产并募集配套资金暨关联交易之补充法律意见书（二）",
+            "id": "case86a1c9426a0111e8a353000c2974e9f6",
+            "date": "2016-05-10"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case86a1c9426a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          },
+          {
+            "source": "case86a1c9426a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#d6a5f9"
+          }
+        ]
+      }
+    ],
+    "2": [
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所", "id": "organizationde0d5d125f0811e89323005056c00008", "date": null },
+          { "name": "钱大治", "id": "personbfbe3e6c5f2211e89bb5005056c00008", "date": null },
+          {
+            "name": "2008年03月27日-置信电气：2007年度股东大会决议公告",
+            "id": "casef56f4d8d6a0111e8a353000c2974e9f6",
+            "date": "2008-03-27"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationde0d5d125f0811e89323005056c00008",
+            "relation": "2017隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "organizationde0d5d125f0811e89323005056c00008",
+            "target": "personbfbe3e6c5f2211e89bb5005056c00008",
+            "relation": "2011隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "personbfbe3e6c5f2211e89bb5005056c00008",
+            "target": "casef56f4d8d6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casef56f4d8d6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "831618_文广农贷_2014-12-25_文广农贷-公开转让说明书",
+            "id": "cased4b2ee447e6511e8a0f6000c2974e9f6",
+            "date": "2014-12-25"
+          },
+          { "name": "秦桂森", "id": "persondda477185f2311e8983d005056c00008", "date": null },
+          {
+            "name": "2008年08月21日-飞亚股份：2008年第三次临时股东大会的法律意见书",
+            "id": "case4e3f779a6a0211e8a353000c2974e9f6",
+            "date": "2008-08-21"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "cased4b2ee447e6511e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "cased4b2ee447e6511e8a0f6000c2974e9f6",
+            "target": "persondda477185f2311e8983d005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "persondda477185f2311e8983d005056c00008",
+            "target": "case4e3f779a6a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case4e3f779a6a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2017年03月09日-绿康生化股份有限公司首次公开发行股票说明书",
+            "id": "case959c8e9679cf11e8a0f6000c2974e9f6",
+            "date": "2017-03-09"
+          },
+          { "name": "孙月焕", "id": "personff92984c5f2211e89db8005056c00008", "date": null },
+          {
+            "name": "2013年05月22日-襄阳轴承：重大资产购买报告书（草案）",
+            "id": "case7ed3162d6a0111e8a353000c2974e9f6",
+            "date": "2013-05-22"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case959c8e9679cf11e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case959c8e9679cf11e8a0f6000c2974e9f6",
+            "target": "personff92984c5f2211e89db8005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "personff92984c5f2211e89db8005056c00008",
+            "target": "case7ed3162d6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case7ed3162d6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月29日-江苏龙蟠科技股份有限公司首次公开发行股票说明书",
+            "id": "case946b0f5679cf11e8a0f6000c2974e9f6",
+            "date": "2015-05-29"
+          },
+          { "name": "朱建弟", "id": "person68ec64ca5f2211e8aff9005056c00008", "date": null },
+          {
+            "name": "2009年11月11日-德棉股份：重大资产出售及向特定对象发行股份购买资产暨关联交易报告书（草案）",
+            "id": "case505514266a0111e8a353000c2974e9f6",
+            "date": "2009-11-11"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case946b0f5679cf11e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case946b0f5679cf11e8a0f6000c2974e9f6",
+            "target": "person68ec64ca5f2211e8aff9005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person68ec64ca5f2211e8aff9005056c00008",
+            "target": "case505514266a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case505514266a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          { "name": "2012年07月05日-广电电气收购报告书（摘要）", "id": "casea924a39e6a0111e8a353000c2974e9f6", "date": "2012-07-05" },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "casea924a39e6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casea924a39e6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所上海分所", "id": "organizationdda0de0a5f0811e887a8005056c00008", "date": null },
+          { "name": "黄文雯", "id": "person1708cc405f2311e8817e005056c00008", "date": null },
+          {
+            "name": "2007年08月09日-上海永久第二十一次股东大会（2007年度第二次临时股东大会）的法律意见书",
+            "id": "case99f219006a0211e8a353000c2974e9f6",
+            "date": "2007-08-09"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationdda0de0a5f0811e887a8005056c00008",
+            "relation": "2015隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "organizationdda0de0a5f0811e887a8005056c00008",
+            "target": "person1708cc405f2311e8817e005056c00008",
+            "relation": "2009隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person1708cc405f2311e8817e005056c00008",
+            "target": "case99f219006a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case99f219006a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          { "name": "2012年09月06日-广电电气收购报告书", "id": "case44b614ca6a0211e8a353000c2974e9f6", "date": "2012-09-06" },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "case44b614ca6a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case44b614ca6a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          {
+            "name": "2014年07月19日-广电电气2014年第一次临时股东大会决议公告",
+            "id": "casea924a3b16a0111e8a353000c2974e9f6",
+            "date": "2014-07-19"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "casea924a3b16a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casea924a3b16a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月29日-江苏龙蟠科技股份有限公司首次公开发行股票说明书",
+            "id": "case946b0f5679cf11e8a0f6000c2974e9f6",
+            "date": "2015-05-29"
+          },
+          { "name": "朱建弟", "id": "person68ec64ca5f2211e8aff9005056c00008", "date": null },
+          {
+            "name": "2014年12月29日-柘中建设：吸收合并柘中集团股份变动暨新增股份上市公告书",
+            "id": "case4f70aaba6a0211e8a353000c2974e9f6",
+            "date": "2014-12-29"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case946b0f5679cf11e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case946b0f5679cf11e8a0f6000c2974e9f6",
+            "target": "person68ec64ca5f2211e8aff9005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person68ec64ca5f2211e8aff9005056c00008",
+            "target": "case4f70aaba6a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case4f70aaba6a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年01月05日-海兰信：发行股份购买资产暨关联交易实施情况暨新增股份上市报告书",
+            "id": "casedb360f976a0111e8a353000c2974e9f6",
+            "date": "2016-01-05"
+          },
+          { "name": "倪俊骥", "id": "person6ccd7e145f2211e8ae1c005056c00008", "date": null },
+          {
+            "name": "2014年01月02日-良信电器：国浩律师（上海）事务所关于公司首次公开发行人民币普通股并上市之法律意见书",
+            "id": "case39fbad7d6a0211e8a353000c2974e9f6",
+            "date": "2014-01-02"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casedb360f976a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casedb360f976a0111e8a353000c2974e9f6",
+            "target": "person6ccd7e145f2211e8ae1c005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person6ccd7e145f2211e8ae1c005056c00008",
+            "target": "case39fbad7d6a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case39fbad7d6a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "300436_广生堂_2017-08-15_2017年第二次临时股东大会法律意见书",
+            "id": "casebdff3e8e89a411e89774000c2974e9f6",
+            "date": "2017-08-15"
+          },
+          { "name": "李强", "id": "person4dd872a780ec11e8a0f6000c2974e9f6", "date": null },
+          {
+            "name": "601616_广电电气_2018-06-16_2017年年度股东大会之法律意见书",
+            "id": "casef6a0352e89a411e89774000c2974e9f6",
+            "date": "2018-06-16"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casebdff3e8e89a411e89774000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casebdff3e8e89a411e89774000c2974e9f6",
+            "target": "person4dd872a780ec11e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person4dd872a780ec11e8a0f6000c2974e9f6",
+            "target": "casef6a0352e89a411e89774000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casef6a0352e89a411e89774000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所", "id": "organizationde0d5d125f0811e89323005056c00008", "date": null },
+          { "name": "钱大治", "id": "personbfbe3e6c5f2211e89bb5005056c00008", "date": null },
+          {
+            "name": "2012年05月11日-华灿光电：首次公开发行股票并在创业板上市招股意向书",
+            "id": "case251bec746a0211e8a353000c2974e9f6",
+            "date": "2012-05-11"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationde0d5d125f0811e89323005056c00008",
+            "relation": "2017隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "organizationde0d5d125f0811e89323005056c00008",
+            "target": "personbfbe3e6c5f2211e89bb5005056c00008",
+            "relation": "2011隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "personbfbe3e6c5f2211e89bb5005056c00008",
+            "target": "case251bec746a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case251bec746a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          {
+            "name": "2013年07月19日-广电电气2013年第三次临时股东大会决议公告",
+            "id": "casea924a3a26a0111e8a353000c2974e9f6",
+            "date": "2013-07-19"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "casea924a3a26a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casea924a3a26a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年01月05日-海兰信：发行股份购买资产暨关联交易实施情况暨新增股份上市报告书",
+            "id": "casedb360f976a0111e8a353000c2974e9f6",
+            "date": "2016-01-05"
+          },
+          { "name": "倪俊骥", "id": "person6ccd7e145f2211e8ae1c005056c00008", "date": null },
+          {
+            "name": "2012年12月22日-广州药业换股吸收合并广州白云山制药股份有限公司、发行股份购买资产暨关联交易报告书",
+            "id": "casee4267fea6a0111e8a353000c2974e9f6",
+            "date": "2012-12-22"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casedb360f976a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casedb360f976a0111e8a353000c2974e9f6",
+            "target": "person6ccd7e145f2211e8ae1c005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person6ccd7e145f2211e8ae1c005056c00008",
+            "target": "casee4267fea6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee4267fea6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          {
+            "name": "2014年05月01日-广电电气2013年度股东大会之法律意见书",
+            "id": "casea924a3966a0111e8a353000c2974e9f6",
+            "date": "2014-05-01"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "casea924a3966a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casea924a3966a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月29日-江苏龙蟠科技股份有限公司首次公开发行股票说明书",
+            "id": "case946b0f5679cf11e8a0f6000c2974e9f6",
+            "date": "2015-05-29"
+          },
+          { "name": "朱建弟", "id": "person68ec64ca5f2211e8aff9005056c00008", "date": null },
+          {
+            "name": "2014年12月26日-柘中建设：发行股份购买资产股份变动暨新增股份上市公告书",
+            "id": "casebb9f77c76a0111e8a353000c2974e9f6",
+            "date": "2014-12-26"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case946b0f5679cf11e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case946b0f5679cf11e8a0f6000c2974e9f6",
+            "target": "person68ec64ca5f2211e8aff9005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person68ec64ca5f2211e8aff9005056c00008",
+            "target": "casebb9f77c76a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casebb9f77c76a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年01月05日-海兰信：发行股份购买资产暨关联交易实施情况暨新增股份上市报告书",
+            "id": "casedb360f976a0111e8a353000c2974e9f6",
+            "date": "2016-01-05"
+          },
+          { "name": "倪俊骥", "id": "person6ccd7e145f2211e8ae1c005056c00008", "date": null },
+          {
+            "name": "2013年08月27日-广州药业换股吸收合并广州白云山制药股份有限公司、发行股份购买资产暨关联交易实施情况之法律意见书",
+            "id": "casee4267f496a0111e8a353000c2974e9f6",
+            "date": "2013-08-27"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casedb360f976a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casedb360f976a0111e8a353000c2974e9f6",
+            "target": "person6ccd7e145f2211e8ae1c005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person6ccd7e145f2211e8ae1c005056c00008",
+            "target": "casee4267f496a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee4267f496a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年12月13日-张家港行：首次公开发行股票招股意向书（已取消）",
+            "id": "case5b5c618d6a0211e8a353000c2974e9f6",
+            "date": "2016-12-13"
+          },
+          { "name": "杨淮", "id": "person09064b665f2411e8ad09005056c00008", "date": null },
+          {
+            "name": "2014年01月02日-良信电器：首次公开发行股票招股意向书",
+            "id": "case39fbae1e6a0211e8a353000c2974e9f6",
+            "date": "2014-01-02"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case5b5c618d6a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case5b5c618d6a0211e8a353000c2974e9f6",
+            "target": "person09064b665f2411e8ad09005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person09064b665f2411e8ad09005056c00008",
+            "target": "case39fbae1e6a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case39fbae1e6a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年01月05日-海兰信：发行股份购买资产暨关联交易实施情况暨新增股份上市报告书",
+            "id": "casedb360f976a0111e8a353000c2974e9f6",
+            "date": "2016-01-05"
+          },
+          { "name": "倪俊骥", "id": "person6ccd7e145f2211e8ae1c005056c00008", "date": null },
+          {
+            "name": "2012年08月17日-广电电气2012年第二次临时股东大会之法律意见书",
+            "id": "casea924a3ae6a0111e8a353000c2974e9f6",
+            "date": "2012-08-17"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casedb360f976a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casedb360f976a0111e8a353000c2974e9f6",
+            "target": "person6ccd7e145f2211e8ae1c005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person6ccd7e145f2211e8ae1c005056c00008",
+            "target": "casea924a3ae6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casea924a3ae6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年07月03日-上海古鳌电子科技股份有限公司创业板首次公开发行股票招股说明书（申报稿2015年7...",
+            "id": "caseafd24ece6a0111e8a353000c2974e9f6",
+            "date": "2015-07-03"
+          },
+          { "name": "张宇", "id": "person91871f6e5f2211e8ac4c005056c00008", "date": null },
+          {
+            "name": "2009年11月11日-德棉股份：国浩律师集团（上海）事务所关于公司重大资产出售及向特定对象发行股份购买资产暨关联交易之法律意见书",
+            "id": "case505514246a0111e8a353000c2974e9f6",
+            "date": "2009-11-11"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "caseafd24ece6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "caseafd24ece6a0111e8a353000c2974e9f6",
+            "target": "person91871f6e5f2211e8ac4c005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person91871f6e5f2211e8ac4c005056c00008",
+            "target": "case505514246a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case505514246a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          {
+            "name": "2012年05月30日-广电电气2012年第一次临时股东大会之法律意见书",
+            "id": "casea924a3ad6a0111e8a353000c2974e9f6",
+            "date": "2012-05-30"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "casea924a3ad6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casea924a3ad6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2016年05月13日-科泰电源：2015年年度股东大会的法律意见书",
+            "id": "case6e7059c16a0211e8a353000c2974e9f6",
+            "date": "2016-05-13"
+          },
+          { "name": "陈杰", "id": "personb2f4b0f05f2411e8b99d005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：国浩律师（上海）事务所关于公司首次公开发行人民币普通股股票并于创业板上市之律师工作报告",
+            "id": "casee983f0b76a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case6e7059c16a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case6e7059c16a0211e8a353000c2974e9f6",
+            "target": "personb2f4b0f05f2411e8b99d005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "personb2f4b0f05f2411e8b99d005056c00008",
+            "target": "casee983f0b76a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f0b76a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所", "id": "organizationde0d5d125f0811e89323005056c00008", "date": null },
+          { "name": "刘军", "id": "person662ce7ff866111e8998f000c2974e9f6", "date": null },
+          {
+            "name": "833539_大方生态_2015-06-04_重庆大方生态环境治理股份有限公司法律意见书",
+            "id": "case1cba8a6d869211e8998f000c2974e9f6",
+            "date": "2015-06-04"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationde0d5d125f0811e89323005056c00008",
+            "relation": "2017隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "organizationde0d5d125f0811e89323005056c00008",
+            "target": "person662ce7ff866111e8998f000c2974e9f6",
+            "relation": "2018隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person662ce7ff866111e8998f000c2974e9f6",
+            "target": "case1cba8a6d869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case1cba8a6d869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所", "id": "organizationde0d5d125f0811e89323005056c00008", "date": null },
+          { "name": "朱东", "id": "persond43dc3925f2711e898b4005056c00008", "date": null },
+          {
+            "name": "833353_南京天梯_2015-07-31_南京天梯-补充法律意见书1",
+            "id": "case1b88048d869211e8998f000c2974e9f6",
+            "date": "2015-07-31"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationde0d5d125f0811e89323005056c00008",
+            "relation": "2017隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "organizationde0d5d125f0811e89323005056c00008",
+            "target": "persond43dc3925f2711e898b4005056c00008",
+            "relation": "2016隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "persond43dc3925f2711e898b4005056c00008",
+            "target": "case1b88048d869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case1b88048d869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          { "name": "2014年05月01日-广电电气2013年度股东大会决议公告", "id": "case44b614d16a0211e8a353000c2974e9f6", "date": "2014-05-01" },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "case44b614d16a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case44b614d16a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          {
+            "name": "2011年05月13日-广电电气：2010年度股东大会决议公告",
+            "id": "casea924a3ab6a0111e8a353000c2974e9f6",
+            "date": "2011-05-13"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "casea924a3ab6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casea924a3ab6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所上海分所", "id": "organizationdda0de0a5f0811e887a8005056c00008", "date": null },
+          { "name": "王伟建", "id": "person11956dec5f2411e8a74f005056c00008", "date": null },
+          {
+            "name": "2016年01月05日-广电电气2016年第一次临时股东大会决议公告",
+            "id": "casea924a3b26a0111e8a353000c2974e9f6",
+            "date": "2016-01-05"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationdda0de0a5f0811e887a8005056c00008",
+            "relation": "2015隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "organizationdda0de0a5f0811e887a8005056c00008",
+            "target": "person11956dec5f2411e8a74f005056c00008",
+            "relation": "2017隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person11956dec5f2411e8a74f005056c00008",
+            "target": "casea924a3b26a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casea924a3b26a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年04月28日-九阳股份：2014年年度股东大会的法律意见书",
+            "id": "case3ec02ed96a0211e8a353000c2974e9f6",
+            "date": "2015-04-28"
+          },
+          { "name": "周易", "id": "person96aa81705f2211e8924d005056c00008", "date": null },
+          {
+            "name": "833571_锁龙消防_2015-08-28_锁龙消防-补充法律意见书1",
+            "id": "case382465f9869211e8998f000c2974e9f6",
+            "date": "2015-08-28"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case3ec02ed96a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case3ec02ed96a0211e8a353000c2974e9f6",
+            "target": "person96aa81705f2211e8924d005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person96aa81705f2211e8924d005056c00008",
+            "target": "case382465f9869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case382465f9869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年04月28日-九阳股份：2014年年度股东大会的法律意见书",
+            "id": "case3ec02ed96a0211e8a353000c2974e9f6",
+            "date": "2015-04-28"
+          },
+          { "name": "周易", "id": "person96aa81705f2211e8924d005056c00008", "date": null },
+          {
+            "name": "833571_锁龙消防_2015-07-29_江苏锁龙消防科技股份有限公司法律意见书",
+            "id": "case2642a1df869211e8998f000c2974e9f6",
+            "date": "2015-07-29"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case3ec02ed96a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case3ec02ed96a0211e8a353000c2974e9f6",
+            "target": "person96aa81705f2211e8924d005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person96aa81705f2211e8924d005056c00008",
+            "target": "case2642a1df869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case2642a1df869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "871789_海航技术_2017-07-26_海航技术-公开转让说明书",
+            "id": "casef1e6f2037e6511e8a0f6000c2974e9f6",
+            "date": "2017-07-26"
+          },
+          { "name": "叶忠辉", "id": "persond338569c5f2211e88b9c005056c00008", "date": null },
+          {
+            "name": "2009年08月08日-ST国药：重大资产出售及发行股份购买资产暨关联交易报告书（草案）",
+            "id": "case28199c3d6a0211e8a353000c2974e9f6",
+            "date": "2009-08-08"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casef1e6f2037e6511e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casef1e6f2037e6511e8a0f6000c2974e9f6",
+            "target": "persond338569c5f2211e88b9c005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "persond338569c5f2211e88b9c005056c00008",
+            "target": "case28199c3d6a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case28199c3d6a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          {
+            "name": "2014年05月16日-柘中建设：2014年第一次临时股东大会之法律意见书",
+            "id": "casebb9f78c16a0111e8a353000c2974e9f6",
+            "date": "2014-05-16"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "casebb9f78c16a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casebb9f78c16a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          {
+            "name": "2015年06月13日-宝利沥青：2015年第二次临时股东大会决议公告",
+            "id": "case2bad72876a0211e8a353000c2974e9f6",
+            "date": "2015-06-13"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "case2bad72876a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case2bad72876a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          {
+            "name": "2012年08月17日-广电电气2012年第二次临时股东大会决议公告",
+            "id": "case44b614c96a0211e8a353000c2974e9f6",
+            "date": "2012-08-17"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "case44b614c96a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case44b614c96a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年04月28日-九阳股份：2014年年度股东大会的法律意见书",
+            "id": "case3ec02ed96a0211e8a353000c2974e9f6",
+            "date": "2015-04-28"
+          },
+          { "name": "周易", "id": "person96aa81705f2211e8924d005056c00008", "date": null },
+          { "name": "833571_锁龙消防_2015-08-28_锁龙消防-法律意见书", "id": "case1f1bd562869211e8998f000c2974e9f6", "date": "2015-08-28" },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "case3ec02ed96a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case3ec02ed96a0211e8a353000c2974e9f6",
+            "target": "person96aa81705f2211e8924d005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person96aa81705f2211e8924d005056c00008",
+            "target": "case1f1bd562869211e8998f000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case1f1bd562869211e8998f000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          {
+            "name": "2014年10月22日-柘中建设：国浩律师（上海）事务所关于公司发行股份购买资产及吸收合并上海柘中（集团）有限公司暨关联交易之法律意见书",
+            "id": "case4f70aab86a0211e8a353000c2974e9f6",
+            "date": "2014-10-22"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "case4f70aab86a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case4f70aab86a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          {
+            "name": "2014年04月30日-柘中建设：国浩律师（上海）事务所关于公司发行股份购买资产及吸收合并上海柘中（集团）有限公司暨关联交易之法律意见书",
+            "id": "case4f70aab76a0211e8a353000c2974e9f6",
+            "date": "2014-04-30"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "case4f70aab76a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case4f70aab76a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "831618_文广农贷_2014-12-25_文广农贷-公开转让说明书",
+            "id": "cased4b2ee447e6511e8a0f6000c2974e9f6",
+            "date": "2014-12-25"
+          },
+          { "name": "秦桂森", "id": "persondda477185f2311e8983d005056c00008", "date": null },
+          {
+            "name": "2008年01月04日-江苏申龙：2007年第六次临时股东大会的法律意见书",
+            "id": "casef0aa895b6a0111e8a353000c2974e9f6",
+            "date": "2008-01-04"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "cased4b2ee447e6511e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "cased4b2ee447e6511e8a0f6000c2974e9f6",
+            "target": "persondda477185f2311e8983d005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "persondda477185f2311e8983d005056c00008",
+            "target": "casef0aa895b6a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casef0aa895b6a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          {
+            "name": "2015年05月25日-信息发展：首次公开发行股票并在创业板上市招股意向书",
+            "id": "casee983f1066a0111e8a353000c2974e9f6",
+            "date": "2015-05-25"
+          },
+          { "name": "周若婷", "id": "person84cbfde85f2711e8ba08005056c00008", "date": null },
+          {
+            "name": "2014年07月03日-广电电气：国浩律师（上海）事务所关于上海广电电气（集团）股份有限公司股票期权激励计划之法律意见书",
+            "id": "casea924a3a46a0111e8a353000c2974e9f6",
+            "date": "2014-07-03"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "casee983f1066a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casee983f1066a0111e8a353000c2974e9f6",
+            "target": "person84cbfde85f2711e8ba08005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person84cbfde85f2711e8ba08005056c00008",
+            "target": "casea924a3a46a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casea924a3a46a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所上海分所", "id": "organizationdda0de0a5f0811e887a8005056c00008", "date": null },
+          { "name": "叶瑛", "id": "person14c452005f2311e8904a005056c00008", "date": null },
+          {
+            "name": "2009年04月04日-ST申 龙：2008年度股东大会的法律意见书",
+            "id": "case63b4e5556a0211e8a353000c2974e9f6",
+            "date": "2009-04-04"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationdda0de0a5f0811e887a8005056c00008",
+            "relation": "2015隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "organizationdda0de0a5f0811e887a8005056c00008",
+            "target": "person14c452005f2311e8904a005056c00008",
+            "relation": "2008隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person14c452005f2311e8904a005056c00008",
+            "target": "case63b4e5556a0211e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case63b4e5556a0211e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所上海分所", "id": "organizationdda0de0a5f0811e887a8005056c00008", "date": null },
+          { "name": "王伟建", "id": "person11956dec5f2411e8a74f005056c00008", "date": null },
+          {
+            "name": "831098_通利农贷_2017-05-16_通利农贷-2016年年度股东大会法律意见书",
+            "id": "case4748c38280ee11e8a0f6000c2974e9f6",
+            "date": "2017-05-16"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationdda0de0a5f0811e887a8005056c00008",
+            "relation": "2015隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "organizationdda0de0a5f0811e887a8005056c00008",
+            "target": "person11956dec5f2411e8a74f005056c00008",
+            "relation": "2017隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person11956dec5f2411e8a74f005056c00008",
+            "target": "case4748c38280ee11e8a0f6000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "case4748c38280ee11e8a0f6000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          { "name": "黄宁宁", "id": "person7136dc2e5f2211e896ae005056c00008", "date": null },
+          { "name": "国浩律师事务所上海分所", "id": "organizationdda0de0a5f0811e887a8005056c00008", "date": null },
+          { "name": "王伟建", "id": "person11956dec5f2411e8a74f005056c00008", "date": null },
+          {
+            "name": "2016年06月21日-广电电气2015年年度股东大会决议公告",
+            "id": "casea924a3906a0111e8a353000c2974e9f6",
+            "date": "2016-06-21"
+          },
+          { "name": "李鹏", "id": "persona137502e5f2211e881f0005056c00008", "date": null }
+        ],
+        "links": [
+          {
+            "source": "person7136dc2e5f2211e896ae005056c00008",
+            "target": "organizationdda0de0a5f0811e887a8005056c00008",
+            "relation": "2015隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "organizationdda0de0a5f0811e887a8005056c00008",
+            "target": "person11956dec5f2411e8a74f005056c00008",
+            "relation": "2017隶属于",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "person11956dec5f2411e8a74f005056c00008",
+            "target": "casea924a3906a0111e8a353000c2974e9f6",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          },
+          {
+            "source": "casea924a3906a0111e8a353000c2974e9f6",
+            "target": "persona137502e5f2211e881f0005056c00008",
+            "relation": "参与",
+            "value": 1,
+            "color": "#f9aaaa"
+          }
+        ]
+      }
+    ]
+  }
+}

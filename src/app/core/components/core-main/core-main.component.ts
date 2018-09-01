@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, Renderer2, NgZone } from '@angular/core';
 import { chartOption, chartColorConfig } from '../../config';
 import { CommonService, ObjTypeLinksData, NodeCate } from '../../services/common/common.service';
 import { Contacts, SearchStatus, SearchBarComponent, AjaxResponse, Line } from '../search-bar/search-bar.component';
@@ -11,6 +11,14 @@ import { mergeMap } from '../../../../../node_modules/rxjs/operators';
 import { CheckTab } from '../check-node/check-node.component';
 
 const searchPersonDetailApi = '/api/web/Detail/detail';
+const maxLines = 10;
+
+// 得到两数之间的随机整数，包括两数
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 @Component({
   selector: 'app-core-main',
@@ -20,8 +28,6 @@ const searchPersonDetailApi = '/api/web/Detail/detail';
   providers: [CommonService]
 })
 export class CoreMainComponent implements OnInit {
-  constructor(private _common: CommonService, private _msg: NzMessageService, private _http: HttpClient) {}
-
   loadingId: any;
   option: any; // 图表配置项
   colorBar = chartColorConfig;
@@ -29,9 +35,9 @@ export class CoreMainComponent implements OnInit {
   person = []; // 侧栏任务信息
   checknodesTab: CheckTab[] = []; // 显示隐藏起点的一度节点
   checkcontactsTab: CheckTab[] = []; // 显示隐藏人脉
+  chartHeight = null;
   private _ajaxData: Contacts;
-  // private _nodesExchangeToObjUseIdkey: { [id: string]: ChartNode } = {};
-  // private _objTypeLinksData: ObjTypeLinksData;
+  private _chartFullStatus = false;
 
   /**
    * 是否显示人脉或节点下拉框
@@ -48,25 +54,17 @@ export class CoreMainComponent implements OnInit {
   @ViewChild('chart')
   chart: ChartComponent;
 
+  constructor(
+    private _common: CommonService,
+    private _msg: NzMessageService,
+    private _http: HttpClient,
+    private _render: Renderer2,
+    private _zone: NgZone
+  ) {}
+
   ngOnInit() {}
 
-  /////////////////////////
-
-  /**
-   * 将数组转换为对象结构数据
-   *
-   * @private
-   * @param {ChartNode[]} nodes
-   * @returns {Observable<{ [id: string]: ChartNode }>}
-   * @memberof CoreMainComponent
-   */
-  private _exchangeArrToObj(nodes: ChartNode[]): Observable<{ [id: string]: ChartNode }> {
-    const tmp = {};
-    nodes.forEach(node => {
-      tmp[node.id] = node;
-    });
-    return of(tmp);
-  }
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /**
    * 为可隐藏的点加标记并返回对象类links
@@ -111,9 +109,11 @@ export class CoreMainComponent implements OnInit {
     console.log(data);
     let links = [];
     let nodes = [];
+    let lines = 0;
     if (data.out.length) {
       // 遍历已选人脉
       data.out.forEach(contact => {
+        lines += this._ajaxData[contact].length;
         links = links.concat(this._common.outCrtContactLinks(this._ajaxData, contact));
         nodes = nodes.concat(this._common.outCrtContactNodes(this._ajaxData, contact));
       });
@@ -123,14 +123,14 @@ export class CoreMainComponent implements OnInit {
     const filterLinks = this._common.filterLinks(links);
     console.log(filterLinks);
     this._creatNodesCheckTab(contactsAllNodes, filterLinks);
-    this._afterGetData(filterNodes, filterLinks);
+    this._creatChart(filterNodes, filterLinks, lines);
   }
 
   /**
-   * 选择节点
+   * 选中的节点
    *
-   * @param {ChartNode[]} activedNodes
-   * @memberof ChartComponent
+   * @param {{ out: ChartNode[]; hidden: ChartNode[] }} data
+   * @memberof CoreMainComponent
    */
   getCheckedNodes(data: { out: ChartNode[]; hidden: ChartNode[] }) {
     console.log('选的节点', data);
@@ -144,9 +144,11 @@ export class CoreMainComponent implements OnInit {
     // 目前只对起点后面的做显隐，所以一个点就代表了一条线，所以可以直接根据返回的显示点来显示图表
     let nodes = [];
     let links = [];
+    let lines = 0;
     for (const contact in record) {
       if (record.hasOwnProperty(contact)) {
         record[contact].forEach(lineIndex => {
+          lines += 1;
           const line: Line = this._ajaxData[contact][lineIndex];
           nodes = [...nodes, ...line.nodes];
           links = [...links, ...line.links];
@@ -154,32 +156,14 @@ export class CoreMainComponent implements OnInit {
       }
     }
     console.log(nodes, links);
-    this._afterGetData(this._common.filterNodes(nodes), this._common.filterLinks(links));
-    // const _loadingId = this._showLoading('图表重绘中....');
-    // const hiddenNodesId = this._common.getHiddenNodesInLine(data.hidden, this._objTypeLinksData);
-    // hiddenNodesId.pop(); // 删除终点
-    // const _newNodes = [];
-    // const _tmp = Object.assign({}, this._nodesExchangeToObjUseIdkey);
-    // console.log('被隐藏的一条线上的点', hiddenNodesId);
-    // hiddenNodesId.forEach(id => {
-    //   delete _tmp[id];
-    // });
-    // for (const id in _tmp) {
-    //   if (_tmp.hasOwnProperty(id)) {
-    //     const node = _tmp[id];
-    //     _newNodes.push(node);
-    //   }
-    // }
-    // console.log(_newNodes);
-    // this._msg.remove(_loadingId);
-    // this._setChartOption(_newNodes, this.crtlinks);
+    this._creatChart(this._common.filterNodes(nodes), this._common.filterLinks(links), lines);
   }
 
   /**
-   * 生成人脉下拉
+   * 创建人脉下拉
    *
    * @private
-   * @param {{ [key: number]: ChartLink[] }} links
+   * @param {Contacts} data
    * @returns {CheckTab[]}
    * @memberof CoreMainComponent
    */
@@ -201,7 +185,8 @@ export class CoreMainComponent implements OnInit {
    * 创建节点下拉数据
    *
    * @private
-   * @param {{ links: ChartLink[]; nodes: ChartNode[] }} data
+   * @param {ChartNode[]} nodes
+   * @param {ChartLink[]} links
    * @memberof CoreMainComponent
    */
   private _creatNodesCheckTab(nodes: ChartNode[], links: ChartLink[]) {
@@ -222,9 +207,6 @@ export class CoreMainComponent implements OnInit {
           });
         });
         console.log(this.checknodesTab);
-        // 隐藏单个节点，为隐藏整条线的准备数据
-        // this._objTypeLinksData = _data.objLinks;
-        // this._exchangeArrToObj(data.nodes).subscribe(_newNodes => (this._nodesExchangeToObjUseIdkey = _newNodes));
       });
     } else {
       this.checknodesTab = [];
@@ -234,10 +216,10 @@ export class CoreMainComponent implements OnInit {
   /**
    * 获取关系数据
    *
-   * @param {Contacts} res
+   * @param {AjaxResponse} res
    * @memberof CoreMainComponent
    */
-  getContacts(res: AjaxResponse) {
+  getRealtions(res: AjaxResponse) {
     console.log(res);
     this.initCore = false;
     if (!res.code && res.data && Object.keys(res.data).length) {
@@ -248,7 +230,7 @@ export class CoreMainComponent implements OnInit {
       const crtAllNodes = this._common.outCrtContactNodes(this._ajaxData); // 未去重的所有的nodes
       const nodesForDis = this._common.filterNodes(crtAllNodes); // 去重的nodes
       this._creatNodesCheckTab(crtAllNodes, linksforDis);
-      this._afterGetData(nodesForDis, linksforDis);
+      this._creatChart(nodesForDis, linksforDis, this._ajaxData[Object.keys(this._ajaxData)[0]].length);
     } else {
       this._msg.remove(this.loadingId);
       this.option = null;
@@ -256,18 +238,58 @@ export class CoreMainComponent implements OnInit {
   }
 
   /**
-   * 当前人脉数据
+   * 生成图表
    *
    * @private
+   * @param {ChartNode[]} nodes
+   * @param {ChartLink[]} links
    * @memberof CoreMainComponent
    */
-  private _afterGetData(nodes: ChartNode[], links: ChartLink[]) {
+  private _creatChart(nodes: ChartNode[], links: ChartLink[], lines: number) {
+    lines = getRandomIntInclusive(2, 30);
+    console.log(lines);
+    if (lines > maxLines) {
+      this.chartHeight = lines * 2 + 'rem';
+    } else {
+      this.chartHeight = null;
+    }
     // 设置节点和线的样式
     this._common.setNodesAndLinksStyle(this.searchBar, nodes, links).subscribe(data => {
       // 生成图表
       this._setChartOption(data.nodes, data.links);
       this._msg.remove(this.loadingId);
     });
+  }
+
+  chartIsFull(isFull: boolean) {
+    this._chartFullStatus = isFull;
+    const main: HTMLElement = document.querySelector('.core-main');
+    const chart: HTMLElement = document.querySelector('app-chart');
+    if (isFull) {
+      this._zone.runOutsideAngular(() => {
+        // 图表全屏时，依据全屏指定的父级而取的高度
+        this._render.setStyle(chart, 'height', '100%');
+        this._render.setStyle(main, 'height', `${chart.clientHeight}px;`);
+      });
+    } else {
+      this._render.removeStyle(main, 'height');
+    }
+  }
+
+  /**
+   * 改变图表中下拉布局
+   *
+   * @private
+   * @param {number} lines
+   * @memberof CoreMainComponent
+   */
+  private _exchangeCheckComponentPosition(lines: number) {
+    // 拉伸
+    if (lines > maxLines) {
+      // 全屏
+      if (this._chartFullStatus) {
+      }
+    }
   }
 
   /**
