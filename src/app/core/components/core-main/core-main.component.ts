@@ -23,6 +23,16 @@ function getRandomIntInclusive(min, max) {
   }
 }
 
+/**
+ * 图表下拉框定位模式
+ *
+ * @enum {number}
+ */
+enum checkUIMode {
+  normal = 'normal',
+  fullscreen = 'fullscreen'
+}
+
 @Component({
   selector: 'app-core-main',
   templateUrl: './core-main.component.html',
@@ -41,6 +51,35 @@ export class CoreMainComponent implements OnInit {
   chartHeight = null;
   private _ajaxData: Contacts;
   private _chartFullStatus = false;
+
+  checkUIMode = checkUIMode.normal;
+
+  checkUIPosition = {
+    fullscreen: {
+      contactsCheckUI: {
+        positionType: 'absolute',
+        top: 2.262626,
+        right: 20.525253
+      },
+      nodesCheckUI: {
+        positionType: 'absolute',
+        top: 2.262626,
+        right: 2.525253
+      }
+    },
+    normal: {
+      contactsCheckUI: {
+        positionType: 'fixed',
+        top: 12.262626,
+        right: 25.525253
+      },
+      nodesCheckUI: {
+        positionType: 'fixed',
+        top: 12.262626,
+        right: 8.525253
+      }
+    }
+  };
 
   /**
    * 是否显示人脉或节点下拉框
@@ -266,6 +305,7 @@ export class CoreMainComponent implements OnInit {
 
   chartIsFull(isFull: boolean) {
     this._chartFullStatus = isFull;
+    this.checkUIMode = isFull ? checkUIMode.fullscreen : checkUIMode.normal;
   }
 
   /**

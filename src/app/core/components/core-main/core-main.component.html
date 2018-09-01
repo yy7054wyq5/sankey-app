@@ -19,9 +19,26 @@
       <!-- 图表 -->
       <app-chart #chart *ngIf="option" [eoption]="option" [eheight]="chartHeight" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)" (efullStatus)="chartIsFull($event)">
         <!-- 选择人脉 -->
-        <app-check-node *ngIf="showCheckComponent" [tabs]="checkcontactsTab" [positionType]="'fixed'" placeholder="显示隐藏人脉" [top]="10.262626" [right]="20.525253" (outCheckedNodes)="getCheckedContacts($event)"></app-check-node>
+        <app-check-node 
+          *ngIf="showCheckComponent" 
+          [tabs]="checkcontactsTab" 
+          [positionType]="checkUIPosition[checkUIMode].contactsCheckUI.positionType" 
+          placeholder="显示隐藏人脉" 
+          [top]="checkUIPosition[checkUIMode].contactsCheckUI.top" 
+          [right]="checkUIPosition[checkUIMode].contactsCheckUI.right"
+          (outCheckedNodes)="getCheckedContacts($event)">
+        </app-check-node>
         <!-- 选择隐藏节点 -->
-        <app-check-node *ngIf="showCheckComponent" [outFullData]="true" [tabs]="checknodesTab" [positionType]="'fixed'" placeholder="显示隐藏关系" [top]="10.262626" [right]="2.525253" (outCheckedNodes)="getCheckedNodes($event)"></app-check-node>
+        <app-check-node 
+          *ngIf="showCheckComponent" 
+          [outFullData]="true" 
+          [tabs]="checknodesTab" 
+          [positionType]="checkUIPosition[checkUIMode].nodesCheckUI.positionType" 
+          placeholder="显示隐藏关系" 
+          [top]="checkUIPosition[checkUIMode].nodesCheckUI.top" 
+          [right]="checkUIPosition[checkUIMode].nodesCheckUI.right" 
+          (outCheckedNodes)="getCheckedNodes($event)">
+        </app-check-node>
       </app-chart>
       <div class="hack" style="height: .606061rem"></div>
       <!-- 颜色盘 -->

@@ -39,6 +39,15 @@ const chartOption = {
       return name;
     }
   },
+  tooltip: {
+    show: true,
+    formatter: param => {
+      const data = param.data;
+      if (data.hasOwnProperty('date') && data.hasOwnProperty('name')) {
+        return `${data.name}`;
+      }
+    }
+  },
   series: [
     {
       type: 'sankey',
