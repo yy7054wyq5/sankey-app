@@ -288,8 +288,8 @@ export class CoreMainComponent implements OnInit {
    * @memberof CoreMainComponent
    */
   private _creatChart(nodes: ChartNode[], links: ChartLink[], lines: number) {
-    lines = getRandomIntInclusive(2, 30);
-    console.log(lines);
+    // lines = getRandomIntInclusive(2, 30);
+    // console.log(lines);
     if (lines > maxLines) {
       this.chartHeight = lines * 2 + 'rem';
     } else {
@@ -306,19 +306,6 @@ export class CoreMainComponent implements OnInit {
   chartIsFull(isFull: boolean) {
     this._chartFullStatus = isFull;
     this.checkUIMode = isFull ? checkUIMode.fullscreen : checkUIMode.normal;
-  }
-
-  /**
-   * 改变图表中下拉布局
-   *
-   * @private
-   * @param {number} lines
-   * @memberof CoreMainComponent
-   */
-  private _exchangeCheckComponentPosition(lines: number) {
-    // 拉伸
-    if (lines > maxLines) {
-    }
   }
 
   /**
