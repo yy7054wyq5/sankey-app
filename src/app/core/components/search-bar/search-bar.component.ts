@@ -13,7 +13,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../../services/common/common.service';
 import { Observable, fromEvent, of } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged, switchMap, retry } from 'rxjs/operators';
 import { StorageService } from '../../../share/services/storage/storage.service';
 import { ChartLink, ChartNode } from '../../../share/components/chart/chart.service';
 import { environment } from '../../../../environments/environment';
@@ -118,6 +118,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   startOptions = []; // 起点下拉option数据
   endOptions = []; // 终点下拉option数据
+
+  selectedRecord;
 
   /**
    * 外部以模板变量的方式获取内部变量
@@ -240,6 +242,15 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ////////////////////////////////////////////////////////////////////////////////
+
+  recordOptionLabel(option: SuccessSearchRecord) {
+    return option.start['company'] + ':' + option.start['name'] + '=>' + option.end['company'] + ':' + option.end['name'];
+  }
+
+  selectedRecrodEvent(event) {
+    console.log(event);
+    this.search(event);
+  }
 
   /**
    * 将数据改变结构以适应相同id数据的展示
@@ -417,10 +428,15 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     if (searchData) {
       // 避免将外部变量的索引传入；导致内部记录，跟随起点或重点的选中使记录同步变化的问题
       this.records.startAndEnd = JSON.parse(JSON.stringify(searchData));
-      this.startOptions = [searchData.start];
-      this.endOptions = [searchData.end];
-      this.start = searchData.start.p_id;
-      this.end = searchData.end.p_id;
+      try {
+        this.startOptions = [searchData.start];
+        this.endOptions = [searchData.end];
+        this.start = searchData.start.p_id;
+        this.end = searchData.end.p_id;
+      } catch (error) {
+        console.log('search', error);
+        return;
+      }
     }
 
     // if (!environment.production) {

@@ -20,6 +20,7 @@
       <app-chart #chart *ngIf="option" [eoption]="option" [eheight]="chartHeight" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)" (efullStatus)="chartIsFull($event)">
         <!-- 选择人脉 -->
         <app-check-node 
+          [ngStyle]="{width:checkUIPosition[checkUIMode].width}"
           *ngIf="showCheckComponent" 
           [tabs]="checkcontactsTab" 
           [positionType]="checkUIPosition[checkUIMode].contactsCheckUI.positionType" 
@@ -29,12 +30,12 @@
           (outCheckedNodes)="getCheckedContacts($event)">
         </app-check-node>
         <!-- 选择隐藏节点 -->
-        <app-check-node 
+        <app-check-node
           *ngIf="showCheckComponent" 
           [outFullData]="true" 
           [tabs]="checknodesTab" 
           [positionType]="checkUIPosition[checkUIMode].nodesCheckUI.positionType" 
-          placeholder="显示隐藏关系" 
+          placeholder="显示隐藏关系"
           [top]="checkUIPosition[checkUIMode].nodesCheckUI.top" 
           [right]="checkUIPosition[checkUIMode].nodesCheckUI.right" 
           (outCheckedNodes)="getCheckedNodes($event)">

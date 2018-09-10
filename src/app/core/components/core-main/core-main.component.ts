@@ -20,6 +20,7 @@ const maxLines = 10;
  * @enum {number}
  */
 enum checkUIMode {
+  mobile = 'mobile',
   normal = 'normal',
   fullscreen = 'fullscreen'
 }
@@ -69,6 +70,20 @@ export class CoreMainComponent implements OnInit {
         top: 12.262626,
         right: 8.525253
       }
+    },
+    mobile: {
+      contactsCheckUI: {
+        positionType: 'absolute',
+        top: 0,
+        right: 0,
+        width: '100%'
+      },
+      nodesCheckUI: {
+        positionType: 'absolute',
+        top: 2.1,
+        right: 0,
+        width: '100%'
+      }
     }
   };
 
@@ -95,7 +110,11 @@ export class CoreMainComponent implements OnInit {
     private _zone: NgZone
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (isMobile()) {
+      this.checkUIMode = checkUIMode.mobile;
+    }
+  }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 

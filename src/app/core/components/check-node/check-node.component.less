@@ -3,7 +3,7 @@
 
 app-check-node {
   background: #fff;
-  width: 15.151515rem;
+  width: 15rem;
   min-height: 2.020202rem;
   .select-chart {
     .bar {
@@ -67,5 +67,17 @@ app-check-node {
         }
       }
     }
+  }
+}
+
+@media (min-width: @media750) and(max-width: @media1020) {
+  app-check-node {
+    width: 100%;
+  }
+}
+
+@media (max-width: @media750) {
+  app-check-node {
+    width: 100%;
   }
 }
