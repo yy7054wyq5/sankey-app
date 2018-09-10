@@ -50,7 +50,7 @@
     </nz-spin>
   </div>
 
-  <div class="history">
+  <div class="records">
     <nz-select [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请选择搜索历史"
                [(ngModel)]="selectedRecord" name="history" (ngModelChange)="selectedRecrodEvent($event)">
       <ng-container *ngFor="let option of records.data">

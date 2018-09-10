@@ -115,22 +115,28 @@ app-search-bar {
   }
 }
 
-@media (min-width: @media1020) {
+@media (min-width: @media1024) {
   app-search-bar {
     padding-left: 14.646465rem;
+    .records {
+      display: none;
+    }
   }
 }
 
-@media (max-width: @media1020) {
+@media (max-width: @media1024) {
   app-search-bar {
     height: auto;
+    form {
+      padding-top: 0;
+    }
   }
   .search-tips {
     display: none;
   }
 }
 
-@media (min-width: @media750) and(max-width: @media1020) {
+@media (min-width: @media750) and(max-width: @media1024) {
   app-search-bar {
     padding-left: 1rem;
     padding-right: 1rem;
