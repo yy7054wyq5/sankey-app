@@ -122,19 +122,28 @@ app-search-bar {
 }
 
 @media (max-width: @media1020) {
+  app-search-bar{
+    height: auto;
+  }
+  .search-tips {
+    display: none;
+  }
+}
+
+@media (min-width: @media750) and(max-width: @media1020) {
   app-search-bar {
     padding-left: 1rem;
     padding-right: 1rem;
     form {
-      > div {
+      > * {
         &:first-child {
-          flex: 1;
+          flex: 4;
         }
         &:nth-child(2) {
-          flex: 1;
+          flex: 4;
         }
-        &:last-child {
-          flex: 5;
+        &:nth-child(3) {
+          flex: 2;
         }
         .@{perfix} {
           width: 100%;
@@ -142,7 +151,29 @@ app-search-bar {
       }
     }
   }
-  .search-tips {
-    display: none;
+}
+
+@media (max-width: @media750) {
+  app-search-bar {
+    padding-left: 0;
+    padding-right: 0;
+    form {
+      flex-wrap: wrap;
+      padding-top: 0;
+      > * {
+        &:first-child {
+          width: 100%;
+        }
+        &:nth-child(2) {
+          width: 100%;
+        }
+        &:nth-child(3) {
+          width: 100%;
+        }
+        .@{perfix} {
+          width: 100%;
+        }
+      }
+    }
   }
 }

@@ -9,6 +9,7 @@ import { ChartNode, ChartLink } from '../../../share/components/chart/chart.serv
 import { Observable, of } from '../../../../../node_modules/rxjs';
 import { mergeMap } from '../../../../../node_modules/rxjs/operators';
 import { CheckTab } from '../check-node/check-node.component';
+import { isMobile } from '../../../share/utils';
 
 const searchPersonDetailApi = '/api/web/Detail/detail';
 const maxLines = 10;
@@ -368,6 +369,9 @@ export class CoreMainComponent implements OnInit {
   clickChartEvent(node) {
     // ChartEventCbParams
     if (node.dataType === 'node' && node.data.id.indexOf('person') === 0) {
+      if (isMobile()) {
+        return;
+      }
       const loadingId = this._showLoading();
       this._http
         .get(searchPersonDetailApi, {
