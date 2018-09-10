@@ -3,7 +3,7 @@ app-core-main {
   display: flex;
   width: 100%;
   .core-main {
-    margin-top: .757576rem;
+    margin-top: 0.757576rem;
     display: flex;
     flex: 1;
     padding-right: 5.353535rem;
@@ -12,18 +12,18 @@ app-core-main {
       flex: 1;
       flex-direction: row; //
       // 内容区
-      // 
+      //
       .core-content {
         flex: 1;
         display: flex;
         flex-direction: column;
-        >ul.chart-color-bar {
+        > ul.chart-color-bar {
           width: 32.525253rem;
           height: 3.131313rem;
           background: #fff;
           border-radius: 3px;
           display: flex;
-          font-size: .808081rem;
+          font-size: 0.808081rem;
           li {
             flex: 1;
             display: flex;
@@ -31,15 +31,15 @@ app-core-main {
             i {
               background: #000;
               display: block;
-              width: .909091rem;
-              height: .909091rem;
+              width: 0.909091rem;
+              height: 0.909091rem;
             }
             span {
               margin-left: 1.010101rem;
             }
           }
         }
-        >div.status {
+        > div.status {
           flex: 1;
           display: flex;
           background-color: #fff;
@@ -59,6 +59,17 @@ app-core-main {
           }
         }
       }
+    }
+  }
+}
+
+@media (max-width: @media1020) {
+  app-core-main {
+    app-sider {
+      display: none;
+    }
+    .core-main {
+      padding-right: 0;
     }
   }
 }

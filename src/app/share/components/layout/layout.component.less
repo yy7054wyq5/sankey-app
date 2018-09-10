@@ -1,35 +1,47 @@
 @import '../../../../less/variable.less';
 @import '../../../../less/mixin.less';
 @headerHeight: 4.242424rem;
+
 .layout {
   min-height: 100vh;
-  padding-top: @headerHeight;
-  .header {
-    width: 100%;
-    background: #fff;
-    height: @headerHeight;
-    line-height: @headerHeight;
-    padding-right: 4.545455rem;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    .bottom-shadow;
-    .menu {
-      height: 100%;
+  .content {
+    nz-content {
       display: flex;
-      color: #1a1a1a;
-      justify-content: flex-end;
-      font-size: .808081rem;
-      li {
-        flex: 1;
-        cursor: pointer;
+    }
+  }
+}
+
+@media (min-width: @media1020) {
+  .layout {
+    padding-top: @headerHeight;
+    .header {
+      width: 100%;
+      background: #fff;
+      height: @headerHeight;
+      line-height: @headerHeight;
+      padding-right: 4.545455rem;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      .bottom-shadow;
+      #menu {
+        height: 100%;
+        display: flex;
+        color: #1a1a1a;
+        justify-content: flex-end;
+        font-size: 0.808081rem;
+        li {
+          flex: 1;
+          cursor: pointer;
+        }
       }
     }
   }
-  .content {
-    nz-content {
-      display: flex
-    }
+}
+
+@media (max-width: @media1020) {
+  #menu{
+    display: none;
   }
 }

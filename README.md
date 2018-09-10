@@ -7,6 +7,7 @@
 * 采用rem布局，达到等比例放大缩小效果
 * 1rem = 19.8px
 * 计算方式[RemService](./src/app/share/services/rem/rem.service.ts)
+* 宽度1020以上PC端布局
 
 ## 第三方说明
 

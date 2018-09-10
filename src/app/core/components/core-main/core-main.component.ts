@@ -13,16 +13,6 @@ import { CheckTab } from '../check-node/check-node.component';
 const searchPersonDetailApi = '/api/web/Detail/detail';
 const maxLines = 10;
 
-// 得到两数之间的随机整数，包括两数
-function getRandomIntInclusive(min, max) {
-  const a = Math.random();
-  if (a < 0.5) {
-    return min;
-  } else {
-    return max;
-  }
-}
-
 /**
  * 图表下拉框定位模式
  *
@@ -288,7 +278,6 @@ export class CoreMainComponent implements OnInit {
    * @memberof CoreMainComponent
    */
   private _creatChart(nodes: ChartNode[], links: ChartLink[], lines: number) {
-    // lines = getRandomIntInclusive(2, 30);
     // console.log(lines);
     if (lines > maxLines) {
       this.chartHeight = lines * 2 + 'rem';

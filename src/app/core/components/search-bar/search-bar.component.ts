@@ -17,6 +17,7 @@ import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operato
 import { StorageService } from '../../../share/services/storage/storage.service';
 import { ChartLink, ChartNode } from '../../../share/components/chart/chart.service';
 import { environment } from '../../../../environments/environment';
+import { isMobile } from '../../../share/utils';
 
 /**
  * 搜索的状态
@@ -249,6 +250,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof SearchBarComponent
    */
   private _concatData(data: Option[]): Observable<any[]> {
+    if (!data) {
+      return of([]);
+    }
     const _tmp: { [id: string]: { name: string; p_id: string; company: string; info: Option[] } } = {};
     data.forEach(item => {
       if (item && item.name) {
@@ -313,7 +317,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof SearchBarComponent
    */
   private _showTips(show: boolean) {
-    if (this.tip) {
+    console.log(isMobile());
+    if (this.tip && !isMobile()) {
       this._renderer.setStyle(this.tip, 'display', show ? 'flex' : 'none');
     }
   }

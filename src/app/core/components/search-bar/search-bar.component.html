@@ -1,28 +1,61 @@
 <form (submit)="search()">
-  <!-- 选择起点 -->
-  <nz-spin [nzSpinning]="startLoading">
-    <nz-select class="start-point" [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请输入您的姓名 或公司名称 或职务" [(ngModel)]="start" name="start" (ngModelChange)="selected($event, 'start')" (nzOpenChange)="open($event)">
-      <ng-container *ngFor="let option of startOptions">
-        <nz-option *ngIf="option['name']" nzLabel="{{option['name']}}&nbsp;{{option['company']}}&nbsp;{{lastOptionLable(option.info)}}" nzValue="{{option['p_id']}}" [nzCustomContent]="true">
-          <div class="option-label" (click)="getStartAndEndData(option ,'start')">
-            <div class="name">{{option.name}}</div>
-            <div class="content">
-              <div *ngFor="let info of option.info">
-                <span class="company">{{info.company}}</span>
-                <span class="last">{{lastOptionLable(info)}}</span>
+
+  <div class="start">
+    <!-- 选择起点 -->
+    <nz-spin [nzSpinning]="startLoading">
+      <nz-select class="start-point" [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch
+                 nzAllowClear nzPlaceHolder="请输入您的姓名 或公司名称 或职务" [(ngModel)]="start" name="start" (ngModelChange)="selected($event, 'start')"
+                 (nzOpenChange)="open($event)">
+        <ng-container *ngFor="let option of startOptions">
+          <nz-option *ngIf="option['name']" nzLabel="{{option['name']}}&nbsp;{{option['company']}}&nbsp;{{lastOptionLable(option.info)}}"
+                     nzValue="{{option['p_id']}}" [nzCustomContent]="true">
+            <div class="option-label" (click)="getStartAndEndData(option ,'start')">
+              <div class="name">{{option.name}}</div>
+              <div class="content">
+                <div *ngFor="let info of option.info">
+                  <span class="company">{{info.company}}</span>
+                  <span class="last">{{lastOptionLable(info)}}</span>
+                </div>
               </div>
             </div>
-          </div>
-        </nz-option>
-      </ng-container>
-    </nz-select>
-  </nz-spin>
+          </nz-option>
+        </ng-container>
+      </nz-select>
+    </nz-spin>
+  </div>
 
-  <!-- 选择终点 -->
-  <nz-spin [nzSpinning]="endLoading">
-    <nz-select class="end-point" [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请输入对方的姓名 或公司名称 或职务" [(ngModel)]="end" name="end" (ngModelChange)="selected($event, 'end')" (nzOpenChange)="open($event)">
-      <ng-container *ngFor="let option of endOptions">
-        <nz-option *ngIf="option['name']" nzLabel="{{option['name']}}&nbsp;{{option['company']}}&nbsp;{{lastOptionLable(option.info)}}" nzValue="{{option['p_id']}}" [nzCustomContent]="true">
+
+  <div class="end">
+    <!-- 选择终点 -->
+    <nz-spin [nzSpinning]="endLoading">
+      <nz-select class="end-point" [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch
+                 nzAllowClear nzPlaceHolder="请输入对方的姓名 或公司名称 或职务" [(ngModel)]="end" name="end" (ngModelChange)="selected($event, 'end')"
+                 (nzOpenChange)="open($event)">
+        <ng-container *ngFor="let option of endOptions">
+          <nz-option *ngIf="option['name']" nzLabel="{{option['name']}}&nbsp;{{option['company']}}&nbsp;{{lastOptionLable(option.info)}}"
+                     nzValue="{{option['p_id']}}" [nzCustomContent]="true">
+            <div class="option-label" (click)="getStartAndEndData(option ,'end')">
+              <div class="name">{{option.name}}</div>
+              <div class="content">
+                <div *ngFor="let info of option.info">
+                  <span class="company">{{info.company}}</span>
+                  <span class="last">{{lastOptionLable(info)}}</span>
+                </div>
+              </div>
+            </div>
+          </nz-option>
+        </ng-container>
+
+      </nz-select>
+    </nz-spin>
+  </div>
+
+  <!-- <div class="history">
+    <nz-select [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请选择搜索历史"
+               [(ngModel)]="history" name="history" (ngModelChange)="selectedHistory($event)">
+      <ng-container *ngFor="let option of historyOptions">
+        <nz-option nzLabel="{{option['name']}}&nbsp;{{option['company']}}&nbsp;{{lastOptionLable(option.info)}}"
+                   nzValue="{{option['p_id']}}" [nzCustomContent]="true">
           <div class="option-label" (click)="getStartAndEndData(option ,'end')">
             <div class="name">{{option.name}}</div>
             <div class="content">
@@ -36,7 +69,7 @@
       </ng-container>
 
     </nz-select>
-  </nz-spin>
+  </div> -->
 
   <!-- 匹配 -->
   <button nz-button [nzType]="'primary'" type="submit">智配关系</button>

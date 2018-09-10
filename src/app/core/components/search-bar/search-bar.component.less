@@ -4,7 +4,6 @@
 app-search-bar {
   width: 100%;
   height: 5.360606rem;
-  padding-left: 14.646465rem;
   position: relative;
   form {
     height: 100%;
@@ -62,7 +61,7 @@ app-search-bar {
     &:last-child {
       border-bottom: 0;
     }
-    .option-label{
+    .option-label {
       display: flex;
       .name {
         flex: 1;
@@ -113,5 +112,37 @@ app-search-bar {
     margin-top: -0.8rem;
     background: #fff;
     .box-shadow;
+  }
+}
+
+@media (min-width: @media1020) {
+  app-search-bar {
+    padding-left: 14.646465rem;
+  }
+}
+
+@media (max-width: @media1020) {
+  app-search-bar {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    form {
+      > div {
+        &:first-child {
+          flex: 1;
+        }
+        &:nth-child(2) {
+          flex: 1;
+        }
+        &:last-child {
+          flex: 5;
+        }
+        .@{perfix} {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .search-tips {
+    display: none;
   }
 }
