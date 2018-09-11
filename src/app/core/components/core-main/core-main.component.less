@@ -17,6 +17,12 @@ app-core-main {
         flex: 1;
         display: flex;
         flex-direction: column;
+        .media-pc-check-node{
+          width: 15rem;
+        }
+        .media-mobile-check-node {
+          display: none;
+        }
         > ul.chart-color-bar {
           width: 32.525253rem;
           height: 3.131313rem;
@@ -71,14 +77,19 @@ app-core-main {
     .core-main {
       padding-right: 0;
       margin-top: 0;
-      section.core-body .core-content {
-        width: 100%;
-        > div.status img{
-          width: 80%;
-          height: auto;
-        }
-        > ul.chart-color-bar {
+      section.core-body {
+        .core-content {
           width: 100%;
+          .media-pc-check-node {
+            display: none;
+          }
+          > div.status img {
+            width: 80%;
+            height: auto;
+          }
+          > ul.chart-color-bar {
+            width: 100%;
+          }
         }
       }
     }

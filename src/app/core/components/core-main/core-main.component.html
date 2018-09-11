@@ -18,26 +18,43 @@
       </div>
       <!-- 图表 -->
       <app-chart #chart *ngIf="option" [eoption]="option" [eheight]="chartHeight" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)" (efullStatus)="chartIsFull($event)">
+        <!-- 移动端展示 -->
         <!-- 选择人脉 -->
-        <app-check-node 
-          [ngStyle]="{width:checkUIPosition[checkUIMode].width}"
+        <app-check-node
+          class="media-mobile-check-node contacts" 
           *ngIf="showCheckComponent" 
           [tabs]="checkcontactsTab" 
-          [positionType]="checkUIPosition[checkUIMode].contactsCheckUI.positionType" 
           placeholder="显示隐藏人脉" 
-          [top]="checkUIPosition[checkUIMode].contactsCheckUI.top" 
-          [right]="checkUIPosition[checkUIMode].contactsCheckUI.right"
           (outCheckedNodes)="getCheckedContacts($event)">
         </app-check-node>
         <!-- 选择隐藏节点 -->
         <app-check-node
+          class="media-mobile-check-node nodes" 
           *ngIf="showCheckComponent" 
           [outFullData]="true" 
           [tabs]="checknodesTab" 
-          [positionType]="checkUIPosition[checkUIMode].nodesCheckUI.positionType" 
           placeholder="显示隐藏关系"
-          [top]="checkUIPosition[checkUIMode].nodesCheckUI.top" 
-          [right]="checkUIPosition[checkUIMode].nodesCheckUI.right" 
+          (outCheckedNodes)="getCheckedNodes($event)">
+        </app-check-node>
+
+        <!-- PC端展示 -->        
+        <!-- 选择人脉 -->
+        <app-check-node
+          class="media-pc-check-node" 
+          [ngStyle]="checkUIPosition[checkUIMode].contactsCheckUI"
+          *ngIf="showCheckComponent" 
+          [tabs]="checkcontactsTab" 
+          placeholder="显示隐藏人脉" 
+          (outCheckedNodes)="getCheckedContacts($event)">
+        </app-check-node>
+        <!-- 选择隐藏节点 -->
+        <app-check-node
+          class="media-pc-check-node" 
+          [ngStyle]="checkUIPosition[checkUIMode].nodesCheckUI"
+          *ngIf="showCheckComponent" 
+          [outFullData]="true" 
+          [tabs]="checknodesTab" 
+          placeholder="显示隐藏关系"
           (outCheckedNodes)="getCheckedNodes($event)">
         </app-check-node>
       </app-chart>

@@ -25,6 +25,13 @@ enum checkUIMode {
   fullscreen = 'fullscreen'
 }
 
+interface CheckNodeUIStyle {
+  position: 'absolute' | 'relative' | 'fixed';
+  top: string;
+  right: string;
+  width: string;
+}
+
 @Component({
   selector: 'app-core-main',
   templateUrl: './core-main.component.html',
@@ -46,43 +53,33 @@ export class CoreMainComponent implements OnInit {
 
   checkUIMode = checkUIMode.normal;
 
-  checkUIPosition = {
+  checkUIPosition: { [mode: string]: { [nodeType: string]: CheckNodeUIStyle } } = {
     fullscreen: {
       contactsCheckUI: {
-        positionType: 'absolute',
-        top: 2.262626,
-        right: 20.525253
+        position: 'absolute',
+        top: '2.262626rem',
+        right: '20.525253rem',
+        width: '15rem'
       },
       nodesCheckUI: {
-        positionType: 'absolute',
-        top: 2.262626,
-        right: 2.525253
+        position: 'absolute',
+        top: '2.262626rem',
+        right: '2.525253rem',
+        width: '15rem'
       }
     },
     normal: {
       contactsCheckUI: {
-        positionType: 'fixed',
-        top: 12.262626,
-        right: 25.525253
+        position: 'fixed',
+        top: '12.262626rem',
+        right: '25.525253rem',
+        width: '15rem'
       },
       nodesCheckUI: {
-        positionType: 'fixed',
-        top: 12.262626,
-        right: 8.525253
-      }
-    },
-    mobile: {
-      contactsCheckUI: {
-        positionType: 'absolute',
-        top: 0,
-        right: 0,
-        width: '100%'
-      },
-      nodesCheckUI: {
-        positionType: 'absolute',
-        top: 2.1,
-        right: 0,
-        width: '100%'
+        position: 'fixed',
+        top: '12.262626rem',
+        right: '8.525253rem',
+        width: '15rem'
       }
     }
   };
@@ -110,11 +107,7 @@ export class CoreMainComponent implements OnInit {
     private _zone: NgZone
   ) {}
 
-  ngOnInit() {
-    if (isMobile()) {
-      this.checkUIMode = checkUIMode.mobile;
-    }
-  }
+  ngOnInit() {}
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 

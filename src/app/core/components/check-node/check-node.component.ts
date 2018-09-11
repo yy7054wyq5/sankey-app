@@ -43,13 +43,8 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   pointsTag: string; // 下拉公司与事件的切换
 
   @Input()
-  top: number;
-  @Input()
-  right: number;
-  @Input()
   tabs: CheckTab[];
-  @Input()
-  positionType: 'absolute' | 'relative' | 'fixed' | null = 'absolute';
+  // positionType: 'absolute' | 'relative' | 'fixed' | null = 'absolute';
   @Input()
   placeholder: string;
   @Input()
@@ -73,7 +68,7 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
       }
 
       if (changes.positionType) {
-        this._positionDiv(this.positionType);
+        // this._positionDiv(this.positionType);
       }
     }
     // console.log(this.tabs);
@@ -86,19 +81,21 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this._positionDiv(this.positionType);
+    // this._positionDiv(this.positionType);
   }
 
   ////////////////////////////////////
 
-  private _positionDiv(positionType) {
-    // 定位下拉框
-    this._render.setAttribute(
-      this._element.nativeElement,
-      'style',
-      `top: ${this.top}rem;right: ${this.right}rem; position: ${positionType};`
-    );
-  }
+  // private _positionDiv(positionType) {
+  //   if (this.top && this.right && positionType) {
+  //     // 定位下拉框
+  //     this._render.setAttribute(
+  //       this._element.nativeElement,
+  //       'style',
+  //       `top: ${this.top}rem;right: ${this.right}rem; position: ${positionType};`
+  //     );
+  //   }
+  // }
 
   /**
    * 选中样式
