@@ -17,11 +17,11 @@ app-core-main {
         flex: 1;
         display: flex;
         flex-direction: column;
-        .media-pc-check-node{
-          width: 15rem;
-        }
         .media-mobile-check-node {
           display: none;
+        }
+        .media-pc-check-node {
+          display: block;
         }
         > ul.chart-color-bar {
           width: 32.525253rem;
@@ -83,12 +83,52 @@ app-core-main {
           .media-pc-check-node {
             display: none;
           }
+          .media-mobile-check-node {
+            display: block;
+            position: fixed;
+            width: 25rem;
+            top: 8rem;
+            &.contacts {
+              right: 30rem;
+            }
+            &.nodes {
+              right: 0;
+            }
+          }
           > div.status img {
             width: 80%;
             height: auto;
           }
           > ul.chart-color-bar {
             width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: @media750) {
+  app-core-main {
+    .core-main {
+      section.core-body {
+        .core-content {
+          .media-pc-check-node {
+            display: none;
+          }
+          .media-mobile-check-node {
+            display: block;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            &.contacts {
+              right: 0;
+              z-index: 2;
+            }
+            &.nodes {
+              top: 2.2rem;
+              right: 0;
+            }
           }
         }
       }

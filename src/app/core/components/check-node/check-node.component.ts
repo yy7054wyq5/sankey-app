@@ -7,7 +7,6 @@ import {
   SimpleChanges,
   Output,
   EventEmitter,
-  AfterViewInit,
   ElementRef,
   Renderer2
 } from '@angular/core';
@@ -38,13 +37,12 @@ export interface CheckOption extends ChartNode {
   styleUrls: ['./check-node.component.less'],
   encapsulation: ViewEncapsulation.None
 })
-export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
+export class CheckNodeComponent implements OnInit, OnChanges {
   show: boolean; // 控制下拉是否显示
   pointsTag: string; // 下拉公司与事件的切换
 
   @Input()
   tabs: CheckTab[];
-  // positionType: 'absolute' | 'relative' | 'fixed' | null = 'absolute';
   @Input()
   placeholder: string;
   @Input()
@@ -66,10 +64,6 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
         this.pointsTag = this.tabs.length ? this.tabs[0].tag : '';
         console.log(this.pointsTag);
       }
-
-      if (changes.positionType) {
-        // this._positionDiv(this.positionType);
-      }
     }
     // console.log(this.tabs);
   }
@@ -77,25 +71,9 @@ export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   ngOnInit() {
     this.pointsTag = this.tabs[0].tag;
     // console.log(this.nodes);
-    // console.log(this.tabs, this.tabs[0].tag);
-  }
-
-  ngAfterViewInit() {
-    // this._positionDiv(this.positionType);
   }
 
   ////////////////////////////////////
-
-  // private _positionDiv(positionType) {
-  //   if (this.top && this.right && positionType) {
-  //     // 定位下拉框
-  //     this._render.setAttribute(
-  //       this._element.nativeElement,
-  //       'style',
-  //       `top: ${this.top}rem;right: ${this.right}rem; position: ${positionType};`
-  //     );
-  //   }
-  // }
 
   /**
    * 选中样式
