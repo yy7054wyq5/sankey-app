@@ -277,38 +277,4 @@ export class CommonService {
     return of(tmp);
   }
 
-  /**
-   * 获取隐藏点对应的一条线上的点
-   *
-   * @param {string[]} ids
-   * @param {ObjTypeLinksData} objTypeLinksData
-   * @param {string[]} [data]
-   * @returns {string[]}
-   * @memberof CommonService
-   */
-  // getHiddenNodesInLine(ids: string[], objTypeLinksData: ObjTypeLinksData, data?: string[]): string[] {
-  //   const hiddenNodesInLine = data || [];
-  //   for (let index = 0; index < ids.length; index++) {
-  //     const id = ids[index];
-  //     const targets = objTypeLinksData[id].targets; // 该点的所有目标点
-  //     if (targets.length > 1) {
-  //       for (let idx = 0; idx < targets.length; idx++) {
-  //         const target = targets[idx];
-  //         // 若目标点只对应了一个源点
-  //         if (objTypeLinksData[target].sources.length === 1) {
-  //           if (!this.hasPusedInArr(target, hiddenNodesInLine)) {
-  //             hiddenNodesInLine.push(target);
-  //           }
-  //         }
-  //       }
-  //     } else {
-  //       // 若该点只有一个目标点
-  //       if (!this.hasPusedInArr(id, hiddenNodesInLine)) {
-  //         hiddenNodesInLine.push(id);
-  //       }
-  //     }
-  //     this.getHiddenNodesInLine(targets, objTypeLinksData, hiddenNodesInLine);
-  //   }
-  //   return hiddenNodesInLine;
-  // }
 }

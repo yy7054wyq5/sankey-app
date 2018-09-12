@@ -100,8 +100,7 @@ class Record {
 }
 
 const searchPersonApi = '/api/web/Extract/extract';
-// let searchRelationApi = '/api/web/Relation/relation';
-let searchRelationApi = '/api/web/Relation/relationWithColor';
+const searchRelationApi = '/api/web/Relation/relationWithColor';
 
 @Component({
   selector: 'app-search-bar',

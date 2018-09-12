@@ -3,7 +3,7 @@
   <app-search-bar #searchBar (outSearchResult)="getRealtions($event)" (outSearchStatus)="getSearchStatus($event)"></app-search-bar>
   <section class="core-body">
     <!-- sider以模板变量的方式接收app-search-bar某些变量或整个对象 -->
-    <app-sider [histories]="searchBar.records.data" [person]="person" [searchBar]="searchBar" (outFoldStatus)="siderFoldStatus($event)"></app-sider>
+    <app-panel [histories]="searchBar.records.data" [person]="person" [searchBar]="searchBar" (outFoldStatus)="siderFoldStatus($event)"></app-panel>
     <section class="core-content">
       <!-- 初始状态 -->
       <div *ngIf="initCore" class="status">

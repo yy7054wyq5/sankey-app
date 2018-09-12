@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SuccessSearchRecord, SearchBarComponent } from '../search-bar/search-bar.component';
-import { NzModalService } from '../../../../../node_modules/ng-zorro-antd';
+import { NzModalService } from 'ng-zorro-antd';
 
 @Component({
-  selector: 'app-sider',
-  templateUrl: './sider.component.html',
-  styleUrls: ['./sider.component.less']
+  selector: 'app-panel',
+  templateUrl: './panel.component.html',
+  styleUrls: ['./panel.component.less']
 })
-export class SiderComponent implements OnInit {
+export class PanelComponent implements OnInit {
   fold = false;
   // 控制个人信息展开或关闭
   userActived = false;

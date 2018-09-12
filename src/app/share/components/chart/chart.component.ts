@@ -56,6 +56,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     txt: '',
     id: ''
   };
+  UI_modalPersonDetail = false;
   fullStatus = FullStatus.no; // yes为全屏
   chartDom: Element; // 图表结构
   chartContainer: Element; // 整个组件
@@ -295,6 +296,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       // console.log(params);
       this._zone.run(() => {
         this.eclick.emit(params);
+        this.UI_modalPersonDetail = true;
       });
       this._highlightNode(params);
     });

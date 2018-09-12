@@ -44,10 +44,24 @@ app-chart {
       margin: 0;
     }
   }
+  .mobile-person-detail {
+    display: none;
+  }
+}
+
+.mobile-person-detail-modal-wrap {
+  .ant-modal-content {
+    background: #fff;
+  }
 }
 
 @media (max-width: @media1025) {
-  app-chart .full-screen-btn {
-    display: none;
+  app-chart {
+    .full-screen-btn {
+      display: none;
+    }
+    .point-info {
+      display: none;
+    }
   }
 }
