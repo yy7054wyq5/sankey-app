@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, Renderer2, NgZone } from '@angular/core';
 import { chartOption, chartColorConfig } from '../../config';
-import { CommonService, ObjTypeLinksData, NodeCate } from '../../services/common/common.service';
+import { CoreMainService, ObjTypeLinksData, NodeCate } from './core-main.service';
 import { Contacts, SearchStatus, SearchBarComponent, AjaxResponse, Line } from '../search-bar/search-bar.component';
 import { NzMessageService } from 'ng-zorro-antd';
 import { HttpClient } from '../../../../../node_modules/@angular/common/http';
@@ -37,7 +37,7 @@ interface CheckNodeUIStyle {
   templateUrl: './core-main.component.html',
   styleUrls: ['./core-main.component.less'],
   encapsulation: ViewEncapsulation.None,
-  providers: [CommonService]
+  providers: [CoreMainService]
 })
 export class CoreMainComponent implements OnInit {
   loadingId: any;
@@ -100,7 +100,7 @@ export class CoreMainComponent implements OnInit {
   chart: ChartComponent;
 
   constructor(
-    private _common: CommonService,
+    private _common: CoreMainService,
     private _msg: NzMessageService,
     private _http: HttpClient,
     private _render: Renderer2,

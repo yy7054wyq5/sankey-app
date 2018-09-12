@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { ChartNode } from '../../../share/components/chart/chart.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NodeCate } from '../../services/common/common.service';
+import { NodeCate } from '../core-main/core-main.service';
 
 export class CheckTab {
   tag: string;

@@ -11,7 +11,6 @@ import {
   OnDestroy
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CommonService } from '../../services/common/common.service';
 import { Observable, fromEvent, of } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, switchMap, retry } from 'rxjs/operators';
 import { StorageService } from '../../../share/services/storage/storage.service';
@@ -171,7 +170,6 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private _http: HttpClient,
-    private _common: CommonService,
     private _element: ElementRef,
     private _renderer: Renderer2,
     private _storge: StorageService

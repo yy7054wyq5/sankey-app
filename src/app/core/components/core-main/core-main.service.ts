@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ChartNode, ChartLink } from '../../../share/components/chart/chart.service';
-import { Observable, of } from '../../../../../node_modules/rxjs';
-import { SearchBarComponent, Contacts, Line } from '../../components/search-bar/search-bar.component';
+import { Observable, of } from 'rxjs';
+import { SearchBarComponent, Contacts, Line } from '../search-bar/search-bar.component';
 import { chartColorConfig } from '../../config';
-import { CheckOption } from '../../components/check-node/check-node.component';
+import { CheckOption } from '../check-node/check-node.component';
 import { objToArr } from '../../../share/utils';
 
 /**
@@ -31,7 +31,7 @@ export enum NodeCate {
 }
 
 @Injectable()
-export class CommonService {
+export class CoreMainService {
   constructor() {}
 
   /**
