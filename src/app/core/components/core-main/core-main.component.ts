@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, Renderer2, NgZone } from '@angular/core';
-import { chartOption, chartColorConfig } from '../../config';
+import { chartOption, chartColorConfig, api } from '../../config';
 import { CoreMainService, ObjTypeLinksData, NodeCate } from './core-main.service';
 import { Contacts, SearchStatus, SearchBarComponent, AjaxResponse, Line } from '../search-bar/search-bar.component';
 import { NzMessageService } from 'ng-zorro-antd';
@@ -11,7 +11,7 @@ import { mergeMap } from '../../../../../node_modules/rxjs/operators';
 import { CheckTab } from '../check-node/check-node.component';
 import { isMobile } from '../../../share/utils';
 
-const searchPersonDetailApi = '/api/web/Detail/detail';
+const searchPersonDetailApi = api.searchPersonDetailApi;
 const maxLines = 10;
 
 /**

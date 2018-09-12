@@ -7,6 +7,21 @@ aside {
   width: 14.646465rem;
   padding-right: 1rem;
   background: transparent;
+  &.just-dis-person {
+    width: 100%;
+    padding-right: 0;
+    .fold-bar {
+      display: none;
+    }
+    .ant-menu > li {
+      .menu-info {
+        display: none;
+      }
+      .person-info {
+        border-top: 0;
+      }
+    }
+  }
   .fold-bar {
     cursor: pointer;
     display: flex;

@@ -5,14 +5,12 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { ShareModule } from '../share/share.module';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FormsModule } from '@angular/forms';
-import { PanelComponent } from './components/panel/panel.component';
 import { CheckNodeComponent } from './components/check-node/check-node.component';
-import { SearchRecordsService } from './services/search-records/search-records.service';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ShareModule, NgZorroAntdModule],
-  exports: [CoreMainComponent, PanelComponent],
-  declarations: [CoreMainComponent, SearchBarComponent, PanelComponent, CheckNodeComponent],
-  providers: [SearchRecordsService]
+  exports: [CoreMainComponent],
+  declarations: [CoreMainComponent, SearchBarComponent, CheckNodeComponent],
+  providers: []
 })
 export class CoreModule {}

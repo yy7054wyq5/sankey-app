@@ -70,4 +70,10 @@ const chartOption = {
   ]
 };
 
-export { chartOption, chartColorConfig };
+const api = {
+  searchPersonDetailApi: '/api/web/Detail/detail',
+  searchPersonApi: '/api/web/Extract/extract',
+  searchRelationApi: '/api/web/Relation/relationWithColor'
+};
+
+export { chartOption, chartColorConfig, api };

@@ -12,11 +12,11 @@ import {
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, fromEvent, of } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged, switchMap, retry } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { StorageService } from '../../../share/services/storage/storage.service';
 import { ChartLink, ChartNode } from '../../../share/components/chart/chart.service';
-import { environment } from '../../../../environments/environment';
 import { isMobile } from '../../../share/utils';
+import { api } from '../../config';
 
 /**
  * 搜索的状态
@@ -98,8 +98,8 @@ class Record {
   }
 }
 
-const searchPersonApi = '/api/web/Extract/extract';
-const searchRelationApi = '/api/web/Relation/relationWithColor';
+const searchPersonApi = api.searchPersonApi;
+const searchRelationApi = api.searchRelationApi;
 
 @Component({
   selector: 'app-search-bar',
@@ -172,7 +172,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     private _http: HttpClient,
     private _element: ElementRef,
     private _renderer: Renderer2,
-    private _storge: StorageService
+    private _storge: StorageService,
   ) {}
 
   ngOnInit() {

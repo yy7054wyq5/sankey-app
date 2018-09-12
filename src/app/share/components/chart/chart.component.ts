@@ -16,7 +16,11 @@ import {
 } from '@angular/core';
 import * as echarts from 'echarts';
 import theme from './theme';
-import { ChartService, ChartNode, ChartEventCbParams, ChartLink } from './chart.service';
+import { HttpClient } from '@angular/common/http';
+import { ChartService, ChartEventCbParams } from './chart.service';
+import { isMobile } from '../../utils';
+import { api } from '../../../core/config';
+import { NzMessageService } from 'ng-zorro-antd';
 
 enum FullStatus {
   yes = 'yes',
@@ -56,7 +60,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     txt: '',
     id: ''
   };
-  UI_modalPersonDetail = false;
+  UI_modalPersonDetail = null;
   fullStatus = FullStatus.no; // yes为全屏
   chartDom: Element; // 图表结构
   chartContainer: Element; // 整个组件
@@ -70,7 +74,14 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     return this.chartInstance ? true : false;
   }
 
-  constructor(private _chart: ChartService, private _element: ElementRef, private _renderer: Renderer2, private _zone: NgZone) {}
+  constructor(
+    private _chart: ChartService,
+    private _element: ElementRef,
+    private _renderer: Renderer2,
+    private _zone: NgZone,
+    private _http: HttpClient,
+    private _msg: NzMessageService
+  ) {}
 
   ngOnChanges(changes: { eoption: SimpleChange; eheight: SimpleChange }) {
     if (changes) {
@@ -296,7 +307,28 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       // console.log(params);
       this._zone.run(() => {
         this.eclick.emit(params);
-        this.UI_modalPersonDetail = true;
+        if (params.data.id.indexOf('person') > -1 && isMobile()) {
+          const id = this._msg.loading('请求数据...').messageId;
+          this._http
+            .get(api.searchPersonDetailApi, {
+              params: {
+                P_id: params.data.id
+              }
+            })
+            .subscribe(
+              (res: any) => {
+                this._msg.remove(id);
+                if (!res.status && res.data) {
+                  this.UI_modalPersonDetail = res.data;
+                } else {
+                  this.UI_modalPersonDetail = [];
+                }
+              },
+              error => {
+                this._msg.remove(id);
+              }
+            );
+        }
       });
       this._highlightNode(params);
     });

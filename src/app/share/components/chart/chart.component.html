@@ -17,6 +17,8 @@
 </ng-container>
 <ng-content></ng-content>
 
-<nz-modal class="mobile-person-detail" [(nzVisible)]="UI_modalPersonDetail" nzTitle="人物详情" nzWrapClassName="mobile-person-detail-modal-wrap" [nzOkText]="null" (nzOnCancel)="UI_modalPersonDetail=false;" [nzMaskClosable]="false">
-  111
+<nz-modal class="mobile-person-detail" [(nzVisible)]="UI_modalPersonDetail" nzTitle="人物详情" nzWrapClassName="mobile-person-detail-modal-wrap" [nzStyle]="{top:0}"
+          [nzBodyStyle]="{padding: 0,maxHeight: '90vh', overflow: 'auto'}" [nzOkText]="null" (nzOnCancel)="UI_modalPersonDetail=null"
+          [nzMaskClosable]="false">
+  <app-panel [person]="UI_modalPersonDetail"></app-panel>
 </nz-modal>

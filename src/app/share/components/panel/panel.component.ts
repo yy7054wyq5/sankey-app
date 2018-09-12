@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SuccessSearchRecord, SearchBarComponent } from '../search-bar/search-bar.component';
+import { SuccessSearchRecord, SearchBarComponent } from '../../../core/components/search-bar/search-bar.component';
 import { NzModalService } from 'ng-zorro-antd';
 
 @Component({
@@ -24,8 +24,8 @@ export class PanelComponent implements OnInit {
 
   @Input()
   set person(data: any[]) {
-    this.personMenus = data;
-    if (data.length) {
+    this.personMenus = data || [];
+    if (data && data.length) {
       this.userActived = true;
     }
   }
@@ -37,6 +37,13 @@ export class PanelComponent implements OnInit {
 
   @Output()
   outFoldStatus = new EventEmitter<boolean>();
+
+  get justDisPerson(): boolean {
+    if (!this.historyMenus.length) {
+      return true;
+    }
+    return false;
+  }
 
   constructor(private _modal: NzModalService) {}
 
