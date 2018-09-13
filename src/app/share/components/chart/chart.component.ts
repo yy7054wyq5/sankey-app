@@ -9,7 +9,6 @@ import {
   ViewEncapsulation,
   OnDestroy,
   OnChanges,
-  SimpleChanges,
   Output,
   EventEmitter,
   SimpleChange
@@ -75,7 +74,6 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   }
 
   constructor(
-    private _chart: ChartService,
     private _element: ElementRef,
     private _renderer: Renderer2,
     private _zone: NgZone,

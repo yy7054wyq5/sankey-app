@@ -12,7 +12,7 @@ import { CheckTab } from '../check-node/check-node.component';
 import { isMobile } from '../../../share/utils';
 
 const searchPersonDetailApi = api.searchPersonDetailApi;
-const maxLines = 10;
+const maxLines = isMobile() ? 1 : 10;
 
 /**
  * 图表下拉框定位模式
@@ -292,8 +292,8 @@ export class CoreMainComponent implements OnInit {
    */
   private _creatChart(nodes: ChartNode[], links: ChartLink[], lines: number) {
     // console.log(lines);
-    if (lines > maxLines) {
-      this.chartHeight = lines * 2 + 'rem';
+    if (lines >= maxLines) {
+      this.chartHeight = lines * (isMobile() ? 5 : 2) + 'rem';
     } else {
       this.chartHeight = null;
     }
