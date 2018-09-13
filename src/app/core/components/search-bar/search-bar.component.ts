@@ -119,6 +119,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   selectedRecord;
 
+  private _isMobile: boolean;
+
   /**
    * 外部以模板变量的方式获取内部变量
    *
@@ -159,7 +161,12 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   outSearchSuccessRecords = new EventEmitter<SuccessSearchRecord[]>();
 
   // 引导提示的偏移值
-  tipsLeft = ['21rem', '59rem', '83rem'];
+  get tipsMoveValues() {
+    if (this._isMobile) {
+      return ['1.7rem', '3.7rem', '8.7rem'];
+    }
+    return ['21rem', '59rem', '83rem'];
+  }
   // 提示
   tip: Element;
   errorBakData: AjaxResponse = {
@@ -168,15 +175,11 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     data: null
   };
 
-  constructor(
-    private _http: HttpClient,
-    private _element: ElementRef,
-    private _renderer: Renderer2,
-    private _storge: StorageService,
-  ) {}
+  constructor(private _http: HttpClient, private _element: ElementRef, private _renderer: Renderer2, private _storge: StorageService) {}
 
   ngOnInit() {
     const histories: SuccessSearchRecord[] = this._storge.get('histories');
+    this._isMobile = isMobile();
     if (histories) {
       this.records.data = histories;
       this._synRecordsByStorages(histories);
@@ -240,8 +243,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  recordOptionLabel(option: SuccessSearchRecord) {
-    return option.start['company'] + ':' + option.start['name'] + '=>' + option.end['company'] + ':' + option.end['name'];
+  recordOptionLabel(option: SuccessSearchRecord): string {
+    const max = 25;
+    const str =  option.start['name'] + '|' + option.start['company']  + '=>' + option.end['name'] + '|' + option.end['company'];
+    if (str.length > max) {
+      return str.substring(0, max) + '...';
+    }
+    return str;
   }
 
   selectedRecrodEvent(event) {
@@ -311,10 +319,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof SearchBarComponent
    */
   private _moveTips(value: string) {
-    if (value === this.tipsLeft[2]) {
+    if (value === this.tipsMoveValues[2]) {
       this.tip.querySelector('div').innerHTML = '点击按钮获取结果';
     }
-    this._renderer.setStyle(this.tip, 'left', value);
+    this._renderer.setStyle(this.tip, this._isMobile ? 'top' : 'left', value);
   }
 
   /**
@@ -325,8 +333,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof SearchBarComponent
    */
   private _showTips(show: boolean) {
-    console.log(isMobile());
-    if (this.tip && !isMobile()) {
+    if (this.tip) {
       this._renderer.setStyle(this.tip, 'display', show ? 'flex' : 'none');
     }
   }
@@ -508,10 +515,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     this._showTips(true);
     if (tag === 'start') {
       this.start = value;
-      this._moveTips(this.tipsLeft[1]);
+      this._moveTips(this.tipsMoveValues[1]);
     } else {
       this.end = value;
-      this._moveTips(this.tipsLeft[2]);
+      this._moveTips(this.tipsMoveValues[2]);
     }
   }
 
