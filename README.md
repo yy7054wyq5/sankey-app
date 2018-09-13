@@ -39,6 +39,7 @@
 ## 开发说明
 
 * npm install 安装项目依赖
-* npm start 开启本地开发
+* npm run dev 开启本地开发
+* npm start 开启本地开发(修改IP地址为本机IP，则可使手机访问开发微网站，手机与电脑需在同一wifi下)，以当前为例，手机访问192.168.2.113:4444即可
 * npm run prod 生产打包
 * proxy.conf.json 为本地开发时配置请求代理的文件
