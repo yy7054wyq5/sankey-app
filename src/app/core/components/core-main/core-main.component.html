@@ -62,19 +62,19 @@
       <!-- 颜色盘 -->
       <ul class="chart-color-bar">
         <li style="margin-left: 1.616162rem;">
-          <i [style]="'background-color:'+colorBar.person.bg | safeHtml:'style'"></i>
+          <i [ngStyle]="{backgroundColor: colorBar.person.bg}"></i>
           <span>人物</span>
         </li>
         <li>
-          <i [style]="'background-color:'+colorBar.case.bg | safeHtml:'style'"></i>
+          <i  [ngStyle]="{backgroundColor: colorBar.case.bg}"></i>
           <span>事件</span>
         </li>
         <li>
-          <i [style]="'background-color:'+colorBar.organization.bg | safeHtml:'style'"></i>
+          <i  [ngStyle]="{backgroundColor: colorBar.organization.bg}"></i>
           <span>公司</span>
         </li>
         <li>
-          <i [style]="'background-color:'+colorBar.point.bg | safeHtml:'style'"></i>
+          <i  [ngStyle]="{backgroundColor: colorBar.point.bg}"></i>
           <span>起点/终点</span>
         </li>
       </ul>
