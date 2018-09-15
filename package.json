@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open --host 192.168.2.113 --port 4444 --proxy-config proxy.conf.json",
+    "start": "ng serve --open --host 192.168.2.100 --port 4444 --proxy-config proxy.conf.json",
     "dev": "ng serve --open --port 4444",
     "prod": "ng build --prod --base-href ./",
     "test": "ng test",

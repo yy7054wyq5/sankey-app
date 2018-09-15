@@ -21,6 +21,8 @@ export class PanelComponent implements OnInit {
   // 搜索栏组件
   @Input()
   searchBar: SearchBarComponent;
+  @Input()
+  justDisPerson = false;
 
   @Input()
   set person(data: any[]) {
@@ -37,13 +39,6 @@ export class PanelComponent implements OnInit {
 
   @Output()
   outFoldStatus = new EventEmitter<boolean>();
-
-  get justDisPerson(): boolean {
-    if (!this.historyMenus.length) {
-      return true;
-    }
-    return false;
-  }
 
   constructor(private _modal: NzModalService) {}
 

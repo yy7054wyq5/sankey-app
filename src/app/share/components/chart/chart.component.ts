@@ -87,6 +87,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         if (!this.chartInstance) {
           this._initChart();
         } else {
+          this._disabledDrag();
           this.chartInstance.setOption(this.eoption);
         }
       }
@@ -129,6 +130,19 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   }
 
   /////////////////////////////////////////////////
+
+
+  /**
+   * 移动端禁用拖拽
+   *
+   * @private
+   * @memberof ChartComponent
+   */
+  private _disabledDrag() {
+    if (isMobile()) {
+      this.eoption.series[0].draggable = false;
+    }
+  }
 
   /**
    * 设置样式
@@ -244,6 +258,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     const _chartDom = this._setChartWH(this.chartDom, this.ewidth, this.eheight);
     this._zone.runOutsideAngular(() => {
       this.chartInstance = echarts.init(_chartDom, 'sn');
+      this._disabledDrag();
       this.chartInstance.setOption(this.eoption);
     });
     if (!this.bindedEvent) {

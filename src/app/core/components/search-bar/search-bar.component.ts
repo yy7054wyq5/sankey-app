@@ -134,7 +134,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof SearchBarComponent
    */
   @Input()
-  searchDelaytTime = 500;
+  searchDelaytTime = 400;
 
   /**
    * 传出搜索结果
