@@ -17,6 +17,7 @@ import { StorageService } from '../../../share/services/storage/storage.service'
 import { ChartLink, ChartNode } from '../../../share/components/chart/chart.service';
 import { isMobile } from '../../../share/utils';
 import { api } from '../../config';
+import { environment } from '../../../../environments/environment';
 
 /**
  * 搜索的状态
@@ -99,7 +100,7 @@ class Record {
 }
 
 const searchPersonApi = api.searchPersonApi;
-const searchRelationApi = api.searchRelationApi;
+let searchRelationApi = api.searchRelationApi;
 
 @Component({
   selector: 'app-search-bar',
@@ -443,13 +444,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
 
-    // if (!environment.production) {
-    //   this.records.startAndEnd.start.p_id = this.start = 'persona137502e5f2211e881f0005056c00008';
-    //   this.records.startAndEnd.end.p_id = this.end = 'person8abbfaa65f2211e8afad005056c00008';
-    //   searchRelationApi = '/assets/mock/relation4.json';
-    //   this.records.startAndEnd.start.p_id = this.start = 'person7136dc2e5f2211e896ae005056c00008';
-    //   this.records.startAndEnd.end.p_id = this.end = 'persona137502e5f2211e881f0005056c00008';
-    // }
+    if (!environment.production) {
+      this.records.startAndEnd.start.p_id = this.start = 'persona137502e5f2211e881f0005056c00008';
+      this.records.startAndEnd.end.p_id = this.end = 'person8abbfaa65f2211e8afad005056c00008';
+      searchRelationApi = '/assets/mock/relation4.json';
+      // this.records.startAndEnd.start.p_id = this.start = 'person7136dc2e5f2211e896ae005056c00008';
+      // this.records.startAndEnd.end.p_id = this.end = 'persona137502e5f2211e881f0005056c00008';
+    }
 
     if (!this.start || !this.end) {
       return;

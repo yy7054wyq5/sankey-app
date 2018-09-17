@@ -48,6 +48,7 @@ export class CoreMainComponent implements OnInit {
   checknodesTab: CheckTab[] = []; // 显示隐藏起点的一度节点
   checkcontactsTab: CheckTab[] = []; // 显示隐藏人脉
   chartHeight = null;
+  chartWidth = null;
   private _ajaxData: Contacts;
   private _chartFullStatus = false;
 
@@ -296,6 +297,9 @@ export class CoreMainComponent implements OnInit {
       this.chartHeight = lines * (isMobile() ? 5 : 2) + 'rem';
     } else {
       this.chartHeight = null;
+    }
+    if (isMobile()) {
+      this.chartWidth = nodes.length * 10 + 'rem';
     }
     // 设置节点和线的样式
     this._common.setNodesAndLinksStyle(this.searchBar, nodes, links).subscribe(data => {
