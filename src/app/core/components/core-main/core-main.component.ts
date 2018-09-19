@@ -299,7 +299,7 @@ export class CoreMainComponent implements OnInit {
       this.chartHeight = null;
     }
     if (isMobile()) {
-      this.chartWidth = nodes.length * 10 + 'rem';
+      this.chartWidth = (nodes.length > 10 ? 10 : nodes.length) * 10 + 'rem';
     }
     // 设置节点和线的样式
     this._common.setNodesAndLinksStyle(this.searchBar, nodes, links).subscribe(data => {
