@@ -96,7 +96,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         if (!this.chartInstance) {
           this._initChart();
         } else {
-          this._setChartWH(this.chartDom, null, this.eheight);
+          this._setChartWH(this.chartDom, this.ewidth, this.eheight);
           this._resizeChart();
         }
       }
