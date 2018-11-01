@@ -1,30 +1,12 @@
 @import '../../../../less/variable.less';
 @import '../../../../less/mixin.less';
 
-@paddingLeft: 20%;
+@paddingLeft: 2.777778rem;
 
 aside {
   width: 14.646465rem;
   padding-right: 1rem;
   background: transparent;
-  &.just-dis-person {
-    width: 100%;
-    padding-right: 0;
-    .fold-bar {
-      display: none;
-    }
-    .ant-menu > li {
-      .menu-info {
-        display: none;
-      }
-      &.person-info {
-        border-top: 0;
-      }
-      &.history-info {
-        display: none;
-      }
-    }
-  }
   .fold-bar {
     cursor: pointer;
     display: flex;
@@ -84,7 +66,6 @@ aside {
       display: block;
       clear: both;
       height: auto;
-      width: 100%;
       padding-left: @paddingLeft;
       border-top: 1px solid @fontColor;
       li {

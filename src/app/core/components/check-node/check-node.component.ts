@@ -7,12 +7,13 @@ import {
   SimpleChanges,
   Output,
   EventEmitter,
+  AfterViewInit,
   ElementRef,
   Renderer2
 } from '@angular/core';
 import { ChartNode } from '../../../share/components/chart/chart.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NodeCate } from '../core-main/core-main.service';
+import { NodeCate } from '../../services/common/common.service';
 
 export class CheckTab {
   tag: string;
@@ -37,12 +38,23 @@ export interface CheckOption extends ChartNode {
   styleUrls: ['./check-node.component.less'],
   encapsulation: ViewEncapsulation.None
 })
-export class CheckNodeComponent implements OnInit, OnChanges {
+export class CheckNodeComponent implements OnInit, OnChanges, AfterViewInit {
   show: boolean; // 控制下拉是否显示
   pointsTag: string; // 下拉公司与事件的切换
 
+
+  @Input()
+  top: number;
+  @Input()
+  right: number;
+  @Input()
+  display: string;
+  @Input()
+  marginTop: string;
   @Input()
   tabs: CheckTab[];
+  @Input()
+  positionType: 'absolute' | 'relative' | 'fixed' | null = 'absolute';
   @Input()
   placeholder: string;
   @Input()
@@ -64,6 +76,10 @@ export class CheckNodeComponent implements OnInit, OnChanges {
         this.pointsTag = this.tabs.length ? this.tabs[0].tag : '';
         console.log(this.pointsTag);
       }
+
+      if (changes.positionType) {
+        this._positionDiv(this.positionType);
+      }
     }
     // console.log(this.tabs);
   }
@@ -71,9 +87,23 @@ export class CheckNodeComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.pointsTag = this.tabs[0].tag;
     // console.log(this.nodes);
+    // console.log(this.tabs, this.tabs[0].tag);
+  }
+
+  ngAfterViewInit() {
+    this._positionDiv(this.positionType);
   }
 
   ////////////////////////////////////
+
+  private _positionDiv(positionType) {
+    // 定位下拉框
+    this._render.setAttribute(
+      this._element.nativeElement,
+      'style',
+      `top: ${this.top}rem;right: ${this.right}rem; position: ${positionType};display:${this.display};margin-top:${this.marginTop}`
+    );
+  }
 
   /**
    * 选中样式
@@ -100,7 +130,8 @@ export class CheckNodeComponent implements OnInit, OnChanges {
    */
   disName(option: CheckOption) {
     if (option.contact !== undefined && option.line !== undefined) {
-      return `${option.contact}度_${option.line} ${option.name}`;
+      // return `${option.contact}度_${option.line} ${option.name}`;
+      return option.name;
     }
     return option.name;
   }

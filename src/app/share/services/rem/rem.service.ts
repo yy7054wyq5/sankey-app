@@ -19,7 +19,7 @@ export class RemService {
     // 设计图上90px，转换为rem就是90/19.8 rem
     this.rem = htmlEl.clientWidth * dpr / 100;
     let fontSize = this.rem / dpr;
-    if (htmlEl.clientWidth < 1024) {
+    if (htmlEl.clientWidth < 1000) {
       fontSize = 14;
     }
     // console.log(this.rem);

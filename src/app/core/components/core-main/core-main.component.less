@@ -3,49 +3,44 @@ app-core-main {
   display: flex;
   width: 100%;
   .core-main {
-    margin-top: 0.757576rem;
+    margin-top: .757576rem;
     display: flex;
     flex: 1;
     padding-right: 5.353535rem;
+    // ul.chart-color-bar {
+    //   width: 32.525253rem;
+    //   height: 3.131313rem;
+    //   background: #fff;
+    //   border-radius: 3px;
+    //   display: flex;
+    //   font-size: .808081rem;
+    //   li {
+    //     flex: 1;
+    //     display: flex;
+    //     align-items: center;
+    //     i {
+    //       background: #000;
+    //       display: block;
+    //       width: .909091rem;
+    //       height: .909091rem;
+    //     }
+    //     span {
+    //       margin-left: 1.010101rem;
+    //     }
+    //   }
+    // }
     section.core-body {
       display: flex;
       flex: 1;
       flex-direction: row; //
       // 内容区
-      //
+      // 
       .core-content {
         flex: 1;
         display: flex;
         flex-direction: column;
-        .media-mobile-check-node {
-          display: none;
-        }
-        .media-pc-check-node {
-          display: block;
-        }
-        > ul.chart-color-bar {
-          width: 32.525253rem;
-          height: 3.131313rem;
-          background: #fff;
-          border-radius: 3px;
-          display: flex;
-          font-size: 0.808081rem;
-          li {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            i {
-              background: #000;
-              display: block;
-              width: 0.909091rem;
-              height: 0.909091rem;
-            }
-            span {
-              margin-left: 1.010101rem;
-            }
-          }
-        }
-        > div.status {
+        
+        >div.status {
           flex: 1;
           display: flex;
           background-color: #fff;
@@ -62,73 +57,6 @@ app-core-main {
             margin-top: 1.5rem;
             color: @fontColor;
             font-size: 1.111111rem;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: @media1025) {
-  app-core-main {
-    app-panel {
-      display: none;
-    }
-    .core-main {
-      padding-right: 0;
-      margin-top: 0;
-      section.core-body {
-        .core-content {
-          width: 100%;
-          .media-pc-check-node {
-            display: none;
-          }
-          .media-mobile-check-node {
-            display: block;
-            position: fixed;
-            width: 25rem;
-            top: 8rem;
-            &.contacts {
-              right: 30rem;
-            }
-            &.nodes {
-              right: 0;
-            }
-          }
-          > div.status img {
-            width: 80%;
-            height: auto;
-          }
-          > ul.chart-color-bar {
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: @media769) {
-  app-core-main {
-    .core-main {
-      section.core-body {
-        .core-content {
-          .media-pc-check-node {
-            display: none;
-          }
-          .media-mobile-check-node {
-            display: block;
-            position: absolute;
-            width: 100%;
-            top: 0;
-            &.contacts {
-              right: 0;
-              z-index: 2;
-            }
-            &.nodes {
-              top: 2.2rem;
-              right: 0;
-            }
           }
         }
       }

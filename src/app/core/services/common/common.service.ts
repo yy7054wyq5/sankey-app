@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ChartNode, ChartLink } from '../../../share/components/chart/chart.service';
-import { Observable, of } from 'rxjs';
-import { SearchBarComponent, Contacts, Line } from '../search-bar/search-bar.component';
+import { Observable, of } from '../../../../../node_modules/rxjs';
+import { SearchBarComponent, Contacts, Line } from '../../components/search-bar/search-bar.component';
 import { chartColorConfig } from '../../config';
-import { CheckOption } from '../check-node/check-node.component';
+import { CheckOption } from '../../components/check-node/check-node.component';
 import { objToArr } from '../../../share/utils';
 
 /**
@@ -27,11 +27,12 @@ export interface ObjTypeLinksData {
 export enum NodeCate {
   person = 'person',
   case = 'case',
+  middlePerson = 'middlePerson',
   organization = 'organization'
 }
 
 @Injectable()
-export class CoreMainService {
+export class CommonService {
   constructor() {}
 
   /**
@@ -47,6 +48,24 @@ export class CoreMainService {
       const _node: ChartNode = JSON.parse(JSON.stringify(node));
       delete _node.contact;
       delete _node.line;
+      if (!nodesObj[node.id]) {
+        nodesObj[node.id] = _node;
+      }
+    });
+    return objToArr(nodesObj);
+  }
+
+  /**
+   * 过滤掉重复的node
+   *
+   * @param {ChartNode[]} nodes
+   * @returns
+   * @memberof CommonService
+   */
+  filterNodesHasConAndLine(nodes: ChartNode[]): ChartNode[] {
+    const nodesObj: { [id: string]: ChartNode } = {};
+    nodes.forEach(node => {
+      const _node: ChartNode = JSON.parse(JSON.stringify(node));
       if (!nodesObj[node.id]) {
         nodesObj[node.id] = _node;
       }
@@ -122,6 +141,32 @@ export class CoreMainService {
     return nodes;
   }
 
+  // 寻找nodes中相同id的
+  getCommonId(data: ChartNode[], newLineIndex: any) {
+    let newNodes = data;
+    let newId = newLineIndex;
+    let notHas = false;
+    newNodes.forEach(element => {
+      if (element.id === newId) {
+        notHas = true;
+      }
+    });
+    return notHas;
+  }
+  // 寻找links中相同id的
+  getCommonLinkId(data: ChartLink[], newLineIndex: any, startPoint: any) {
+    let newLinks = data;
+    let newId = newLineIndex;
+    let origePoint = startPoint;
+    let notHas = false;
+    newLinks.forEach(element => {
+      if (element.target === newId && element.source === origePoint) {
+        notHas = true;
+      }
+    });
+    return notHas;
+  }
+
   /**
    * 加颜色的方法
    *
@@ -131,7 +176,7 @@ export class CoreMainService {
    * @param {string} highlightColor
    * @memberof CoreMainComponent
    */
-  private _setNodeStyle(node: ChartNode, normalColor: string, highlightColor: string) {
+  setNodeStyle(node: ChartNode, normalColor: string, highlightColor: string) {
     node.itemStyle = {};
     node.itemStyle.color = node.itemStyle.borderColor = normalColor;
     node.emphasis = {};
@@ -139,7 +184,7 @@ export class CoreMainService {
     node.emphasis.itemStyle.color = node.emphasis.itemStyle.borderColor = highlightColor;
   }
 
-  private _setLinkStyle(link: ChartLink, normalColor: string, highlightColor: string) {
+  setLinkStyle(link: ChartLink, normalColor: string, highlightColor: string) {
     link.lineStyle = {};
     link.lineStyle.color = normalColor;
     link.emphasis = {};
@@ -155,20 +200,26 @@ export class CoreMainService {
    * @returns {Observable<UInodes>}
    * @memberof CheckNodeComponent
    */
-  separateNode(data: ChartNode[]): Observable<{ [tag: string]: CheckOption[] | undefined }> {
+  separateNode(data: ChartNode[], searchBar: SearchBarComponent): Observable<{ [tag: string]: CheckOption[] | undefined }> {
     const tmp = {};
+    let startPoint = searchBar.records.startAndEnd.start.p_id;
+    let endPoint = searchBar.records.startAndEnd.end.p_id;
     data.forEach(node => {
       const _node: CheckOption = {
         ...node,
         actived: true
       };
       if (_node.id) {
-        if (node.id.indexOf(NodeCate.case) > -1) {
-          this._newObjArr(tmp, NodeCate.case).push(_node);
+        if (node.id.indexOf(NodeCate.middlePerson) > -1) {
+          this._newObjArr(tmp, NodeCate.middlePerson).push(_node);
         } else if (node.id.indexOf(NodeCate.organization) > -1) {
           this._newObjArr(tmp, NodeCate.organization).push(_node);
-        } else if (node.id.indexOf(NodeCate.person) > -1) {
+        } else if (node.id.indexOf(NodeCate.person) > -1 && (startPoint == node.id || endPoint == node.id)) {
+          // 属于person,是源和目标
           this._newObjArr(tmp, NodeCate.person).push(_node);
+        } else if (node.id.indexOf(NodeCate.person) > -1 && startPoint !== node.id && endPoint !== node.id) {
+          // 属于person,但不是源和目标
+          this._newObjArr(tmp, NodeCate.middlePerson).push(_node);
         }
       }
     });
@@ -215,18 +266,18 @@ export class CoreMainService {
           } else {
             tag = 'person';
           }
+        } else if (node.id.indexOf('middlePerson') === 0) {
+          tag = 'organization';
         } else if (node.id.indexOf('case') === 0) {
           tag = 'case';
-        } else if (node.id.indexOf('organization') === 0) {
-          tag = 'organization';
         } else {
           // do something
         }
-        this._setNodeStyle(node, chartColorConfig[tag].bg, chartColorConfig[tag].hover);
+        this.setNodeStyle(node, chartColorConfig[tag].bg, chartColorConfig[tag].hover);
       }
     });
     links.forEach(link => {
-      this._setLinkStyle(link, link.color, link.color);
+      this.setLinkStyle(link, link.color, link.color);
     });
     return of({ nodes, links });
   }
@@ -277,4 +328,38 @@ export class CoreMainService {
     return of(tmp);
   }
 
+  /**
+   * 获取隐藏点对应的一条线上的点
+   *
+   * @param {string[]} ids
+   * @param {ObjTypeLinksData} objTypeLinksData
+   * @param {string[]} [data]
+   * @returns {string[]}
+   * @memberof CommonService
+   */
+  // getHiddenNodesInLine(ids: string[], objTypeLinksData: ObjTypeLinksData, data?: string[]): string[] {
+  //   const hiddenNodesInLine = data || [];
+  //   for (let index = 0; index < ids.length; index++) {
+  //     const id = ids[index];
+  //     const targets = objTypeLinksData[id].targets; // 该点的所有目标点
+  //     if (targets.length > 1) {
+  //       for (let idx = 0; idx < targets.length; idx++) {
+  //         const target = targets[idx];
+  //         // 若目标点只对应了一个源点
+  //         if (objTypeLinksData[target].sources.length === 1) {
+  //           if (!this.hasPusedInArr(target, hiddenNodesInLine)) {
+  //             hiddenNodesInLine.push(target);
+  //           }
+  //         }
+  //       }
+  //     } else {
+  //       // 若该点只有一个目标点
+  //       if (!this.hasPusedInArr(id, hiddenNodesInLine)) {
+  //         hiddenNodesInLine.push(id);
+  //       }
+  //     }
+  //     this.getHiddenNodesInLine(targets, objTypeLinksData, hiddenNodesInLine);
+  //   }
+  //   return hiddenNodesInLine;
+  // }
 }

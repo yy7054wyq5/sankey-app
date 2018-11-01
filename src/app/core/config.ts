@@ -6,8 +6,8 @@ const chartColorConfig = {
     hover: '#0080ff'
   },
   case: {
-    bg: '#f4b98c',
-    hover: '#ff6700'
+    bg: '#add8e6',
+    hover: '#6495ed'
   },
   organization: {
     bg: '#00dbff',
@@ -20,9 +20,18 @@ const chartColorConfig = {
   line: '#ececec'
 };
 
+const caseColorConfig = {
+  '2': '#483d8b',
+  '3': '#00bfff',
+  '4': '#4169e1',
+  '5': '#b0c4de',
+  '6': '#add8e6',
+  '7': '#e0ffff'
+};
+
 const cutWord = (txt: string) => {
-  if (txt.length > 6) {
-    return txt.substr(0, 6) + '...';
+  if (txt.length > 25) {
+    return txt.substr(0, 25) + '...';
   }
   return txt;
 };
@@ -31,10 +40,17 @@ const chartOption = {
   label: {
     formatter: (params: ChartEventCbParams) => {
       // console.log(params);
-      const data = params.data;
-      const name = cutWord(params.name);
-      if (data.date) {
-        return data.date + '\n' + name;
+      // const data = params.data;
+      // const name = cutWord(params.name);
+      // if (data.date) {
+      //   return data.date + '\n' + name;
+      // }
+      let name = '';
+      const names = params.name.split('<br>');
+      if (names.length > 1) {
+        name = names[0] + '\n' + cutWord(names[1]);
+      } else {
+        name = cutWord(params.name);
       }
       return name;
     }
@@ -54,26 +70,22 @@ const chartOption = {
       layout: 'none',
       data: [],
       links: [],
+      right: '5%',
+      top: 'top',
       layoutIterations: 0,
-      focusNodeAdjacency: 'allEdges',
+      focusNodeAdjacency: true,
       lineStyle: {
         color: chartColorConfig.line,
-        opacity: 0.6
+        opacity: 0.5
       },
       emphasis: {
         lineStyle: {
           color: chartColorConfig.line,
-          opacity: 0.8
+          opacity: 0.7
         }
       }
     }
   ]
 };
 
-const api = {
-  searchPersonDetailApi: '/api/web/Detail/detail',
-  searchPersonApi: '/api/web/Extract/extract',
-  searchRelationApi: '/api/web/Relation/relationWithColor'
-};
-
-export { chartOption, chartColorConfig, api };
+export { chartOption, chartColorConfig, caseColorConfig };

@@ -8,6 +8,29 @@ app-chart {
   flex-direction: column;
   background: #fff;
   flex: 1;
+  ul.chart-color-barUl {
+    // width: 32.525253rem;
+    width:15.525253rem;
+    height: 3.131313rem;
+    background: #fff;
+    border-radius: 3px;
+    display: inline-flex;
+    font-size: .808081rem;
+    li {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      i {
+        background: #000;
+        display: block;
+        width: .909091rem;
+        height: .909091rem;
+      }
+      span {
+        margin-left: 1.010101rem;
+      }
+    }
+  }
   .chart-container {
     flex: 1;
     overflow: auto;
@@ -27,7 +50,7 @@ app-chart {
     background-size: 3.131313rem;
   }
   .point-info {
-    border-top: 1px solid #f6f6f6;
+    // border-top: 1px solid #f6f6f6;
     padding-left: 1.767677rem;
     height: 5rem;
     color: @fontColor;
@@ -36,35 +59,16 @@ app-chart {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    // bottom: 0;
+    // position: absolute;
+    // width: 100%;
+    // background: #fff;
     &.no-boder {
       border: 0;
     }
     h3,
     p {
       margin: 0;
-    }
-  }
-  .mobile-person-detail {
-    display: none;
-  }
-}
-
-.mobile-person-detail-modal-wrap {
-  .ant-modal-content {
-    background: #fff;
-  }
-}
-
-@media (max-width: @media1025) {
-  app-chart {
-    .chart-container {
-      width: 30rem;
-    }
-    .full-screen-btn {
-      display: none;
-    }
-    .point-info {
-      display: none;
     }
   }
 }

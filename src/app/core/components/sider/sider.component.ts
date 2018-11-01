@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SuccessSearchRecord, SearchBarComponent } from '../../../core/components/search-bar/search-bar.component';
-import { NzModalService } from 'ng-zorro-antd';
+import { SuccessSearchRecord, SearchBarComponent } from '../search-bar/search-bar.component';
+import { NzModalService } from '../../../../../node_modules/ng-zorro-antd';
 
 @Component({
-  selector: 'app-panel',
-  templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.less']
+  selector: 'app-sider',
+  templateUrl: './sider.component.html',
+  styleUrls: ['./sider.component.less']
 })
-export class PanelComponent implements OnInit {
+export class SiderComponent implements OnInit {
   fold = false;
   // 控制个人信息展开或关闭
   userActived = false;
@@ -21,13 +21,11 @@ export class PanelComponent implements OnInit {
   // 搜索栏组件
   @Input()
   searchBar: SearchBarComponent;
-  @Input()
-  justDisPerson = false;
 
   @Input()
   set person(data: any[]) {
-    this.personMenus = data || [];
-    if (data && data.length) {
+    this.personMenus = data;
+    if (data.length) {
       this.userActived = true;
     }
   }
@@ -63,7 +61,7 @@ export class PanelComponent implements OnInit {
    * @memberof SiderComponent
    */
   toSearch(data: SuccessSearchRecord) {
-    console.log(data);
+    // console.log(data);
     this.searchBar.search(data);
   }
 

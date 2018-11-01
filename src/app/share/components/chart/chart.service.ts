@@ -37,6 +37,7 @@ export interface ChartNode {
   value?: any;
   emphasis?: any; // 高亮样式
   itemStyle?: any; // 展示样式
+  relation?:any;
 }
 
 export interface ChartLink {
@@ -47,6 +48,11 @@ export interface ChartLink {
   relation?: string;
   lineStyle?: any;
   emphasis?: any;
+  detail?:any;
+  weight?:number;
+  cases?:any;
+  relationCaseName?:string;
+  concat?:any;
 }
 
 @Injectable()
