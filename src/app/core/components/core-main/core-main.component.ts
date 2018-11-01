@@ -624,12 +624,28 @@ export class CoreMainComponent implements OnInit {
    * @param {*} chart
    * @memberof CoreMainComponent
    */
-  private _highlightLine(node, chart) {
+  private _highlightLine(node: ChartEventCbParams, chart) {
     const sourceOptions = this.option;
     console.log(node, sourceOptions, this.nodeDataHasSourcesAndTargets);
 
     const sourceNodes = sourceOptions.series[0].data;
     const sourceLinks = sourceOptions.series[0].links;
+
+    let sourceIds;
+    let targetIds;
+
+    // 点的是线
+    if (node.dataType === 'edge') {
+      const [startId, endId] = node.name.split('>').map(id => {
+        return id.toString().trim();
+      });
+      sourceIds = this.nodeDataHasSourcesAndTargets[startId].sources;
+      targetIds = this.nodeDataHasSourcesAndTargets[endId].targets;
+    } else {
+      // 点的是点
+      sourceIds = this.nodeDataHasSourcesAndTargets[node.data.id].sources;
+      targetIds = this.nodeDataHasSourcesAndTargets[node.data.id].targets;
+    }
 
     // 找到需要高亮的node和link
     this._common.setNodeStyle(sourceNodes[0], 'red', 'red');

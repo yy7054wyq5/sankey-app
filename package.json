@@ -21,7 +21,6 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
-    "buyint-company-library": "^1.0.9",
     "core-js": "^2.5.4",
     "echarts": "^4.2.0-rc.2",
     "less": "^2.7.3",

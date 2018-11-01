@@ -17,7 +17,7 @@ import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operato
 import { StorageService } from '../../../share/services/storage/storage.service';
 import { ChartLink, ChartNode } from '../../../share/components/chart/chart.service';
 import { environment } from '../../../../environments/environment';
-import { DecryptData } from 'buyint-company-library/dist/index'
+import { DecryptData } from 'buyint-company-library/dist/index';
 
 /**
  * 搜索的状态
@@ -78,8 +78,8 @@ export interface OptionNew {
  * @interface SuccessSearchRecord
  */
 export interface SuccessSearchRecord {
-  start: { p_id: string;[key: string]: any };
-  end: { p_id: string;[key: string]: any };
+  start: { p_id: string; [key: string]: any };
+  end: { p_id: string; [key: string]: any };
 }
 
 /**
@@ -181,7 +181,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     private _element: ElementRef,
     private _renderer: Renderer2,
     private _storge: StorageService
-  ) { }
+  ) {}
 
   ngOnInit() {
     const histories: SuccessSearchRecord[] = this._storge.get('histories');
@@ -210,16 +210,15 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
           (bak: { code: number; data: any[] }) => {
             this.startLoading = false;
 
-
             if (!bak.code) {
-              //假数据
+              // 假数据
               // bak.data = [{
               //   name: "朱根林",
               //   _key: "persond232dfaca4cd8cdae25dd3c739201623",
               //   jobs:[
               //     {
               //       c_id:'organization2f6a16d707e12973356ccaf749f5de79',
-              //       c_loc:'',	
+              //       c_loc:'',
               //       c_name:'深圳市洲明科技股份有限公司',
               //       p_gender:'男',
               //       p_name:'陆晨',
@@ -231,12 +230,12 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
               //   type:'person',
               // }]
 
-              //原來
+              // 原來
               // this._concatData(bak.data).subscribe(data => {
               //   this.startOptions = data;
               // });
 
-              //現在
+              // 現在
               this._concatDataNew(bak.data).subscribe(data => {
                 this.startOptions = data;
               });
@@ -259,14 +258,14 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
           (bak: { code: number; data: any[] }) => {
             this.endLoading = false;
             if (!bak.code) {
-              //假数据
+              // 假数据
               // bak.data = [{
               //   name: "潘岳汉",
               //   _key: "person3ba5d60eb9322dba7c9473a073479fbe",
               //   jobs:[
               //     {
               //       c_id:'organization2f6a16d707e12973356ccaf749f5de79',
-              //       c_loc:'',	
+              //       c_loc:'',
               //       c_name:'深圳市洲明科技股份有限公司',
               //       p_gender:'男',
               //       p_name:'陆晨',
@@ -276,7 +275,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
               //     },
               //     {
               //       c_id:'organization2f6a16d707e12973356ccaf749f5de79',
-              //       c_loc:'',	
+              //       c_loc:'',
               //       c_name:'上海市洲明科技股份有限公司',
               //       p_gender:'男',
               //       p_name:'陆晨',
@@ -340,7 +339,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   //   return of(_arr);
   // }
 
-  //改变数据格式后数据改变结构适应相同id展示（新）
+  // 改变数据格式后数据改变结构适应相同id展示（新）
   private _concatDataNew(data: OptionNew[]): Observable<any[]> {
     const _tmp: { [id: string]: { name: string; p_id: string; company?: string; info: any; c_name: string; p_title: string } } = {};
     if (data && data.length > 0) {
@@ -350,11 +349,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
             _tmp[item._key] = {
               name: item.name,
               p_id: item._key,
-              //company: item.company,
+              // company: item.company,
               info: item.jobs,
               c_name: item['c_name'],
-              p_title: item['p_title'],
-
+              p_title: item['p_title']
             };
           }
         }
@@ -370,8 +368,6 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       return of([]);
     }
-
-
   }
 
   /**
@@ -533,47 +529,49 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.outSearchStatus.emit(SearchStatus.pending);
 
-    this._http.get<AjaxResponse>(searchRelationApi, {
-      observe: 'response',
-      responseType: 'json', params: { source: this.start, target: this.end }
-    }).subscribe(
-      (res: HttpResponse<AjaxResponse>) => {
-        if (this._isSuccessBack(res.body)) {
-          let data
-          if (res.headers.has("isEncryption") && res.headers.get("isEncryption")) {
-            data = DecryptData.Decrypt<any>(<string><any>res.body.data, res.headers)
-            res.body.data = data;
-          } else {
-            data = res.body.data
-          }
-          for (var i in data) {
-            let concat = i;
-            for (var j of data[i]) {
-              for (var z of j['links']) {
-                z['concat'] = concat;
-              }
-
+    this._http
+      .get<AjaxResponse>(searchRelationApi, {
+        observe: 'response',
+        responseType: 'json',
+        params: { source: this.start, target: this.end }
+      })
+      .subscribe(
+        (res: HttpResponse<AjaxResponse>) => {
+          if (this._isSuccessBack(res.body)) {
+            let data;
+            if (res.headers.has('isEncryption') && res.headers.get('isEncryption')) {
+              data = DecryptData.Decrypt<any>(<string>(<any>res.body.data), res.headers);
+              res.body.data = data;
+            } else {
+              data = res.body.data;
             }
+            for (var i in data) {
+              let concat = i;
+              for (var j of data[i]) {
+                for (var z of j['links']) {
+                  z['concat'] = concat;
+                }
+              }
+            }
+            this.outSearchResult.emit(res.body);
+            this._updateRecords().subscribe(data => {
+              this.outSearchSuccessRecords.emit(data);
+            });
+          } else {
+            this.outSearchResult.emit(this.errorBakData);
           }
-          this.outSearchResult.emit(res.body);
-          this._updateRecords().subscribe(data => {
-            this.outSearchSuccessRecords.emit(data);
-          });
-        } else {
+          this.outSearchStatus.emit(SearchStatus.success);
+        },
+        error => {
           this.outSearchResult.emit(this.errorBakData);
+          this.outSearchStatus.emit(SearchStatus.fail);
+          this._removeTips();
+        },
+        () => {
+          this.outSearchStatus.emit(SearchStatus.complate);
+          this._removeTips();
         }
-        this.outSearchStatus.emit(SearchStatus.success);
-      },
-      error => {
-        this.outSearchResult.emit(this.errorBakData);
-        this.outSearchStatus.emit(SearchStatus.fail);
-        this._removeTips();
-      },
-      () => {
-        this.outSearchStatus.emit(SearchStatus.complate);
-        this._removeTips();
-      }
-    );
+      );
   }
 
   /**
@@ -621,7 +619,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   searchName(eve: string, arr: any) {
     let status = '';
     for (let item of arr) {
-      if (item.indexOf(eve) > -1 && (eve.length == item.length)) {
+      if (item.indexOf(eve) > -1 && eve.length == item.length) {
         status = item;
         break;
       }
@@ -654,9 +652,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       let titleArray = optionObj.p_titles.length == 0 ? '' : optionObj.p_titles;
 
       //董事长 ，总经理，总裁优先
-      var nameOne = "董事长";
-      var nameTwo = "总裁";
-      var nameThree = "总经理";
+      var nameOne = '董事长';
+      var nameTwo = '总裁';
+      var nameThree = '总经理';
       let title = '';
       if (titleArray) {
         if (this.searchName(nameOne, titleArray)) {
@@ -670,14 +668,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
 
-
       let role = optionObj.p_roles.length == 0 ? '' : optionObj.p_roles[0];
       return title || role;
     } else {
       //董事长 ，总经理，总裁优先
-      var nameOne = "董事长";
-      var nameTwo = "总裁";
-      var nameThree = "总经理";
+      var nameOne = '董事长';
+      var nameTwo = '总裁';
+      var nameThree = '总经理';
       let titleArray = option.p_titles.length == 0 ? '' : option.p_titles;
       let title = '';
       if (titleArray) {
@@ -696,7 +693,4 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       return title || role;
     }
   }
-
-
-
 }
