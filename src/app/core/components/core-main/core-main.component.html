@@ -1,10 +1,9 @@
 <nz-layout class="core-main" style="margin-bottom: 20px">
   
-  <app-search-bar #searchBar (outSearchResult)="getRealtions($event)" (outSearchStatus)="getSearchStatus($event)"></app-search-bar>
+  
   
   <section class="core-body">
-    <!-- sider以模板变量的方式接收app-search-bar某些变量或整个对象 -->
-    <app-sider [histories]="searchBar.records.data" [person]="person" [searchBar]="searchBar" (outFoldStatus)="siderFoldStatus($event)"></app-sider>
+    
     <section class="core-content">
       
       <!-- 初始状态 -->
@@ -71,5 +70,11 @@
       
       
     </section>
+
+    <!-- sider以模板变量的方式接收app-search-bar某些变量或整个对象 -->
+    <app-sider [histories]="searchBar.records.data" [person]="person" [searchBar]="searchBar" (outFoldStatus)="siderFoldStatus($event)">
+        <app-search-bar #searchBar (outSearchResult)="getRealtions($event)" (outSearchStatus)="getSearchStatus($event)"></app-search-bar>
+
+    </app-sider>
   </section>
 </nz-layout>

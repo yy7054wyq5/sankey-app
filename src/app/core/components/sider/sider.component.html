@@ -1,4 +1,5 @@
 <aside [class.fold]="fold">
+  <ng-content></ng-content>
   <div class="fold-bar" (click)="folder()">
     <span *ngIf="!fold">展开</span>
     <span *ngIf="fold">收起</span>
