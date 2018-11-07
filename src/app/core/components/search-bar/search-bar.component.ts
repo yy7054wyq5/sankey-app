@@ -117,6 +117,23 @@ let searchRelationApi = '/api/web/Relation/relationWithColorNew';
   encapsulation: ViewEncapsulation.None
 })
 export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  /**
+   * 搜索模式
+   *
+   * @type {('startEnd' | 'start')}
+   * @memberof SearchBarComponent
+   */
+  searchMode: 'startEnd' | 'start';
+
+  searchModes = [{
+    label: '关系路径查询',
+    value: 'startEnd'
+  }, {
+    label: '单点周围关系查询',
+    value: 'start'
+  }];
+
   start: string; // 起点id
   end: string; // 终点id
 
@@ -196,7 +213,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this._storge.get('noSearchTips')) {
       this.tip.remove();
     } else {
-      this._showTips(true);
+      // this._showTips(true);
     }
     // 搜起点
     this._bindSearchEvent('start-point').subscribe(res => {

@@ -45,6 +45,9 @@ export class CoreMainComponent implements OnInit {
 
   nodeDataHasSourcesAndTargets: ObjTypeLinksData;
 
+  siderIsFold = true;
+
+
   showChartFilterNodes = [];
   showChartFilterLinks = [];
   showChartLinesLength = 0;

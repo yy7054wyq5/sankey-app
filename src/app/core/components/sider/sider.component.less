@@ -3,10 +3,14 @@
 
 @paddingLeft: 2.777778rem;
 
+app-sider {
+  background: @bgColor;
+}
+
 aside {
-  width: 14.646465rem;
-  padding-right: 1rem;
-  background: transparent;
+  width: 0;
+  overflow: hidden;
+  // background: transparent;
   .fold-bar {
     cursor: pointer;
     display: flex;
@@ -17,7 +21,8 @@ aside {
     }
   }
   &.fold {
-    width: 35rem;
+    padding-left: 1rem;
+    width: 15.151515rem;
   }
   i.icon {
     .icon-mixin;

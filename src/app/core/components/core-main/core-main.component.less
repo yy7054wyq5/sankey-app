@@ -2,11 +2,12 @@
 app-core-main {
   display: flex;
   width: 100%;
+  padding: 1rem;
+  background: @bgColor;
   .core-main {
-    margin-top: .757576rem;
     display: flex;
     flex: 1;
-    padding-right: 5.353535rem;
+    background: @bgColor;
     // ul.chart-color-bar {
     //   width: 32.525253rem;
     //   height: 3.131313rem;
@@ -32,31 +33,46 @@ app-core-main {
     section.core-body {
       display: flex;
       flex: 1;
-      flex-direction: row; //
+      flex-direction: row;
+      border-radius: @borderRaduis;
+      //
       // 内容区
-      // 
+      //
       .core-content {
         flex: 1;
         display: flex;
         flex-direction: column;
-        
-        >div.status {
+        border-radius: @borderRaduis;
+        position: relative;
+        .icon-fold{
+          background: url('/assets/images/arrow-right.png') no-repeat center;
+          width: 1rem;
+          height: 1rem;
+          position: absolute;
+          right: 1rem;
+          top: 1rem;
+          border-radius: @borderRaduis;
+          border: 1px solid @bgColor;
+          &.no-fold {
+            background: url('/assets/images/arrow-left.png') no-repeat center;
+          }
+        }
+        > div.status {
           flex: 1;
           display: flex;
           background-color: #fff;
           flex-direction: column;
           border-radius: 6px;
           align-items: center;
-          img {
-            width: 30.30303rem;
-            height: 20.20202rem;
-            margin-top: 3rem;
-          }
-          p {
+          justify-content: center;
+          .content {
             text-align: center;
-            margin-top: 1.5rem;
-            color: @fontColor;
-            font-size: 1.111111rem;
+            p {
+              text-align: center;
+              margin-top: 1.5rem;
+              color: @fontColor;
+              font-size: 1.111111rem;
+            }
           }
         }
       }

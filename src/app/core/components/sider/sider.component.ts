@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { SuccessSearchRecord, SearchBarComponent } from '../search-bar/search-bar.component';
 import { NzModalService } from '../../../../../node_modules/ng-zorro-antd';
 
 @Component({
   selector: 'app-sider',
   templateUrl: './sider.component.html',
-  styleUrls: ['./sider.component.less']
+  styleUrls: ['./sider.component.less'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SiderComponent implements OnInit {
   fold = false;
@@ -18,6 +19,11 @@ export class SiderComponent implements OnInit {
   // 任务信心菜单
   personMenus = [];
 
+  @Input()
+  set folderStatus(status: boolean) {
+    this.fold = status;
+    this.outFoldStatus.emit(status);
+  }
   // 搜索栏组件
   @Input()
   searchBar: SearchBarComponent;
