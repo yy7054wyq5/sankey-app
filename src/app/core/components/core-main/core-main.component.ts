@@ -13,16 +13,6 @@ import { CheckTab } from '../check-node/check-node.component';
 const searchPersonDetailApi = '/api/web/Detail/detailNew';
 const maxLines = 10;
 
-// 得到两数之间的随机整数，包括两数
-function getRandomIntInclusive(min, max) {
-  const a = Math.random();
-  if (a < 0.5) {
-    return min;
-  } else {
-    return max;
-  }
-}
-
 /**
  * 图表下拉框定位模式
  *
@@ -617,55 +607,6 @@ export class CoreMainComponent implements OnInit {
   }
 
   /**
-   * 高亮线
-   *
-   * @private
-   * @param {*} node
-   * @param {*} chart
-   * @memberof CoreMainComponent
-   */
-  private _highlightLine(node: ChartEventCbParams, chart) {
-    const sourceOptions = this.option;
-    console.log(node, sourceOptions, this.nodeDataHasSourcesAndTargets);
-
-    const sourceNodes = sourceOptions.series[0].data;
-    const sourceLinks = sourceOptions.series[0].links;
-
-    let sourceIds;
-    let targetIds;
-
-    // 点的是线
-    if (node.dataType === 'edge') {
-      const [startId, endId] = node.name.split('>').map(id => {
-        return id.toString().trim();
-      });
-      sourceIds = this.nodeDataHasSourcesAndTargets[startId].sources;
-      targetIds = this.nodeDataHasSourcesAndTargets[endId].targets;
-    } else {
-      // 点的是点
-      sourceIds = this.nodeDataHasSourcesAndTargets[node.data.id].sources;
-      targetIds = this.nodeDataHasSourcesAndTargets[node.data.id].targets;
-    }
-
-    // 找到需要高亮的node和link
-    this._common.setNodeStyle(sourceNodes[0], 'red', 'red');
-    this._common.setLinkStyle(sourceLinks[0], 'red', 'red');
-
-    // 还原上一次的node和link
-
-    // 重新设置
-    chart.setOption({
-      ...sourceOptions,
-      series: [
-        {
-          data: [...sourceNodes],
-          links: [...sourceLinks]
-        }
-      ]
-    });
-  }
-
-  /**
    * 图表事件
    *
    * @param {*} data
@@ -675,9 +616,6 @@ export class CoreMainComponent implements OnInit {
     // ChartEventCbParams
     const node = data.crtNode;
     const chart = data.chartInstance;
-
-    this._highlightLine(node, chart);
-
     this._showPersonInfo(node);
   }
 }
