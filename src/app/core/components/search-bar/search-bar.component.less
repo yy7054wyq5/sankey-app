@@ -3,8 +3,6 @@
 @perfix: ant-select;
 app-search-bar {
   width: 100%;
-  height: 5.360606rem;
-  padding-left: 14.646465rem;
   position: relative;
   form {
     height: 100%;
@@ -24,6 +22,22 @@ app-search-bar {
         font-weight: 300;
         color: #b3bac8;
       }
+      &.search-point {
+        .@{perfix}-selection {
+          background: transparent;
+          border: 0;
+          border-bottom: 1px solid @borderColor;
+          border-radius: 0;
+          color: #fff;
+        }
+        .@{perfix}-selection__placeholder {
+          color: #fff;
+        }
+        .@{perfix}-selection__clear,
+        .@{perfix}-arrow{
+          color: #fff;
+        }
+      }
     } // 已选中
     .@{perfix}.ng-valid.ng-touched {
       .@{perfix}-selection {
@@ -32,6 +46,14 @@ app-search-bar {
       .@{perfix}-selection-selected-value {
         color: @fontColor;
         font-size: 1.111111rem;
+      }
+      &.search-point {
+        .@{perfix}-selection {
+          background: transparent;
+        }
+        .@{perfix}-selection-selected-value {
+          color: #fff;
+        }
       }
     }
     button {
@@ -63,7 +85,7 @@ app-search-bar {
     &:last-child {
       border-bottom: 0;
     }
-    .option-label{
+    .option-label {
       display: flex;
       .name {
         flex: 1;

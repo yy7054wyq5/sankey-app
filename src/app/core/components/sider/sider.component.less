@@ -9,8 +9,16 @@ app-sider {
 
 aside {
   width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   overflow: hidden;
   // background: transparent;
+  &.fold {
+    padding-left: 1rem;
+    width: 15.151515rem;
+  }
   .fold-bar {
     cursor: pointer;
     display: flex;
@@ -19,10 +27,6 @@ aside {
     > i.anticon {
       font-size: 1.2rem;
     }
-  }
-  &.fold {
-    padding-left: 1rem;
-    width: 15.151515rem;
   }
   i.icon {
     .icon-mixin;

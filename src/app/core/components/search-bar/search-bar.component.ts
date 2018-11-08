@@ -121,27 +121,30 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * 搜索模式
    *
-   * @type {('startEnd' | 'start')}
+   * @type {('startEnd' | 'onePoint')}
    * @memberof SearchBarComponent
    */
-  searchMode: 'startEnd' | 'start';
+  searchMode: 'startEnd' | 'onePoint' = 'onePoint';
 
   searchModes = [{
     label: '关系路径查询',
     value: 'startEnd'
   }, {
     label: '单点周围关系查询',
-    value: 'start'
+    value: 'onePoint'
   }];
 
   start: string; // 起点id
   end: string; // 终点id
+  onePoint: string; // 单点
 
   startLoading = false; // 起点下拉loading开关
   endLoading = false; // 终点下拉loading开关
+  onePointLoading = false; // 单点loading
 
   startOptions = []; // 起点下拉option数据
   endOptions = []; // 终点下拉option数据
+  onePointOptions = []; // 终点下拉option数据
 
   /**
    * 外部以模板变量的方式获取内部变量
@@ -311,6 +314,57 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
           },
           error => {
             this.endLoading = false;
+          }
+        );
+    });
+    // 搜终点
+    this._bindSearchEvent('one-point').subscribe(res => {
+      this.onePointLoading = true;
+      this._http
+        .get(searchPersonApi, {
+          params: { name: res }
+          // params: { string: res }
+        })
+        .subscribe(
+          (bak: { code: number; data: any[] }) => {
+            this.onePointLoading = false;
+            if (!bak.code) {
+              // 假数据
+              // bak.data = [{
+              //   name: "潘岳汉",
+              //   _key: "person3ba5d60eb9322dba7c9473a073479fbe",
+              //   jobs:[
+              //     {
+              //       c_id:'organization2f6a16d707e12973356ccaf749f5de79',
+              //       c_loc:'',
+              //       c_name:'深圳市洲明科技股份有限公司',
+              //       p_gender:'男',
+              //       p_name:'陆晨',
+              //       p_roles:['高管','白領'],
+              //       p_titles:['副总经理','董事'],
+              //       relation_dates:['2018','2017']
+              //     },
+              //     {
+              //       c_id:'organization2f6a16d707e12973356ccaf749f5de79',
+              //       c_loc:'',
+              //       c_name:'上海市洲明科技股份有限公司',
+              //       p_gender:'男',
+              //       p_name:'陆晨',
+              //       p_roles:['白領','經歷'],
+              //       p_titles:['副总经理','董事'],
+              //       relation_dates:['2018','2017']
+              //     }
+              //   ],
+              //   type:'person',
+              // }]
+
+              this._concatDataNew(bak.data).subscribe(data => {
+                this.onePointOptions = data;
+              });
+            }
+          },
+          error => {
+            this.onePointLoading = false;
           }
         );
     });
