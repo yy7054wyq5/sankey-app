@@ -45,7 +45,7 @@ export class CoreMainComponent implements OnInit {
 
   nodeDataHasSourcesAndTargets: ObjTypeLinksData;
 
-  siderIsFold = true;
+  siderIsFold = true; // 侧栏打开
 
 
   showChartFilterNodes = [];
@@ -512,6 +512,7 @@ export class CoreMainComponent implements OnInit {
   chartIsFull(isFull: boolean) {
     this._chartFullStatus = isFull;
     this.checkUIMode = isFull ? checkUIMode.fullscreen : checkUIMode.normal;
+    this.siderIsFold = !isFull;
   }
 
   /**

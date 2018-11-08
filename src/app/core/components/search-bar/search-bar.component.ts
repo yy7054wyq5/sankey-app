@@ -164,6 +164,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   searchResult: any;
 
+  checkOptionsOne = [
+    { label: 'Apple', value: 'Apple', checked: true },
+    { label: 'Pear', value: 'Pear' },
+    { label: 'Orange', value: 'Orange' }
+  ];
+
+
   /**
    * 外部以模板变量的方式获取内部变量
    *
@@ -393,6 +400,12 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ////////////////////////////////////////////////////////////////////////////////
+
+
+  log(value: object[]): void {
+    console.log(value);
+  }
+
 
   /**
    * 将数据改变结构以适应相同id数据的展示（旧）

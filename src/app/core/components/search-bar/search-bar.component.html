@@ -113,7 +113,16 @@
 
   <ng-container *ngIf="showFilter">
     <app-collapse class="collapse" colIcon="anticon-question-circle-o" colTitle="Filters" [colIsCollapse]="false">
-      <div class="filter">111111</div>
+      <div class="filter">
+        <h5>Degree level</h5>
+        <nz-checkbox-group name="checkOptionsOne" [(ngModel)]="checkOptionsOne" (ngModelChange)="log(checkOptionsOne)"></nz-checkbox-group>
+        <h5>Number of chains</h5>
+        <nz-slider nzDots  [nzMarks]="[0, 10, 20, 30]" [nzDefaultValue]="0"  [nzMin]="0" [nzMax]="30"></nz-slider>
+        <h5>Timeline</h5>
+        <nz-slider nzDots  [nzMarks]="[0, 5, 10]" [nzDefaultValue]="0" [nzMin]="0" [nzMax]="10"></nz-slider>
+        <h5>Strength</h5>
+        <nz-slider nzDots  [nzMarks]="[0, 10, 20]" [nzDefaultValue]="0" [nzMin]="0" [nzMax]="20"></nz-slider>
+      </div>
     </app-collapse>
   </ng-container>
 
