@@ -13,6 +13,6 @@ import { CollapseComponent } from './components/collapse/collapse.component';
   imports: [RouterModule, CommonModule, HttpClientModule, NgZorroAntdModule],
   declarations: [LayoutComponent, ErrorComponent, ChartComponent, SafeHtmlPipe, CollapseComponent],
   providers: [SafeHtmlPipe],
-  exports: [ChartComponent, SafeHtmlPipe]
+  exports: [ChartComponent, SafeHtmlPipe, CollapseComponent]
 })
 export class ShareModule {}

@@ -1,0 +1,36 @@
+@import '../../../../less/variable.less';
+
+@titleBgColor: #f2f2f2;
+@fontSize: 15px;
+.collapse {
+  .title {
+    background: @titleBgColor;
+    display: flex;
+    justify-content: space-between;
+    color: #000;
+    height: 32px;
+    border-radius: @borderRaduis;
+    span {
+      font-size: @fontSize;
+    }
+    i {
+      display: block;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+      font-size: @fontSize;
+      &.handle {
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        font-size: 32px;
+      }
+    }
+  }
+  .content {
+    overflow: hidden;
+  }
+}

@@ -1,3 +1,9 @@
-<p>
-  collapse works!
-</p>
+<section class="collapse">
+  <div class="title">
+    <i class="anticon {{colIcon}}" style="margin-top: 7px; margin-left: 5px;"></i>
+    <span style="flex: 1;text-align: left; margin-top: 5px; margin-left: 5px;">{{ colTitle }}</span>
+    <i class="handle" *ngIf="colIsCollapse" (click)="toClick($event)">+</i>
+    <i class="handle" *ngIf="!colIsCollapse" (click)="toClick($event)">-</i>
+  </div>
+  <div class="content" [ngStyle]="{ height: colIsCollapse ? 0 : 'auto' }"><ng-content></ng-content></div>
+</section>

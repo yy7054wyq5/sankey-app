@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-collapse',
@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./collapse.component.less']
 })
 export class CollapseComponent implements OnInit {
+  @Input() colTitle: string;
 
-  constructor() { }
+  @Input() colIcon: string;
 
-  ngOnInit() {
+  @Input() colIsCollapse = true;
+
+  @Output() isCollapse = new EventEmitter<boolean>();
+
+  constructor() {}
+
+  ngOnInit() {}
+
+  toClick(bool) {
+    this.colIsCollapse = !this.colIsCollapse;
+    this.isCollapse.emit(bool);
   }
-
 }

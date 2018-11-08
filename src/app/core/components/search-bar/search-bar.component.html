@@ -110,6 +110,23 @@
 
   <!-- 匹配 -->
   <button class="match-btn" nz-button [nzType]="'primary'" type="submit">智配关系</button>
+
+  <ng-container *ngIf="showFilter">
+    <app-collapse class="collapse" colIcon="anticon-question-circle-o" colTitle="Filters" [colIsCollapse]="false">
+      <div class="filter">111111</div>
+    </app-collapse>
+  </ng-container>
+
+  <ng-container *ngIf="records.data">
+    <app-collapse class="collapse" colIcon="anticon-question-circle-o" colTitle="History" [colIsCollapse]="false">
+      <ul class="histores ">
+        <li *ngFor="let history of records.data" (click)="search(history)">
+          {{ history.start['company'] }}/{{ history.start['name'] }}->{{ history.end['company'] }}/{{ history.end['name'] }}
+        </li>
+      </ul>
+    </app-collapse>
+  </ng-container>
+
   <!-- 引导 -->
   <div class="search-tips">
     <img src="/assets/images/arrow-guide.png" alt="" />

@@ -117,7 +117,6 @@ let searchRelationApi = '/api/web/Relation/relationWithColorNew';
   encapsulation: ViewEncapsulation.None
 })
 export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
-
   /**
    * 搜索模式
    *
@@ -126,13 +125,16 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   searchMode: 'startEnd' | 'onePoint' = 'onePoint';
 
-  searchModes = [{
-    label: '关系路径查询',
-    value: 'startEnd'
-  }, {
-    label: '单点周围关系查询',
-    value: 'onePoint'
-  }];
+  searchModes = [
+    {
+      label: '关系路径查询',
+      value: 'startEnd'
+    },
+    {
+      label: '单点周围关系查询',
+      value: 'onePoint'
+    }
+  ];
 
   start: string; // 起点id
   end: string; // 终点id
@@ -145,6 +147,22 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   startOptions = []; // 起点下拉option数据
   endOptions = []; // 终点下拉option数据
   onePointOptions = []; // 终点下拉option数据
+
+  get showFilter(): boolean {
+    if (this.searchResult) {
+      if (this.start && this.end) {
+        this.searchMode = 'startEnd';
+        return true;
+      }
+      if (this.onePoint) {
+        this.searchMode = 'onePoint';
+        return true;
+      }
+    }
+    return false;
+  }
+
+  searchResult: any;
 
   /**
    * 外部以模板变量的方式获取内部变量
@@ -610,6 +628,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
         (res: HttpResponse<AjaxResponse>) => {
           if (this._isSuccessBack(res.body)) {
             let data;
+            this.searchResult = res.body;
             if (res.headers.has('isEncryption') && res.headers.get('isEncryption')) {
               data = DecryptData.Decrypt<any>(<string>(<any>res.body.data), res.headers);
               res.body.data = data;
