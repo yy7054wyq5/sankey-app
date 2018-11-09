@@ -111,17 +111,18 @@
   <!-- 匹配 -->
   <button class="match-btn" nz-button [nzType]="'primary'" type="submit">智配关系</button>
 
-  <ng-container *ngIf="showFilter">
+  <ng-container *ngIf="searchResult">
+  <!-- <ng-container> -->
     <app-collapse class="collapse" colIcon="anticon-question-circle-o" colTitle="Filters" [colIsCollapse]="false">
       <div class="filter">
         <h5>Degree level</h5>
-        <nz-checkbox-group name="checkOptionsOne" [(ngModel)]="checkOptionsOne" (ngModelChange)="log(checkOptionsOne)"></nz-checkbox-group>
+        <nz-checkbox-group name="degree" [(ngModel)]="degrees"></nz-checkbox-group>
         <h5>Number of chains</h5>
-        <nz-slider nzDots  [nzMarks]="[0, 10, 20, 30]" [nzDefaultValue]="0"  [nzMin]="0" [nzMax]="30"></nz-slider>
+        <nz-slider nzDots  [nzMarks]="filterSliders.chains" [nzDefaultValue]="0"  [nzMax]="30"></nz-slider>
         <h5>Timeline</h5>
-        <nz-slider nzDots  [nzMarks]="[0, 5, 10]" [nzDefaultValue]="0" [nzMin]="0" [nzMax]="10"></nz-slider>
+        <nz-slider nzDots  [nzMarks]="filterSliders.timelines" [nzDefaultValue]="0"  [nzMax]="10"></nz-slider>
         <h5>Strength</h5>
-        <nz-slider nzDots  [nzMarks]="[0, 10, 20]" [nzDefaultValue]="0" [nzMin]="0" [nzMax]="20"></nz-slider>
+        <nz-slider nzDots  [nzMarks]="filterSliders.strength" [nzDefaultValue]="0" [nzMax]="20"></nz-slider>
       </div>
     </app-collapse>
   </ng-container>
@@ -133,6 +134,10 @@
           {{ history.start['company'] }}/{{ history.start['name'] }}->{{ history.end['company'] }}/{{ history.end['name'] }}
         </li>
       </ul>
+      <div class="clear-history " *ngIf="records.data.length ">
+        <!-- <i class="icon delete"></i> -->
+        <span (click)="clearRecords()">清空历史</span>
+      </div>
     </app-collapse>
   </ng-container>
 

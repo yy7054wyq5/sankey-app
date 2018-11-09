@@ -47,7 +47,6 @@ export class CoreMainComponent implements OnInit {
 
   siderIsFold = true; // 侧栏打开
 
-
   showChartFilterNodes = [];
   showChartFilterLinks = [];
   showChartLinesLength = 0;
@@ -219,19 +218,19 @@ export class CoreMainComponent implements OnInit {
     let nodes = [];
     let links = [];
     let lines = 0;
-    let startPoint = this.searchBar.records.startAndEnd.start.p_id; //原节点
+    const startPoint = this.searchBar.records.startAndEnd.start.p_id; // 原节点
     for (const contact in record) {
       if (record.hasOwnProperty(contact)) {
         record[contact].forEach(lineIndex => {
           lines += 1;
-          let newLineIndex = lineIndex;
+          const newLineIndex = lineIndex;
           // const line: Line = this._ajaxData[contact][lineIndex];
           // nodes = [...nodes, ...line.nodes];
           // links = [...links, ...line.links];
           const contactRelationship = this._ajaxData[contact];
           // console.log('contactRelationship',contactRelationship);
           contactRelationship.forEach(element => {
-            //找到有相同id的关系数据
+            // 找到有相同id的关系数据
             if (
               this._common.getCommonId(element.nodes, newLineIndex) &&
               this._common.getCommonLinkId(element.links, newLineIndex, startPoint)
@@ -320,16 +319,21 @@ export class CoreMainComponent implements OnInit {
     // console.log(res);
     this.initCore = false;
     if (!res.code && res.data && Object.keys(res.data).length) {
-      this._ajaxData = res.data;
+      this._ajaxData = res.data.relation;
       this.checkcontactsTab = this._creatContactsCheckTab(this._ajaxData);
       // 默认显示已有的第一度人脉
       const linksforDis = this._common.filterLinks(this._common.outCrtContactLinks(this._ajaxData)); // 去重的links
+
       const crtAllNodes = this._common.outCrtContactNodes(this._ajaxData); // 未去重的所有的nodes
+
       const nodesForDis = this._common.filterNodes(crtAllNodes); // 去重的nodes
+
       const nodesHasLine = this._common.filterNodesHasConAndLine(crtAllNodes); // 去重nodes后不删除其中的contact和line
+
       // this._creatNodesCheckTab(crtAllNodes, linksforDis);
       // console.log(nodesHasLine,linksforDis);
       this._creatNodesCheckTab(nodesHasLine, linksforDis); // nodes去重但不删除contact和line,  传入
+
       // 改变去重后的links数组，将case提取出来，并加上source和target    改变去重的nodes,将case的id加上
       // const hasCaseObj = this._caseArrGetConcat(nodesForDis,linksforDis);
       // console.log(hasCaseObj);
@@ -337,6 +341,7 @@ export class CoreMainComponent implements OnInit {
       this.showChartFilterLinks = linksforDis;
       this.showChartLinesLength = this._ajaxData[Object.keys(this._ajaxData)[0]].length;
       this.changeClickView(this.viewStatus);
+
       // this._creatChart(nodesForDis, linksforDis, this._ajaxData[Object.keys(this._ajaxData)[0]].length);
       // this._creatChart(hasCaseObj.newNodes, hasCaseObj.newLinks, this._ajaxData[Object.keys(this._ajaxData)[0]].length);
     } else {
@@ -371,8 +376,8 @@ export class CoreMainComponent implements OnInit {
 
   private changeClickView(isview: boolean) {
     this.viewStatus = isview;
-    let filternodes = this.showChartFilterNodes.concat();
-    let filterlinks = this.showChartFilterLinks.concat();
+    const filternodes = this.showChartFilterNodes.concat();
+    const filterlinks = this.showChartFilterLinks.concat();
     if (isview) {
       const hasCaseObj = this._caseArrGetConcat(filternodes, filterlinks);
       this._creatChart(hasCaseObj.newNodes, hasCaseObj.newLinks, this.showChartLinesLength * 5);
@@ -387,28 +392,28 @@ export class CoreMainComponent implements OnInit {
    * @param links
    */
   private _caseArrGetConcat(nodes: ChartNode[], links: ChartLink[]) {
-    let obj = {
+    const obj = {
       newNodes: [],
       newLinks: []
     };
-    if (nodes && nodes.length != 0) {
+    if (nodes && nodes.length !== 0) {
       obj.newNodes = nodes;
     }
     // 事件添加
-    if (links && links.length != 0) {
+    if (links && links.length !== 0) {
       links.forEach((item, index) => {
-        if (!item.cases || item.cases.length == 0) {
+        if (!item.cases || item.cases.length === 0) {
           item.relationCaseName = '';
           obj.newLinks.push(item);
         } else {
-          let linkEvery = item;
-          let linkEveryIndx = index;
+          const linkEvery = item;
+          const linkEveryIndx = index;
           console.log('linkEvery.source', linkEvery.source);
-          let caseSource = linkEvery.source.replace(/person/g, 'case');
-          let caseTarget = linkEvery.target.replace(/person/g, 'case');
+          const caseSource = linkEvery.source.replace(/person/g, 'case');
+          const caseTarget = linkEvery.target.replace(/person/g, 'case');
           // console.log('linkEvery.source caseSource',linkEvery.source,caseSource);
           item.cases.forEach((caseItem, caseIndex) => {
-            var caseEverySourceObj = {
+            const caseEverySourceObj = {
               color: this.colorCase[linkEvery.concat] ? this.colorCase[linkEvery.concat] : '#ffffff',
               emphasis: {
                 lineStyle: {
@@ -424,7 +429,7 @@ export class CoreMainComponent implements OnInit {
               value: linkEvery.value / 5,
               relationCaseName: caseItem
             };
-            var caseEveryTargetObj = {
+            const caseEveryTargetObj = {
               color: this.colorCase[linkEvery.concat] ? this.colorCase[linkEvery.concat] : '#ffffff',
               emphasis: {
                 lineStyle: {
@@ -440,17 +445,17 @@ export class CoreMainComponent implements OnInit {
               value: linkEvery.value / 5,
               relationCaseName: caseItem
             };
-            var itemCaseIdObj = {
-              //contact: 3
-              //date: null
+            const itemCaseIdObj = {
+              // contact: 3
+              // date: null
               // id: ('case' + linkEveryIndx + '-') + caseIndex,  //没有节点id都不同，但是可能事件相同
               id: caseSource + caseTarget + caseItem,
-              //line: 0
+              // line: 0
               name: caseItem
             };
-            obj.newLinks.push(caseEverySourceObj); //原相同   不同target为事件id
-            obj.newLinks.push(caseEveryTargetObj); //不同source为事件id   相同target
-            obj.newNodes.push(itemCaseIdObj); //节点添加
+            obj.newLinks.push(caseEverySourceObj); // 原相同   不同target为事件id
+            obj.newLinks.push(caseEveryTargetObj); // 不同source为事件id   相同target
+            obj.newNodes.push(itemCaseIdObj); // 节点添加
             // let sourceHasNot = this.filterCommonLink(obj.newLinks,(('case' + linkEveryIndx + '-') + caseIndex),caseEverySourceObj,'source'); //判读是否有同源
             // let targetHasNot = this.filterCommonLink(obj.newLinks,(('case' + linkEveryIndx + '-') + caseIndex),caseEveryTargetObj,'target');//判断是否有同target
             // if (sourceHasNot) {

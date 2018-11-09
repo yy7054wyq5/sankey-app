@@ -33,7 +33,9 @@ export enum NodeCate {
 
 @Injectable()
 export class CommonService {
-  constructor() {}
+  constructor() {
+    console.log('CommonService constructor');
+  }
 
   /**
    * 过滤掉重复的node

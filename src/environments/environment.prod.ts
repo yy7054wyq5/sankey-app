@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   requestDelayTime: 0,
-  apiHost: 'http://10.0.2.12:10130/',
-  useRelationJson: false
+  apiHost: 'https://app-relation.buyint.com/',
+  useRelationJson: false,
+  tmpToken: ''
 };
