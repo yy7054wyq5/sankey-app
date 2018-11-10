@@ -2,7 +2,7 @@
   <section class="core-body">
 
     <section class="core-content">
-      <i class="icon-fold" [class.no-fold]="!siderIsFold" (click)="siderIsFold=!siderIsFold"></i>
+      <i *ngIf="!chartFullStatus" class="icon-fold icon-tool" [class.no-fold]="!siderIsFold" (click)="siderIsFold=!siderIsFold"></i>
       <!-- 初始状态 -->
       <div *ngIf="initCore" class="status">
         <div class="content">
@@ -18,23 +18,23 @@
         <p style="margin-left: -1rem;">未找到合适信息哦</p>
       </div>
       <!-- 图表 -->
-      <app-chart #chart *ngIf="option" [eoption]="option" [eheight]="chartHeight" [efullParentClassName]="'core-main'"
+      <app-chart #chart *ngIf="option" [eoption]="option" [eheight]="chartHeight" [efullParentClassName]="'body'"
                  (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)" (efullStatus)="chartIsFull($event)"
                  (isView)="changeClickView($event)">
         <!-- 翻页 -->
         <nz-pagination  (nzPageIndexChange)="UI_pageIndexChange($event)" [nzPageIndex]="1" [nzPageSize]="1" [nzTotal]="totalPages" nzSimple></nz-pagination>
         <!-- 选择人脉 -->
-        <app-check-node *ngIf="showCheckComponent" [tabs]="checkcontactsTab" [positionType]="checkUIPosition[checkUIMode].contactsCheckUI.positionType"
+        <!-- <app-check-node *ngIf="showCheckComponent" [tabs]="checkcontactsTab" [positionType]="checkUIPosition[checkUIMode].contactsCheckUI.positionType"
                         placeholder="显示/隐藏关系" [top]="checkUIPosition[checkUIMode].contactsCheckUI.top" [right]="checkUIPosition[checkUIMode].contactsCheckUI.right"
                         [marginTop]="checkUIPosition[checkUIMode].contactsCheckUI.marginTop" [display]="checkUIPosition[checkUIMode].contactsCheckUI.display"
                         (outCheckedNodes)="getCheckedContacts($event)">
-        </app-check-node>
+        </app-check-node> -->
         <!-- 选择隐藏节点 -->
-        <app-check-node *ngIf="showCheckComponent" [outFullData]="true" [tabs]="checknodesTab" [positionType]="checkUIPosition[checkUIMode].nodesCheckUI.positionType"
+        <!-- <app-check-node *ngIf="showCheckComponent" [outFullData]="true" [tabs]="checknodesTab" [positionType]="checkUIPosition[checkUIMode].nodesCheckUI.positionType"
                         placeholder="显示/隐藏关系路径" [top]="checkUIPosition[checkUIMode].nodesCheckUI.top" [right]="checkUIPosition[checkUIMode].nodesCheckUI.right"
                         [marginTop]="checkUIPosition[checkUIMode].contactsCheckUI.marginTop" [display]="checkUIPosition[checkUIMode].contactsCheckUI.display"
                         (outCheckedNodes)="getCheckedNodes($event)">
-        </app-check-node>
+        </app-check-node> -->
       </app-chart>
       <!-- <div class="hack" style="height: .606061rem"></div> -->
       <!-- 颜色盘 -->

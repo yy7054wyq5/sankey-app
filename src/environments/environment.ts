@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   requestDelayTime: 500,
-  apiHost: '',
-  // apiHost: 'https://app-relation.buyint.com/relation_api',
+  // apiHost: '',
+  apiHost: 'https://app-relation.buyint.com/relation_api',
   // apiHost: 'http://10.0.2.12:10130/',
   // apiHost: 'http://10.0.15.166:10130/',
   // apiHost: 'http://10.0.15.189:10130/',

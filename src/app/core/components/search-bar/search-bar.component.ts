@@ -194,8 +194,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   searchParams: SearchRelationRequestParams = {
     source: '',
     page: 0,
-    timeLineEnd: 0,
-    timeLineStart: 0
+    timeLineEnd: 2018,
+    timeLineStart: 2008
   };
 
   searchResult;
@@ -848,6 +848,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.start && this.end) {
         this.searchMode = 'startEnd';
       }
+      const crtYear = new Date().getFullYear();
+      this.searchParams.timeLineStart = crtYear - 10;
+      this.searchParams.timeLineEnd = crtYear;
     }
 
     console.log(this.searchParams);

@@ -34,6 +34,10 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   @Input()
   ehasFullBtn = true;
   @Input()
+  set echartToFull(bool) {
+    this.fullStatus = bool ? FullStatus.yes : FullStatus.no;
+  }
+  @Input()
   ewidth: string;
   @Input()
   eheight: string;

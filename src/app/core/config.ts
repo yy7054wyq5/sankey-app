@@ -96,7 +96,7 @@ const chartOption = {
       right: '5%',
       top: 'top',
       layoutIterations: 0,
-      focusNodeAdjacency: true,
+      // focusNodeAdjacency: true,
       lineStyle: {
         color: chartColorConfig.line,
         opacity: 0.5

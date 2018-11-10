@@ -4,26 +4,26 @@
   <div style="padding-top: 12px;margin-left: 120px;">
       <div class="hack" style="height: .606061rem"></div>
         
-        <ul class="chart-color-barUl">
+        <!-- <ul class="chart-color-barUl">
           <li style="margin-left: 1.616162rem;">
             <i [style]="'background-color:'+colorBar.person.bg | safeHtml:'style'"></i>
             <span>人物</span>
           </li>
-          <!-- <li>
+          <li>
             <i [style]="'background-color:'+colorBar.case.bg | safeHtml:'style'"></i>
             <span>事件</span>
           </li>
           <li>
             <i [style]="'background-color:'+colorBar.organization.bg | safeHtml:'style'"></i>
             <span>公司</span>
-          </li> -->
+          </li>
           <li>
             <i [style]="'background-color:'+colorBar.point.bg | safeHtml:'style'"></i>
             <span>起点</span>
             <span style="margin-left: 5px;margin-bottom: 1px;"><img src="../../../../assets/images/leri.png" style="width: 15px;height: 15px;" alt=""></span>
             <span style="margin-left: 5px;">终点</span>  
           </li>
-        </ul>
+        </ul> -->
         <!-- <div style="display: inline-flex;margin-left: 10%;">
           <button (click)="changeClickView()" title="点我切换视图" class="btn" style="background: #2702bb;-shadow: none;border: none;border-radius: 3px;border: 1px solid #2702bb;color: #fff;cursor:pointer">
             切换视图
@@ -36,7 +36,7 @@
 <div class="chart-container" style="max-height:600px;">
   <div class="chart"></div>
 </div>
-<div style="boder-top:1px solid #f6f6f6">
+<div style="border-top:1px solid #f6f6f6">
   <div class="point-info" [class.no-boder]="!UI_nodeDetail.show">
     <ng-container *ngIf="UI_nodeDetail.show && (UI_nodeDetail.showType == 'node')">
       <h3>{{UI_nodeDetail.date}}--{{UI_nodeDetail.id}}</h3>

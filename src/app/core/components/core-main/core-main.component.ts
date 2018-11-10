@@ -40,7 +40,7 @@ export class CoreMainComponent implements OnInit {
   checkcontactsTab: CheckTab[] = []; // 显示隐藏人脉
   chartHeight = null;
   private _ajaxData: Contacts;
-  private _chartFullStatus = false;
+  chartFullStatus = false;
 
   /**
    * 供订阅
@@ -598,9 +598,10 @@ export class CoreMainComponent implements OnInit {
   }
 
   chartIsFull(isFull: boolean) {
-    this._chartFullStatus = isFull;
+    this.chartFullStatus = isFull;
     this.checkUIMode = isFull ? checkUIMode.fullscreen : checkUIMode.normal;
-    this.siderIsFold = !isFull;
+    this.siderIsFold = false;
+    // this.siderIsFold = !isFull;
   }
 
   /**
@@ -622,9 +623,11 @@ export class CoreMainComponent implements OnInit {
    * @memberof CoreMainComponent
    */
   siderFoldStatus(isFold) {
-    if (this.chart) {
-      this.chart.mustResize();
-    }
+    setTimeout(() => {
+      if (this.chart) {
+        this.chart.mustResize();
+      }
+    }, 400);
   }
 
   /**
