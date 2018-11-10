@@ -13,7 +13,7 @@ import {
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { CommonService } from '../../services/common/common.service';
 import { Observable, fromEvent, of, Subscription } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged, switchMap, min } from 'rxjs/operators';
 import { StorageService } from '../../../share/services/storage/storage.service';
 import { ChartLink, ChartNode } from '../../../share/components/chart/chart.service';
 import { environment } from '../../../../environments/environment';
@@ -117,10 +117,11 @@ interface CheckGroupItem {
 }
 
 interface Slider {
-  marks: SliderMarks;
+  marks?: SliderMarks;
+  min: number;
   max: number;
   value: number;
-  options: CheckOption[];
+  options?: CheckOption[];
 }
 
 /**
@@ -255,21 +256,38 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   sliderChains: Slider = {
     marks: {},
+    min: 0,
     max: 0,
     value: 0,
     options: []
   };
   sliderTimelines: Slider = {
     marks: {},
+    min: 0,
     max: 0,
-    value: 0,
-    options: []
+    value: 0
   };
   sliderStrength: Slider = {
-    marks: {},
-    max: 0,
-    value: 0,
-    options: []
+    marks: (() => {
+      const tmp = {};
+      for (let index = 0; index < 11; index++) {
+        const i = (0.1 * index).toFixed(1);
+        if (index === 0 || index === 10) {
+          tmp[i] = {
+            style: {
+              marginLeft: index === 0 ? '-4%' : '-5%'
+            },
+            label: parseInt(i, 10)
+          };
+        } else {
+          tmp[i] = '';
+        }
+      }
+      return tmp;
+    })(),
+    min: 0,
+    max: 1,
+    value: 0.2
   };
 
   constructor(
@@ -454,10 +472,6 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  log(value: object[]): void {
-    console.log(value);
-  }
-
   /**
    * 人脉
    *
@@ -481,6 +495,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.common.coreMainComponent.getCheckedContacts(data);
   }
 
+  /**
+   * 滑动值
+   *
+   * @param {('chains' | 'timelines' | 'strength')} tag
+   * @param {*} value
+   * @memberof SearchBarComponent
+   */
   UI_outCrtMark(tag: 'chains' | 'timelines' | 'strength', value) {
     console.log(tag, value);
     if (tag === 'chains') {
@@ -490,7 +511,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
         hidden: options.slice(value)
       };
       this.common.coreMainComponent.getCheckedNodes(data);
+    } else if (tag === 'timelines') {
+      this.searchParams.timeLineStart = this.sliderTimelines.min;
+      this.searchParams.timeLineEnd = value;
+    } else {
+      // this.
     }
+    console.log(this.searchParams);
   }
 
   /**
@@ -502,7 +529,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @returns {SliderMarks}
    * @memberof SearchBarComponent
    */
-  private _creatSliderMarks(maxNumber: number, sections: number = 3): SliderMarks {
+  private _creatChainsSliderMarks(maxNumber: number, sections: number = 3): SliderMarks {
     const unit = parseInt((maxNumber / sections).toString(), 10);
     const tmp = {};
     for (let index = 0; index < sections; index++) {
@@ -510,6 +537,60 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     tmp[maxNumber] = maxNumber;
     return tmp;
+  }
+
+  /**
+   * 创建路径滑动
+   *
+   * @private
+   * @memberof SearchBarComponent
+   */
+  private _creatChainsSlider() {
+    this.common.coreMainComponent.checkNodesTabSubject.subscribe((nodes: CheckTab[]) => {
+      const options = nodes[0].options.filter(option => {
+        return option.canHidden;
+      });
+      const max = options.length;
+      this.sliderChains.options = options;
+      this.sliderChains.marks = this._creatChainsSliderMarks(max);
+      this.sliderChains.max = this.sliderChains.value = max;
+    });
+  }
+
+  /**
+   * 创建时间范围滑动
+   *
+   * @private
+   * @param {number} minTime
+   * @param {number} maxTime
+   * @memberof SearchBarComponent
+   */
+  private _creatTimelinesSlider(minTime: number, maxTime: number) {
+    this.sliderTimelines.min = minTime;
+    this.sliderTimelines.max = this.sliderTimelines.value = maxTime;
+    const timeLines = [];
+    const cutYears = [-1, -3, -6, -10, -15];
+    this.sliderTimelines.marks[maxTime] = {
+      style: {
+        marginLeft: '-15.5%'
+      },
+      label: maxTime.toString()
+    };
+    for (let index = 0; index < cutYears.length; index++) {
+      const cutYear = cutYears[index];
+      const crt = maxTime + cutYear;
+      if (crt > minTime) {
+        this.sliderTimelines.marks[crt] = '';
+      }
+    }
+    this.sliderTimelines.marks[minTime] = {
+      style: {
+        marginLeft: '-6.5%'
+      },
+      label: minTime.toString()
+    };
+    console.log(this.sliderTimelines.marks);
+    // 时间刻度分别为当前年份-1，当前年份-3，当前年份-6，当前年份-10，当前年份-15，剩余所有
   }
 
   /**
@@ -522,6 +603,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   private _afterAjax(res: AjaxResponse) {
     this.searchResult = res.data;
     const relations = res.data.relation;
+    const minTime = res.data.minTimeLine;
+    const maxTime = new Date().getFullYear();
     this.degrees = Object.keys(relations).map((contacts, idx) => {
       return {
         label: contacts + '度',
@@ -530,15 +613,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       };
     });
 
-    this.common.coreMainComponent.checkNodesTabSubject.subscribe((nodes: CheckTab[]) => {
-      const options = nodes[0].options.filter(option => {
-        return option.canHidden;
-      });
-      const max = options.length;
-      this.sliderChains.options = options;
-      this.sliderChains.marks = this._creatSliderMarks(max);
-      this.sliderChains.max = this.sliderChains.value = max;
-    });
+    this._creatChainsSlider();
+    this._creatTimelinesSlider(minTime, maxTime);
   }
 
   /**
@@ -749,6 +825,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.endOptions = [searchData.end];
       this.start = searchData.start.p_id;
       this.end = searchData.end.p_id;
+      if (this.start && this.end) {
+        this.searchMode = 'startEnd';
+      }
     }
 
     if (!environment.production) {
