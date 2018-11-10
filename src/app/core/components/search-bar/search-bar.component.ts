@@ -35,6 +35,7 @@ export enum SearchStatus {
 export interface AjaxResponse {
   code: number;
   message: string;
+  pages?: number;
   data: {
     minTimeLine: number;
     relation: Contacts;
@@ -191,7 +192,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   onePointOptions = []; // 终点下拉option数据
 
   searchParams: SearchRelationRequestParams = {
-    source: ''
+    source: '',
+    page: 0,
+    timeLineEnd: 0,
+    timeLineStart: 0
   };
 
   searchResult;
@@ -547,13 +551,15 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private _creatChainsSlider() {
     this.common.coreMainComponent.checkNodesTabSubject.subscribe((nodes: CheckTab[]) => {
-      const options = nodes[0].options.filter(option => {
-        return option.canHidden;
-      });
-      const max = options.length;
-      this.sliderChains.options = options;
-      this.sliderChains.marks = this._creatChainsSliderMarks(max);
-      this.sliderChains.max = this.sliderChains.value = max;
+      if (nodes.length) {
+        const options = nodes[0].options.filter(option => {
+          return option.canHidden;
+        });
+        const max = options.length;
+        this.sliderChains.options = options;
+        this.sliderChains.marks = this._creatChainsSliderMarks(max);
+        this.sliderChains.max = this.sliderChains.value = max;
+      }
     });
   }
 
@@ -594,6 +600,23 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
+   * 创建人脉复选框数据
+   *
+   * @private
+   * @param {*} relations
+   * @memberof SearchBarComponent
+   */
+  private _creatDegreesCheckbox(relations) {
+    this.degrees = Object.keys(relations).map((contacts, idx) => {
+      return {
+        label: contacts + '度',
+        checked: idx === 0 ? true : false,
+        value: contacts
+      };
+    });
+  }
+
+  /**
    * 请求之后
    *
    * @private
@@ -602,17 +625,12 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private _afterAjax(res: AjaxResponse) {
     this.searchResult = res.data;
+
     const relations = res.data.relation;
     const minTime = res.data.minTimeLine;
     const maxTime = new Date().getFullYear();
-    this.degrees = Object.keys(relations).map((contacts, idx) => {
-      return {
-        label: contacts + '度',
-        checked: idx === 0 ? true : false,
-        value: contacts
-      };
-    });
 
+    this._creatDegreesCheckbox(relations);
     this._creatChainsSlider();
     this._creatTimelinesSlider(minTime, maxTime);
   }
@@ -818,17 +836,21 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof SearchBarComponent
    */
   search(searchData?: SuccessSearchRecord) {
+    this.searchParams.page = this.common.coreMainComponent.crtPageIndex - 1;
+
     if (searchData) {
       // 避免将外部变量的索引传入；导致内部记录，跟随起点或重点的选中使记录同步变化的问题
       this.records.startAndEnd = JSON.parse(JSON.stringify(searchData));
       this.startOptions = [searchData.start];
       this.endOptions = [searchData.end];
-      this.start = searchData.start.p_id;
-      this.end = searchData.end.p_id;
+      this.start = this.searchParams.source = searchData.start.p_id;
+      this.end = this.searchParams.target = searchData.end.p_id;
       if (this.start && this.end) {
         this.searchMode = 'startEnd';
       }
     }
+
+    console.log(this.searchParams);
 
     if (!environment.production) {
       this.records.startAndEnd.start.p_id = this.start = 'person428ca08fc6bbdf6831016685aaaf2ee4';

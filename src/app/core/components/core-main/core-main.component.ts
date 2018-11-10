@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, ViewChild, Renderer2, NgZone } fr
 import { chartOption, chartColorConfig, caseColorConfig } from '../../config';
 import { CommonService, ObjTypeLinksData, NodeCate } from '../../services/common/common.service';
 import { Contacts, SearchStatus, SearchBarComponent, AjaxResponse, Line } from '../search-bar/search-bar.component';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzPaginationComponent } from 'ng-zorro-antd';
 import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 import { ChartComponent } from '../../../share/components/chart/chart.component';
 import { ChartNode, ChartLink, ChartEventCbParams } from '../../../share/components/chart/chart.service';
@@ -42,13 +42,15 @@ export class CoreMainComponent implements OnInit {
   private _ajaxData: Contacts;
   private _chartFullStatus = false;
 
-
   /**
    * 供订阅
    *
    * @memberof CoreMainComponent
    */
   checkNodesTabSubject = new Subject<CheckTab[]>();
+
+  totalPages = 5;
+  crtPageIndex = 1;
 
   nodeDataHasSourcesAndTargets: ObjTypeLinksData;
 
@@ -136,6 +138,16 @@ export class CoreMainComponent implements OnInit {
   ngOnInit() {}
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * 页码变化
+   *
+   * @param {*} pageIndex
+   * @memberof CoreMainComponent
+   */
+  UI_pageIndexChange(pageIndex) {
+    this.crtPageIndex = pageIndex;
+  }
 
   /**
    * 为可隐藏的点加标记并返回对象类links
@@ -327,8 +339,10 @@ export class CoreMainComponent implements OnInit {
    * @memberof CoreMainComponent
    */
   getRealtions(res: AjaxResponse) {
-    // console.log(res);
+    console.log(res);
     this.initCore = false;
+
+    this.totalPages = res.pages;
     if (!res.code && res.data && Object.keys(res.data).length) {
       this._ajaxData = res.data.relation;
       this.checkcontactsTab = this._creatContactsCheckTab(this._ajaxData);

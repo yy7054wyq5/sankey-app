@@ -21,7 +21,8 @@
       <app-chart #chart *ngIf="option" [eoption]="option" [eheight]="chartHeight" [efullParentClassName]="'core-main'"
                  (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)" (efullStatus)="chartIsFull($event)"
                  (isView)="changeClickView($event)">
-        <nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple></nz-pagination>
+        <!-- 翻页 -->
+        <nz-pagination  (nzPageIndexChange)="UI_pageIndexChange($event)" [nzPageIndex]="1" [nzPageSize]="1" [nzTotal]="totalPages" nzSimple></nz-pagination>
         <!-- 选择人脉 -->
         <app-check-node *ngIf="showCheckComponent" [tabs]="checkcontactsTab" [positionType]="checkUIPosition[checkUIMode].contactsCheckUI.positionType"
                         placeholder="显示/隐藏关系" [top]="checkUIPosition[checkUIMode].contactsCheckUI.top" [right]="checkUIPosition[checkUIMode].contactsCheckUI.right"
