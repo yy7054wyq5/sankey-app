@@ -819,7 +819,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   private _isSuccessBack(res: AjaxResponse): boolean {
     if (!res.code) {
       if (res.data) {
-        if (Object.keys(res.data).length) {
+        if (Object.keys(res.data.relation).length) {
           return true;
         }
         return false;

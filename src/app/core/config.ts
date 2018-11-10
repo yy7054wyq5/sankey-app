@@ -64,18 +64,29 @@ const chartOption = {
   tooltip: {
     show: true,
     formatter: param => {
+      // console.log(param);
       const data = param.data;
-      if (data.hasOwnProperty('date') && data.hasOwnProperty('name')) {
-        return `${data.name}`;
+
+      if (param.dataType === 'edge' && data.cases.length) {
+        return data.cases.join('<br>');
+      } else {
+        if (data.hasOwnProperty('date') && data.hasOwnProperty('name')) {
+          return `${data.name}`;
+        }
       }
-    }
+
+    },
+    position: (point, params, dom, rect, size) => {
+      // 固定在顶部
+      return [point[0], 0];
+  }
   },
   series: [
     {
       label: {
-        position : 'insideLeft',
+        position : 'inside',
         color: '#fff',
-        fontSize: 16
+        fontSize: 16,
       },
       nodeWidth: 90,
       type: 'sankey',

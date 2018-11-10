@@ -9,7 +9,6 @@ import {
   ViewEncapsulation,
   OnDestroy,
   OnChanges,
-  SimpleChanges,
   Output,
   EventEmitter,
   SimpleChange
@@ -70,7 +69,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   bindedEvent: boolean; // 是否已绑定事件
   unlistenDomParentResize: any; // 监听窗口大小变化事件
   clickedNode: ChartEventCbParams;
-  thisPageButton: boolean = false;
+  thisPageButton = false;
 
   get chartActived() {
     // 图表是否激活

@@ -393,17 +393,12 @@ export class CoreMainComponent implements OnInit {
       this.checkcontactsTab = this._creatContactsCheckTab(this._ajaxData);
       // 默认显示已有的第一度人脉
       const linksforDis = this._common.filterLinks(this._common.outCrtContactLinks(this._ajaxData)); // 去重的links
-
       const crtAllNodes = this._common.outCrtContactNodes(this._ajaxData); // 未去重的所有的nodes
-
       const nodesForDis = this._common.filterNodes(crtAllNodes); // 去重的nodes
-
       const nodesHasLine = this._common.filterNodesHasConAndLine(crtAllNodes); // 去重nodes后不删除其中的contact和line
-
       // this._creatNodesCheckTab(crtAllNodes, linksforDis);
       // console.log(nodesHasLine,linksforDis);
       this._creatNodesCheckTab(nodesHasLine, linksforDis); // nodes去重但不删除contact和line,  传入
-
       // 改变去重后的links数组，将case提取出来，并加上source和target    改变去重的nodes,将case的id加上
       // const hasCaseObj = this._caseArrGetConcat(nodesForDis,linksforDis);
       // console.log(hasCaseObj);
@@ -435,6 +430,19 @@ export class CoreMainComponent implements OnInit {
       this.chartHeight = lines * 5 + 'rem';
     } else {
       this.chartHeight = null;
+    }
+
+    let findStartEndPoint = 0;
+    for (let index = 0; index < nodes.length; index++) {
+      const node = nodes[index];
+      if (node.id === this.searchBar.records.startAndEnd.start.p_id || node.id === this.searchBar.records.startAndEnd.end.p_id) {
+        findStartEndPoint += 1;
+        this._common.setNodeStyle(node, chartColorConfig.point.bg, chartColorConfig.point.bg);
+        console.log(node);
+      }
+      if (findStartEndPoint === 2) {
+        break;
+      }
     }
 
     this._setChartOption(nodes, links);
@@ -482,11 +490,12 @@ export class CoreMainComponent implements OnInit {
         } else {
           const linkEvery = item;
           const linkEveryIndx = index;
-          console.log('linkEvery.source', linkEvery.source);
+          // console.log('linkEvery.source', linkEvery.source);
           const caseSource = linkEvery.source.replace(/person/g, 'case');
           const caseTarget = linkEvery.target.replace(/person/g, 'case');
-          // console.log('linkEvery.source caseSource',linkEvery.source,caseSource);
+          // console.log('linkEvery.source caseSource', linkEvery.source, caseSource);
           item.cases.forEach((caseItem, caseIndex) => {
+            console.log(caseItem, linkEvery, linkEvery.concat);
             const caseEverySourceObj = {
               color: this.colorCase[linkEvery.concat] ? this.colorCase[linkEvery.concat] : '#ffffff',
               emphasis: {
@@ -668,7 +677,7 @@ export class CoreMainComponent implements OnInit {
     if (node.dataType === 'node' && node.data.id.indexOf('person') === 0) {
       const loadingId = this._showLoading();
       this._http
-        .get(searchPersonDetailApi, {
+        .get('https://app-relation.buyint.com/relation_api' + searchPersonDetailApi, {
           params: {
             P_id: node.data.id
           }
