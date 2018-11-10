@@ -483,7 +483,6 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof SearchBarComponent
    */
   UI_outCheckedDegrees(_d: CheckGroupItem[]) {
-    console.log(_d);
     const data = {
       out: [],
       hidden: []

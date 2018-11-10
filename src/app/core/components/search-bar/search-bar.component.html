@@ -113,7 +113,7 @@
 
   <ng-container *ngIf="degrees">
   <!-- <ng-container> -->
-    <app-collapse class="collapse" colIcon="anticon-question-circle-o" colTitle="Filters" [colIsCollapse]="false">
+    <app-collapse class="collapse" colIcon="icon-filter" colTitle="Filters" [colIsCollapse]="false">
       <div class="filter">
         <h5>Degree level</h5>
         <nz-checkbox-group name="degree" [(ngModel)]="degrees" (ngModelChange)="UI_outCheckedDegrees($event)"></nz-checkbox-group>
@@ -128,7 +128,7 @@
   </ng-container>
 
   <ng-container *ngIf="records.data">
-    <app-collapse class="collapse" colIcon="anticon-question-circle-o" colTitle="History" [colIsCollapse]="false">
+    <app-collapse class="collapse" colIcon="icon-history" colTitle="History" [colIsCollapse]="false">
       <ul class="histores ">
         <li *ngFor="let history of records.data" (click)="search(history)">
           {{ history.start['company'] }}/{{ history.start['name'] }}->{{ history.end['company'] }}/{{ history.end['name'] }}

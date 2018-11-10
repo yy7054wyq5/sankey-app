@@ -23,6 +23,8 @@ enum FullStatus {
   no = 'no'
 }
 
+const ChartStandardSize = 5;
+
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
@@ -75,6 +77,9 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   clickedNode: ChartEventCbParams;
   thisPageButton = false;
 
+  preChartSize = ChartStandardSize;
+  chartSize = ChartStandardSize;
+
   get chartActived() {
     // 图表是否激活
     return this.chartInstance ? true : false;
@@ -88,7 +93,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         if (!this.chartInstance) {
           this._initChart();
         } else {
-          this.chartInstance.setOption(this.eoption);
+          this._setOption();
         }
       }
 
@@ -141,6 +146,28 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
   /////////////////////////////////////////////////
 
+  private _setOption() {
+    this.chartSize = ChartStandardSize;
+    this.preChartSize = ChartStandardSize;
+    this.chartInstance.setOption({ ...this.eoption, width: 'auto', height: 'auto' });
+  }
+
+  slider(value) {
+    const standard = this.preChartSize;
+    const chartHeight = this.chartInstance.getHeight();
+    const chartWidth = this.chartInstance.getWidth();
+    // console.log(chartHeight, chartWidth);
+
+    this._zone.runOutsideAngular(() => {
+      this.chartInstance.setOption({
+        width: (chartWidth / standard) * value,
+        height: (chartHeight / standard) * value
+      });
+    });
+
+    this.preChartSize = value;
+  }
+
   /**
    * 设置样式
    *
@@ -168,6 +195,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   public toFull(tag: string) {
     this.fullStatus = FullStatus[tag];
     this.mustResize();
+    this.efullStatus.emit(tag === FullStatus.yes ? true : false);
     // this._resizeChart();
   }
 
@@ -199,7 +227,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         width: wraper.clientWidth,
         height: wraper.clientHeight
       });
-      this.efullStatus.emit(true);
+      // this.efullStatus.emit(true);
     } else {
       this._setStyle(this.chartContainer, {
         position: 'relative',
@@ -210,7 +238,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       });
       // var pointInfo = document.getElementsByClassName('point-info');
       // pointInfo
-      this.efullStatus.emit(false);
+      // this.efullStatus.emit(false);
     }
   }
 
@@ -257,7 +285,8 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     const _chartDom = this._setChartWH(this.chartDom, this.ewidth, this.eheight);
     this._zone.runOutsideAngular(() => {
       this.chartInstance = echarts.init(_chartDom, 'sn');
-      this.chartInstance.setOption(this.eoption);
+      // this.chartInstance.setOption(this.eoption);
+      this._setOption();
     });
     if (!this.bindedEvent) {
       this._bindEvent();
@@ -293,7 +322,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @memberof ChartComponent
    */
   private _showNodeInfo(params: ChartEventCbParams): void {
-    if (params.dataType == 'node') {
+    if (params.dataType === 'node') {
       const names = this.handleDataName(params.data.name);
       this._zone.run(() => {
         this.UI_nodeDetail = {
@@ -305,7 +334,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
           showType: 'node'
         };
       });
-    } else if (params.dataType == 'edge') {
+    } else if (params.dataType === 'edge') {
       // 边的显示
       const edgeName = params.data && params.data.relation ? params.data.relation : '';
       this._zone.run(() => {

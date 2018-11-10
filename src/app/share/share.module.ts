@@ -8,9 +8,10 @@ import { RouterModule } from '@angular/router';
 import { ChartComponent } from './components/chart/chart.component';
 import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
 import { CollapseComponent } from './components/collapse/collapse.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [RouterModule, CommonModule, HttpClientModule, NgZorroAntdModule],
+  imports: [RouterModule, CommonModule, HttpClientModule, NgZorroAntdModule, FormsModule],
   declarations: [LayoutComponent, ErrorComponent, ChartComponent, SafeHtmlPipe, CollapseComponent],
   providers: [SafeHtmlPipe],
   exports: [ChartComponent, SafeHtmlPipe, CollapseComponent]

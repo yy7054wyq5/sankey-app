@@ -54,7 +54,7 @@ export class CoreMainComponent implements OnInit {
 
   nodeDataHasSourcesAndTargets: ObjTypeLinksData;
 
-  siderIsFold = true; // 侧栏打开
+  hideSearchBar = false; // 侧栏打开
 
   showChartFilterNodes = [];
   showChartFilterLinks = [];
@@ -191,7 +191,7 @@ export class CoreMainComponent implements OnInit {
    * @memberof CoreMainComponent
    */
   getCheckedContacts(data: { out: number[]; hidden: number[] }) {
-    console.log(data);
+    // console.log(data);
     let links = [];
     let nodes = [];
     let lines = 0;
@@ -432,6 +432,7 @@ export class CoreMainComponent implements OnInit {
       this.chartHeight = null;
     }
 
+    // 起点终点加颜色
     let findStartEndPoint = 0;
     for (let index = 0; index < nodes.length; index++) {
       const node = nodes[index];
@@ -600,8 +601,7 @@ export class CoreMainComponent implements OnInit {
   chartIsFull(isFull: boolean) {
     this.chartFullStatus = isFull;
     this.checkUIMode = isFull ? checkUIMode.fullscreen : checkUIMode.normal;
-    this.siderIsFold = false;
-    // this.siderIsFold = !isFull;
+    this.hideSearchBar = isFull;
   }
 
   /**

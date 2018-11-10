@@ -20,13 +20,7 @@ const chartColorConfig = {
   line: '#ececec'
 };
 
-const nodesAndLinksInOneLineColor = [
-  '#0099C6',
-  '#DC3912',
-  '#FF9900',
-  '#109618',
-  '#990099',
-];
+const nodesAndLinksInOneLineColor = ['#0099C6', '#DC3912', '#FF9900', '#109618', '#990099'];
 
 const caseColorConfig = {
   '2': '#483d8b',
@@ -74,19 +68,22 @@ const chartOption = {
           return `${data.name}`;
         }
       }
-
     },
-    position: (point, params, dom, rect, size) => {
-      // 固定在顶部
-      return [point[0], 0];
-  }
+    position: function(point, params, dom, rect, size) {
+      // point: 鼠标位置，如 [20, 40]。
+      // params: 同 formatter 的参数相同。
+      // dom: tooltip 的 dom 对象。
+      // rect: 只有鼠标在图形上时有效，是一个用x, y, width, height四个属性表达的图形包围盒。
+      // size: 包括 dom 的尺寸和 echarts 容器的当前尺寸，例如：{contentSize: [width, height], viewSize: [width, height]} 
+      return [point[0], point[1]];
+    }
   },
   series: [
     {
       label: {
-        position : 'inside',
+        position: 'inside',
         color: '#fff',
-        fontSize: 16,
+        fontSize: 16
       },
       nodeWidth: 90,
       type: 'sankey',
