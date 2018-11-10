@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, Renderer2, NgZone } from '@angular/core';
-import { chartOption, chartColorConfig, caseColorConfig } from '../../config';
+import { chartOption, chartColorConfig, caseColorConfig, nodesAndLinksInOneLineColor } from '../../config';
 import { CommonService, ObjTypeLinksData, NodeCate } from '../../services/common/common.service';
 import { Contacts, SearchStatus, SearchBarComponent, AjaxResponse, Line } from '../search-bar/search-bar.component';
 import { NzMessageService, NzPaginationComponent } from 'ng-zorro-antd';
@@ -345,6 +345,51 @@ export class CoreMainComponent implements OnInit {
     this.totalPages = res.pages;
     if (!res.code && res.data && Object.keys(res.data).length) {
       this._ajaxData = res.data.relation;
+
+      const colors = nodesAndLinksInOneLineColor;
+
+      for (const contact in this._ajaxData) {
+        if (this._ajaxData.hasOwnProperty(contact)) {
+          const crtContact = this._ajaxData[contact];
+          for (let index = 0; index < crtContact.length; index++) {
+            const line = crtContact[index];
+
+            line.nodes.forEach(node => {
+              if (index / colors.length < 1) {
+                this._common.setNodeStyle(node, colors[index], colors[index]);
+              } else {
+                const _ = (index / colors.length).toString();
+                if (_.indexOf('.') > -1) {
+                  const idx = parseFloat(`0.${_.split('.')[1]}`) * colors.length;
+                  this._common.setNodeStyle(node, colors[idx], colors[idx]);
+                } else {
+                  this._common.setNodeStyle(node, colors[0], colors[0]);
+                }
+              }
+            });
+
+            line.links.forEach(_link => {
+              if (index / colors.length < 1) {
+                this._common.setLinkStyle(_link, colors[index], colors[index]);
+              } else {
+                const _ = (index / colors.length).toString();
+                if (_.indexOf('.') > -1) {
+                  const idx = parseFloat(`0.${_.split('.')[1]}`) * colors.length;
+                  this._common.setLinkStyle(_link, colors[idx], colors[idx]);
+                } else {
+                  this._common.setLinkStyle(_link, colors[0], colors[0]);
+                }
+              }
+            });
+          }
+        }
+      }
+
+      console.log(this._ajaxData);
+
+      // this._common.setNodeStyle();
+      // this._common.setLinkStyle()
+
       this.checkcontactsTab = this._creatContactsCheckTab(this._ajaxData);
       // 默认显示已有的第一度人脉
       const linksforDis = this._common.filterLinks(this._common.outCrtContactLinks(this._ajaxData)); // 去重的links
@@ -391,12 +436,16 @@ export class CoreMainComponent implements OnInit {
     } else {
       this.chartHeight = null;
     }
+
+    this._setChartOption(nodes, links);
+    this._msg.remove(this.loadingId);
+
     // 设置节点和线的样式
-    this._common.setNodesAndLinksStyle(this.searchBar, nodes, links).subscribe(data => {
-      // 生成图表
-      this._setChartOption(data.nodes, data.links);
-      this._msg.remove(this.loadingId);
-    });
+    // this._common.setNodesAndLinksStyle(this.searchBar, nodes, links).subscribe(data => {
+    //   // 生成图表
+    //   this._setChartOption(data.nodes, data.links);
+    //   this._msg.remove(this.loadingId);
+    // });
   }
 
   private changeClickView(isview: boolean) {

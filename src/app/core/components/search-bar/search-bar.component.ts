@@ -852,7 +852,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     console.log(this.searchParams);
 
-    if (!environment.production) {
+    if (!environment.production && !environment.apiHost) {
       this.records.startAndEnd.start.p_id = this.start = 'person428ca08fc6bbdf6831016685aaaf2ee4';
       this.records.startAndEnd.end.p_id = this.end = 'personc36e100160ac09a2642cee7081d07f74';
       searchRelationApi = '/assets/mock/relation-latest.json';
@@ -883,11 +883,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.searchParams.target = this.end;
 
     this._http
-      .post<HttpResponse<AjaxResponse>>(searchRelationApi, {
+      .post<AjaxResponse>(searchRelationApi, this.searchParams, {
         withCredentials: true,
         observe: 'response',
         responseType: 'json',
-        params: this.searchParams
       })
       .subscribe(
         (res: HttpResponse<AjaxResponse>) => {

@@ -20,6 +20,14 @@ const chartColorConfig = {
   line: '#ececec'
 };
 
+const nodesAndLinksInOneLineColor = [
+  '#0099C6',
+  '#DC3912',
+  '#FF9900',
+  '#109618',
+  '#990099',
+];
+
 const caseColorConfig = {
   '2': '#483d8b',
   '3': '#00bfff',
@@ -45,14 +53,12 @@ const chartOption = {
       // if (data.date) {
       //   return data.date + '\n' + name;
       // }
-      let name = '';
-      const names = params.name.split('<br>');
+      const names = params.name.split(' ');
       if (names.length > 1) {
-        name = names[0] + '\n' + cutWord(names[1]);
+        return cutWord(names[1]);
       } else {
-        name = cutWord(params.name);
+        return cutWord(params.name);
       }
-      return name;
     }
   },
   tooltip: {
@@ -66,6 +72,12 @@ const chartOption = {
   },
   series: [
     {
+      label: {
+        position : 'insideLeft',
+        color: '#fff',
+        fontSize: 16
+      },
+      nodeWidth: 90,
       type: 'sankey',
       layout: 'none',
       data: [],
@@ -88,4 +100,4 @@ const chartOption = {
   ]
 };
 
-export { chartOption, chartColorConfig, caseColorConfig };
+export { chartOption, chartColorConfig, caseColorConfig, nodesAndLinksInOneLineColor };
