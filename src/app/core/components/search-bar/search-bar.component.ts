@@ -100,6 +100,7 @@ interface SearchRelationRequestParams {
   timeLineStart?: number; // 时间线开始时间 例如2008
   weightEnd?: number; // 权重 0-1之间的值
   weightStart?: number; // 权重 0-1之间的值
+  weight?: number;
 }
 
 /**
@@ -121,7 +122,7 @@ interface Slider {
   marks?: SliderMarks;
   min: number;
   max: number;
-  value: number;
+  value: number | [number, number];
   options?: CheckOption[];
 }
 
@@ -195,7 +196,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     source: '',
     page: 0,
     timeLineEnd: 2018,
-    timeLineStart: 2008
+    timeLineStart: 2008,
+    weightStart: 0,
+    weightEnd: 1
   };
 
   searchResult;
@@ -291,7 +294,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     })(),
     min: 0,
     max: 1,
-    value: 0.2
+    value: [0, 1]
   };
 
   constructor(
@@ -518,7 +521,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.searchParams.timeLineStart = this.sliderTimelines.min;
       this.searchParams.timeLineEnd = value;
     } else {
-      // this.
+      console.log(value);
+      this.searchParams.weightStart = value[0];
+      this.searchParams.weightEnd = value[1];
     }
     console.log(this.searchParams);
   }

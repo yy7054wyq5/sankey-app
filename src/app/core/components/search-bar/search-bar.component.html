@@ -122,7 +122,7 @@
         <h5>Timeline</h5>
         <nz-slider [nzStep]="null" name="timeline" (ngModelChange)="UI_outCrtMark('timelines', $event)" [(ngModel)]="sliderTimelines.value"  [nzMarks]="sliderTimelines.marks" [nzDefaultValue]="sliderTimelines.max"  [nzMax]="sliderTimelines.max" [nzMin]="sliderTimelines.min"></nz-slider>
         <h5>Strength</h5>
-        <nz-slider [nzStep]="null" name="strength" (ngModelChange)="UI_outCrtMark('strength', $event)" [nzMarks]="sliderStrength.marks" [nzDefaultValue]="0.2" [(ngModel)]="sliderStrength.value" [nzMax]="sliderStrength.max" [nzMin]="sliderStrength.min"></nz-slider>
+        <nz-slider [nzStep]="null" [nzRange]="true" name="strength" (ngModelChange)="UI_outCrtMark('strength', $event)" [nzMarks]="sliderStrength.marks" [(ngModel)]="sliderStrength.value" [nzMax]="sliderStrength.max" [nzMin]="sliderStrength.min"></nz-slider>
       </div>
     </app-collapse>
   </ng-container>
