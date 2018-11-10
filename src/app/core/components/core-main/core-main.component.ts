@@ -6,7 +6,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 import { ChartComponent } from '../../../share/components/chart/chart.component';
 import { ChartNode, ChartLink, ChartEventCbParams } from '../../../share/components/chart/chart.service';
-import { Observable, of } from '../../../../../node_modules/rxjs';
+import { Observable, of, Subject } from '../../../../../node_modules/rxjs';
 import { mergeMap } from '../../../../../node_modules/rxjs/operators';
 import { CheckTab } from '../check-node/check-node.component';
 
@@ -27,8 +27,7 @@ enum checkUIMode {
   selector: 'app-core-main',
   templateUrl: './core-main.component.html',
   styleUrls: ['./core-main.component.less'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [CommonService]
+  encapsulation: ViewEncapsulation.None
 })
 export class CoreMainComponent implements OnInit {
   loadingId: any;
@@ -42,6 +41,14 @@ export class CoreMainComponent implements OnInit {
   chartHeight = null;
   private _ajaxData: Contacts;
   private _chartFullStatus = false;
+
+
+  /**
+   * 供订阅
+   *
+   * @memberof CoreMainComponent
+   */
+  checkNodesTabSubject = new Subject<CheckTab[]>();
 
   nodeDataHasSourcesAndTargets: ObjTypeLinksData;
 
@@ -122,7 +129,9 @@ export class CoreMainComponent implements OnInit {
     private _http: HttpClient,
     private _render: Renderer2,
     private _zone: NgZone
-  ) {}
+  ) {
+    this._common.coreMainComponent = this;
+  }
 
   ngOnInit() {}
 
@@ -307,6 +316,8 @@ export class CoreMainComponent implements OnInit {
     } else {
       this.checknodesTab = [];
     }
+
+    this.checkNodesTabSubject.next(this.checknodesTab);
   }
 
   /**

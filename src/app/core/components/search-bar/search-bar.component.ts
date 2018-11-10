@@ -12,12 +12,13 @@ import {
 } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { CommonService } from '../../services/common/common.service';
-import { Observable, fromEvent, of } from 'rxjs';
+import { Observable, fromEvent, of, Subscription } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { StorageService } from '../../../share/services/storage/storage.service';
 import { ChartLink, ChartNode } from '../../../share/components/chart/chart.service';
 import { environment } from '../../../../environments/environment';
 import { DecryptData } from 'buyint-company-library/dist/index';
+import { CheckTab, CheckOption } from '../check-node/check-node.component';
 
 /**
  * 搜索的状态
@@ -109,6 +110,19 @@ interface SliderMarks {
   [key: number]: string | { style: object; label: string };
 }
 
+interface CheckGroupItem {
+  label: string;
+  value: number | string;
+  checked: boolean;
+}
+
+interface Slider {
+  marks: SliderMarks;
+  max: number;
+  value: number;
+  options: CheckOption[];
+}
+
 /**
  * 搜索记录集合以供侧栏显示，侧栏内历史记录的清空和点击历史项都是调用本组件的内部方法来实现的
  *
@@ -179,6 +193,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     source: ''
   };
 
+  searchResult;
+
+  private _checkNodesTabSub: Subscription;
+
   /**
    * 外部以模板变量的方式获取内部变量
    *
@@ -233,27 +251,25 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    *
    * @memberof SearchBarComponent
    */
-  degrees;
-  // get degrees() {
-  //   return [
-  //     { label: 'Apple', value: 'Apple', checked: true },
-  //     { label: 'Pear', value: 'Pear' },
-  //     { label: 'Orange', value: 'Orange' }
-  //   ];
-  // }
+  degrees: CheckGroupItem[];
 
-  searchResult;
-
-  /**
-   * 滑动条集合
-   *
-   * @type {{ [key: string]: SliderMarks }}
-   * @memberof SearchBarComponent
-   */
-  filterSliders: { [key: string]: SliderMarks } = {
-    chains: {},
-    timelines: {},
-    strength: {}
+  sliderChains: Slider = {
+    marks: {},
+    max: 0,
+    value: 0,
+    options: []
+  };
+  sliderTimelines: Slider = {
+    marks: {},
+    max: 0,
+    value: 0,
+    options: []
+  };
+  sliderStrength: Slider = {
+    marks: {},
+    max: 0,
+    value: 0,
+    options: []
   };
 
   constructor(
@@ -433,12 +449,96 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.clearRecords();
+    this._checkNodesTabSub.unsubscribe();
   }
 
   ////////////////////////////////////////////////////////////////////////////////
 
   log(value: object[]): void {
     console.log(value);
+  }
+
+  /**
+   * 人脉
+   *
+   * @param {CheckGroupItem[]} _d
+   * @memberof SearchBarComponent
+   */
+  UI_outCheckedDegrees(_d: CheckGroupItem[]) {
+    console.log(_d);
+    const data = {
+      out: [],
+      hidden: []
+    };
+    for (let index = 0; index < _d.length; index++) {
+      const item = _d[index];
+      if (item.checked) {
+        data.out.push(parseInt(item.value.toString(), 10));
+      } else {
+        data.hidden.push(parseInt(item.value.toString(), 10));
+      }
+    }
+    this.common.coreMainComponent.getCheckedContacts(data);
+  }
+
+  UI_outCrtMark(tag: 'chains' | 'timelines' | 'strength', value) {
+    console.log(tag, value);
+    if (tag === 'chains') {
+      const options = this.sliderChains.options;
+      const data = {
+        out: options.slice(0, value),
+        hidden: options.slice(value)
+      };
+      this.common.coreMainComponent.getCheckedNodes(data);
+    }
+  }
+
+  /**
+   * 创建滑动节点
+   *
+   * @private
+   * @param {number} maxNumber
+   * @param {number} [sections=3]
+   * @returns {SliderMarks}
+   * @memberof SearchBarComponent
+   */
+  private _creatSliderMarks(maxNumber: number, sections: number = 3): SliderMarks {
+    const unit = parseInt((maxNumber / sections).toString(), 10);
+    const tmp = {};
+    for (let index = 0; index < sections; index++) {
+      tmp[index * unit] = index * unit;
+    }
+    tmp[maxNumber] = maxNumber;
+    return tmp;
+  }
+
+  /**
+   * 请求之后
+   *
+   * @private
+   * @param {AjaxResponse} res
+   * @memberof SearchBarComponent
+   */
+  private _afterAjax(res: AjaxResponse) {
+    this.searchResult = res.data;
+    const relations = res.data.relation;
+    this.degrees = Object.keys(relations).map((contacts, idx) => {
+      return {
+        label: contacts + '度',
+        checked: idx === 0 ? true : false,
+        value: contacts
+      };
+    });
+
+    this.common.coreMainComponent.checkNodesTabSubject.subscribe((nodes: CheckTab[]) => {
+      const options = nodes[0].options.filter(option => {
+        return option.canHidden;
+      });
+      const max = options.length;
+      this.sliderChains.options = options;
+      this.sliderChains.marks = this._creatSliderMarks(max);
+      this.sliderChains.max = this.sliderChains.value = max;
+    });
   }
 
   /**
@@ -656,8 +756,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.records.startAndEnd.end.p_id = this.end = 'personc36e100160ac09a2642cee7081d07f74';
       searchRelationApi = '/assets/mock/relation-latest.json';
       this._http.get<AjaxResponse>(searchRelationApi).subscribe(res => {
+        this._afterAjax(res);
+
         this.outSearchResult.emit(res);
-        this.searchResult = res;
         this._updateRecords().subscribe(data => {
           this.outSearchSuccessRecords.emit(data);
         });
@@ -719,6 +820,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
             //     }
             //   }
             // }
+
+            this._afterAjax(res.body);
 
             this.outSearchResult.emit(res.body);
             this._updateRecords().subscribe(_data => {

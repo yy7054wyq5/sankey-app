@@ -5,6 +5,7 @@ import { SearchBarComponent, Contacts, Line } from '../../components/search-bar/
 import { chartColorConfig } from '../../config';
 import { CheckOption } from '../../components/check-node/check-node.component';
 import { objToArr } from '../../../share/utils';
+import { CoreMainComponent } from '../../components/core-main/core-main.component';
 
 /**
  * 为隐藏点准备的数据结构，由buildLinksToObjByNodeId函数生成
@@ -33,6 +34,9 @@ export enum NodeCate {
 
 @Injectable()
 export class CommonService {
+
+  coreMainComponent: CoreMainComponent;
+
   constructor() {
     console.log('CommonService constructor');
   }

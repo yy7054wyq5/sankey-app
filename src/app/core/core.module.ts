@@ -7,11 +7,12 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { FormsModule } from '@angular/forms';
 import { SiderComponent } from './components/sider/sider.component';
 import { CheckNodeComponent } from './components/check-node/check-node.component';
+import { CommonService } from './services/common/common.service';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ShareModule, NgZorroAntdModule],
   exports: [CoreMainComponent],
   declarations: [CoreMainComponent, SearchBarComponent, SiderComponent, CheckNodeComponent],
-  providers: []
+  providers: [CommonService]
 })
 export class CoreModule {}

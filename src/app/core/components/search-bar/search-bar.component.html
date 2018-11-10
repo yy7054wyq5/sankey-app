@@ -111,18 +111,18 @@
   <!-- 匹配 -->
   <button class="match-btn" nz-button [nzType]="'primary'" type="submit">智配关系</button>
 
-  <ng-container *ngIf="searchResult">
+  <ng-container *ngIf="degrees">
   <!-- <ng-container> -->
     <app-collapse class="collapse" colIcon="anticon-question-circle-o" colTitle="Filters" [colIsCollapse]="false">
       <div class="filter">
         <h5>Degree level</h5>
-        <nz-checkbox-group name="degree" [(ngModel)]="degrees"></nz-checkbox-group>
+        <nz-checkbox-group name="degree" [(ngModel)]="degrees" (ngModelChange)="UI_outCheckedDegrees($event)"></nz-checkbox-group>
         <h5>Number of chains</h5>
-        <nz-slider nzDots  [nzMarks]="filterSliders.chains" [nzDefaultValue]="0"  [nzMax]="30"></nz-slider>
+        <nz-slider [nzStep]="null" [nzIncluded]="false" name="chains" (ngModelChange)="UI_outCrtMark('chains', $event)" [(ngModel)]="sliderChains.value"  [nzMarks]="sliderChains.marks" [nzMax]="sliderChains.max"></nz-slider>
         <h5>Timeline</h5>
-        <nz-slider nzDots  [nzMarks]="filterSliders.timelines" [nzDefaultValue]="0"  [nzMax]="10"></nz-slider>
+        <nz-slider [nzStep]="null" [nzIncluded]="false" name="timeline" (ngModelChange)="UI_outCrtMark('timeline', $event)" [(ngModel)]="sliderTimelines.value"  [nzMarks]="sliderTimelines.marks" [nzDefaultValue]="sliderTimelines.max"  [nzMax]="sliderTimelines.max"></nz-slider>
         <h5>Strength</h5>
-        <nz-slider nzDots  [nzMarks]="filterSliders.strength" [nzDefaultValue]="0" [nzMax]="20"></nz-slider>
+        <nz-slider nzDots (ngModelChange)="UI_outCrtMark('strength', $event)" [nzMarks]="sliderTimelines.marks" [nzDefaultValue]="0" [nzMax]="20"></nz-slider>
       </div>
     </app-collapse>
   </ng-container>

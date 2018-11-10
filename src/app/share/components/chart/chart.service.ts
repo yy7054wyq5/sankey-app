@@ -37,7 +37,7 @@ export interface ChartNode {
   value?: any;
   emphasis?: any; // 高亮样式
   itemStyle?: any; // 展示样式
-  relation?:any;
+  relation?: any;
 }
 
 export interface ChartLink {
