@@ -386,7 +386,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
       this._zone.run(() => {
         this.emouseover.emit(params);
       });
-      this._showNodeInfo(params);
+      // this._showNodeInfo(params);
     });
   }
 

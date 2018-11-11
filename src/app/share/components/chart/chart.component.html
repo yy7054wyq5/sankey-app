@@ -58,8 +58,8 @@
     <div class="hack" style="height: .606061rem"></div>
   </div>
 </div>
-<div class="chart-container" style="max-height:600px;"><div class="chart"></div></div>
-<div style="border-top:1px solid #f6f6f6">
+<div class="chart-container" style="max-height: 40rem;"><div class="chart"></div></div>
+<!-- <div style="border-top:1px solid #f6f6f6">
   <div class="point-info" [class.no-boder]="!UI_nodeDetail.show">
     <ng-container *ngIf="UI_nodeDetail.show && UI_nodeDetail.showType == 'node'">
       <h3>{{ UI_nodeDetail.date }}--{{ UI_nodeDetail.id }}</h3>
@@ -70,7 +70,7 @@
       <p style="height: 100%;">{{ UI_nodeDetail.txt }}</p>
     </ng-container>
   </div>
-</div>
+</div> -->
 
 <div class="chart-slider">
   <nz-slider [(ngModel)]="chartSize" (ngModelChange)="slider($event)" name="changeChartSize" [nzMin]="1" [nzMax]="10" nzVertical></nz-slider>
