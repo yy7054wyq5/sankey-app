@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, Sanitizer, Input } from '@angular/core';
+import { Component, OnInit, HostBinding, Sanitizer, Input, ElementRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -25,10 +25,19 @@ export class DetailPanelComponent implements OnInit {
       top: 0;
       right: ${this._show ? '0' : '-15rem'};
       width: 15rem;
+      height: ${this._e.nativeElement.parentElement.parentElement.clientHeight}px;
+      transition: all 0.3s;
     `);
   }
 
-  constructor(private _san: DomSanitizer) {}
+  constructor(private _san: DomSanitizer,
+    private _e: ElementRef) {}
 
   ngOnInit() {}
+
+  /////////////////////////////////////////////////////////////////////
+
+  handlePanel() {
+    this._show = !this._show;
+  }
 }

@@ -2,16 +2,19 @@
 
 @titleBgColor: #f2f2f2;
 @fontSize: 15px;
+@height: 1.6rem;
 .collapse {
   .title {
     background: @titleBgColor;
     display: flex;
     justify-content: space-between;
     color: #000;
-    height: 32px;
+    height: @height;
     border-radius: @borderRaduis;
     span {
       font-size: @fontSize;
+      font-weight: 900;
+      margin-left: 0.2rem;
     }
     i {
       display: block;
@@ -22,15 +25,16 @@
       font-size: @fontSize;
       &.handle {
         cursor: pointer;
-        width: 32px;
-        height: 32px;
-        line-height: 32px;
+        width: @height;
+        height: @height;
+        line-height: @height;
         text-align: center;
-        font-size: 32px;
+        font-size: @height;
       }
     }
   }
   .content {
     overflow: hidden;
+    transition: all 0.3s;
   }
 }

@@ -2,6 +2,62 @@
 
 .detail {
   width: 100%;
+  height: 100%;
   background: #fff;
   border-radius: @borderRaduis;
+  position: relative;
+  padding: 0.5rem;
+  font-size: @fontSize;
+  .icon-x {
+    position: absolute;
+    right: 0.3rem;
+    top: 0.2rem;
+    cursor: pointer;
+  }
+}
+
+.detail {
+  .header-info {
+    height: 6.4rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    background: url('/assets/images/detail-header-bg.png') center no-repeat;
+    background-size: 14.01rem 6.3rem;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    .info {
+      width: 5.050505rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1rem;
+      .img {
+        border-radius: 50%;
+        height: 2.525253rem;
+        width: 2.525253rem;
+        background: #fff;
+        i {
+          margin: 0 auto;
+          margin-top: 0.6rem;
+        }
+      }
+      span {
+        margin-top: 0.1rem;
+      }
+    }
+  }
+}
+
+.detail {
+  .detail-items {
+    li {
+      border: 1px solid #f2f2f2;
+      min-height: 1.5rem;
+      white-space: wrap;
+      margin-top: 0.2rem;
+      padding-left: 0.2rem;
+    }
+  }
 }

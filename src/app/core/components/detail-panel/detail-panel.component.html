@@ -1,3 +1,19 @@
-<div class="detail">
-  {{data | json}}
+<div class="detail" *ngIf="data">
+  <i class="sa-icon icon-x" (click)="handlePanel()"></i>
+  <!-- {{data | json}} -->
+  <section class="header-info">
+    <div class="info">
+      <div class="img">
+        <i class="sa-icon icon-person"></i>
+      </div>
+      <span>{{data[0]['中文名']}}</span>
+      <!-- <span>大几啊加大就</span> -->
+    </div>
+  </section>
+
+  <app-collapse [colTitle]="'个人经历'">
+    <ul class="detail-items">
+      <li *ngFor="let ex of data[0]['个人经历']">{{ex | json}}</li>
+    </ul>
+  </app-collapse>
 </div>
