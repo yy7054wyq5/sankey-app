@@ -57,9 +57,9 @@
           <div class="hack" style="height: .606061rem"></div>  -->
     </section>
 
-    <app-search-bar [ngStyle]="{width: hideSearchBar ? 0 : '15rem', paddingLeft: hideSearchBar ? '0' : '1rem'}" #searchBar (outSearchResult)="getRealtions($event)" (outSearchStatus)="getSearchStatus($event)"></app-search-bar>
+    <app-search-bar [ngStyle]="{width: hideSearchBar ? 0 : '16rem', paddingLeft: hideSearchBar ? '0' : '1rem'}" #searchBar (outSearchResult)="getRealtions($event)" (outSearchStatus)="getSearchStatus($event)"></app-search-bar>
 
-    <app-detail-panel class="detail-panel"></app-detail-panel>
+    <app-detail-panel class="detail-panel" [dpcData]="nodeDetailData"></app-detail-panel>
 
     <!-- sider以模板变量的方式接收app-search-bar某些变量或整个对象 -->
     <!-- <app-sider [folderStatus]="siderIsFold" [histories]="searchBar.records.data" [person]="person" [searchBar]="searchBar" (outFoldStatus)="siderFoldStatus($event)">

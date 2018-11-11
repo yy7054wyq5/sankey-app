@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, Sanitizer } from '@angular/core';
+import { Component, OnInit, HostBinding, Sanitizer, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -7,6 +7,14 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./detail-panel.component.less']
 })
 export class DetailPanelComponent implements OnInit {
+  private _show = false;
+  data;
+
+  @Input()
+  set dpcData(data: any | null) {
+    this._show = data ? true : false;
+    this.data = data;
+  }
 
   // https://stackoverflow.com/questions/46150788/inject-style-declarations-using-hostbinding-in-angular
   @HostBinding('style')
@@ -14,17 +22,13 @@ export class DetailPanelComponent implements OnInit {
     return this._san.bypassSecurityTrustStyle(`
       z-index: 2;
       position: absolute;
-      top: 2rem;
-      right: 1rem;
-      width: 14rem;
+      top: 0;
+      right: ${this._show ? '0' : '-15rem'};
+      width: 15rem;
     `);
   }
 
-  constructor(
-    private _san: DomSanitizer
-  ) { }
+  constructor(private _san: DomSanitizer) {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

@@ -10,7 +10,7 @@ import { Observable, of, Subject } from '../../../../../node_modules/rxjs';
 import { mergeMap } from '../../../../../node_modules/rxjs/operators';
 import { CheckTab } from '../check-node/check-node.component';
 
-const searchPersonDetailApi = '/api/web/Detail/detailNew';
+const searchNodeDetailApi = '/api/web/Detail/detailNew';
 const maxLines = 10;
 
 /**
@@ -41,6 +41,7 @@ export class CoreMainComponent implements OnInit {
   chartHeight = null;
   private _ajaxData: Contacts;
   chartFullStatus = false;
+  nodeDetailData; // 点的详情数据
 
   /**
    * 供订阅
@@ -676,29 +677,27 @@ export class CoreMainComponent implements OnInit {
    * @param {ChartEventCbParams} node
    * @memberof CoreMainComponent
    */
-  private _showPersonInfo(node: ChartEventCbParams): void {
-    if (node.dataType === 'node' && node.data.id.indexOf('person') === 0) {
-      const loadingId = this._showLoading();
-      this._http
-        .get('https://app-relation.buyint.com/relation_api' + searchPersonDetailApi, {
-          params: {
-            P_id: node.data.id
+  private _showNodeInfo(node: ChartEventCbParams): void {
+    const loadingId = this._showLoading();
+    this._http
+      .get(searchNodeDetailApi, {
+        params: {
+          P_id: node.data.id
+        }
+      })
+      .subscribe(
+        (res: any) => {
+          this._msg.remove(loadingId);
+          if (!res.status && res.data) {
+            this.nodeDetailData = res.data;
+          } else {
+            this.nodeDetailData = null;
           }
-        })
-        .subscribe(
-          (res: any) => {
-            this._msg.remove(loadingId);
-            if (!res.status && res.data) {
-              this.person = res.data;
-            } else {
-              this.person = [];
-            }
-          },
-          error => {
-            this._msg.remove(loadingId);
-          }
-        );
-    }
+        },
+        error => {
+          this._msg.remove(loadingId);
+        }
+      );
   }
 
   /**
@@ -711,6 +710,6 @@ export class CoreMainComponent implements OnInit {
     // ChartEventCbParams
     const node = data.crtNode;
     const chart = data.chartInstance;
-    this._showPersonInfo(node);
+    this._showNodeInfo(node);
   }
 }
