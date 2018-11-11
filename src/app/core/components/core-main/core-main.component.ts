@@ -425,10 +425,9 @@ export class CoreMainComponent implements OnInit {
    * @memberof CoreMainComponent
    */
   private _creatChart(nodes: ChartNode[], links: ChartLink[], lines: number) {
-    // lines = getRandomIntInclusive(2, 30);
     // console.log(lines);
-    if (lines > maxLines) {
-      this.chartHeight = lines * 5 + 'rem';
+    if (lines < 10) {
+      this.chartHeight = '5rem';
     } else {
       this.chartHeight = null;
     }

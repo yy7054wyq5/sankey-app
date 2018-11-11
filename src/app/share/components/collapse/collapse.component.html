@@ -1,7 +1,7 @@
 <section class="collapse">
   <div class="title">
-    <i *ngIf="colIcon" class="sa-icon {{colIcon}}" style="margin-top: 7px; margin-left: 5px;"></i>
-    <span style="flex: 1;text-align: left; margin-top: 5px; margin-left: 5px;">{{ colTitle }}</span>
+    <i *ngIf="colIcon" class="sa-icon {{colIcon}}"></i>
+    <span style="flex: 1;text-align: left;">{{ colTitle }}</span>
     <i class="handle" *ngIf="colIsCollapse" (click)="toClick($event)">+</i>
     <i class="handle" *ngIf="!colIsCollapse" (click)="toClick($event)">-</i>
   </div>
