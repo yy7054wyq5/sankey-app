@@ -167,15 +167,15 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @type {('startEnd' | 'onePoint')}
    * @memberof SearchBarComponent
    */
-  searchMode: 'startEnd' | 'onePoint' = 'onePoint';
+  searchMode: 'startEnd' | 'onePoint' = 'startEnd';
 
   searchModes = [
     {
-      label: '关系路径查询',
+      label: '两个人之间有哪些关系',
       value: 'startEnd'
     },
     {
-      label: '单点周围关系查询',
+      label: '他有哪些关系',
       value: 'onePoint'
     }
   ];

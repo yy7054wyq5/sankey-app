@@ -2,6 +2,7 @@
 @import '../../../../less/variable.less';
 @perfix: ant-select;
 app-search-bar {
+  font-size: @fontSize;
   padding-left: 1rem;
   position: relative;
   overflow: hidden;
@@ -12,6 +13,11 @@ app-search-bar {
     display: flex;
     flex-direction: column;
     padding-top: 1.2rem;
+    h2{
+      color: #fff;
+      font-size: @fontSize;
+      margin-bottom: 1rem;
+    }
     .@{perfix} {
       // width: 31.111111rem;
       height: 2.323232rem;
@@ -47,7 +53,7 @@ app-search-bar {
       }
       .@{perfix}-selection-selected-value {
         color: @fontColor;
-        font-size: 1.111111rem;
+        font-size: @fontSize;
       }
       &.search-point {
         .@{perfix}-selection {

@@ -1,5 +1,7 @@
 <form (submit)="search()">
-  <nz-select [(ngModel)]="searchMode" name="value" nzPlaceHolder="选择搜索模式" nzAllowClear>
+  <!-- <h2 *ngIf="searchMode==='startEnd'">两个人之间有哪些关系</h2>
+  <h2 *ngIf="searchMode==='onePoint'">他有哪些关系</h2> -->
+  <nz-select [(ngModel)]="searchMode" name="value" nzPlaceHolder="请选择搜索模式" nzAllowClear>
     <nz-option *ngFor="let item of searchModes" [nzLabel]="item.label" [nzValue]="item.value"> </nz-option>
   </nz-select>
 
@@ -109,7 +111,7 @@
   </div>
 
   <!-- 匹配 -->
-  <button class="match-btn" nz-button [nzType]="'primary'" type="submit">智配关系</button>
+  <button class="match-btn" nz-button [nzType]="'primary'" type="submit">Match</button>
 
   <ng-container *ngIf="degrees">
   <!-- <ng-container> -->
