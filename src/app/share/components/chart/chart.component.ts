@@ -47,6 +47,10 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   efullParentClassName: string;
   @Input()
   eoption: any; // http://echarts.baidu.com/option.html
+  @Input()
+  set elines(lines) {
+    this._lines = lines;
+  }
   @Output()
   efullStatus = new EventEmitter<boolean>();
   @Output()
@@ -77,7 +81,12 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   clickedNode: ChartEventCbParams;
   thisPageButton = false;
 
-  preChartSize = ChartStandardSize;
+  private _lines;
+
+  oneChartSize = {
+    width: 0,
+    height: 0
+  };
   chartSize = ChartStandardSize;
 
   get chartActived() {
@@ -148,24 +157,20 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
   private _setOption() {
     this.chartSize = ChartStandardSize;
-    this.preChartSize = ChartStandardSize;
     this.chartInstance.setOption({ ...this.eoption, width: 'auto', height: 'auto' });
+    const oneSizeHeight = this.chartInstance.getHeight() / ChartStandardSize;
+    const oneSizeWidth = this.chartInstance.getWidth() / ChartStandardSize;
+    this.oneChartSize = { width: oneSizeWidth, height: oneSizeHeight };
+    console.log(this.oneChartSize);
   }
 
   slider(value) {
-    const standard = this.preChartSize;
-    const chartHeight = this.chartInstance.getHeight();
-    const chartWidth = this.chartInstance.getWidth();
-    // console.log(chartHeight, chartWidth);
-
+    console.log(this.oneChartSize, value);
     this._zone.runOutsideAngular(() => {
       this.chartInstance.setOption({
-        width: (chartWidth / standard) * value,
-        height: (chartHeight / standard) * value
+        height: this.oneChartSize.height * value
       });
     });
-
-    this.preChartSize = value;
   }
 
   /**

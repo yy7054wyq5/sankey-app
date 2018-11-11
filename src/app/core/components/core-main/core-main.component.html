@@ -1,7 +1,8 @@
 <nz-layout class="core-main">
   <section class="core-body">
     <section [ngStyle]="{width: hideSearchBar ? '98rem' : '82rem'}" class="core-content">
-      <i *ngIf="!chartFullStatus" class="icon-fold icon-tool" [class.no-fold]="hideSearchBar" (click)="hideSearchBar=!hideSearchBar"></i>
+ 
+      <i *ngIf="!chartFullStatus" class="icon-fold icon-tool" [class.no-fold]="hideSearchBar" (click)="UI_clickFolder($event)"></i>
       <!-- 初始状态 -->
       <div *ngIf="initCore" class="status">
         <div class="content">
@@ -16,7 +17,7 @@
         <p style="margin-left: -1rem;">未找到合适信息哦</p>
       </div>
       <!-- 图表 -->
-      <app-chart #chart *ngIf="option" [eoption]="option" [eheight]="chartHeight" [efullParentClassName]="'body'"
+      <app-chart #chart *ngIf="option" [elines]="lines" [eoption]="option" [eheight]="chartHeight" [efullParentClassName]="'body'"
                  (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)" (efullStatus)="chartIsFull($event)"
                  (isView)="changeClickView($event)">
         <!-- 翻页 -->

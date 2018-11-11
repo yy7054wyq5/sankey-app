@@ -63,6 +63,7 @@ export class CoreMainComponent implements OnInit {
   viewStatus = false;
 
   checkUIMode = checkUIMode.normal;
+  lines;
 
   checkUIPosition = {
     fullscreen: {
@@ -426,12 +427,13 @@ export class CoreMainComponent implements OnInit {
    */
   private _creatChart(nodes: ChartNode[], links: ChartLink[], lines: number) {
     // console.log(lines);
-    if (lines < 10) {
-      this.chartHeight = '5rem';
-    } else {
-      this.chartHeight = null;
-    }
-
+    // if (lines < 10) {
+    //   this.chartHeight = '5rem';
+    // } else {
+    //   this.chartHeight = null;
+    // }
+    // this.chartHeight = null;
+    this.lines = lines;
     // 起点终点加颜色
     let findStartEndPoint = 0;
     for (let index = 0; index < nodes.length; index++) {
@@ -455,6 +457,11 @@ export class CoreMainComponent implements OnInit {
     //   this._setChartOption(data.nodes, data.links);
     //   this._msg.remove(this.loadingId);
     // });
+  }
+
+  UI_clickFolder(bool) {
+    this.hideSearchBar = !this.hideSearchBar;
+    this.chart.mustResize();
   }
 
   private changeClickView(isview: boolean) {
