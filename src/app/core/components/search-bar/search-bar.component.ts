@@ -13,12 +13,13 @@ import {
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { CommonService } from '../../services/common/common.service';
 import { Observable, fromEvent, of, Subscription } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged, switchMap, min } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged, switchMap, delay } from 'rxjs/operators';
 import { StorageService } from '../../../share/services/storage/storage.service';
 import { ChartLink, ChartNode } from '../../../share/components/chart/chart.service';
 import { environment } from '../../../../environments/environment';
 import { DecryptData } from 'buyint-company-library/dist/index';
 import { CheckTab, CheckOption } from '../check-node/check-node.component';
+import { LoadingService } from 'src/app/share/services/loading/loading.service';
 
 /**
  * 搜索的状态
@@ -299,6 +300,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     public common: CommonService,
+    public loading: LoadingService,
     private _http: HttpClient,
     private _element: ElementRef,
     private _renderer: Renderer2,
@@ -517,6 +519,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
         hidden: options.slice(value)
       };
       this.common.coreMainComponent.getCheckedNodes(data);
+      return;
     } else if (tag === 'timelines') {
       this.searchParams.timeLineStart = this.sliderTimelines.min;
       this.searchParams.timeLineEnd = value;
@@ -525,7 +528,12 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.searchParams.weightStart = value[0];
       this.searchParams.weightEnd = value[1];
     }
-    console.log(this.searchParams);
+
+    of(value)
+      .pipe(delay(400))
+      .subscribe(_ => {
+        this.search();
+      });
   }
 
   /**
@@ -576,8 +584,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof SearchBarComponent
    */
   private _creatTimelinesSlider(minTime: number, maxTime: number) {
+    this.sliderTimelines.max = maxTime;
     this.sliderTimelines.min = minTime;
-    this.sliderTimelines.max = this.sliderTimelines.value = maxTime;
+    this.sliderTimelines.value = this.sliderTimelines.value || maxTime;
     const timeLines = [];
     const cutYears = [-1, -3, -6, -10, -15];
     this.sliderTimelines.marks[maxTime] = {
@@ -840,6 +849,9 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof SearchBarComponent
    */
   search(searchData?: SuccessSearchRecord) {
+    if (this.loading.status) {
+      return;
+    }
     this.searchParams.page = this.common.coreMainComponent.crtPageIndex - 1;
 
     if (searchData) {
@@ -893,7 +905,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
       .post<AjaxResponse>(searchRelationApi, this.searchParams, {
         withCredentials: true,
         observe: 'response',
-        responseType: 'json',
+        responseType: 'json'
       })
       .subscribe(
         (res: HttpResponse<AjaxResponse>) => {
