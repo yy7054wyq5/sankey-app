@@ -1,18 +1,13 @@
 <nz-layout class="layout">
   <nz-header class="header">
-    <div nz-row>
-      <div nz-col nzSpan="18" class="logo">LOGO</div>
-      <ul id="menu" nz-col nzSpan="6">
-        <li [routerLink]="''">首页</li>
-        <li>助理</li>
-        <li>核心能力</li>
-        <li>登陆/注册</li>
-      </ul>
+    <img src="assets/images/logo.png" class="logo" alt="" />
+    <!-- <h1>商业合作从资本关系开始</h1> -->
+    <div class="tool" *ngIf="storage.get('avatarUrl') && storage.get('nickName')">
+      <img class="header-person-img" alt="" [src]="storage.get('avatarUrl')" /> <span>{{ storage.get('nickName') }}</span>
     </div>
   </nz-header>
   <nz-layout class="content">
-    <nz-content>
-      <router-outlet></router-outlet>
-    </nz-content>
+    <!-- <div class="menu" [ngStyle]="{right: offsetX}"></div> -->
+    <nz-content> <router-outlet></router-outlet> </nz-content>
   </nz-layout>
 </nz-layout>

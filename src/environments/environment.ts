@@ -3,10 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  requestDelayTime: 500,
-  apiHost: '',
-  useRelationJson: false
+    production: false,
+    requestDelayTime: 500,
+    // apiHost: '',
+    apiHost: 'https://app-relation.buyint.com/relation_api',
+    // apiHost: 'http://10.0.15.204:10130/',
+    memberApiHost: 'http://10.0.2.11:10120/',
+    // apiHost: 'http://10.0.15.166:10130/',
+    // apiHost: 'http://10.0.15.189:10130/',
+    useRelationJson: false,
+    tmpToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDIzNjIyNTMwMTgsImlhdCI6MTU0MTc1NzQ1MzAzMCwianRpIjoiYWlndWFueGl0ZXN0X3V1aWRiMmFiM2VhODIzMDY0N2E0YmQzMWEzNjZkNjI2YmQ5MSJ9.QpHtwgIbdtbihVIxqBkvTxnlf2Tt2Ue2otEE3aGTZyc'
 };
 
 /*

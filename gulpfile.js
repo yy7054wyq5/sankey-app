@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var proxy = require('http-proxy-middleware');
 
-
 gulp.task('prod', function () {
   browserSync.init({
     server: {

@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target":"http://match.aimer.ai/",
+    "target":"https://app-relation.buyint.com/relation",
     "changeOrigin": true,
     "secure": false,
     "logLevel": "debug"

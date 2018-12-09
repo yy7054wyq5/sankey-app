@@ -1,0 +1,61 @@
+<div class="full-detail" *ngIf="_data">
+  <i class="sa-icon icon-x" (click)="UI_handlePanel()"></i>
+  <section class="header">
+    <div class="round">
+      <i
+        class="sa-icon icon-case"
+        [class.icon-case]="detailType === 'case'"
+        [class.icon-person]="detailType === 'person'"
+        [class.icon-company]="detailType === 'organization'"
+      ></i>
+    </div>
+    <ng-container *ngIf="detailType === 'person'"
+      ><span>{{ data.name.split(' ')[0] }}</span
+      >| <span>{{ data.name.split(' ')[1] }}</span
+      >| <span>{{ data.name.split(' ')[2] }}</span></ng-container
+    >
+    <ng-container *ngIf="detailType !== 'person'"
+      ><span>{{ data.name }}</span></ng-container
+    >
+  </section>
+
+  <section class="content" *ngIf="detailType === 'person'">
+    <app-collapse
+      [colIsCollapse]="false"
+      style="width: 20rem;"
+      *ngFor="let info of _data; index as i"
+      [colMode]="2"
+      [colTitle]="UI_title(info)"
+    >
+      <ul>
+        <li [ngStyle]="{ borderColor: UI_chooseColor(i) }" *ngFor="let item of (info.value | keyvalue)" (click)="UI_viewFullDetail(item)">
+          {{ item.value }}
+        </li>
+      </ul>
+    </app-collapse>
+  </section>
+
+  <section class="content" *ngIf="detailType === 'organization'">
+    <app-collapse
+      [colIsCollapse]="false"
+      style="width: 20rem;"
+      *ngFor="let info of _data; index as i"
+      [colMode]="2"
+      [colTitle]="UI_title(info)"
+    >
+      <ul>
+        <li [ngStyle]="{ borderColor: UI_chooseColor(i) }" *ngFor="let item of (info.value | keyvalue)" (click)="UI_viewFullDetail(item)">
+          {{ item.value }}
+        </li>
+      </ul>
+    </app-collapse>
+  </section>
+
+  <section class="content" *ngIf="detailType === 'case'">
+    <app-collapse [colIsCollapse]="false" style="width: 20rem;" [colMode]="2" [colTitle]="'事件参与人(' + _data.length + ')'">
+      <ul>
+        <li [ngStyle]="{ borderColor: itemBorderColor[0] }" *ngFor="let info of _data" (click)="UI_viewFullDetail(info)">{{ info.name }}</li>
+      </ul>
+    </app-collapse>
+  </section>
+</div>

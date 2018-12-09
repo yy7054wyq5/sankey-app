@@ -1,20 +1,40 @@
-<form (submit)="search()">
+<form (submit)="search(null, true)">
+  <nz-select
+    [(ngModel)]="searchMode"
+    (ngModelChange)="UI_searchModeChange($event)"
+    name="value"
+    nzPlaceHolder="请选择搜索模式"
+    nzAllowClear
+  >
+    <nz-option *ngFor="let item of searchModes" [nzLabel]="item.label" [nzValue]="item.value"> </nz-option>
+  </nz-select>
 
-  <div class="start">
+  <div [ngStyle]="{ display: !isOnePointMode ? 'block' : 'none' }">
     <!-- 选择起点 -->
     <nz-spin [nzSpinning]="startLoading">
-      <nz-select class="start-point" [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch
-                 nzAllowClear nzPlaceHolder="请输入您的姓名 或公司名称 或职务" [(ngModel)]="start" name="start" (ngModelChange)="selected($event, 'start')"
-                 (nzOpenChange)="open($event)">
+      <nz-select
+        class="search-point start-point"
+        [nzServerSearch]="true"
+        [nzDropdownClassName]="'search-bar-select'"
+        nzShowSearch
+        nzAllowClear
+        [nzPlaceHolder]="pointSelectPlaceholders[searchMode][0]"
+        [(ngModel)]="start"
+        name="start"
+        (ngModelChange)="selected($event, 'start')"
+      >
         <ng-container *ngFor="let option of startOptions">
-          <nz-option *ngIf="option['name']" nzLabel="{{option['name']}}&nbsp;{{option['company']}}&nbsp;{{lastOptionLable(option.info)}}"
-                     nzValue="{{option['p_id']}}" [nzCustomContent]="true">
-            <div class="option-label" (click)="getStartAndEndData(option ,'start')">
-              <div class="name">{{option.name}}</div>
-              <div class="content">
-                <div *ngFor="let info of option.info">
-                  <span class="company">{{info.company}}</span>
-                  <span class="last">{{lastOptionLable(info)}}</span>
+          <nz-option
+            *ngIf="option['name']"
+            nzLabel="{{option['name']}}&nbsp;{{option['c_name']}}&nbsp;{{option['p_title']}}"
+            nzValue="{{option['p_id']}}"
+            [nzCustomContent]="true"
+          >
+            <div class="option-label" (click)="UI_getStartAndEndData(option, 'start')">
+              <div class="name">{{ option.name }}</div>
+              <div class="content" *ngIf="option.info">
+                <div *ngFor="let item of option.info">
+                  <span class="company">{{ item.c_name }}</span> <span class="last">{{ lastOptionLable(item) }}</span>
                 </div>
               </div>
             </div>
@@ -22,55 +42,158 @@
         </ng-container>
       </nz-select>
     </nz-spin>
-  </div>
 
-
-  <div class="end">
     <!-- 选择终点 -->
     <nz-spin [nzSpinning]="endLoading">
-      <nz-select class="end-point" [nzServerSearch]="true" [nzDropdownClassName]="'search-bar-select'" nzShowSearch
-                 nzAllowClear nzPlaceHolder="请输入对方的姓名 或公司名称 或职务" [(ngModel)]="end" name="end" (ngModelChange)="selected($event, 'end')"
-                 (nzOpenChange)="open($event)">
+      <nz-select
+        class="search-point end-point"
+        [nzServerSearch]="true"
+        [nzDropdownClassName]="'search-bar-select'"
+        nzShowSearch
+        nzAllowClear
+        [nzPlaceHolder]="pointSelectPlaceholders[searchMode][1]"
+        [(ngModel)]="end"
+        name="end"
+        (ngModelChange)="selected($event, 'end')"
+      >
         <ng-container *ngFor="let option of endOptions">
-          <nz-option *ngIf="option['name']" nzLabel="{{option['name']}}&nbsp;{{option['company']}}&nbsp;{{lastOptionLable(option.info)}}"
-                     nzValue="{{option['p_id']}}" [nzCustomContent]="true">
-            <div class="option-label" (click)="getStartAndEndData(option ,'end')">
-              <div class="name">{{option.name}}</div>
-              <div class="content">
+          <nz-option
+            *ngIf="option['name']"
+            nzLabel="{{option['name']}}&nbsp;{{option['c_name']}}&nbsp;{{option['p_title']}}"
+            nzValue="{{option['p_id']}}"
+            [nzCustomContent]="true"
+          >
+            <div class="option-label" (click)="UI_getStartAndEndData(option, 'end')">
+              <div class="name">{{ option.name }}</div>
+              <div class="content" *ngIf="option.info">
                 <div *ngFor="let info of option.info">
-                  <span class="company">{{info.company}}</span>
-                  <span class="last">{{lastOptionLable(info)}}</span>
+                  <span class="company">{{ info.c_name }}</span> <span class="last">{{ lastOptionLable(info) }}</span>
                 </div>
               </div>
             </div>
           </nz-option>
         </ng-container>
-
       </nz-select>
     </nz-spin>
   </div>
 
-  <div class="records">
-    <nz-select [nzDropdownClassName]="'search-bar-select'" nzShowSearch nzAllowClear nzPlaceHolder="请选择搜索历史"
-               [(ngModel)]="selectedRecord" name="history" (ngModelChange)="selectedRecrodEvent($event)">
-      <ng-container *ngFor="let option of records.data">
-        <nz-option [nzCustomContent]="true" [nzLabel]="recordOptionLabel(option)" [nzValue]="option">
-          <div class="option-label" (click)="getStartAndEndData(option ,'end')">
-            <div class="content">
-              {{recordOptionLabel(option)}}
+  <div [ngStyle]="{ display: this.isOnePointMode ? 'block' : 'none' }">
+    <nz-spin [nzSpinning]="onePointLoading">
+      <nz-select
+        class="search-point one-point"
+        [nzServerSearch]="true"
+        [nzDropdownClassName]="'search-bar-select'"
+        nzShowSearch
+        nzAllowClear
+        [nzPlaceHolder]="pointSelectPlaceholders[searchMode][0]"
+        [(ngModel)]="onePoint"
+        name="onePoint"
+        (ngModelChange)="selected($event, 'end')"
+      >
+        <ng-container *ngFor="let option of onePointOptions">
+          <nz-option
+            *ngIf="option['name']"
+            nzLabel="{{option['name']}}&nbsp;{{option['c_name']}}&nbsp;{{option['p_title']}}"
+            nzValue="{{option['p_id']}}"
+            [nzCustomContent]="true"
+          >
+            <div class="option-label" (click)="UI_getStartAndEndData(option)">
+              <div class="name">{{ option.name }}</div>
+              <div class="content" *ngIf="option.info">
+                <div *ngFor="let info of option.info">
+                  <span class="company">{{ info.c_name }}</span> <span class="last">{{ lastOptionLable(info) }}</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </nz-option>
-      </ng-container>
-
-    </nz-select>
+          </nz-option>
+        </ng-container>
+      </nz-select>
+    </nz-spin>
   </div>
 
   <!-- 匹配 -->
-  <button nz-button [nzType]="'primary'" type="submit">智配关系</button>
-  <!-- 引导 -->
-  <div class="search-tips">
-    <img src="/assets/images/arrow-guide.png" alt="">
-    <div>请输入您的关键字，以“空格”隔开</div>
-  </div>
+  <button class="match-btn" nz-button [nzType]="'primary'" type="submit">匹配</button>
+
+  <ng-container *ngIf="degrees">
+    <!-- <ng-container> -->
+    <app-collapse class="collapse" colIcon="icon-filter" colTitle="过滤器" [colIsCollapse]="false">
+      <div class="filter">
+        <h5>关系层数</h5>
+        <nz-checkbox-group
+          name="degree"
+          [nzDisabled]="degreesDisabled"
+          [(ngModel)]="degrees"
+          (ngModelChange)="UI_outCheckedDegrees($event)"
+        ></nz-checkbox-group>
+        <h5>关系路径</h5>
+        <nz-slider
+          [nzStep]="null"
+          [nzRange]="true"
+          [nzDisabled]="sliderChains.disabled"
+          name="chains"
+          (ngModelChange)="UI_outCrtMark('chains', $event)"
+          [(ngModel)]="sliderChains.value"
+          [nzMarks]="sliderChains.marks"
+          [nzMax]="sliderChains.max"
+          [nzMin]="sliderChains.min"
+        ></nz-slider>
+        <h5 style="position:relative;">
+          交集时间<label
+            style="position: absolute; right: 0; top: 0;"
+            nz-checkbox
+            name="ignoreTime"
+            [(ngModel)]="searchParams.ignoreTimeLine"
+            >忽略时间</label
+          >
+        </h5>
+        <nz-slider
+          [nzStep]="null"
+          [nzRange]="true"
+          name="timeline"
+          (ngModelChange)="UI_outCrtMark('timelines', $event)"
+          [(ngModel)]="sliderTimelines.value"
+          [nzMarks]="sliderTimelines.marks"
+          [nzMax]="sliderTimelines.max"
+          [nzMin]="sliderTimelines.min"
+        ></nz-slider>
+        <h5>疑似关系强度</h5>
+        <nz-slider
+          [nzStep]="0.1"
+          [nzRange]="true"
+          name="strength"
+          (ngModelChange)="UI_outCrtMark('strength', $event)"
+          [nzMarks]="sliderStrength.marks"
+          [(ngModel)]="sliderStrength.value"
+          [nzMax]="sliderStrength.max"
+          [nzMin]="sliderStrength.min"
+        ></nz-slider>
+      </div>
+    </app-collapse>
+  </ng-container>
+
+  <ng-container *ngIf="crtRecord.data && !isOnePointMode">
+    <app-collapse class="collapse" colIcon="icon-history" colTitle="历史记录" [colIsCollapse]="false">
+      <ul class="histores ">
+        <li *ngFor="let history of crtRecord.data" (click)="search(history, true)">
+          {{ history.start['c_name'] }}/{{ history.start['name'] }}==>{{ history.end['c_name'] }}/{{ history.end['name'] }}
+        </li>
+      </ul>
+      <div class="clear-history " *ngIf="crtRecord.data.length">
+        <!-- <i class="icon delete"></i> -->
+        <span (click)="clearRecords()">清空历史</span>
+      </div>
+    </app-collapse>
+  </ng-container>
+
+  <ng-container *ngIf="crtRecord.data && isOnePointMode">
+    <app-collapse class="collapse" colIcon="icon-history" colTitle="历史记录" [colIsCollapse]="false">
+      <ul class="histores ">
+        <li *ngFor="let history of crtRecord.data" (click)="search(history, true)">{{ history?.name }}</li>
+      </ul>
+      <div class="clear-history " *ngIf="crtRecord.data.length">
+        <!-- <i class="icon delete"></i> -->
+        <span (click)="clearRecords()">清空历史</span>
+      </div>
+    </app-collapse>
+  </ng-container>
 </form>

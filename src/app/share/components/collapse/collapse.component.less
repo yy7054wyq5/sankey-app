@@ -1,0 +1,47 @@
+@import '../../../../less/variable.less';
+
+@titleBgColor: #e6e6e6;
+@fontSize: 0.5rem;
+@height: 1.6rem;
+.collapse {
+  .title {
+    background: @titleBgColor;
+    padding-left: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000;
+    height: @height;
+    border-radius: @borderRaduis;
+    cursor: pointer;
+    span {
+      font-size: @fontSize;
+      font-weight: 900;
+      margin-left: 0.2rem;
+    }
+    i {
+      display: block;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+      font-size: @fontSize;
+      &.handle {
+        cursor: pointer;
+        width: @height;
+        height: @height;
+        line-height: @height;
+        text-align: center;
+        font-size: @height;
+        &.rotate{
+          transform: rotate(90deg);
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  .content {
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+}

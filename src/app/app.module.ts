@@ -12,6 +12,9 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { CoreModule } from './core/core.module';
 import { httpInterceptorProviders } from './share/services/interceptors';
+import {CookieService} from 'ngx-cookie-service';
+import {DomainService} from './core/services/domain/domain.service';
+import {StorageService} from './share/services/storage/storage.service';
 
 registerLocaleData(zh);
 
@@ -27,7 +30,7 @@ registerLocaleData(zh);
     CoreModule,
     NgZorroAntdModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }, httpInterceptorProviders],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }, httpInterceptorProviders, CookieService, DomainService, StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

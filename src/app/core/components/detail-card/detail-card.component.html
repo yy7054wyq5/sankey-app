@@ -1,0 +1,58 @@
+<div class="detail" *ngIf="data">
+  <!-- <div class="detail"> -->
+  <i class="sa-icon icon-x" (click)="UI_handlePanel()"></i>
+
+  <section class="header-info">
+    <div class="info" [class.case]="data.type === 'case'">
+      <!-- 事件头部 -->
+      <ng-container *ngIf="data.type === 'case'">
+        <div class="line"></div>
+        <div class="item">
+          <div class="round"><i class="sa-icon icon-person"></i></div>
+          <span>{{ UI_casePoint('source') }}</span>
+        </div>
+        <div class="item">
+          <div class="round"><i class="sa-icon icon-case"></i></div>
+          <span>事件</span>
+        </div>
+        <div class="item">
+          <div class="round"><i class="sa-icon icon-person"></i></div>
+          <span>{{ UI_casePoint('target') }}</span>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="data.type !== 'case'">
+        <div class="round">
+          <i class="sa-icon icon-person" *ngIf="data.type === 'person'"></i>
+          <i class="sa-icon icon-company" *ngIf="data.type === 'company'"></i>
+        </div>
+        <span>{{ UI_name(data.node.name) }} {{ data.res.title }}</span> <span>{{ data.res.company }}</span>
+      </ng-container>
+    </div>
+  </section>
+
+  <!-- 事件明细 -->
+  <section class="case-items" *ngIf="data.type === 'case'">
+    <nz-timeline>
+      <nz-timeline-item *ngFor="let case of _data">
+        <h5>{{ case.year }}年</h5>
+        <p *ngFor="let caseInfo of case.data" (click)="UI_clickCase(caseInfo)">{{ caseInfo.case_name }}</p>
+      </nz-timeline-item>
+    </nz-timeline>
+  </section>
+
+  <ng-container *ngIf="data.type !== 'case'">
+    <app-collapse
+      *ngFor="let infos of _data; index as i"
+      [colIsCollapse]="actives[i]"
+      [colTitle]="infos.key + '(' + UI_itemsLength(infos.value) + ')'"
+      (isCollapse)="UI_outCollapse($event, i)"
+    >
+      <ul class="detail-items">
+        <li (click)="UI_clickItem(info)" *ngFor="let info of (infos.value | keyvalue)">{{ info.value }}</li>
+      </ul>
+    </app-collapse>
+  </ng-container>
+
+  <button *ngIf="data.type !== 'case'" nz-button [nzType]="'primary'" (click)="UI_viewMore()">&lt;查看更多</button>
+</div>

@@ -1,18 +1,16 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, Renderer2, NgZone } from '@angular/core';
-import { chartOption, chartColorConfig, api } from '../../config';
-import { CoreMainService, ObjTypeLinksData, NodeCate } from './core-main.service';
-import { Contacts, SearchStatus, SearchBarComponent, AjaxResponse, Line } from '../search-bar/search-bar.component';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { chartOption, chartColorConfig, caseColorConfig, nodesAndLinksInOneLineColor } from '../../config';
+import { CommonService, ObjTypeLinksData, NodeCate } from '../../services/common/common.service';
+import { Contacts, SearchStatus, SearchBarComponent, AjaxResponse, noResultDis } from '../search-bar/search-bar.component';
 import { NzMessageService } from 'ng-zorro-antd';
 import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 import { ChartComponent } from '../../../share/components/chart/chart.component';
-import { ChartNode, ChartLink } from '../../../share/components/chart/chart.service';
-import { Observable, of } from '../../../../../node_modules/rxjs';
+import { ChartNode, ChartLink, ChartEventCbParams } from '../../../share/components/chart/chart.service';
+import { Observable, of, Subject } from 'rxjs';
 import { mergeMap } from '../../../../../node_modules/rxjs/operators';
 import { CheckTab } from '../check-node/check-node.component';
-import { isMobile } from '../../../share/utils';
 
-const searchPersonDetailApi = api.searchPersonDetailApi;
-const maxLines = isMobile() ? 1 : 10;
+const maxLines = 10;
 
 /**
  * 图表下拉框定位模式
@@ -20,70 +18,50 @@ const maxLines = isMobile() ? 1 : 10;
  * @enum {number}
  */
 enum checkUIMode {
-  mobile = 'mobile',
   normal = 'normal',
   fullscreen = 'fullscreen'
-}
-
-interface CheckNodeUIStyle {
-  position: 'absolute' | 'relative' | 'fixed';
-  top: string;
-  right: string;
-  width: string;
 }
 
 @Component({
   selector: 'app-core-main',
   templateUrl: './core-main.component.html',
   styleUrls: ['./core-main.component.less'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [CoreMainService]
+  encapsulation: ViewEncapsulation.None
 })
 export class CoreMainComponent implements OnInit {
   loadingId: any;
   option: any; // 图表配置项
-  colorBar = chartColorConfig;
+  colorCase = caseColorConfig;
   initCore = true; // 初始状态
-  person = []; // 侧栏任务信息
   checknodesTab: CheckTab[] = []; // 显示隐藏起点的一度节点
   checkcontactsTab: CheckTab[] = []; // 显示隐藏人脉
-  chartHeight = null;
-  chartWidth = null;
   private _ajaxData: Contacts;
-  private _chartFullStatus = false;
+  private _LinksToObjByNodeId: ObjTypeLinksData;
+  chartFullStatus = false;
+  nodeDetailData; // 点的详情数据
+  fullDetailData; // 完整的详情数据
+  allNodes: { [peronId: string]: any } = {}; // 所有节点，用于在事件卡片中显示事件的起点和终点
+
+  /**
+   * 供订阅
+   *
+   * @memberof CoreMainComponent
+   */
+  checkNodesTabSubject = new Subject<CheckTab[]>();
+
+  totalPages = 5;
+  crtPageIndex = 1;
+
+  nodeDataHasSourcesAndTargets: ObjTypeLinksData;
+
+  hideSearchBar = false; // 侧栏打开
+
+  showChartFilterNodes = [];
+  showChartFilterLinks = [];
 
   checkUIMode = checkUIMode.normal;
 
-  checkUIPosition: { [mode: string]: { [nodeType: string]: CheckNodeUIStyle } } = {
-    fullscreen: {
-      contactsCheckUI: {
-        position: 'absolute',
-        top: '2.262626rem',
-        right: '20.525253rem',
-        width: '15rem'
-      },
-      nodesCheckUI: {
-        position: 'absolute',
-        top: '2.262626rem',
-        right: '2.525253rem',
-        width: '15rem'
-      }
-    },
-    normal: {
-      contactsCheckUI: {
-        position: 'fixed',
-        top: '12.262626rem',
-        right: '25.525253rem',
-        width: '15rem'
-      },
-      nodesCheckUI: {
-        position: 'fixed',
-        top: '12.262626rem',
-        right: '8.525253rem',
-        width: '15rem'
-      }
-    }
-  };
+  noResultDis = noResultDis;
 
   /**
    * 是否显示人脉或节点下拉框
@@ -100,17 +78,34 @@ export class CoreMainComponent implements OnInit {
   @ViewChild('chart')
   chart: ChartComponent;
 
-  constructor(
-    private _common: CoreMainService,
-    private _msg: NzMessageService,
-    private _http: HttpClient,
-    private _render: Renderer2,
-    private _zone: NgZone
-  ) {}
+  constructor(private _common: CommonService, private _msg: NzMessageService, private _http: HttpClient) {
+    this._common.coreMainComponent = this;
+  }
 
   ngOnInit() {}
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  UI_viewFullDetail(info) {
+    // console.log(info);
+    this._common.requestNodeInfo(info.id).subscribe(res => {
+      console.log(info, res);
+      this.fullDetailData = { ...res, name: info.name };
+    });
+  }
+
+  /**
+   * 页码变化
+   *
+   * @param {*} pageIndex
+   * @memberof CoreMainComponent
+   */
+  UI_pageIndexChange(pageIndex) {
+    console.log(pageIndex);
+    this.crtPageIndex = pageIndex;
+    // 调用搜索
+    this.searchBar.search(null, true);
+  }
 
   /**
    * 为可隐藏的点加标记并返回对象类links
@@ -126,10 +121,24 @@ export class CoreMainComponent implements OnInit {
   ): Observable<{ nodes: ChartNode[]; objLinks: ObjTypeLinksData }> {
     return this._common.buildLinksToObjByNodeId(links).pipe(
       mergeMap((_newLinks: ObjTypeLinksData) => {
-        console.log('节点对应关系', _newLinks);
-        const startId = this.searchBar.records.startAndEnd.start.p_id;
-        const startTargets = _newLinks[startId].targets;
-        console.log('起点目标点', startTargets);
+        this._LinksToObjByNodeId = _newLinks;
+        // console.log('节点对应关系', _newLinks);
+        const startId = this.searchBar.isOnePointMode ? this.searchBar.onePoint : this.searchBar.start;
+        console.log(startId);
+        let startTargets = _newLinks[startId].targets;
+        if (this.searchBar.isOnePointMode) {
+          let startTargetsTargets = [];
+          for (let index = 0; index < startTargets.length; index++) {
+            // 起点目标的目标，即二度节点
+            const item = startTargets[index];
+            startTargetsTargets = [...startTargetsTargets, ..._newLinks[item].targets];
+          }
+          startTargets = startTargetsTargets;
+          // console.log(startTargets);
+        } else {
+          startTargets = _newLinks[startId].targets;
+        }
+        // console.log('起点目标点', startTargets);
         for (let idx = 0; idx < nodes.length; idx++) {
           const node = nodes[idx];
           const index = startTargets.indexOf(node.id);
@@ -137,6 +146,8 @@ export class CoreMainComponent implements OnInit {
             node.canHidden = true; // 添加可隐藏标记
           }
         }
+        console.log('nodes', nodes);
+        // console.log('objLinks',_newLinks);
         return of({
           nodes: nodes,
           objLinks: _newLinks
@@ -152,7 +163,7 @@ export class CoreMainComponent implements OnInit {
    * @memberof CoreMainComponent
    */
   getCheckedContacts(data: { out: number[]; hidden: number[] }) {
-    console.log(data);
+    // console.log(data);
     let links = [];
     let nodes = [];
     let lines = 0;
@@ -167,9 +178,17 @@ export class CoreMainComponent implements OnInit {
     const contactsAllNodes = nodes;
     const filterNodes = this._common.filterNodes(contactsAllNodes);
     const filterLinks = this._common.filterLinks(links);
+    const filterNodesHasLine = this._common.filterNodesHasConAndLine(contactsAllNodes); // 去重nodes后不删除其中的contact和line
     console.log(filterLinks);
-    this._creatNodesCheckTab(contactsAllNodes, filterLinks);
-    this._creatChart(filterNodes, filterLinks, lines);
+    // this._creatNodesCheckTab(contactsAllNodes, filterLinks);
+    this._creatNodesCheckTab(filterNodesHasLine, filterLinks); // nodes`去重不删除其中的contact和line   传入
+    // this._creatChart(filterNodes, filterLinks, lines);
+    // const hasCaseObj = this._caseArrGetConcat(filterNodes,filterLinks);
+    // console.log(hasCaseObj);
+    this.showChartFilterNodes = filterNodes;
+    this.showChartFilterLinks = filterLinks;
+    this.renderChart();
+    // this._creatChart(filterNodes, filterLinks, lines);
   }
 
   /**
@@ -185,24 +204,45 @@ export class CoreMainComponent implements OnInit {
       if (!record[chartNode.contact]) {
         record[chartNode.contact] = [];
       }
-      record[chartNode.contact].push(chartNode.line);
+      record[chartNode.contact].push(chartNode.id);
     });
     // 目前只对起点后面的做显隐，所以一个点就代表了一条线，所以可以直接根据返回的显示点来显示图表
     let nodes = [];
     let links = [];
-    let lines = 0;
-    for (const contact in record) {
-      if (record.hasOwnProperty(contact)) {
-        record[contact].forEach(lineIndex => {
-          lines += 1;
-          const line: Line = this._ajaxData[contact][lineIndex];
-          nodes = [...nodes, ...line.nodes];
-          links = [...links, ...line.links];
-        });
+    let startPoints: string[]; // 原节点
+
+    if (this.searchBar.isOnePointMode) {
+      const _ = this.searchBar.onePoint;
+      if (this._LinksToObjByNodeId) {
+        startPoints = this._LinksToObjByNodeId[_].targets; // 将1度节点作为起点
+      } else {
+        startPoints = [_];
       }
+    } else {
+      startPoints = [this.searchBar.start];
     }
-    console.log(nodes, links);
-    this._creatChart(this._common.filterNodes(nodes), this._common.filterLinks(links), lines);
+
+    startPoints.forEach(point => {
+      for (const contact in record) {
+        if (record.hasOwnProperty(contact)) {
+          record[contact].forEach(needShowNodeId => {
+            const lines = this._ajaxData[contact];
+            lines.forEach(line => {
+              // 找到有相同id的关系数据
+              if (this._common.getCommonId(line.nodes, needShowNodeId) && this._common.getCommonLinkId(line.links, needShowNodeId, point)) {
+                nodes = [...nodes, ...line.nodes];
+                links = [...links, ...line.links];
+              }
+            });
+          });
+        }
+      }
+    });
+
+    console.log('node', nodes, 'links', links);
+    this.showChartFilterNodes = this._common.filterNodes(nodes);
+    this.showChartFilterLinks = this._common.filterLinks(links);
+    this.renderChart();
   }
 
   /**
@@ -239,14 +279,16 @@ export class CoreMainComponent implements OnInit {
     if (links.length) {
       // 初始化节点下拉框
       this.checknodesTab = [];
-      this.checknodesTab[0] = new CheckTab('organization', '公司', 'blue');
-      this.checknodesTab[1] = new CheckTab('case', '事件', 'orange');
+      this.checknodesTab[0] = new CheckTab('middlePerson', '路径筛选', 'orange');
+      // this.checknodesTab[1] = new CheckTab('case', '事件', 'orange');
       this._addCanHiddenAttrInNodeAndBackObjLinks(links, nodes).subscribe(_data => {
+        this.nodeDataHasSourcesAndTargets = _data.objLinks;
+
         // 分离可以显隐的数据
-        this._common.separateNode(_data.nodes).subscribe(cheknodes => {
+        this._common.separateNode(_data.nodes, this.searchBar).subscribe(cheknodes => {
           this.checknodesTab.forEach((tab, idx) => {
-            if (tab.tag === NodeCate.case) {
-              this.checknodesTab[idx].options = cheknodes[NodeCate.case] || [];
+            if (tab.tag === NodeCate.middlePerson) {
+              this.checknodesTab[idx].options = cheknodes[NodeCate.middlePerson] || [];
             } else if (tab.tag === NodeCate.organization) {
               this.checknodesTab[idx].options = cheknodes[NodeCate.organization] || [];
             }
@@ -257,6 +299,10 @@ export class CoreMainComponent implements OnInit {
     } else {
       this.checknodesTab = [];
     }
+
+    setTimeout(() => {
+      this.checkNodesTabSubject.next(this.checknodesTab);
+    }, 1);
   }
 
   /**
@@ -267,19 +313,85 @@ export class CoreMainComponent implements OnInit {
    */
   getRealtions(res: AjaxResponse) {
     console.log(res);
-    this.initCore = false;
+
+    if (!res.code) {
+      this.initCore = false;
+    }
+
     if (!res.code && res.data && Object.keys(res.data).length) {
-      this._ajaxData = res.data;
+      this.totalPages = res.pages;
+      this._ajaxData = res.data.relation;
+      this.allNodes = {};
+
+      const colors = nodesAndLinksInOneLineColor;
+
+      for (const contact in this._ajaxData) {
+        if (this._ajaxData.hasOwnProperty(contact)) {
+          const crtContact = this._ajaxData[contact];
+          for (let index = 0; index < crtContact.length; index++) {
+            const line = crtContact[index];
+
+            line.nodes.forEach(node => {
+              this.allNodes[node.id] = node;
+              if (index / colors.length < 1) {
+                this._common.setNodeStyle(node, colors[index], colors[index]);
+              } else {
+                const _ = (index / colors.length).toString();
+                if (_.indexOf('.') > -1) {
+                  const idx = parseFloat(`0.${_.split('.')[1]}`) * colors.length;
+                  this._common.setNodeStyle(node, colors[idx], colors[idx]);
+                } else {
+                  this._common.setNodeStyle(node, colors[0], colors[0]);
+                }
+              }
+            });
+
+            line.links.forEach(_link => {
+              if (index / colors.length < 1) {
+                this._common.setLinkStyle(_link, colors[index], colors[index]);
+              } else {
+                const _ = (index / colors.length).toString();
+                if (_.indexOf('.') > -1) {
+                  const idx = parseFloat(`0.${_.split('.')[1]}`) * colors.length;
+                  this._common.setLinkStyle(_link, colors[idx], colors[idx]);
+                } else {
+                  this._common.setLinkStyle(_link, colors[0], colors[0]);
+                }
+              }
+            });
+          }
+        }
+      }
+
+      console.log(this._ajaxData);
+      console.log(this.allNodes);
+
+      // this._common.setNodeStyle();
+      // this._common.setLinkStyle()
+
       this.checkcontactsTab = this._creatContactsCheckTab(this._ajaxData);
       // 默认显示已有的第一度人脉
       const linksforDis = this._common.filterLinks(this._common.outCrtContactLinks(this._ajaxData)); // 去重的links
       const crtAllNodes = this._common.outCrtContactNodes(this._ajaxData); // 未去重的所有的nodes
       const nodesForDis = this._common.filterNodes(crtAllNodes); // 去重的nodes
-      this._creatNodesCheckTab(crtAllNodes, linksforDis);
-      this._creatChart(nodesForDis, linksforDis, this._ajaxData[Object.keys(this._ajaxData)[0]].length);
+      const nodesHasLine = this._common.filterNodesHasConAndLine(crtAllNodes); // 去重nodes后不删除其中的contact和line
+      // this._creatNodesCheckTab(crtAllNodes, linksforDis);
+      // console.log(nodesHasLine,linksforDis);
+      this._creatNodesCheckTab(nodesHasLine, linksforDis); // nodes去重但不删除contact和line,  传入
+      // 改变去重后的links数组，将case提取出来，并加上source和target    改变去重的nodes,将case的id加上
+      // const hasCaseObj = this._caseArrGetConcat(nodesForDis,linksforDis);
+      // console.log(hasCaseObj);
+      this.showChartFilterNodes = nodesForDis;
+      this.showChartFilterLinks = linksforDis;
+      this.renderChart();
+
+      // this._creatChart(nodesForDis, linksforDis, this._ajaxData[Object.keys(this._ajaxData)[0]].length);
+      // this._creatChart(hasCaseObj.newNodes, hasCaseObj.newLinks, this._ajaxData[Object.keys(this._ajaxData)[0]].length);
     } else {
       this._msg.remove(this.loadingId);
       this.option = null;
+      this._LinksToObjByNodeId = null;
+      this._ajaxData = {};
     }
   }
 
@@ -291,27 +403,50 @@ export class CoreMainComponent implements OnInit {
    * @param {ChartLink[]} links
    * @memberof CoreMainComponent
    */
-  private _creatChart(nodes: ChartNode[], links: ChartLink[], lines: number) {
-    // console.log(lines);
-    if (lines >= maxLines) {
-      this.chartHeight = lines * (isMobile() ? 5 : 2) + 'rem';
-    } else {
-      this.chartHeight = null;
+  private _creatChart(nodes: ChartNode[], links: ChartLink[]) {
+    // 起点终点加颜色
+    let findStartEndPoint = 0;
+    for (let index = 0; index < nodes.length; index++) {
+      const node = nodes[index];
+      if (this.searchBar.isOnePointMode) {
+        if (node.id === this.searchBar.onePoint) {
+          findStartEndPoint += 1;
+          this._common.setNodeStyle(node, chartColorConfig.point.bg, chartColorConfig.point.bg);
+          console.log(node);
+        }
+      } else {
+        if (node.id === this.searchBar.start || node.id === this.searchBar.end) {
+          findStartEndPoint += 1;
+          this._common.setNodeStyle(node, chartColorConfig.point.bg, chartColorConfig.point.bg);
+          console.log(node);
+        }
+      }
+      if (findStartEndPoint === 2) {
+        break;
+      }
     }
-    if (isMobile()) {
-      this.chartWidth = (nodes.length > 10 ? 10 : nodes.length) * 10 + 'rem';
+
+    this._setChartOption(nodes, links);
+    this._msg.remove(this.loadingId);
+  }
+
+  UI_clickFolder(bool) {
+    this.hideSearchBar = !this.hideSearchBar;
+    if (this.chart) {
+      this.chart.mustResize();
     }
-    // 设置节点和线的样式
-    this._common.setNodesAndLinksStyle(this.searchBar, nodes, links).subscribe(data => {
-      // 生成图表
-      this._setChartOption(data.nodes, data.links);
-      this._msg.remove(this.loadingId);
-    });
+  }
+
+  private renderChart() {
+    const filternodes = this.showChartFilterNodes.concat();
+    const filterlinks = this.showChartFilterLinks.concat();
+    this._creatChart(filternodes, filterlinks);
   }
 
   chartIsFull(isFull: boolean) {
-    this._chartFullStatus = isFull;
+    this.chartFullStatus = isFull;
     this.checkUIMode = isFull ? checkUIMode.fullscreen : checkUIMode.normal;
+    this.hideSearchBar = isFull;
   }
 
   /**
@@ -322,7 +457,7 @@ export class CoreMainComponent implements OnInit {
    */
   getSearchStatus(status: SearchStatus) {
     if (status === SearchStatus.pending) {
-      this.loadingId = this._showLoading();
+      this.loadingId = this._common.showLoading();
     }
   }
 
@@ -333,22 +468,11 @@ export class CoreMainComponent implements OnInit {
    * @memberof CoreMainComponent
    */
   siderFoldStatus(isFold) {
-    if (this.chart) {
-      this.chart.mustResize();
-    }
-  }
-
-  /**
-   * loading效果
-   *
-   * @private
-   * @returns {*}
-   * @memberof CoreMainComponent
-   */
-  private _showLoading(msg = '请求数据中...'): any {
-    return this._msg.loading(msg, {
-      nzDuration: 0
-    }).messageId;
+    setTimeout(() => {
+      if (this.chart) {
+        this.chart.mustResize();
+      }
+    }, 400);
   }
 
   /**
@@ -361,6 +485,7 @@ export class CoreMainComponent implements OnInit {
    */
   private _setChartOption(nodes: ChartNode[], links: ChartLink[]) {
     const _chartConfig = chartOption;
+    // console.log(nodes);
     _chartConfig.series[0].data = nodes;
     _chartConfig.series[0].links = links;
     this.option = Object.assign({}, _chartConfig);
@@ -382,32 +507,12 @@ export class CoreMainComponent implements OnInit {
    * @param {*} data
    * @memberof CoreMainComponent
    */
-  clickChartEvent(node) {
+  clickChartEvent(data: { crtNode: ChartEventCbParams; chartInstance: any }) {
     // ChartEventCbParams
-    if (node.dataType === 'node' && node.data.id.indexOf('person') === 0) {
-      if (isMobile()) {
-        return;
-      }
-      const loadingId = this._showLoading();
-      this._http
-        .get(searchPersonDetailApi, {
-          params: {
-            P_id: node.data.id
-          }
-        })
-        .subscribe(
-          (res: any) => {
-            this._msg.remove(loadingId);
-            if (!res.status && res.data) {
-              this.person = res.data;
-            } else {
-              this.person = [];
-            }
-          },
-          error => {
-            this._msg.remove(loadingId);
-          }
-        );
-    }
+    const node = data.crtNode;
+    const chart = data.chartInstance;
+    this._common.requestNodeInfo(node).subscribe(nodeDetailData => {
+      this.nodeDetailData = nodeDetailData;
+    });
   }
 }

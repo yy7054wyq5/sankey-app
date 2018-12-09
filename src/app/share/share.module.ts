@@ -7,12 +7,15 @@ import { ErrorComponent } from './components/error/error.component';
 import { RouterModule } from '@angular/router';
 import { ChartComponent } from './components/chart/chart.component';
 import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
-import { PanelComponent } from './components/panel/panel.component';
+import { CollapseComponent } from './components/collapse/collapse.component';
+import { FormsModule } from '@angular/forms';
+import { PagingComponent } from './components/paging/paging.component';
+import {StorageService} from './services/storage/storage.service';
 
 @NgModule({
-  imports: [RouterModule, CommonModule, HttpClientModule, NgZorroAntdModule],
-  declarations: [LayoutComponent, ErrorComponent, ChartComponent, SafeHtmlPipe, PanelComponent],
-  providers: [SafeHtmlPipe],
-  exports: [ChartComponent, SafeHtmlPipe, PanelComponent]
+  imports: [RouterModule, CommonModule, HttpClientModule, NgZorroAntdModule, FormsModule],
+  declarations: [LayoutComponent, ErrorComponent, ChartComponent, SafeHtmlPipe, CollapseComponent, PagingComponent],
+  providers: [SafeHtmlPipe, StorageService],
+  exports: [ChartComponent, SafeHtmlPipe, CollapseComponent, PagingComponent]
 })
 export class ShareModule {}

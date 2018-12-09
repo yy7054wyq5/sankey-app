@@ -1,24 +1,91 @@
 <!-- 上方留白 -->
-<div class="hack" style="height: 5.050505rem"></div>
-<div class="chart-container">
-  <div class="chart"></div>
+<div class="hack" style="height: 3rem">
+  <!-- 颜色盘 -->
+  <div class="hack" style="height: .606061rem"></div>
+
+  <!--
+    <ul class="chart-color-barUl">
+      <li style="margin-left: 1.616162rem;">
+
+        <i [style]="'background-color:'+colorBar.person.bg | safeHtml:'style'"></i>
+
+        <span>人物</span>
+
+      </li>
+
+      <li>
+
+        <i [style]="'background-color:'+colorBar.case.bg | safeHtml:'style'"></i>
+
+        <span>事件</span>
+
+      </li>
+
+      <li>
+
+        <i [style]="'background-color:'+colorBar.organization.bg | safeHtml:'style'"></i>
+
+        <span>公司</span>
+
+      </li>
+
+      <li>
+
+        <i [style]="'background-color:'+colorBar.point.bg | safeHtml:'style'"></i>
+
+        <span>起点</span>
+
+        <span style="margin-left: 5px;margin-bottom: 1px;"><img src="../../../../assets/images/leri.png" style="width: 15px;height: 15px;" alt=""></span>
+
+        <span style="margin-left: 5px;">终点</span>
+
+      </li>
+
+    </ul>
+  -->
+  <!--
+    <div style="display: inline-flex;margin-left: 10%;">
+      <button (click)="changeClickView()" title="点我切换视图" class="btn" style="background: #2702bb;-shadow: none;border: none;border-radius: 3px;border: 1px solid #2702bb;color: #fff;cursor:pointer">
+
+        切换视图
+
+      </button>
+
+    </div>
+  -->
+  <div class="hack" style="height: .606061rem"></div>
 </div>
-<div class="point-info" [class.no-boder]="!UI_nodeDetail.show">
-  <ng-container *ngIf="UI_nodeDetail.show">
-    <h3>{{UI_nodeDetail.date}}--{{UI_nodeDetail.id}}</h3>
-    <p>{{UI_nodeDetail.txt}}</p>
-  </ng-container>
+<div class="chart-container"><div class="chart"></div></div>
+<!--
+  <div style="border-top:1px solid #f6f6f6">
+    <div class="point-info" [class.no-boder]="!UI_nodeDetail.show">
+      <ng-container *ngIf="UI_nodeDetail.show && UI_nodeDetail.showType == 'node'">
+        <h3>{{ UI_nodeDetail.date }}--{{ UI_nodeDetail.id }}</h3>
+        <p>{{ UI_nodeDetail.txt }}</p>
+        <p *ngIf="UI_nodeDetail.txt1 != ''">{{ UI_nodeDetail.txt1 }}</p>
+      </ng-container>
+      <ng-container *ngIf="UI_nodeDetail.show && UI_nodeDetail.showType == 'edge'">
+        <p style="height: 100%;">{{ UI_nodeDetail.txt }}</p>
+      </ng-container>
+    </div>
+  </div>
+-->
+
+<div class="chart-slider">
+  <nz-slider
+    [(ngModel)]="chartSize"
+    (ngModelChange)="slider($event)"
+    name="changeChartSize"
+    [nzMin]="1"
+    [nzMax]="20"
+    nzVertical
+  ></nz-slider>
 </div>
+
 <ng-container *ngIf="chartActived">
   <ng-container *ngIf="ehasFullBtn">
-    <i *ngIf="fullStatus==='no'" class="anticon full-screen-btn" (click)="toFull('yes')"></i>
-    <i *ngIf="fullStatus==='yes'" class="anticon full-screen-btn" (click)="toFull('no')"></i>
+    <i *ngIf="fullStatus === 'no'" class="anticon full-screen-btn" (click)="toFull('yes')"></i>
+    <i *ngIf="fullStatus === 'yes'" class="anticon full-screen-btn" (click)="toFull('no')"></i>
   </ng-container>
 </ng-container>
 <ng-content></ng-content>
-
-<nz-modal class="mobile-person-detail" [(nzVisible)]="UI_modalPersonDetail" nzTitle="人物详情" nzWrapClassName="mobile-person-detail-modal-wrap" [nzStyle]="{top:0}"
-          [nzBodyStyle]="{padding: 0,maxHeight: '90vh', overflow: 'auto'}" [nzOkText]="null" (nzOnCancel)="UI_modalPersonDetail=null"
-          [nzMaskClosable]="false">
-  <app-panel [person]="UI_modalPersonDetail" [justDisPerson]="1"></app-panel>
-</nz-modal>

@@ -1,84 +1,81 @@
 <nz-layout class="core-main">
-  <!-- 搜索栏 -->
-  <app-search-bar #searchBar (outSearchResult)="getRealtions($event)" (outSearchStatus)="getSearchStatus($event)"></app-search-bar>
   <section class="core-body">
-    <!-- sider以模板变量的方式接收app-search-bar某些变量或整个对象 -->
-    <app-panel [histories]="searchBar.records.data" [person]="person" [searchBar]="searchBar" (outFoldStatus)="siderFoldStatus($event)"></app-panel>
-    <section class="core-content">
-      <!-- 初始状态 -->
-      <div *ngIf="initCore" class="status">
-        <img src="/assets/images/init-status.png" alt="">
-        <p>告诉我您是谁？你想找谁？</p>
-        <p>我会帮您找到他哦</p>
-      </div>
-      <!-- 数据未找到 -->
-      <div class="status" *ngIf="!initCore&&!option">
-        <img src="/assets/images/not-found.png" alt="">
-        <p style="margin-left: -1rem;">未找到合适信息哦</p>
-      </div>
-      <!-- 图表 -->
-      <app-chart #chart *ngIf="option" [eoption]="option" [eheight]="chartHeight" [ewidth]="chartWidth" [efullParentClassName]="'core-main'" (emouseover)="mouseoverChartEvent($event)" (eclick)="clickChartEvent($event)" (efullStatus)="chartIsFull($event)">
-        <!-- 移动端展示 -->
-        <!-- 选择人脉 -->
-        <app-check-node
-          class="media-mobile-check-node contacts" 
-          *ngIf="showCheckComponent" 
-          [tabs]="checkcontactsTab" 
-          placeholder="显示隐藏人脉" 
-          (outCheckedNodes)="getCheckedContacts($event)">
-        </app-check-node>
-        <!-- 选择隐藏节点 -->
-        <app-check-node
-          class="media-mobile-check-node nodes" 
-          *ngIf="showCheckComponent" 
-          [outFullData]="true" 
-          [tabs]="checknodesTab" 
-          placeholder="显示隐藏关系"
-          (outCheckedNodes)="getCheckedNodes($event)">
-        </app-check-node>
+    <!-- {{ searchBar.noResultDis }} --- {{ initCore }} -->
 
-        <!-- PC端展示 -->        
-        <!-- 选择人脉 -->
-        <app-check-node
-          class="media-pc-check-node" 
-          [ngStyle]="checkUIPosition[checkUIMode].contactsCheckUI"
-          *ngIf="showCheckComponent" 
-          [tabs]="checkcontactsTab" 
-          placeholder="显示隐藏人脉" 
-          (outCheckedNodes)="getCheckedContacts($event)">
-        </app-check-node>
-        <!-- 选择隐藏节点 -->
-        <app-check-node
-          class="media-pc-check-node" 
-          [ngStyle]="checkUIPosition[checkUIMode].nodesCheckUI"
-          *ngIf="showCheckComponent" 
-          [outFullData]="true" 
-          [tabs]="checknodesTab" 
-          placeholder="显示隐藏关系"
-          (outCheckedNodes)="getCheckedNodes($event)">
-        </app-check-node>
+    <section [ngStyle]="{ width: hideSearchBar ? '98rem' : '82rem' }" class="core-content">
+      <i *ngIf="!chartFullStatus" class="icon-fold icon-tool" [class.no-fold]="hideSearchBar" (click)="UI_clickFolder($event)"></i>
+      <!-- 初始状态 -->
+
+      <!-- {{searchBar.noResultDis}} -->
+
+      <div *ngIf="!option && searchBar.noResultDis === 0" class="status" style="justify-content: center; padding: 0; height: 100%;">
+        <div>
+          <img src="assets/images/glass.png" alt="" style="display: block;margin: 0 auto; width: 5rem;" />
+          <p>找“到”关系，找“对”伙伴</p>
+        </div>
+      </div>
+
+      <!-- 数据未找到 -->
+
+      <div class="status no-result" *ngIf="!initCore && !option && searchBar.noResultDis !== 0">
+        <ng-container *ngIf="searchBar.noResultDis === 2">
+          <p style="margin-left: -1rem;">{{ noResultDis[searchBar.searchMode].txt }}</p>
+          <img [src]="noResultDis[searchBar.searchMode].imgSrc" alt="" />
+          <div class="content no-result">
+            <div class="bar"></div>
+            <div class="txt">
+              <div>
+                <div class="start" (click)="searchBar.UI_searchPoint(searchBar.crtRecord['startAndEnd'].start, searchBar.searchMode)">
+                  {{ searchBar.crtRecord['startAndEnd'].start.name }}
+                </div>
+              </div>
+              <div><div class="symbol">?</div></div>
+              <div>
+                <div class="end" (click)="searchBar.UI_searchPoint(searchBar.crtRecord['startAndEnd'].end, searchBar.searchMode)">
+                  {{ searchBar.crtRecord['startAndEnd'].end.name }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="searchBar.noResultDis === 1">
+          <p style="margin-left: -1rem;">{{ noResultDis[searchBar.searchMode].txt }}</p>
+          <img style="width: 5rem;" [src]="noResultDis[searchBar.searchMode].imgSrc" alt="" />
+        </ng-container>
+      </div>
+
+      <!-- 图表 -->
+      <app-chart
+        #chart
+        *ngIf="option"
+        [eoption]="option"
+        [efullParentClassName]="'body'"
+        (emouseover)="mouseoverChartEvent($event)"
+        (eclick)="clickChartEvent($event)"
+        (efullStatus)="chartIsFull($event)"
+      >
+        <!-- 翻页 -->
+        <!-- <nz-pagination
+          (nzPageIndexChange)="UI_pageIndexChange($event)"
+          [nzPageIndex]="1"
+          [nzPageSize]="1"
+          [nzTotal]="totalPages"
+          nzSimple
+        ></nz-pagination> -->
+
+        <app-paging [pageTotal]="totalPages" (crtIndexChange)="UI_pageIndexChange($event)"></app-paging>
       </app-chart>
-      <div class="hack" style="height: .606061rem"></div>
-      <!-- 颜色盘 -->
-      <ul class="chart-color-bar">
-        <li style="margin-left: 1.616162rem;">
-          <i [ngStyle]="{backgroundColor: colorBar.person.bg}"></i>
-          <span>人物</span>
-        </li>
-        <li>
-          <i  [ngStyle]="{backgroundColor: colorBar.case.bg}"></i>
-          <span>事件</span>
-        </li>
-        <li>
-          <i  [ngStyle]="{backgroundColor: colorBar.organization.bg}"></i>
-          <span>公司</span>
-        </li>
-        <li>
-          <i  [ngStyle]="{backgroundColor: colorBar.point.bg}"></i>
-          <span>起点/终点</span>
-        </li>
-      </ul>
-      <div class="hack" style="height: .606061rem"></div>
     </section>
+
+    <app-search-bar
+      [ngStyle]="{ width: hideSearchBar ? 0 : '16rem', paddingLeft: hideSearchBar ? '0' : '1rem' }"
+      #searchBar
+      (outSearchResult)="getRealtions($event)"
+      (outSearchStatus)="getSearchStatus($event)"
+    ></app-search-bar>
+
+    <!-- (dpcClick)="viewDetail($event)" -->
+    <app-detail-card [dpcData]="nodeDetailData" (dpcClick)="UI_viewFullDetail($event)"></app-detail-card>
+    <app-full-detail-panel [fpcData]="fullDetailData"></app-full-detail-panel>
   </section>
 </nz-layout>

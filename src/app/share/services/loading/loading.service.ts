@@ -6,10 +6,12 @@ const loadingStyle = 'position: fixed;left: 0;top: 0;width: 100vw;height: 100vh;
   providedIn: 'root'
 })
 export class LoadingService {
+  status = false;
   constructor() {}
   loadingShadow: Element;
 
   open() {
+    this.status = true;
     if (!this.loadingShadow) {
       this.loadingShadow = document.createElement('div');
       this.loadingShadow.setAttribute('style', loadingStyle);
@@ -21,5 +23,6 @@ export class LoadingService {
 
   close() {
     this.loadingShadow.setAttribute('style', 'display: none;');
+    this.status = false;
   }
 }

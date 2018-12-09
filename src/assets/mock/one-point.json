@@ -1,0 +1,60 @@
+{
+  "code": null,
+  "message": null,
+  "data": {
+    "relation": {
+      "1": [
+        {
+          "nodes": [
+            {
+              "id": "a",
+              "name": "a"
+            },
+            {
+              "id": "b",
+              "name": "b"
+            },
+            {
+              "id": "a1",
+              "name": "a1"
+            },
+            {
+              "id": "a2",
+              "name": "a2"
+            },
+            {
+              "id": "b1",
+              "name": "b1"
+            },
+            {
+              "id": "c",
+              "name": "c"
+            }
+          ],
+          "links": [
+            {
+              "source": "a",
+              "target": "a1",
+              "value": 5
+            },
+            {
+              "source": "a",
+              "target": "a2",
+              "value": 3
+            },
+            {
+              "source": "a",
+              "target": "b1",
+              "value": 3
+            }
+          ]
+        }
+      ]
+    },
+    "minTimeLine": 2009
+  },
+  "pageNum": 1,
+  "pageSize": 100,
+  "total": 24,
+  "pages": 1
+}

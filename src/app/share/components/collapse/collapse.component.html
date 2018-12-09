@@ -1,0 +1,9 @@
+<section class="collapse">
+  <div class="title" (click)="toClick($event)">
+    <i *ngIf="colIcon" class="sa-icon {{colIcon}}"></i>
+    <span style="flex: 1;text-align: left;">{{ colTitle }}</span>
+    <i class="handle" [class.rotate]="colMode===2" *ngIf="colIsCollapse">{{handleIcon[colMode][0]}}</i>
+    <i class="handle" [class.rotate]="colMode===2" *ngIf="!colIsCollapse">{{handleIcon[colMode][1]}}</i>
+  </div>
+  <div class="content" [ngStyle]="{ display: colIsCollapse ? 'none' : 'block' }"><ng-content></ng-content></div>
+</section>

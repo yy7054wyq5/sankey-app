@@ -15,16 +15,17 @@ import {
 } from '@angular/core';
 import * as echarts from 'echarts';
 import theme from './theme';
-import { HttpClient } from '@angular/common/http';
 import { ChartService, ChartEventCbParams } from './chart.service';
-import { isMobile } from '../../utils';
-import { api } from '../../../core/config';
-import { NzMessageService } from 'ng-zorro-antd';
+import { chartColorConfig } from '../../../core/config';
+import { of } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 enum FullStatus {
   yes = 'yes',
   no = 'no'
 }
+
+const ChartStandardSize = 5;
 
 @Component({
   selector: 'app-chart',
@@ -37,6 +38,10 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   @Input()
   ehasFullBtn = true;
   @Input()
+  set echartToFull(bool) {
+    this.fullStatus = bool ? FullStatus.yes : FullStatus.no;
+  }
+  @Input()
   ewidth: string;
   @Input()
   eheight: string;
@@ -44,12 +49,18 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   efullParentClassName: string;
   @Input()
   eoption: any; // http://echarts.baidu.com/option.html
+  @Input()
+  set elines(lines) {
+    this._lines = lines;
+  }
   @Output()
   efullStatus = new EventEmitter<boolean>();
   @Output()
   emouseover = new EventEmitter<any>();
   @Output()
   eclick = new EventEmitter<any>();
+  @Output()
+  isView = new EventEmitter<boolean>();
 
   selectOpenStatus = false;
   // 鼠标经过或点击的文字
@@ -57,29 +68,41 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     show: false,
     date: '',
     txt: '',
-    id: ''
+    txt1: '',
+    id: '',
+    showType: ''
   };
-  UI_modalPersonDetail = null;
+
+  colorBar = chartColorConfig;
   fullStatus = FullStatus.no; // yes为全屏
+
+  /**
+   * 图表dom结构
+   *
+   * @type {Element}
+   * @memberof ChartComponent
+   */
   chartDom: Element; // 图表结构
   chartContainer: Element; // 整个组件
   chartInstance: any; // 图表实例
   bindedEvent: boolean; // 是否已绑定事件
   unlistenDomParentResize: any; // 监听窗口大小变化事件
   clickedNode: ChartEventCbParams;
+  thisPageButton = false;
+
+  _lines;
+  chartSize = ChartStandardSize;
+  oneChartSize = {
+    width: 0,
+    height: 0
+  };
 
   get chartActived() {
     // 图表是否激活
     return this.chartInstance ? true : false;
   }
 
-  constructor(
-    private _element: ElementRef,
-    private _renderer: Renderer2,
-    private _zone: NgZone,
-    private _http: HttpClient,
-    private _msg: NzMessageService
-  ) {}
+  constructor(private _chart: ChartService, private _element: ElementRef, private _renderer: Renderer2, private _zone: NgZone) {}
 
   ngOnChanges(changes: { eoption: SimpleChange; eheight: SimpleChange }) {
     if (changes) {
@@ -87,8 +110,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         if (!this.chartInstance) {
           this._initChart();
         } else {
-          this._disabledDrag();
-          this.chartInstance.setOption(this.eoption);
+          this._setOption();
         }
       }
 
@@ -96,10 +118,12 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         if (!this.chartInstance) {
           this._initChart();
         } else {
-          this._setChartWH(this.chartDom, this.ewidth, this.eheight);
+          this._setChartWH(this.chartDom, null, this.eheight);
           this._resizeChart();
         }
       }
+      // this.thisPageButton = this.viewStatusChart;
+      // this.changeClickView();
       // debugger;
     }
   }
@@ -129,19 +153,31 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     this.unlistenDomParentResize();
   }
 
+  /**
+   *
+   */
+  changeClickView() {
+    this.thisPageButton = !this.thisPageButton;
+    this.isView.emit(this.thisPageButton);
+  }
+
   /////////////////////////////////////////////////
 
+  private _setOption() {
+    this.chartSize = ChartStandardSize;
+    const oneSizeHeight = this.chartInstance.getHeight() / ChartStandardSize;
+    const oneSizeWidth = this.chartInstance.getWidth() / ChartStandardSize;
+    this.oneChartSize = { width: oneSizeWidth, height: oneSizeHeight };
+    this.chartInstance.setOption({ ...this.eoption, width: 'auto', height: 'auto' });
+    // console.log(this.oneChartSize);
+  }
 
-  /**
-   * 移动端禁用拖拽
-   *
-   * @private
-   * @memberof ChartComponent
-   */
-  private _disabledDrag() {
-    if (isMobile()) {
-      this.eoption.series[0].draggable = false;
-    }
+  slider(value) {
+    console.log(this.oneChartSize, value);
+    // this._zone.runOutsideAngular(() => {
+    // });
+    this._setChartWH(this.chartDom, this.oneChartSize.width * value + 'px', this.oneChartSize.height * value + 'px');
+    this._resizeChart();
   }
 
   /**
@@ -171,7 +207,30 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   public toFull(tag: string) {
     this.fullStatus = FullStatus[tag];
     this.mustResize();
-    // this._resizeChart();
+    this.efullStatus.emit(tag === FullStatus.yes ? true : false);
+    if (tag === FullStatus.yes) {
+      this._renderer.setAttribute(document.body, 'style', `height: ${window.innerHeight}; overflow:hidden;`);
+      // this._f11(document, true);
+    } else {
+      this._renderer.setAttribute(document.body, 'style', '');
+      // this._f11(document, false);
+    }
+  }
+
+  private _f11(dom, open: boolean) {
+    if (open) {
+      if (dom.requestFullscreen) {
+        dom.requestFullscreen();
+      } else if (dom.msRequestFullscreen) {
+        dom.msRequestFullscreen();
+      } else if (dom.mozRequestFullScreen) {
+        dom.mozRequestFullScreen();
+      } else if (dom.webkitRequestFullscreen) {
+        dom.webkitRequestFullscreen();
+      }
+    } else {
+      // dom.exitFullscreen();
+    }
   }
 
   public mustResize() {
@@ -202,7 +261,7 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         width: wraper.clientWidth,
         height: wraper.clientHeight
       });
-      this.efullStatus.emit(true);
+      // this.efullStatus.emit(true);
     } else {
       this._setStyle(this.chartContainer, {
         position: 'relative',
@@ -211,7 +270,9 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         width: '100%',
         height: '100%'
       });
-      this.efullStatus.emit(false);
+      // var pointInfo = document.getElementsByClassName('point-info');
+      // pointInfo
+      // this.efullStatus.emit(false);
     }
   }
 
@@ -258,8 +319,8 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     const _chartDom = this._setChartWH(this.chartDom, this.ewidth, this.eheight);
     this._zone.runOutsideAngular(() => {
       this.chartInstance = echarts.init(_chartDom, 'sn');
-      this._disabledDrag();
-      this.chartInstance.setOption(this.eoption);
+      // this.chartInstance.setOption(this.eoption);
+      this._setOption();
     });
     if (!this.bindedEvent) {
       this._bindEvent();
@@ -295,17 +356,43 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * @memberof ChartComponent
    */
   private _showNodeInfo(params: ChartEventCbParams): void {
-    if (params.dataType !== 'node') {
+    if (params.dataType === 'node') {
+      const names = this.handleDataName(params.data.name);
+      this._zone.run(() => {
+        this.UI_nodeDetail = {
+          show: true,
+          date: params.data.date,
+          txt: names[0],
+          txt1: names[1],
+          id: params.data.id,
+          showType: 'node'
+        };
+      });
+    } else if (params.dataType === 'edge') {
+      // 边的显示
+      const edgeName = params.data && params.data.relation ? params.data.relation : '';
+      this._zone.run(() => {
+        this.UI_nodeDetail = {
+          show: true,
+          date: '',
+          txt1: '',
+          txt: edgeName,
+          id: '',
+          showType: 'edge'
+        };
+      });
+    } else {
       return;
     }
-    this._zone.run(() => {
-      this.UI_nodeDetail = {
-        show: true,
-        date: params.data.date,
-        txt: params.data.name,
-        id: params.data.id
-      };
-    });
+  }
+
+  private handleDataName(name: string): string[] {
+    const names = name.split('<br>');
+    if (names.length > 1) {
+      return names;
+    } else {
+      return [name, ''];
+    }
   }
 
   /**
@@ -316,46 +403,34 @@ export class ChartComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    */
   private _bindEvent() {
     // 点击事件
+    const chart = this.chartInstance;
     this.chartInstance.on('click', (params: ChartEventCbParams) => {
-      // console.log(params);
+      console.log(params);
+      // this.chartInstance.setOption(this.eoption);
       this._zone.run(() => {
-        this.eclick.emit(params);
-        if (params.data.id.indexOf('person') > -1 && isMobile()) {
-          const id = this._msg.loading('请求数据...').messageId;
-          this._http
-            .get(api.searchPersonDetailApi, {
-              params: {
-                P_id: params.data.id
-              }
-            })
-            .subscribe(
-              (res: any) => {
-                this._msg.remove(id);
-                if (!res.status && res.data) {
-                  this.UI_modalPersonDetail = res.data;
-                } else {
-                  this.UI_modalPersonDetail = [];
-                }
-              },
-              error => {
-                this._msg.remove(id);
-              }
-            );
-        }
+        this.eclick.emit({
+          crtNode: params,
+          chartInstance: chart
+        });
       });
       this._highlightNode(params);
     });
     // 鼠标经过事件
     this.chartInstance.on('mouseover', (params: ChartEventCbParams) => {
       this._zone.run(() => {
-        this.emouseover.emit(params);
+        of(1)
+          .pipe(debounceTime(400))
+          .subscribe(n => {
+            this.emouseover.emit(params);
+          });
       });
-      this._showNodeInfo(params);
+      // this._showNodeInfo(params);
     });
   }
 
   /**
-   * 设置宽高
+   * 设置宽高（核心）
+   * 图表生成变化之基础，改变图表dom元素宽高
    *
    * @private
    * @param {Element} chartDom

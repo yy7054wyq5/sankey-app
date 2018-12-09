@@ -1,0 +1,34 @@
+@import '../../../../less/variable.less';
+.paging-container {
+  display: flex;
+  border: 1px solid @borderColor;
+  border-radius: @borderRaduis;
+  justify-content: space-between;
+  height: 2rem;
+  width: 15rem;
+  background-color: #fff;
+  .pages {
+    flex: 1;
+    border-left: 1px solid @borderColor;
+    border-right: 1px solid @borderColor;
+    line-height: 2rem;
+    text-align: center;
+    display: flex;
+    padding: 1px;
+    font-size: 14px;
+    input {
+      width: 50%;
+      border: 0;
+      display: inline-block;
+      height: 1.5rem;
+      margin-top: 0.25rem;
+      text-align: right;
+    }
+  }
+  button {
+    font-size: 14px;
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+}

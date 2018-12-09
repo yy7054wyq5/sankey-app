@@ -1,0 +1,89 @@
+@import '../../../../less/variable.less';
+
+.full-detail {
+  position: relative;
+  padding: 30px;
+  .sa-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  .icon-x {
+    position: absolute;
+    right: 0rem;
+    top: -0.2rem;
+    cursor: pointer;
+  }
+  .header {
+    height: 4rem;
+    width: 100%;
+    border-radius: @borderRaduis;
+    background: @jianbianBg;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 1rem;
+    color: #fff;
+    .round {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: #fff;
+      border-radius: 2.5rem;
+      i {
+        margin-top: 0.2rem;
+        margin-left: 0.2rem;
+      }
+    }
+    span {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.full-detail {
+  .content {
+    display: flex;
+    flex-direction: row;
+    app-collapse {
+      margin-right: 2rem;
+      margin-top: 1rem;
+      // background-color: #f2f2f2;
+      border-radius: @borderRaduis;
+      .collapse {
+        margin-top: 0.5rem;
+        .title {
+          background-color: #f2f2f2;
+          border-radius: @borderRaduis @borderRaduis 0;
+          height: 2rem;
+          line-height: 2rem;
+          padding-top: 0.2rem;
+          span {
+            font-size: 16px;
+          }
+        }
+        .content {
+          background: #f2f2f2;
+          border-radius: 0 0 @borderRaduis;
+          max-height: 35rem;
+          overflow: auto;
+          ul {
+            margin: 12px;
+            width: 96%;
+            li {
+              display: block;
+              padding: 12px;
+              cursor: pointer;
+              width: 100%;
+              background: #fff;
+              margin-bottom: 12px;
+              font-size: 13px;
+              border-radius: @borderRaduis;
+              border-left: 6px solid red;
+            }
+          }
+        }
+      }
+    }
+  }
+}
